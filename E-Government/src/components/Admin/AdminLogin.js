@@ -24,7 +24,7 @@ const AdminLogin = () => {
 
     useEffect(() => {
         isAuthenticated ? navigate('/dashboard') : navigate('/adlogin')
-    }, [isAuthenticated])
+    }, [isAuthenticated,navigate])
 
     const [type, setType] = useState("password")
     const [visible, setVisible] = useState(false)

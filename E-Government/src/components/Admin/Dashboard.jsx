@@ -13,7 +13,7 @@ const Dashboard = () => {
 
   useEffect(() => {
    isAuthenticated ? navigate('/dashboard') : navigate('/adlogin')
-  }, [isAuthenticated])
+  }, [isAuthenticated,navigate])
   
   //  isAuthenticated ? navigate("/dashboard") : navigate('/adlogin')
   return (

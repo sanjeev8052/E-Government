@@ -5,8 +5,6 @@ import { TextField, Typography, Radio, FormControl, FormLabel, RadioGroup, FormC
 import { LoginRounded, LocalPhoneTwoTone, VisibilityTwoTone, VisibilityOffTwoTone, PasswordTwoTone, Person3TwoTone, EmailTwoTone } from '@mui/icons-material'
 import * as Yup from 'yup'
 import signup from '../Images/Icons/signup1.jpg'
-import { style } from '@mui/system'
-
 const Empregister = () => {
   const details = {
     name: "",
@@ -106,7 +104,7 @@ const Empregister = () => {
 
   }
   const emailpattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  const passwordpattern = /^[a-z0-9]$/;
+ 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("!! Please Enter Your Name..").min(5, "!! Too Short..").max(8, "!! Very Long..."),
     email: Yup.string().email("!! Enter a Valid Email").required("!! Please Enter Email.. ").matches(emailpattern, "!! Enter Email Properly"),

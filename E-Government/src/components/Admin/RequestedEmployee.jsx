@@ -2,10 +2,8 @@ import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
 import React, { useEffect } from 'react'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
-import EmpModel from '../Global/EmpModel'
 import Header from '../Global/Header'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 
 import { tokens } from '../../Global'
 import { getTempEmp, conTempEmp } from '../../Action/Admin/Employee'
@@ -13,7 +11,7 @@ import { getTempEmp, conTempEmp } from '../../Action/Admin/Employee'
 const RequestedEmployee = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    const { isAuthenticated, loading } = useSelector((state) => (state.admin))
+    const { isAuthenticated } = useSelector((state) => (state.admin))
     const { data } = useSelector((state) => (state.admin.data))
     console.log(data)
 
@@ -23,7 +21,7 @@ const RequestedEmployee = () => {
     useEffect(() => {
         // isAuthenticated ? navigate('/aemployee') : navigate('/adlogin')
         dispatch(getTempEmp())
-    }, [isAuthenticated])
+    }, [isAuthenticated,dispatch])
     const confirm = (id) => {
         dispatch(conTempEmp(id))
         dispatch(getTempEmp())

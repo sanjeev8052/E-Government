@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { AppBar, Toolbar, Tabs, Tab, Typography, } from '@mui/material'
 import { Link } from 'react-router-dom';
-import { AssuredWorkload, Login } from '@mui/icons-material/';
+import { AssuredWorkload } from '@mui/icons-material/';
 import AccountMenu from './AccountMenu'
 import { useSelector } from 'react-redux'
-import { Button } from '@material-ui/core';
 
 const Header = () => {
     const { isAuthenticated } = useSelector((state) => state.user)
