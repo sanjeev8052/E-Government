@@ -102,7 +102,7 @@ exports.myProfile = async (req, res) => {
         const user = await User.findById(req.user._id)
         res.send(user)
     } catch (error) {
-        res.status(500).json({ sucsess: false, message: error.message })
+        res.status(500).json({    sucsess: false, message: error.message })
     }
 
 }
