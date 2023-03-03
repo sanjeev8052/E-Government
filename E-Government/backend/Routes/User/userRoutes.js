@@ -1,9 +1,13 @@
-const User = require('../models/User/UserModel')
-const { body, validationResult, cookie } = require('express-validator');
-const { sendEmail } = require('../middlewares/sendEmail')
+const express = require("express");
+const router = express.Router();
+const User = require('../../models/User/UserModel')
+// const { body, validationResult, cookie } = require('express-validator');
+const { sendEmail } = require('../../middlewares/sendEmail')
 const crypto = require('crypto')
 
-exports.register = async (req, res) => {
+const { isAuthenticated } = require("../../middlewares/auth");
+
+router.post("/user/new/",async (req, res) => {
 
     try {
         const { name, email, password, mobile } = req.body
@@ -24,10 +28,8 @@ exports.register = async (req, res) => {
     } catch (error) {
         res.status(500).json({ sucsess: false, message: error.message })
     }
-}
-
-
-exports.login = async (req, res) => {
+});
+router.post("/user/login",async (req, res) => {
 
 
     try {
@@ -66,9 +68,30 @@ exports.login = async (req, res) => {
     }
 
 
-}
+});
+router.get("/me",isAuthenticated,async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id)
+        res.send(user)
+    } catch (error) {
+        res.status(500).json({    sucsess: false, message: error.message })
+    }
 
-exports.searchUser = async (req, res) => {
+});
+router.get("/logout",async (req, res) => {
+    try {
+        res
+            .status(200)
+            .cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
+            .json({ success: true, message: "Logout" })
+    } catch (error) {
+        res
+            .status(500)
+            .json({ success: false, Error: error.message })
+    }
+
+})
+router.get("/search/:id",async (req, res) => {
     const user = await User.findById(req.params.id)
 
     if (!user) {
@@ -81,33 +104,8 @@ exports.searchUser = async (req, res) => {
     res.send(user)
 
 
-}
-
-exports.LogoutUser = async (req, res) => {
-    try {
-        res
-            .status(200)
-            .cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
-            .json({ success: true, message: "Logout" })
-    } catch (error) {
-        res
-            .status(500)
-            .json({ success: false, Error: error.message })
-    }
-
-}
-
-exports.myProfile = async (req, res) => {
-    try {
-        const user = await User.findById(req.user._id)
-        res.send(user)
-    } catch (error) {
-        res.status(500).json({    sucsess: false, message: error.message })
-    }
-
-}
-
-exports.resetPasswordToken = async (req, res) => {
+})
+router.post("/forgot/password",async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
         if (!user) {
@@ -146,10 +144,8 @@ exports.resetPasswordToken = async (req, res) => {
     } catch (error) {
         res.status(500).json({ sucsess: false, message: error.message })
     }
-}
-
-
-exports.resetPassword = async (req, res) => {
+})
+router.put("/reset/password/:token",async (req, res) => {
 
     try {
         const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex")
@@ -182,4 +178,6 @@ exports.resetPassword = async (req, res) => {
 
     }
 
-}
+})
+
+module.exports = router  

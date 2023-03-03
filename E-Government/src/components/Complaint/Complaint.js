@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextareaAutosize, Typography } from '@material-ui/core';
+import { Box, Button, FormControl, MenuItem, Select,  Typography } from '@material-ui/core';
 import { Send } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
