@@ -56,3 +56,21 @@ export const getEmp = () => async (dispatch) =>{
         })
     }
 }
+export const blockEmp = (id) => async (dispatch) =>{
+    try {
+        dispatch({
+            type: "BlockRequest"
+        })
+        const response = await axios.post(`/api/admin/blockemp/${id}`)
+
+        dispatch({
+            type: "BlockSuccess",
+            payload: response
+        })
+    } catch (error) {
+        dispatch({
+            type: "BlockFailure",
+            payload: error
+        })
+    }
+}
