@@ -53,7 +53,7 @@ export const userRegister = (user) => async (dispatch) => {
 export const LoadUser = () => async (dispatch) => {
     try {
         dispatch({
-            type: "LoadRequest",
+            type: "UserLoadRequest",
         })
 
         const { data } = await axios.get("api/me", {
@@ -63,13 +63,13 @@ export const LoadUser = () => async (dispatch) => {
         })
 
         dispatch({
-            type: "LoadSuccess",
+            type: "UserLoadSuccess",
             payload: data
         })
 
     } catch (error) {
         dispatch({
-            type: "LoadFailuer",
+            type: "UserLoadFailuer",
             payload: error
         })
     }

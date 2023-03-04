@@ -9,10 +9,10 @@ const EmpModel = () => {
   const themes = useTheme()
   const colors = tokens(themes.palette.mode)
   const [open, setOpen] = React.useState(false);
-  const { data } = useSelector((state) => (state.admin.data))
+  // const { data } = useSelector((state) => (state.admin.data))
   const { loading } = useSelector((state) => (state.admin))
   const dispatch = useDispatch()
-  console.log(data)
+  // console.log(data)
   
   const handleClickOpen = () => {
     setOpen(true);
@@ -23,7 +23,7 @@ const EmpModel = () => {
 
   const handleClose = () => {
     setOpen(false);
-    dispatch(getEmp())
+    // dispatch(getEmp())
   };
   // const request = () => {
   //   dispatch(getTempEmp())
@@ -65,7 +65,7 @@ const EmpModel = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {
+                  {/* {
                     data?.map((data) => (
                       <TableRow key={data._id}>
                         <TableCell >{data.name}</TableCell>
@@ -78,7 +78,7 @@ const EmpModel = () => {
                         </TableCell>
                       </TableRow>
                     ))
-                  }
+                  } */}
                 </TableBody>
               </Table>
             </TableContainer>

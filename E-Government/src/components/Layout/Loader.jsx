@@ -2,7 +2,7 @@ import * as React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
-const  Loading=()=> {
+const  Loader=()=> {
   return (
     <Box sx={{ display: 'flex', justifyContent:"center", }}>
       <CircularProgress sx={{alignContent:"center"}} />
@@ -10,4 +10,4 @@ const  Loading=()=> {
   );
 }
 
-export default Loading
+export default Loader

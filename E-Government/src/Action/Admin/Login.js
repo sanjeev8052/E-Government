@@ -31,11 +31,11 @@ export const LoadAdmin = (admin) => async (dispatch) => {
         dispatch({
             type: "LoadRequest"
         })
-        const response = await axios.get(`/api/admin/profile`, admin)
+        const {data} = await axios.get(`/api/admin/profile`, admin)
 
         dispatch({
             type: "LoadSuccess",
-            payload: response.admin,
+            payload: data,
         })
 
     } catch (error) {

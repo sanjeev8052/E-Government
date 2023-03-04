@@ -16,6 +16,6 @@ app.use("/api/admin", require("./Routes/Admin/Adminlog"))
 app.use("/api/admin", require("./Routes/Admin/Employee"))
 app.use("/api/admin", require("./Routes/Admin/User"))
 app.use("/api/employee", require("./Routes/Emp/Emplogin"))
-
+app.use('/api', require('./Routes/User/complaint'))
 
 module.exports = app
