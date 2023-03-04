@@ -5,7 +5,8 @@ const User = require('../../models/User/UserModel')
 const { sendEmail } = require('../../middlewares/sendEmail')
 const crypto = require('crypto')
 
-const { isAuthenticated } = require("../../middlewares/auth");
+const { errorHandler } = require("../../middlewares/Errorhandler");
+const { isAuthenticatedUser } = require("../../middlewares/auth");
 
 router.post("/user/new/",async (req, res) => {
 
@@ -69,7 +70,7 @@ router.post("/user/login",async (req, res) => {
 
 
 });
-router.get("/me",isAuthenticated,async (req, res) => {
+router.get("/me" ,isAuthenticatedUser,async (req, res) => {
     try {
         const user = await User.findById(req.user._id)
         res.send(user)

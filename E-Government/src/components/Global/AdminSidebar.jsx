@@ -6,10 +6,12 @@ import Logo from '../Images/Icons/login.png';
 import { Link } from 'react-router-dom'
 import { tokens } from "../../Global";
 import { HomeOutlined,  PersonOutlined, MenuOutlined } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
+
   return (
     <MenuItem active={selected === title} style={{ color: colors.grey[100] }} onClick={() => setSelected(title)} icon={icon}>
       <Typography>{title}</Typography>
@@ -18,7 +20,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   )
 
 }
-const AdminSidebar = () => {
+const AdminSidebar = ({admin}) => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -70,7 +72,7 @@ const AdminSidebar = () => {
                   <img src={Logo} alt="admin" width="100px" height="100px" style={{ cursor: "pointer", borderRadius: "50%" }} />
                 </Box>
                 <Box textAlign="center">
-                  <Typography variant='h3' color={colors.grey[500]} fontWeight="bold" xs={{ m: "10px 0 0 0" }} >Admin Name</Typography>
+                  <Typography variant='h3' color={colors.grey[500]} fontWeight="bold" xs={{ m: "10px 0 0 0" }} >Hello,{admin && admin}</Typography>
                   <Typography variant='h5' color={colors.greenAccent[500]}>fancy Admin</Typography>
                 </Box>
               </Box>

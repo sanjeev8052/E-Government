@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { AppBar, Toolbar, Tabs, Tab, Typography, } from '@mui/material'
 import { Link } from 'react-router-dom';
 import { AssuredWorkload } from '@mui/icons-material/';
-import AccountMenu from './AccountMenu'
+import AccountMenu from '../../AccountMenu'
 import { useSelector } from 'react-redux'
 
 const Header = () => {

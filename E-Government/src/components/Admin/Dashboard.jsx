@@ -8,9 +8,9 @@ import AdminTopbar from '../Global/AdminTopbar'
 import Header from '../Global/Header'
 
 const Dashboard = () => {
-   const { isAuthenticated } = useSelector((state) => (state.admin))
+   const { isAuthenticated , admin } = useSelector((state) => (state.admin))
   const navigate = useNavigate()
-
+console.log()
   useEffect(() => {
    isAuthenticated ? navigate('/dashboard') : navigate('/adlogin')
   }, [isAuthenticated,navigate])
@@ -18,7 +18,7 @@ const Dashboard = () => {
   //  isAuthenticated ? navigate("/dashboard") : navigate('/adlogin')
   return (
     <div className='app'>
-      <AdminSidebar />
+      <AdminSidebar admin={admin && admin.name}  />
       <main className='content'>
         <AdminTopbar />
         <Box m="15px">

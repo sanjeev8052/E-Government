@@ -43,11 +43,11 @@ export const getEmp = () => async (dispatch) =>{
         dispatch({
             type: "EmployeeRequest"
         })
-        const response = await axios.get(`/api/admin/getemp`)
+        const {data} = await axios.get(`/api/admin/getemp`)
 
         dispatch({
             type: "EmployeeSuccess",
-            payload: response
+            payload: data
         })
     } catch (error) {
         dispatch({

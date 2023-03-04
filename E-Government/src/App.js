@@ -4,8 +4,10 @@ import Login from './components/Login'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { LoadUser } from './Action/User'
-import Home from './components/Home'
+import Home from './components/Home/Home'
 import './App.css'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import ForgotPassword from './components/ForgotPassword'
 import Complaint from './components/Complaint/Complaint'
 
@@ -46,13 +48,13 @@ const App = () => {
               <Route path='/' element={<Home />} />
               <Route path='/forgotPassword' element={<ForgotPassword />} />
               <Route path='/complaint' element={<Complaint />} />
-              <Route exact path='/empregister' element={<Empregister/>} />
-              <Route exact path='/adlogin' element={<AdminLogin />} />
-              <Route exact path='/aforgot' element={<Aforgetpassword />} />
-              <Route exact path='/emplogin' element={<Emplogin />} />
-              <Route exact path="/dashboard" element={<Dashboard />} />
-              <Route exact path="/aemployee" element={<Employee />} />
-              <Route exact path="/aremployee" element={<RequestedEmployee />} />
+              <Route path='/empregister' element={<Empregister />} />
+              <Route path='/adlogin' element={<AdminLogin />} />
+              <Route path='/aforgot' element={<Aforgetpassword />} />
+              <Route path='/emplogin' element={<Emplogin />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/aemployee" element={<Employee />} />
+              <Route path="/aremployee" element={<RequestedEmployee />} />
 
 
             </Routes>

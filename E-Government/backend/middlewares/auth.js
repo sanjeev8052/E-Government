@@ -1,6 +1,6 @@
 const  User = require('../models/User/UserModel')
 const jwt = require('jsonwebtoken');
-exports.isAuthenticated = async (req, res, next)=>{
+exports.isAuthenticatedUser = async (req, res, next)=>{
     try {
         const {token} = req.cookies;
     
@@ -11,7 +11,7 @@ exports.isAuthenticated = async (req, res, next)=>{
             }
          const decoded = jwt.verify(token,process.env.SECRET_KEY)
          req.user = await User.findById(decoded._id)
-         next();
+          next();
     } catch (error) {
         res.status(500).json({
                         success: false,

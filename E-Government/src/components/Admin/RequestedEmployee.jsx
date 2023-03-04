@@ -11,9 +11,9 @@ import { getTempEmp, conTempEmp } from '../../Action/Admin/Employee'
 const RequestedEmployee = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    const { isAuthenticated } = useSelector((state) => (state.admin))
-    const { data } = useSelector((state) => (state.admin.data))
-    console.log(data)
+    const { isAuthenticated, loading , data } = useSelector((state) => (state.admin))
+    // const { data } = useSelector((state) => (state.admin.data))
+    // console.log(data)
 
 
     const dispatch = useDispatch()
