@@ -1,5 +1,7 @@
+
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, Button } from '@mui/material'
 import React, { Fragment, useEffect } from 'react'
+
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
 import EmpModel from '../Global/EmpModel'
@@ -11,7 +13,8 @@ import { blockEmp, getEmp } from '../../Action/Admin/Employee'
 import { BlockTwoTone } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
 
-const Employee = () => {
+
+const AdminComplaint = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
     const { isAuthenticated, loading, emp } = useSelector((state) => (state.admin))
@@ -21,7 +24,7 @@ const Employee = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        isAuthenticated ? navigate('/aemployee') : navigate('/adlogin')
+        isAuthenticated ? navigate('/acomplaint') : navigate('/adlogin')
         dispatch(getEmp())
     }, [isAuthenticated, dispatch])
 
@@ -30,18 +33,13 @@ const Employee = () => {
         dispatch(getEmp())
     }
     return (
-
-
-
         <div className='app'>
             <AdminSidebar />
             <main className='content'>
                 <AdminTopbar />
-
-                          
-                            <Box m="15px">
+                <Box m="15px">
                             <Box display="flex" justifyContent="space-between" alignItems="center">
-                                <Header title="Employee" subtitle="Welcome Your Employee Details Page" />
+                                <Header title="Complaints" subtitle="Welcome Your Copmliants Details Page" />
                                 <EmpModel />
 
                             </Box>
@@ -55,9 +53,13 @@ const Employee = () => {
                                             <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
                                                 <TableCell>Name</TableCell>
                                                 <TableCell>Email</TableCell>
-                                                <TableCell>Gender</TableCell>
                                                 <TableCell>Phone NO.</TableCell>
-                                                <TableCell>Opratons</TableCell>
+                                                <TableCell>Complaint Type</TableCell>
+                                                <TableCell>City</TableCell>
+                                                <TableCell>StreetAddress</TableCell>
+                                                <TableCell>Area</TableCell>
+                                                <TableCell>Pincode</TableCell>
+                                                <TableCell>Complaint Description</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -86,9 +88,10 @@ const Employee = () => {
                             </Box>
                            }
                         </Box>
-                        </main>
-                    </div>
+ 
+            </main>
+        </div>
     )
 }
 
-export default Employee
+export default AdminComplaint

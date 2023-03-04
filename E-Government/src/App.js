@@ -21,6 +21,7 @@ import AdminLogin from './components/Admin/AdminLogin'
 import Employee from './components/Admin/Employee'
 import RequestedEmployee from './components/Admin/RequestedEmployee'
 import Aforgetpassword from './components/Admin/Aforgetpassword'
+import AdminComplaint from './components/Admin/AdminComplaint'
 
 import Empregister from './components/Employee/Empregister'
 import Emplogin from './components/Employee/Emplogin'
@@ -55,6 +56,7 @@ const App = () => {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/aemployee" element={<Employee />} />
               <Route path="/aremployee" element={<RequestedEmployee />} />
+              <Route path="/acomplaint" element={<AdminComplaint />} />
 
 
             </Routes>
