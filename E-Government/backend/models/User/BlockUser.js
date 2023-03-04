@@ -1,7 +1,9 @@
 const  mongoose = require("mongoose");
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const crypto = require('crypto')
 
-const blockUserSchema = mongoose.Schema({
+const BlockUser = mongoose.Schema({
     name: {
         type: String,
         required: [true,'Name is required'],
@@ -22,10 +24,11 @@ const blockUserSchema = mongoose.Schema({
         select:false,
     },
 
-    
+    resetPasswordToken:String,
+    resetPasswordExpire: Date
 
 });
-blockUserSchema.pre("save", async function(next){
+BlockUser.pre("save", async function(next){
     if(this.isModified("password")){
         this.password = await bcrypt.hash(this.password, 10);
     }
@@ -33,5 +36,20 @@ blockUserSchema.pre("save", async function(next){
     next();
 })
 
+BlockUser.methods.matchPassword = async function(password){
+    return await bcrypt.compare(password, this.password);
+}
 
-module.exports = mongoose.model("blockUser",blockUserSchema);
+BlockUser.methods.generateToken = async function(){
+    return jwt.sign({_id:this._id}, process.env.SECRET_KEY)
+}
+
+BlockUser.methods.getResetPasswordToken = async function(){
+
+    const resetToken = crypto.randomBytes(20).toString('hex')
+    this.resetPasswordToken  = crypto.createHash("sha256").update(resetToken).digest('hex')
+    this.resetPasswordExpire = Date.now() + 10 + 60 + 1000 ;
+    return resetToken
+}
+
+module.exports = mongoose.model("blockUser",BlockUser);
