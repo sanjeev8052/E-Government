@@ -73,6 +73,7 @@ const block = (id) => {
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Employee" subtitle="Welcome Your Employee Details Page" />
+                        <EmpModel/>
                     </Box>
 
                     <Box alignItems="center" justifyContent="center" m="15px" >
@@ -85,7 +86,7 @@ const block = (id) => {
                                         <TableCell>Email</TableCell>
                                         <TableCell>Gender</TableCell>
                                         <TableCell>Phone NO.</TableCell>
-                                        <TableCell>Opratons</TableCell>
+                                        <TableCell>Oprations</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody sx={{backgroundColor:colors.blueAccent[800]}}>
