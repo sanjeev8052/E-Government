@@ -72,6 +72,4 @@ export const userReducer = createReducer(initialState, {
         state.error = action.payload;
     },
 
-
-
 })
