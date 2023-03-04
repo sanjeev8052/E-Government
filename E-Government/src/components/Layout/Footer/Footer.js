@@ -2,10 +2,11 @@ import React from "react";
 import "./Footer.css";
  import playStore from '../../Images/playstore.jpg'
  import appStore from '../../Images/Appstore.jpg'
-
+import { Facebook, Instagram, YouTube} from "@mui/icons-material";
 const Footer = () => {
   return (
     <footer id="footer">
+     
       <div className="leftFooter">
         <h4>DOWNLOAD OUR APP</h4>
         <p>Download App for Android and IOS mobile phone</p>
@@ -22,9 +23,9 @@ const Footer = () => {
 
       <div className="rightFooter">
         <h4>Follow Us</h4>
-        <a href="http://instagram.com/meabhisingh">Instagram</a>
-        <a href="http://youtube.com/6packprogramemr">Youtube</a>
-        <a href="http://instagram.com/meabhisingh">Facebook</a>
+        <a href="http://instagram.com/meabhisingh"><Instagram/> Instagram</a>
+        <a href="http://youtube.com/6packprograme"><YouTube/>Youtube</a>
+        <a href="http://instagram.com/meabhisingh"><Facebook/>Facebook</a>
       </div>
     </footer>
   );

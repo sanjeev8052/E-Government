@@ -1,5 +1,5 @@
 import React from 'react'
-import Carousel from '../Carousel'
+import Carousel from '../Layout/Carousel'
 import Header from '../Layout/Header/Header'
 import Footer  from '../Layout/Footer/Footer'
 import './Home.css'

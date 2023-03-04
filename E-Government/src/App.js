@@ -1,5 +1,5 @@
-import Register from './components/Register'
-import Login from './components/Login'
+import Register from './components/User/Register'
+import Login from './components/User/Login'
 import Home from './components/Home/Home'
 import { LoadUser } from './Action/User'
 import  UserForgotPassword from  './components/User/ForgotPassword'
@@ -18,7 +18,6 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { LoadAdmin } from './Action/Admin/Login'
 
 // admin
-import ForgotPassword from './components/ForgotPassword'
 import Dashboard from './components/Admin/Dashboard'
 import AdminLogin from './components/Admin/AdminLogin'
 import Employee from './components/Admin/Employee'
@@ -54,8 +53,6 @@ const App = () => {
 
 
 
-
-              <Route path='/forgotPassword' element={<ForgotPassword />} />
               <Route path='/complaint' element={<Complaint />} />
               <Route path='/empregister' element={<Empregister />} />
               <Route path='/adlogin' element={<AdminLogin />} />
