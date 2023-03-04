@@ -73,7 +73,7 @@ const AdminSidebar = ({admin}) => {
                 </Box>
                 <Box textAlign="center">
                   <Typography variant='h3' color={colors.grey[500]} fontWeight="bold" xs={{ m: "10px 0 0 0" }} >Hello,{admin && admin}</Typography>
-                  <Typography variant='h5' color={colors.greenAccent[500]}>fancy Admin</Typography>
+
                 </Box>
               </Box>
             )}
@@ -96,6 +96,13 @@ const AdminSidebar = ({admin}) => {
             <Item
               title="RequestedEmpployee"
               to="/aremployee"
+              icon={<PersonOutlined />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Complaint"
+              to="/acomplaint"
               icon={<PersonOutlined />}
               selected={selected}
               setSelected={setSelected}

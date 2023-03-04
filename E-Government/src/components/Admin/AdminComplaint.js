@@ -13,7 +13,8 @@ import { blockEmp, getEmp } from '../../Action/Admin/Employee'
 import { BlockTwoTone } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
 
-const Employee = () => {
+
+const AdminComplaint = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
     const { isAuthenticated, loading, emp } = useSelector((state) => (state.admin))
@@ -23,7 +24,7 @@ const Employee = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        isAuthenticated ? navigate('/aemployee') : navigate('/adlogin')
+        isAuthenticated ? navigate('/acomplaint') : navigate('/adlogin')
         dispatch(getEmp())
     }, [isAuthenticated, dispatch])
 
@@ -32,23 +33,18 @@ const Employee = () => {
         dispatch(getEmp())
     }
     return (
-
-
-
         <div className='app'>
             <AdminSidebar />
             <main className='content'>
                 <AdminTopbar />
-
-
                 <Box m="15px">
-                    <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <Header title="Employee" subtitle="Welcome Your Employee Details Page" />
-                        <EmpModel />
+                            <Box display="flex" justifyContent="space-between" alignItems="center">
+                                <Header title="Complaints" subtitle="Welcome Your Copmliants Details Page" />
+                                <EmpModel />
 
-                    </Box>
-                    {
-                        loading ? <Loader /> :
+                            </Box>
+                            {
+                            loading ? <Loader/> : 
                             <Box alignItems="center" justifyContent="center" m="15px" >
                                 <Typography variant="h3" color={colors.redAccent[600]}>Employees Details</Typography>
                                 <TableContainer sx={{ mt: "10px" }} component={Paper}>
@@ -57,40 +53,45 @@ const Employee = () => {
                                             <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
                                                 <TableCell>Name</TableCell>
                                                 <TableCell>Email</TableCell>
-                                                <TableCell>Gender</TableCell>
                                                 <TableCell>Phone NO.</TableCell>
-                                                <TableCell>Opratons</TableCell>
+                                                <TableCell>Complaint Type</TableCell>
+                                                <TableCell>City</TableCell>
+                                                <TableCell>StreetAddress</TableCell>
+                                                <TableCell>Area</TableCell>
+                                                <TableCell>Pincode</TableCell>
+                                                <TableCell>Complaint Description</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-
+                                           
                                             {
-                                                emp?.map((data) => (
-                                                    <TableRow key={data._id}>
-                                                        <TableCell >{data.name}</TableCell>
-                                                        <TableCell >{data.email}</TableCell>
-                                                        <TableCell >{data.gender}</TableCell>
-                                                        <TableCell >{data.phone}</TableCell>
-                                                        <TableCell >
-                                                            {/* <IconButton aria-label="block" color='error'>
+                                        emp?.map((data) => (
+                                            <TableRow key={data._id}>
+                                                <TableCell >{data.name}</TableCell>
+                                                <TableCell >{data.email}</TableCell>
+                                                <TableCell >{data.gender}</TableCell>
+                                                <TableCell >{data.phone}</TableCell>
+                                                <TableCell >
+                                                    {/* <IconButton aria-label="block" color='error'>
                                                         <BlockTwoTone/>
                                                       
                                                     </IconButton> */}
-                                                            <Button variant="contained" color="primary" size='small' sx={{ borderRadius: "100px" }} onClick={() => { block(data._id) }}><BlockTwoTone /> Block
-                                                            </Button>
-                                                        </TableCell>
-                                                    </TableRow>
-                                                ))
-                                            }
+                                                    <Button variant="contained" color="primary" size='small' sx={{borderRadius:"100px"}} onClick={() => { block(data._id) }}><BlockTwoTone/> Block
+                                                    </Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))
+                                    }
                                         </TableBody>
                                     </Table>
                                 </TableContainer>
                             </Box>
-                    }
-                </Box>
+                           }
+                        </Box>
+ 
             </main>
         </div>
     )
 }
 
-export default Employee
+export default AdminComplaint
