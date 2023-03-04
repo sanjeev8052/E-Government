@@ -4,7 +4,7 @@ const BlockUser = require("../../models/User/BlockUser");
 const UserModel = require("../../models/User/UserModel");
 const router = express.Router();
 
-router.post("blockuser/:_id", isAuthenticate, async (req, res) => {
+router.post("/blockuser/:_id", isAuthenticate, async (req, res) => {
     try {
         const user = await UserModel.findById(req.params._id)
         if (!user) {
