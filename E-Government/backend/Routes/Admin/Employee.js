@@ -3,7 +3,7 @@ const router = express.Router();
 const { isAuthenticate } = require("../../middlewares/Adminmiddle");
 const TempEmployee = require("../../models/Admin/TempEmployee");
 const Employee = require("../../models/Emp/Employee");
-const Bloackemployee = require("../../models/Admin/BlockEmployee")
+const Blockemployee = require("../../models/Admin/BlockEmployee")
 
 router.get("/gettempemp", isAuthenticate, async (req, res) => {
     try {
@@ -60,7 +60,7 @@ router.post("/blockemp/:_id", isAuthenticate, async (req, res) => {
             res.status(400).json({ message: "Employee Not Found" })
         }
        
-        const blockemp = await Bloackemployee.create(emp.toJSON());
+        const blockemp = await Blockemployee.create(emp.toJSON());
         const deleteEmp = await Employee.deleteOne({ _id: req.params._id })
         res.status(200).
             json({
