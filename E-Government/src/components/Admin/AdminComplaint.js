@@ -1,6 +1,6 @@
 
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, Button } from '@mui/material'
-import React, { Fragment, useEffect } from 'react'
+import React, {  useEffect } from 'react'
 
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
@@ -12,12 +12,13 @@ import { tokens } from '../../Global'
 import { blockEmp, getEmp } from '../../Action/Admin/Employee'
 import { BlockTwoTone } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
+import { getCompReq } from '../../Action/Services/Services'
 
 
 const AdminComplaint = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    const { isAuthenticated, loading, emp } = useSelector((state) => (state.admin))
+    const {  isAuthenticated ,loading ,getComReq } = useSelector((state) => (state.services))
     // const {  data } = useSelector((state) => (state.admin.data))
     //    console.log(data)
     const navigate = useNavigate()
@@ -25,8 +26,8 @@ const AdminComplaint = () => {
 
     useEffect(() => {
         isAuthenticated ? navigate('/acomplaint') : navigate('/adlogin')
-        dispatch(getEmp())
-    }, [isAuthenticated, dispatch])
+        dispatch(getCompReq())
+    }, [isAuthenticated, dispatch, navigate])
 
     const block = (id) => {
         dispatch(blockEmp(id))
@@ -60,17 +61,24 @@ const AdminComplaint = () => {
                                                 <TableCell>Area</TableCell>
                                                 <TableCell>Pincode</TableCell>
                                                 <TableCell>Complaint Description</TableCell>
+                                                <TableCell>Actions</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
                                            
                                             {
-                                        emp?.map((data) => (
+                                               
+                                        getComReq?.map((data) => (
                                             <TableRow key={data._id}>
                                                 <TableCell >{data.name}</TableCell>
                                                 <TableCell >{data.email}</TableCell>
-                                                <TableCell >{data.gender}</TableCell>
                                                 <TableCell >{data.phone}</TableCell>
+                                                <TableCell >{data.complaintType}</TableCell>
+                                                <TableCell >{data.city}</TableCell>
+                                                <TableCell >{data.streetAddress}</TableCell>
+                                                <TableCell >{data.area}</TableCell>
+                                                <TableCell >{data.pincode}</TableCell>
+                                                <TableCell >{data.complaintDesc}</TableCell>
                                                 <TableCell >
                                                     {/* <IconButton aria-label="block" color='error'>
                                                         <BlockTwoTone/>

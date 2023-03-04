@@ -1,5 +1,5 @@
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, Button } from '@mui/material'
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
 import EmpModel from '../Global/EmpModel'
@@ -23,7 +23,7 @@ const Employee = () => {
     useEffect(() => {
         isAuthenticated ? navigate('/aemployee') : navigate('/adlogin')
         dispatch(getEmp())
-    }, [isAuthenticated, dispatch])
+    }, [isAuthenticated, dispatch ,navigate])
 
     const block = (id) => {
         dispatch(blockEmp(id))

@@ -7,7 +7,7 @@ const initialState = {
 
 export const userServicesReducer = createReducer(initialState, {
 
-    // Login Reducers........
+    // getCompreq Reducers........
     getCompReqRequset: (state) => {
         state.loading = true;
     },

@@ -1,21 +1,24 @@
 import Register from './components/Register'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Login from './components/Login'
+import Home from './components/Home/Home'
+import { LoadUser } from './Action/User'
+import  UserForgotPassword from  './components/User/ForgotPassword'
+import Complaint from './components/Complaint/Complaint'
+
+// package
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { LoadUser } from './Action/User'
-import Home from './components/Home/Home'
 import './App.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ForgotPassword from './components/ForgotPassword'
-import Complaint from './components/Complaint/Complaint'
 
 import { ColorModeContext, useMode } from "./Global";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { LoadAdmin } from './Action/Admin/Login'
 
 // admin
+import ForgotPassword from './components/ForgotPassword'
 import Dashboard from './components/Admin/Dashboard'
 import AdminLogin from './components/Admin/AdminLogin'
 import Employee from './components/Admin/Employee'
@@ -47,6 +50,11 @@ const App = () => {
               <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login />} />
               <Route path='/' element={<Home />} />
+              <Route path='/UserForgotPassword' element={<UserForgotPassword />} />
+
+
+
+
               <Route path='/forgotPassword' element={<ForgotPassword />} />
               <Route path='/complaint' element={<Complaint />} />
               <Route path='/empregister' element={<Empregister />} />

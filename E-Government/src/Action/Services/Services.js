@@ -6,7 +6,7 @@ export const getCompReq = () => async (dispatch) => {
             type: "getCompReqRequset",
         })
 
-        const { data } = await axios.post("api/comp/req", {
+        const { data } = await axios.get("api/getComp/req", {
             headers: {
                 "Content-Type": "application/json"
             }
@@ -14,7 +14,7 @@ export const getCompReq = () => async (dispatch) => {
 
         dispatch({
             type: "getCompReqSuccess",
-            payload: data.message
+            payload: data
         })
 
     } catch (error) {

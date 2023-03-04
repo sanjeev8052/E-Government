@@ -6,7 +6,6 @@ import Logo from '../Images/Icons/login.png';
 import { Link } from 'react-router-dom'
 import { tokens } from "../../Global";
 import { HomeOutlined,  PersonOutlined, MenuOutlined } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme()

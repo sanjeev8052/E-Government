@@ -10,6 +10,7 @@ import { useFormik } from 'formik'
 import { signUpSchema } from '../ValidateSchema/User'
 import loginuimage from '../Images/login.jpg'
 import './Login.css'
+import ForgotPassword from '../components/User/ForgotPassword'
 const Login = () => {
     const styles = {
         BoxStyle: {
@@ -175,7 +176,8 @@ const Login = () => {
                         />
                     }
                 />
-                <Button sx={{ marginLeft: 'auto' }} variant='text' color="inherit"   >Forgot?</Button>
+                <ForgotPassword/>
+                {/* <Button sx={{ marginLeft: 'auto' }} variant='text' color="inherit"   >Forgot?</Button> */}
 
                 <Button type='submit' sx={{ width: "100%" }} variant="contained" color="primary" endIcon={<LoginIcon />}>Login </Button>
 

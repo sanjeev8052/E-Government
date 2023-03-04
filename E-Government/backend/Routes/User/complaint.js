@@ -25,10 +25,10 @@ router.get('/getComp/req', isAuthenticatedUser, async(req, res) => {
     try {
         const  complaint = await UserComplaint.find({})
        
-        res.status(200).json({
-            success:true,
-            complaint
-        })
+        res.status(200).send(complaint)
+           
+            
+        
         
     } catch (error) {
         res
