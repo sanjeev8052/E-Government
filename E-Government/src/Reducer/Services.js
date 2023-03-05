@@ -14,12 +14,12 @@ export const userServicesReducer = createReducer(initialState, {
     getCompReqSuccess: (state, action) => {
         state.loading = false;
         state.getComReq = action.payload;
-        state.isAuthenticated = true
+       
     },
     getCompReqFailuer: (state, action) => {
         state.loading = false;
         state.LoginError = action.payload;
-        state.isAuthenticated = false
+       
     },
 
 

@@ -1,4 +1,4 @@
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, Button } from '@mui/material'
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, Button, IconButton } from '@mui/material'
 import React, { useEffect } from 'react'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
@@ -7,25 +7,23 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../Layout/Loader'
 import { tokens } from '../../Global'
 import { getTempEmp, conTempEmp } from '../../Action/Admin/Employee'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { CheckCircleOutlineTwoTone } from '@mui/icons-material'
 
 const RequestedEmployee = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
     const { isAuthenticated, loading, empReq } = useSelector((state) => (state.admin))
-    // const { data } = useSelector((state) => (state.admin.data))
-    // console.log(data)
-
 
     const dispatch = useDispatch()
-
+    const navigate = useNavigate();
     useEffect(() => {
-        // isAuthenticated ? navigate('/aemployee') : navigate('/adlogin')
+        isAuthenticated ? navigate('/aremployee') : navigate('/adlogin')
         dispatch(getTempEmp())
-    }, [isAuthenticated, dispatch])
+    }, [isAuthenticated, dispatch, navigate])
     const confirm = (id) => {
         dispatch(conTempEmp(id));
-        <Navigate to='/aremployee' />
+        window.location.reload();
     }
 
     return (
@@ -42,8 +40,8 @@ const RequestedEmployee = () => {
                     </Box>
                     {loading ? <Loader /> :
                         <Box alignItems="center" justifyContent="center" m="15px" >
-                            <Typography variant="h3" color={colors.redAccent[600]}>Employees Details</Typography>
-                            <TableContainer sx={{ mt: "10px" }} component={Paper}>
+                            <Typography variant="h3" color={colors.redAccent[600]}>Requested Employees Details</Typography>
+                            <TableContainer sx={{ mt: "10px" , maxWidth:1000 }} component={Paper}>
                                 <Table size='small' >
                                     <TableHead  >
                                         <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
@@ -51,14 +49,14 @@ const RequestedEmployee = () => {
                                             <TableCell>Email</TableCell>
                                             <TableCell>Gender</TableCell>
                                             <TableCell>Phone NO.</TableCell>
-                                            <TableCell>Opratons</TableCell>
+                                            <TableCell>Actions</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
 
                                         {empReq <= 0 ? <TableRow>
                                             <TableCell colSpan={6}>
-                                            <Typography sx={{margin:"10px auto" , width:"10rem"}} variant="h1" color="primary">No Data</Typography>
+                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Emploee Data</Typography>
                                             </TableCell>
                                         </TableRow>
                                             :
@@ -69,9 +67,12 @@ const RequestedEmployee = () => {
                                                     <TableCell >{data.gender}</TableCell>
                                                     <TableCell >{data.phone}</TableCell>
                                                     <TableCell >
-                                                        <Button variant="contained" color="primary" onClick={() => { confirm(data._id) }} >
-                                                            Confirm
-                                                        </Button>
+                                                        <IconButton aria-label="correct" onClick={() => { confirm(data._id) }}>
+                                                          <CheckCircleOutlineTwoTone/>
+                                                        </IconButton>
+                                                        {/* <Button variant="contained" color="success" onClick={() => { confirm(data._id) }} sx={{borderRadius:"100px"}}>
+                                                            <CheckCircleOutlineTwoTone/>
+                                                        </Button> */}
                                                     </TableCell>
                                                 </TableRow>
                                             ))

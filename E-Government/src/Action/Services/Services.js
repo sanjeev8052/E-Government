@@ -6,7 +6,7 @@ export const getCompReq = () => async (dispatch) => {
             type: "getCompReqRequset",
         })
 
-        const { data } = await axios.get("api/getComp/req", {
+        const { data } = await axios.get("api/admin/getComp/req", {
             headers: {
                 "Content-Type": "application/json"
             }

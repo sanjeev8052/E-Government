@@ -23,7 +23,7 @@ router.post("/employee/:_id", isAuthenticate, async (req, res) => {
     try {
         const emp = await TempEmployee.findById(req.params._id)
         if (!emp) {
-            res.status(400).json({ message: "EMployee Not Found" })
+            res.status(400).json({ message: "Employee Not Found" })
         }  
         const confirmemp = await Employee.create(emp.toJSON());
         const deleteTempEmp = await TempEmployee.deleteOne({ _id: req.params._id })
