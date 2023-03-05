@@ -1,14 +1,13 @@
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, Button, IconButton } from '@mui/material'
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper,  IconButton } from '@mui/material'
 import React, { useEffect } from 'react'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
-import EmpModel from '../Global/EmpModel'
 import Header from '../Global/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../Layout/Loader'
 import { tokens } from '../../Global'
 import { blockEmp, getEmp } from '../../Action/Admin/Employee'
-import { Block, BlockTwoTone } from '@mui/icons-material'
+import { Block } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
 
 const Employee = () => {
