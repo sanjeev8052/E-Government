@@ -13,7 +13,7 @@ const Header = () => {
         <div>
             <AppBar position="static" sx={{ background: "white" }}>
                 <Toolbar>
-                    {/* <AssuredWorkload sx={{ color: "black", fontSize: "2rem" }} /> */}
+                    <AssuredWorkload sx={{ color: "black", fontSize: "2rem" }} />
                     <Typography variant="h3" color="primary">E-Goverment</Typography>
                     <Tabs
                         sx={{ color: "balck" }}

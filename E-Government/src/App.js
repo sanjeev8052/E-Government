@@ -1,17 +1,17 @@
+import './App.css'
 import Register from './components/User/Register'
 import Login from './components/User/Login'
 import Home from './components/Home/Home'
 import { LoadUser } from './Action/User'
 import  UserForgotPassword from  './components/User/ForgotPassword'
-import Complaint from './components/Complaint/Complaint'
+import Complaint from './components/Services/Complaint'
+import BillPay from './components/User/BillPay'
 
 // package
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import './App.css'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 
 import { ColorModeContext, useMode } from "./Global";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -43,7 +43,7 @@ const App = () => {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className='app'>
+        <div className=''>
 
           <Router>
             <Routes>
@@ -51,10 +51,11 @@ const App = () => {
               <Route path='/login' element={<Login />} />
               <Route path='/' element={<Home />} />
               <Route path='/UserForgotPassword' element={<UserForgotPassword />} />
-
-
-
               <Route path='/complaint' element={<Complaint />} />
+              <Route path='/billpay' element={<BillPay />} />
+
+
+
               <Route path='/empregister' element={<Empregister />} />
               <Route path='/adlogin' element={<AdminLogin />} />
               <Route path='/aforgot' element={<Aforgetpassword />} />

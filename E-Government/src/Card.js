@@ -1,28 +1,37 @@
 import React from 'react'
-import {Button} from '@material-ui/core'
+var Slider = require('react-slick');
+import { Button } from '@material-ui/core'
 
 const Card = () => {
+    var settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
     return (
-        <div className="card" style={{width:"10rem"}}>
-            <img src="" alt="Card" />
-            <div className="card-body">
+        <>
+            {/* <div className="card m-5" style={{ width: "10rem" }}>
+                <img src="" alt="Card" />
+                <div className="card-body">
                     <h5>Card Titel</h5>
                     <p>Lorem ipsum dolor sit amet  officia iusto quos? Atque dolore veniam consectetur rem?</p>
                     <Button variant="text" color="default">
-                      Click me!
+                        Click me!
                     </Button>
-            </div>
-        </div>
-        // <div>
-        //     <div  style={{width:"4rem"}>
-        //         {/* <img className="card-img-top" src="..." alt="Card image cap" />
-        //         <div className="card-body">
-        //             <h5 className="card-title">Card title</h5>
-        //             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        //             <a href="#" className="btn btn-primary">Go somewhere</a>
-        //         </div> */}
-        //     </div>
-        // </div>
+                </div>
+            </div> */}
+            {/* <Slider {...settings}>
+                <div><h3>1</h3></div>
+                <div><h3>2</h3></div>
+                <div><h3>3</h3></div>
+                <div><h3>4</h3></div>
+                <div><h3>5</h3></div>
+                <div><h3>6</h3></div>
+            </Slider> */}
+        </>
+
     )
 }
 
