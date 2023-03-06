@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../Layout/Loader'
 import { tokens } from '../../Global'
 
-import { BlockTwoTone, CheckTwoTone, DangerousTwoTone, TaskTwoTone } from '@mui/icons-material'
+import {  DangerousTwoTone, TaskTwoTone } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
 import { accCompReq, getCompReq, rejCompReq } from '../../Action/Services/Services'
 
@@ -26,7 +26,7 @@ const AdminComplaint = () => {
     useEffect(() => {
         isAuthenticated ? navigate('/acomplaint') : navigate('/adlogin')
         dispatch(getCompReq())
-    }, [dispatch, navigate])
+    }, [ isAuthenticated,dispatch, navigate])
 
    const accept = (id) => { 
     dispatch(accCompReq(id))
