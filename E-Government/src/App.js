@@ -27,6 +27,7 @@ import AdminComplaint from './components/Admin/AdminComplaint'
 
 import Empregister from './components/Employee/Empregister'
 import Emplogin from './components/Employee/Emplogin'
+import User from './components/Admin/User'
 
 const App = () => {
   const [theme, colorMode] = useMode()
@@ -63,6 +64,8 @@ const App = () => {
               <Route path="/aemployee" element={<Employee />} />
               <Route path="/aremployee" element={<RequestedEmployee />} />
               <Route path="/acomplaint" element={<AdminComplaint />} />
+              <Route path="/auser" element={<User />} />
+
 
 
             </Routes>

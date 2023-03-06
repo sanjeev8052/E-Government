@@ -155,6 +155,34 @@ export const AdminReducer = createReducer(initialState, {
         state.error = action.payload;
        
     },
+    GetUserRequest: (state, action) => {
+        state.loading = true;
+       
+    },
+    GetUserSuccess: (state, action) => {
+        state.loading = false;
+        state.GetUser = action.payload;
+       
+    },
+    GetUserFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+       
+    },
+    BlockUserRequest: (state, action) => {
+        state.loading = true;
+       
+    },
+    BlockUserSuccess: (state, action) => {
+        state.loading = false;
+        state.BlkUser = action.payload;
+       
+    },
+    BlockUserFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+       
+    },
 
 
 });

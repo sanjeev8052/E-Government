@@ -106,6 +106,13 @@ const AdminSidebar = ({admin}) => {
               selected={selected}
               setSelected={setSelected}
             />
+            <Item
+              title="Users"
+              to="/auser"
+              icon={<PersonOutlined />}
+              selected={selected}
+              setSelected={setSelected}
+            />
           
           </Box>
         </Menu>
