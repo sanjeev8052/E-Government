@@ -20,7 +20,7 @@ router.post('/comp/req', isAuthenticatedUser, async(req, res) => {
     }  
 })
 
-router.get('/getComp/req', isAuthenticatedUser, async(req, res) => {
+router.get('/getComp/req', async(req, res) => {
    
     try {
         const  complaint = await UserComplaint.find({})

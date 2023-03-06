@@ -4,11 +4,17 @@ import TextField from '@material-ui/core/TextField'
 import { Box, Button, FormControl, MenuItem, Select,  Typography } from '@material-ui/core';
 import { Send } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import Footer from '../Layout/Footer/Footer';
+import bgImage from '../../Images/bgImage3.jpg'
 
 
 const useStyles = makeStyles({
   Complaint: {
-
+    width:"100vw",
+    height:"50vh",
+    paddingTop:"4rem",
+    backgroundImage:`url(${bgImage})`,
+    backgroundSize: "cover"
   },
   box: {
     width: "80%",
@@ -49,6 +55,8 @@ const Complaint = () => {
 
   const classes = useStyles();
   return (
+ 
+
     <div className={classes.Complaint}>
       <Box className={classes.box} >
         <Typography variant="h4" sx={{ marginBottom: "20px" }} color="initial">New Complaint</Typography>
@@ -140,8 +148,8 @@ const Complaint = () => {
         </Button>
 
       </Box>
+      <Footer/>
     </div>
-
   )
 }
 
