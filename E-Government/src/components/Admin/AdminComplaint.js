@@ -1,5 +1,5 @@
 
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, Button } from '@mui/material'
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton } from '@mui/material'
 import React, { useEffect } from 'react'
 
 import AdminSidebar from '../Global/AdminSidebar'
@@ -10,9 +10,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../Layout/Loader'
 import { tokens } from '../../Global'
 
-import { BlockTwoTone } from '@mui/icons-material'
+import { BlockTwoTone, CheckTwoTone, DangerousTwoTone, TaskTwoTone } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
-import { getCompReq } from '../../Action/Services/Services'
+import { accCompReq, getCompReq, rejCompReq } from '../../Action/Services/Services'
 
 
 const AdminComplaint = () => {
@@ -28,9 +28,13 @@ const AdminComplaint = () => {
         dispatch(getCompReq())
     }, [dispatch, navigate])
 
-    const block = (id) => {
-        // dispatch(blockEmp(id))
-        //dispatch(getEmp())
+   const accept = (id) => { 
+    dispatch(accCompReq(id))
+    window.location.reload();
+    }
+   const reject = (id) => { 
+    dispatch(rejCompReq(id))
+    window.location.reload();
     }
     return (
         <div className='app'>
@@ -47,7 +51,7 @@ const AdminComplaint = () => {
                         loading ? <Loader /> :
                             <Box alignItems="center" justifyContent="center" m="15px" >
                                 <Typography variant="h3" color={colors.redAccent[600]}>Complaint Details</Typography>
-                                <TableContainer sx={{ mt: "10px" , minWidth:200 }} component={Paper}>
+                                <TableContainer sx={{ mt: "10px", minWidth: 200 }} component={Paper}>
                                     <Table size='small' >
                                         <TableHead  >
                                             <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
@@ -81,12 +85,14 @@ const AdminComplaint = () => {
                                                     <TableCell >{data.pincode}</TableCell>
                                                     <TableCell component='th' scope='row'>{data.complaintDesc}</TableCell>
                                                     <TableCell >
-                                                        {/* <IconButton aria-label="block" color='error'>
-                                                        <BlockTwoTone/>
-                                                      
-                                                    </IconButton> */}
-                                                        <Button variant="contained" color="primary" size='small' sx={{ borderRadius: "100px" }} onClick={() => { block(data._id) }}><BlockTwoTone /> Block
-                                                        </Button>
+                                                        <IconButton aria-label="block" color='success' onClick={() => { accept(data._id) }}>
+                                                            <TaskTwoTone />
+                                                        </IconButton>
+                                                        <IconButton aria-label="block" color='error' onClick={() => { reject(data._id) }}>
+                                                            <DangerousTwoTone />
+                                                        </IconButton>
+                                                        {/* <Button variant="contained" color="primary" size='small' sx={{ borderRadius: "100px" }} onClick={() => { block(data._id) }}><BlockTwoTone /> Block
+                                                        </Button> */}
                                                     </TableCell>
                                                 </TableRow>
                                             ))

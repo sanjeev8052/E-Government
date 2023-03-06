@@ -22,5 +22,34 @@ export const userServicesReducer = createReducer(initialState, {
        
     },
 
+// Accept Complaint Request
+    AcceptCompReqRequset: (state) => {
+        state.loading = true;
+    },
+    AcceptCompReqSuccess: (state, action) => {
+        state.loading = false;
+        state.accComReq = action.payload;
+       
+    },
+    AcceptCompReqFailuer: (state, action) => {
+        state.loading = false;
+        state.LoginError = action.payload;
+       
+    },
+// Reject Complaint Request
+    RejectCompReqRequset: (state) => {
+        state.loading = true;
+    },
+    RejectCompReqSuccess: (state, action) => {
+        state.loading = false;
+        state.rejComReq = action.payload;
+       
+    },
+    RejectCompReqFailuer: (state, action) => {
+        state.loading = false;
+        state.LoginError = action.payload;
+       
+    },
+
 
 })
