@@ -1,14 +1,13 @@
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, Button } from '@mui/material'
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper,  IconButton } from '@mui/material'
 import React, { useEffect } from 'react'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
-import EmpModel from '../Global/EmpModel'
 import Header from '../Global/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../Layout/Loader'
 import { tokens } from '../../Global'
 import { blockEmp, getEmp } from '../../Action/Admin/Employee'
-import { BlockTwoTone } from '@mui/icons-material'
+import { Block } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
 
 const Employee = () => {
@@ -21,13 +20,13 @@ const Employee = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        isAuthenticated ? navigate('/aemployee') : navigate('/adlogin')
+        //isAuthenticated ? navigate('/aemployee') : navigate('/adlogin')
         dispatch(getEmp())
     }, [isAuthenticated, dispatch ,navigate])
 
     const block = (id) => {
-        dispatch(blockEmp(id))
-        dispatch(getEmp())
+        dispatch(blockEmp(id));
+        window.location.reload();
     }
     return (
 
@@ -42,7 +41,7 @@ const Employee = () => {
                             <Box m="15px">
                             <Box display="flex" justifyContent="space-between" alignItems="center">
                                 <Header title="Employee" subtitle="Welcome Your Employee Details Page" />
-                                <EmpModel />
+                                {/* <EmpModel /> */}
 
                             </Box>
                             {
@@ -57,7 +56,7 @@ const Employee = () => {
                                                 <TableCell>Email</TableCell>
                                                 <TableCell>Gender</TableCell>
                                                 <TableCell>Phone NO.</TableCell>
-                                                <TableCell>Opratons</TableCell>
+                                                <TableCell>Actions</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -70,12 +69,12 @@ const Employee = () => {
                                                 <TableCell >{data.gender}</TableCell>
                                                 <TableCell >{data.phone}</TableCell>
                                                 <TableCell >
-                                                    {/* <IconButton aria-label="block" color='error'>
-                                                        <BlockTwoTone/>
+                                                    <IconButton aria-label="block" color='error' onClick={() => { block(data._id) }}>
+                                                        <Block/>
                                                       
-                                                    </IconButton> */}
-                                                    <Button variant="contained" color="primary" size='small' sx={{borderRadius:"100px"}} onClick={() => { block(data._id) }}><BlockTwoTone/> Block
-                                                    </Button>
+                                                    </IconButton>
+                                                    {/* <Button variant="contained" color="primary" size='small' sx={{borderRadius:"100px"}} onClick={() => { block(data._id) }}><BlockTwoTone/> Block
+                                                    </Button> */}
                                                 </TableCell>
                                             </TableRow>
                                         ))

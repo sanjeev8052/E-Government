@@ -53,7 +53,7 @@ const AdminSidebar = ({admin}) => {
               color: colors.grey[600]
             }}>
             {!isCollapsed && (
-              <Box display="flex" justifyContent="space-between" alignItems="center" ml="15px">
+              <Box display="flex" justifyContent="space-between" alignItems="center" ml="10px">
                 <Typography variant='h4'>
                   ADMINIS
                 </Typography>
@@ -77,7 +77,7 @@ const AdminSidebar = ({admin}) => {
               </Box>
             )}
           {/* menu item */}
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Box paddingLeft={isCollapsed ? undefined : "3%"}>
             <Item
               title="Dashboard"
               to="/dashboard"

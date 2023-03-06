@@ -1,37 +1,40 @@
 
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, Button } from '@mui/material'
-import React, {  useEffect } from 'react'
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton } from '@mui/material'
+import React, { useEffect } from 'react'
 
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
-import EmpModel from '../Global/EmpModel'
+
 import Header from '../Global/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../Layout/Loader'
 import { tokens } from '../../Global'
-import { blockEmp, getEmp } from '../../Action/Admin/Employee'
-import { BlockTwoTone } from '@mui/icons-material'
+
+import { BlockTwoTone, CheckTwoTone, DangerousTwoTone, TaskTwoTone } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
-import { getCompReq } from '../../Action/Services/Services'
+import { accCompReq, getCompReq, rejCompReq } from '../../Action/Services/Services'
 
 
 const AdminComplaint = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    const {  isAuthenticated ,loading ,getComReq } = useSelector((state) => (state.services))
-    // const {  data } = useSelector((state) => (state.admin.data))
-    //    console.log(data)
+    const { loading, getComReq } = useSelector((state) => (state.services))
+    const { isAuthenticated } = useSelector((state) => (state.admin))
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     useEffect(() => {
         isAuthenticated ? navigate('/acomplaint') : navigate('/adlogin')
         dispatch(getCompReq())
-    }, [isAuthenticated, dispatch, navigate])
+    }, [dispatch, navigate])
 
-    const block = (id) => {
-        dispatch(blockEmp(id))
-        dispatch(getEmp())
+   const accept = (id) => { 
+    dispatch(accCompReq(id))
+    window.location.reload();
+    }
+   const reject = (id) => { 
+    dispatch(rejCompReq(id))
+    window.location.reload();
     }
     return (
         <div className='app'>
@@ -39,16 +42,16 @@ const AdminComplaint = () => {
             <main className='content'>
                 <AdminTopbar />
                 <Box m="15px">
-                            <Box display="flex" justifyContent="space-between" alignItems="center">
-                                <Header title="Complaints" subtitle="Welcome Your Copmliants Details Page" />
-                                <EmpModel />
+                    <Box display="flex" justifyContent="space-between" alignItems="center">
+                        <Header title="Complaints" subtitle="Welcome Your Complaints Details Page" />
+                        {/* <EmpModel /> */}
 
-                            </Box>
-                            {
-                            loading ? <Loader/> : 
+                    </Box>
+                    {
+                        loading ? <Loader /> :
                             <Box alignItems="center" justifyContent="center" m="15px" >
-                                <Typography variant="h3" color={colors.redAccent[600]}>Employees Details</Typography>
-                                <TableContainer sx={{ mt: "10px" }} component={Paper}>
+                                <Typography variant="h3" color={colors.redAccent[600]}>Complaint Details</Typography>
+                                <TableContainer sx={{ mt: "10px", minWidth: 200 }} component={Paper}>
                                     <Table size='small' >
                                         <TableHead  >
                                             <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
@@ -65,38 +68,42 @@ const AdminComplaint = () => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                           
-                                            {
-                                               
-                                        getComReq?.map((data) => (
-                                            <TableRow key={data._id}>
-                                                <TableCell >{data.name}</TableCell>
-                                                <TableCell >{data.email}</TableCell>
-                                                <TableCell >{data.phone}</TableCell>
-                                                <TableCell >{data.complaintType}</TableCell>
-                                                <TableCell >{data.city}</TableCell>
-                                                <TableCell >{data.streetAddress}</TableCell>
-                                                <TableCell >{data.area}</TableCell>
-                                                <TableCell >{data.pincode}</TableCell>
-                                                <TableCell >{data.complaintDesc}</TableCell>
-                                                <TableCell >
-                                                    {/* <IconButton aria-label="block" color='error'>
-                                                        <BlockTwoTone/>
-                                                      
-                                                    </IconButton> */}
-                                                    <Button variant="contained" color="primary" size='small' sx={{borderRadius:"100px"}} onClick={() => { block(data._id) }}><BlockTwoTone/> Block
-                                                    </Button>
+
+                                            {getComReq <= 0 ? <TableRow>
+                                                <TableCell colSpan={6}>
+                                                    <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Complaint Data</Typography>
                                                 </TableCell>
-                                            </TableRow>
-                                        ))
-                                    }
+                                            </TableRow> : getComReq?.map((data) => (
+                                                <TableRow key={data._id}>
+                                                    <TableCell >{data.name}</TableCell>
+                                                    <TableCell >{data.email}</TableCell>
+                                                    <TableCell >{data.phone}</TableCell>
+                                                    <TableCell >{data.complaintType}</TableCell>
+                                                    <TableCell >{data.city}</TableCell>
+                                                    <TableCell >{data.streetAddress}</TableCell>
+                                                    <TableCell >{data.area}</TableCell>
+                                                    <TableCell >{data.pincode}</TableCell>
+                                                    <TableCell component='th' scope='row'>{data.complaintDesc}</TableCell>
+                                                    <TableCell >
+                                                        <IconButton aria-label="block" color='success' onClick={() => { accept(data._id) }}>
+                                                            <TaskTwoTone />
+                                                        </IconButton>
+                                                        <IconButton aria-label="block" color='error' onClick={() => { reject(data._id) }}>
+                                                            <DangerousTwoTone />
+                                                        </IconButton>
+                                                        {/* <Button variant="contained" color="primary" size='small' sx={{ borderRadius: "100px" }} onClick={() => { block(data._id) }}><BlockTwoTone /> Block
+                                                        </Button> */}
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))
+                                            }
                                         </TableBody>
                                     </Table>
                                 </TableContainer>
                             </Box>
-                           }
-                        </Box>
- 
+                    }
+                </Box>
+
             </main>
         </div>
     )

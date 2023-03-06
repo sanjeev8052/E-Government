@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core'
 import { Box, Typography } from '@mui/material'
 import React from 'react'
+import "./../../index1.css"
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
