@@ -39,3 +39,45 @@ export const BLockUser = (id) => async (dispatch) =>{
         })
     }
 }
+
+export const getblkUser = () => async (dispatch) =>{
+    try {
+        dispatch({
+            type: "GetblkUserRequest"
+        })
+        const {data} = await axios.get(`/api/admin/getblockuser`)
+
+        dispatch({
+            type: "GetblkUserSuccess",
+            payload: data
+        })
+       
+        
+    } catch (error) {
+        dispatch({
+            type: "GetblkUserFailure",
+            payload: error
+        })
+    }
+}
+
+export const unBlockUser = (id) => async (dispatch) =>{
+    try {
+        dispatch({
+            type: "unBlockUserRequest"
+        })
+        const {data} = await axios.post(`api/admin/unblockuser/${id}`)
+
+        dispatch({
+            type: "unBlockUserSuccess",
+            payload: data
+        })
+       
+        
+    } catch (error) {
+        dispatch({
+            type: "unBlockUserFailure",
+            payload: error
+        })
+    }
+}

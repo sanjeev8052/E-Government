@@ -25,19 +25,14 @@ const EmpModel = () => {
     setOpen(false);
     // dispatch(getEmp())
   };
-  // const request = () => {
-  //   dispatch(getTempEmp())
-  // }
-  // useEffect(() => {
-  //   dispatch(getTempEmp())
-  // }, [dispatch])
 
   const confirm = (id) => {
     dispatch(conTempEmp(id))
     dispatch(getTempEmp())
   }
   return (
-    <>{loading ? <Loader /> : (<Box>
+    <>{loading ? <Loader /> : (
+    <Box>
       <Button variant="contained" onClick={handleClickOpen} color="secondary" sx={{ borderRadius: "100px" }}>
         Requests
       </Button>

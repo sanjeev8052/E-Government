@@ -8,6 +8,7 @@ import { BLockUser, getUser } from '../../Action/Admin/User'
 import { tokens } from '../../Global'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
+import BlockUser from '../Global/BlockUser'
 import Header from '../Global/Header'
 import Loader from '../Layout/Loader'
 
@@ -33,8 +34,7 @@ const User = () => {
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Users" subtitle="Welcome Your Users Details Page" />
-                        {/* <EmpModel /> */}
-
+                        <BlockUser/>
                     </Box>
                     {
                             loading ? <Loader/> : 

@@ -59,12 +59,12 @@ router.post("/unblockuser/:_id", isAuthenticate, async (req, res) => {
             res.status(404).json({ message: "Blocked User Not Find" })
         }
 
-        // const unblockuser = await BlockUser.create(user.toJSON())
-        // const deleteblkuser = await UserModel.deleteOne({ _id: req.params._id })
+        const unblockuser = await UserModel.create(blkuser.toJSON())
+         const deleteblkuser = await BlockUser.deleteOne({ _id: req.params._id })
         res.status(200).
         json({
             success: true,
-            message: "Successfully Blocked",
+            message: "Successfully UnBlocked",
         })
     } catch (error) {
         res.status(500).json({ error: error.message})

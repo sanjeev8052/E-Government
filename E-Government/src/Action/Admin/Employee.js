@@ -57,6 +57,7 @@ export const getEmp = () => async (dispatch) =>{
         })
     }
 }
+
 export const blockEmp = (id) => async (dispatch) =>{
     try {
         dispatch({
@@ -71,6 +72,44 @@ export const blockEmp = (id) => async (dispatch) =>{
     } catch (error) {
         dispatch({
             type: "BlockFailure",
+            payload: error
+        })
+    }
+}
+
+export const getblkEmp = () => async (dispatch) =>{
+    try {
+        dispatch({
+            type: "BlkEmployeeRequest"
+        })
+        const {data} = await axios.get(`api/admin/getblkemp`)
+
+        dispatch({
+            type: "BlkEmployeeSuccess",
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: "BlkEmployeeFailure",
+            payload: error
+        })
+    }
+}
+
+export const unblockEmp = (id) => async (dispatch) =>{
+    try {
+        dispatch({
+            type: "UnBlockRequest"
+        })
+        const response = await axios.post(`/api/admin/unblockemp/${id}`)
+
+        dispatch({
+            type: "UnBlockSuccess",
+            payload: response
+        })
+    } catch (error) {
+        dispatch({
+            type: "UnBlockFailure",
             payload: error
         })
     }
