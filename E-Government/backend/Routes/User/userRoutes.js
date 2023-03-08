@@ -11,7 +11,7 @@ const { isAuthenticatedUser } = require("../../middlewares/auth");
 router.post("/user/new/",async (req, res) => {
 
     try {
-        const { name, email, password, mobile } = req.body
+        const { name, email, password, phone } = req.body
         let user = await User.findOne({ email });
         if (user) {
             return res
@@ -19,7 +19,7 @@ router.post("/user/new/",async (req, res) => {
                 .json({ sucsess: false, message: "user already exists....." })
         }
 
-        user = await User.create({ name, email, mobile, password })
+        user = await User.create({ name, email, phone, password })
         user.save();
 
         res.status(201).json({

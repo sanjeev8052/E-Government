@@ -1,6 +1,7 @@
 
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton } from '@mui/material'
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton, TextField } from '@mui/material'
 import React, { useEffect } from 'react'
+import {Button} from '@material-ui/core'
 
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
@@ -10,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../Layout/Loader'
 import { tokens } from '../../Global'
 
-import {  DangerousTwoTone, TaskTwoTone } from '@mui/icons-material'
+import { DangerousTwoTone, TaskTwoTone } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
 import { accCompReq, getCompReq, rejCompReq } from '../../Action/Services/Services'
 
@@ -26,15 +27,15 @@ const AdminComplaint = () => {
     useEffect(() => {
         isAuthenticated ? navigate('/acomplaint') : navigate('/adlogin')
         dispatch(getCompReq())
-    }, [ isAuthenticated,dispatch, navigate])
+    }, [isAuthenticated, dispatch, navigate])
 
-   const accept = (id) => { 
-    dispatch(accCompReq(id))
-    window.location.reload();
+    const accept = (id) => {
+        dispatch(accCompReq(id))
+        dispatch(getCompReq())
     }
-   const reject = (id) => { 
-    dispatch(rejCompReq(id))
-    window.location.reload();
+    const reject = (id) => {
+        dispatch(rejCompReq(id))
+        window.location.reload();
     }
     return (
         <div className='app'>
@@ -47,6 +48,19 @@ const AdminComplaint = () => {
                         {/* <EmpModel /> */}
 
                     </Box>
+                    <Box display="felx" justifyContent="space-between" alignItems="center">
+                        
+                    </Box>
+                    <TextField sx={{width:"80%"}}
+                            id=""
+                            label=""
+                            variant='standard'
+                            placeholder='Search by Name And Conplaint Type'
+
+                        />
+                       <Button variant="text" color="default">
+                         Reload
+                       </Button>
                     {
                         loading ? <Loader /> :
                             <Box alignItems="center" justifyContent="center" m="15px" >

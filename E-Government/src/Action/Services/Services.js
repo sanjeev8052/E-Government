@@ -1,5 +1,30 @@
 import axios from 'axios'
 
+export const CompReq = (values) => async (dispatch) => {
+    try {
+        dispatch({
+            type: "CompReqRequset",
+        })
+
+        const { data } = await axios.post("api/comp/req",values, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+        dispatch({
+            type: "CompReqSuccess",
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: "CompReqFailuer",
+            payload: error
+        })
+    }
+}
+
 export const getCompReq = () => async (dispatch) => {
     try {
         dispatch({

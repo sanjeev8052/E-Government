@@ -20,6 +20,6 @@ app.use("/api/employee", require("./Routes/Emp/Emplogin"))
 
 // User
 app.use("/api/", require('./Routes/User/userRoutes'))
-// app.use('/api', require('./Routes/User/complaint'))
+app.use('/api', require('./Routes/User/complaint'))
 
 module.exports = app
