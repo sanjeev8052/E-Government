@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
+
  const complaintCatSchema =  mongoose.Schema({
-    comlaintType : {
+    complaintType : {
         type:String,
         required : true
     }
