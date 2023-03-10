@@ -6,6 +6,8 @@ const AdRegister = require("../../models/Admin/AdRegister")
 const { body, validationResult, } = require('express-validator');
 const { isAuthenticate } = require("../../middlewares/Adminmiddle");
 
+
+// For Admin Register
 router.post("/aregister", [
     body('email', 'Enter a valid E-mail').isEmail(),
     body('name', 'Enter a valid Name').isLength({ min: 5 }),
@@ -41,7 +43,7 @@ router.post("/aregister", [
     }
 })
 
-
+// For Login
 router.post("/alogin", [
     body('email', 'Enter a valid E-mail').isEmail(),
     body('password', 'Enter minimum 5 length password').isLength({ min: 5 }),
@@ -91,6 +93,8 @@ router.post("/alogin", [
     }
 
 })
+
+// For Profile
 router.get("/profile", isAuthenticate, async (req, res) => {
     try {
         const admin = await AdRegister.findById(req.admin._id)

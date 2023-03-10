@@ -3,7 +3,7 @@ import Register from './components/User/Register'
 import Login from './components/User/Login'
 import Home from './components/Home/Home'
 import { LoadUser } from './Action/User'
-import  UserForgotPassword from  './components/User/ForgotPassword'
+import UserForgotPassword from './components/User/ForgotPassword'
 import Complaint from './components/Services/Complaint'
 import BillPay from './components/User/BillPay'
 
@@ -28,6 +28,7 @@ import AdminComplaint from './components/Admin/AdminComplaint'
 import Empregister from './components/Employee/Empregister'
 import Emplogin from './components/Employee/Emplogin'
 import User from './components/Admin/User'
+import Categories from './components/Admin/Categories'
 
 const App = () => {
   const [theme, colorMode] = useMode()
@@ -47,6 +48,7 @@ const App = () => {
 
           <Router>
             <Routes>
+              {/* User */}
               <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login />} />
               <Route path='/' element={<Home />} />
@@ -55,7 +57,7 @@ const App = () => {
               <Route path='/billpay' element={<BillPay />} />
 
 
-
+              {/* Admin */}
               <Route path='/empregister' element={<Empregister />} />
               <Route path='/adlogin' element={<AdminLogin />} />
               <Route path='/aforgot' element={<Aforgetpassword />} />
@@ -65,6 +67,7 @@ const App = () => {
               <Route path="/aremployee" element={<RequestedEmployee />} />
               <Route path="/acomplaint" element={<AdminComplaint />} />
               <Route path="/auser" element={<User />} />
+              <Route path="/categories" element={<Categories />} />
 
 
 

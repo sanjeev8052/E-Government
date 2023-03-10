@@ -4,6 +4,7 @@ const BlockUser = require("../../models/User/BlockUser");
 const UserModel = require("../../models/User/UserModel");
 const router = express.Router();
 
+// For Block User
 router.post("/blockuser/:_id", isAuthenticate, async (req, res) => {
     try {
         const user = await UserModel.findById(req.params._id)
@@ -25,6 +26,7 @@ router.post("/blockuser/:_id", isAuthenticate, async (req, res) => {
     }
 })
 
+// For Get User Details
 router.get("/getuser", isAuthenticate, async (req, res) => {
     try {
         const user = await UserModel.find({})
@@ -38,6 +40,7 @@ router.get("/getuser", isAuthenticate, async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 })
+// For Get Block User
 router.get("/getblockuser", isAuthenticate, async (req, res) => {
     try {
         const blkuser = await BlockUser.find({})
@@ -52,6 +55,7 @@ router.get("/getblockuser", isAuthenticate, async (req, res) => {
     }
 })
 
+// For Unblock User
 router.post("/unblockuser/:_id", isAuthenticate, async (req, res) => {
     try {
         const blkuser = await BlockUser.findById(req.params._id)

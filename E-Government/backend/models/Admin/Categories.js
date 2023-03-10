@@ -7,20 +7,20 @@ const mongoose = require("mongoose")
     }
 })
 const billsCatSchema = mongoose.Schema({
-    billsCat: {
+    billsType: {
         type:String,
         required : true
     }
 })
 
 const CertificateCatSchema =  mongoose.Schema({
-    certificateCat : {
+    certificateType : {
         type:String,
         required : true
     }
 })
 const MeterCatSchema =  mongoose.Schema({
-    meterCat : {
+    meterType : {
         type:String,
         required : true
     }

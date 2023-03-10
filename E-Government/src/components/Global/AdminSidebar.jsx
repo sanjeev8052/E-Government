@@ -5,7 +5,7 @@ import { Box, IconButton, Typography, useTheme } from '@mui/material'
 import Logo from '../Images/Icons/login.png';
 import { Link } from 'react-router-dom'
 import { tokens } from "../../Global";
-import { HomeOutlined,  PersonOutlined, MenuOutlined, DashboardTwoTone, CoPresentTwoTone, GroupAddTwoTone, FactCheckTwoTone, Groups2TwoTone, SpeakerNotesTwoTone } from '@mui/icons-material';
+import {  MenuOutlined, DashboardTwoTone, CoPresentTwoTone, FactCheckTwoTone, Groups2TwoTone, SpeakerNotesTwoTone, CategoryTwoTone } from '@mui/icons-material';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme()
@@ -112,6 +112,13 @@ const AdminSidebar = ({admin}) => {
               title="Users"
               to="/auser"
               icon={<Groups2TwoTone />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Categories"
+              to="/categories"
+              icon={<CategoryTwoTone />}
               selected={selected}
               setSelected={setSelected}
             />

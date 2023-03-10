@@ -34,8 +34,6 @@ const Employee = () => {
             <AdminSidebar />
             <main className='content'>
                 <AdminTopbar />
-
-
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Employee" subtitle="Welcome Your Employee Details Page" />

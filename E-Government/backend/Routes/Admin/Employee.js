@@ -5,6 +5,7 @@ const TempEmployee = require("../../models/Admin/TempEmployee");
 const Employee = require("../../models/Emp/Employee");
 const Blockemployee = require("../../models/Admin/BlockEmployee")
 
+// For Get Register Employee Request
 router.get("/gettempemp", isAuthenticate, async (req, res) => {
     try {
         const employee = await TempEmployee.find({})
@@ -19,6 +20,7 @@ router.get("/gettempemp", isAuthenticate, async (req, res) => {
     }
 })
 
+// For Comfirm Employee Request
 router.post("/employee/:_id", isAuthenticate, async (req, res) => {
     try {
         const emp = await TempEmployee.findById(req.params._id)
@@ -38,6 +40,7 @@ router.post("/employee/:_id", isAuthenticate, async (req, res) => {
     }
 })
 
+// For Get Confirm Employee Data
 router.get("/getemp", isAuthenticate, async (req, res) => {
     try {
         const employee = await Employee.find({})
@@ -51,6 +54,8 @@ router.get("/getemp", isAuthenticate, async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 })
+
+// For Block Employee 
 router.post("/blockemp/:_id", isAuthenticate, async (req, res) => {
     try {
         const emp = await Employee.findById(req.params._id)
@@ -73,6 +78,7 @@ router.post("/blockemp/:_id", isAuthenticate, async (req, res) => {
     }
 })
 
+// For get Block Employee datails
 router.get("/getblkemp", isAuthenticate, async (req, res) => {
     try {
         const blkemployee = await Blockemployee.find({})
@@ -87,7 +93,7 @@ router.get("/getblkemp", isAuthenticate, async (req, res) => {
     }
 })
 
-
+// For Unblock Employee
 router.post("/unblockemp/:_id", isAuthenticate, async (req, res) => {
     try {
         const blkemp = await Blockemployee.findById(req.params._id)

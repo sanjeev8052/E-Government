@@ -5,6 +5,7 @@ const AcceptedComplaint = require('../../models/Admin/AcceptedComplaint')
 const express = require("express")
 const router = express.Router();
 
+// For Complaint Request
 router.post('/comp/req', isAuthenticatedUser, async (req, res) => {
 
     try {
@@ -21,6 +22,7 @@ router.post('/comp/req', isAuthenticatedUser, async (req, res) => {
     }
 })
 
+// For Get Complaint Request 
 router.get('/getComp/req', isAuthenticate, async (req, res) => {
 
     try {
@@ -38,7 +40,7 @@ router.get('/getComp/req', isAuthenticate, async (req, res) => {
     }
 })
 
-
+// For Accept complaint
 router.post('/acceptcomplaint/:_id', isAuthenticate, async (req, res) => {
     try {
         const complaint = await UserComplaint.findById(req.params._id)
@@ -60,6 +62,7 @@ router.post('/acceptcomplaint/:_id', isAuthenticate, async (req, res) => {
     }
 })
 
+// For Reject complaint
 router.delete("/rejectcomplaint/:_id", isAuthenticate, async (req, res) => {
     const complaint = await UserComplaint.findById(req.params._id)
     if (!complaint) {
