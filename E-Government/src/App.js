@@ -46,7 +46,7 @@ const App = () => {
         <CssBaseline />
         <div className=''>
 
-          <Router>
+         
             <Routes>
               {/* User */}
               <Route path='/register' element={<Register />} />
@@ -58,6 +58,7 @@ const App = () => {
 
 
               {/* Admin */}
+              
               <Route path='/empregister' element={<Empregister />} />
               <Route path='/adlogin' element={<AdminLogin />} />
               <Route path='/aforgot' element={<Aforgetpassword />} />
@@ -72,8 +73,7 @@ const App = () => {
 
 
             </Routes>
-          </Router>
-
+         
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>

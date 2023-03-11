@@ -16,9 +16,9 @@ const Dashboard = () => {
   const { isAuthenticated, admin } = useSelector((state) => (state.admin))
   const navigate = useNavigate()
  
-  useEffect(() => {
-    isAuthenticated ? navigate('/dashboard') : navigate('/adlogin')
-  }, [isAuthenticated, navigate])
+  // useEffect(() => {
+  //   isAuthenticated ? navigate('/dashboard') : navigate('/adlogin')
+  // }, [isAuthenticated, navigate])
 
   //  isAuthenticated ? navigate("/dashboard") : navigate('/adlogin')
   return (
