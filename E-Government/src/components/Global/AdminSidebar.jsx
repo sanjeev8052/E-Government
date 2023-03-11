@@ -5,7 +5,7 @@ import { Box, IconButton, Typography, useTheme } from '@mui/material'
 import Logo from '../Images/Icons/login.png';
 import { Link } from 'react-router-dom'
 import { tokens } from "../../Global";
-import { HomeOutlined,  PersonOutlined, MenuOutlined } from '@mui/icons-material';
+import {  MenuOutlined, DashboardTwoTone, CoPresentTwoTone, FactCheckTwoTone, Groups2TwoTone, SpeakerNotesTwoTone, CategoryTwoTone } from '@mui/icons-material';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme()
@@ -81,35 +81,44 @@ const AdminSidebar = ({admin}) => {
             <Item
               title="Dashboard"
               to="/dashboard"
-              icon={<HomeOutlined />}
+              icon={<DashboardTwoTone />}
               selected={selected}
               setSelected={setSelected}
             />
+            <Typography variant="h5" color={colors.grey[500]} sx={{m:"10px 0 5px 15px"}}
+            >Employees</Typography>
             <Item
               title="Empployee"
               to="/aemployee"
-              icon={<PersonOutlined />}
+              icon={<CoPresentTwoTone />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="RequestedEmpployee"
               to="/aremployee"
-              icon={<PersonOutlined />}
+              icon={<FactCheckTwoTone/>}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Complaint"
               to="/acomplaint"
-              icon={<PersonOutlined />}
+              icon={<SpeakerNotesTwoTone />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Users"
               to="/auser"
-              icon={<PersonOutlined />}
+              icon={<Groups2TwoTone />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Categories"
+              to="/categories"
+              icon={<CategoryTwoTone />}
               selected={selected}
               setSelected={setSelected}
             />

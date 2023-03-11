@@ -41,10 +41,10 @@ const RequestedEmployee = () => {
                     {loading ? <Loader /> :
                         <Box alignItems="center" justifyContent="center" m="15px" >
                             <Typography variant="h3" color={colors.redAccent[600]}>Requested Employees Details</Typography>
-                            <TableContainer sx={{ mt: "10px" , maxWidth:1000 }} component={Paper}>
+                            <TableContainer sx={{ mt: "10px" , maxWidth:1000 }} component={Paper} >
                                 <Table size='small' >
                                     <TableHead  >
-                                        <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
+                                        <TableRow sx={{ backgroundColor: colors.greenAccent[700] }}>
                                             <TableCell>Name</TableCell>
                                             <TableCell>Email</TableCell>
                                             <TableCell>Gender</TableCell>
@@ -52,11 +52,11 @@ const RequestedEmployee = () => {
                                             <TableCell>Actions</TableCell>
                                         </TableRow>
                                     </TableHead>
-                                    <TableBody>
+                                    <TableBody sx={{ backgroundColor: colors.grey[600] }}>
 
                                         {empReq <= 0 ? <TableRow>
                                             <TableCell colSpan={6}>
-                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Emploee Data</Typography>
+                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Employee Data</Typography>
                                             </TableCell>
                                         </TableRow>
                                             :

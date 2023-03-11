@@ -16,10 +16,17 @@ const Dashboard = () => {
 
   const { isAuthenticated, admin, loading } = useSelector((state) => (state.admin))
   const navigate = useNavigate()
+<<<<<<< HEAD
 
   useEffect(() => {
     isAuthenticated ? navigate('/dashboard') : navigate('/adlogin')
   }, [loading])
+=======
+ 
+  // useEffect(() => {
+  //   isAuthenticated ? navigate('/dashboard') : navigate('/adlogin')
+  // }, [isAuthenticated, navigate])
+>>>>>>> 98b276590d8e71c4fb72900754c7e62d1f13e7a9
 
   //  isAuthenticated ? navigate("/dashboard") : navigate('/adlogin')
   return (

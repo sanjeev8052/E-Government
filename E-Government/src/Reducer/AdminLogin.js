@@ -1,75 +1,10 @@
-// import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import axios from "axios";
-// // const URL = 'http://localhost:5000'
-
-// export const adminLogin = createAsyncThunk(
-//     'AdminLogin', async (admin) => {
-//         const response = await axios.post(`/api/admin/alogin`, admin)
-//         return response.data
-//     }
-// )
-// export const Loaduser = createAsyncThunk(
-//     'LoadUser', async (admin) => {
-//         const response = await axios.get(`/api/admin/profile`, admin)
-//         return response.data
-//     }
-// )
-
-// const adminSlice = createSlice({
-//     name: "admin",
-//     initialState: {
-//        loading:false,
-//        isAuthenticated:false,
-//        admin:[],
-//        error:null
-//     },
-//     reducers: {},
-//     extraReducers: {
-//         [adminLogin.pending]: (state, action) => {
-//             state.loading = true;
-//             state.isAuthenticated = false;
-
-//         },
-//         [adminLogin.fulfilled]: (state, action) => {
-//             state.loading = false;
-//             state.isAuthenticated = true;
-//             state.admin.push(action.payload);
-//         },
-//         [adminLogin.rejected]: (state, action) => {
-//             state.loading = false;
-//             state.error = action.payload.error;
-
-//         },
-//         [Loaduser.pending]: (state, action) => {
-//             state.loading = true;
-//             state.isAuthenticated = false
-//         },
-//         [Loaduser.fulfilled]: (state, action) => {
-//             state.loading = false;
-//             state.isAuthenticated = true;
-//              state.admin = action.payload;
-//         },
-//         [Loaduser.rejected]: (state, action) => {
-//             state.loading = false;
-//             state.error = action.payload
-//             state.isAuthenticated = false
-
-
-//         },
-
-
-//     }
-// })
-
-// export default adminSlice.reducer;
-
 import { createReducer } from "@reduxjs/toolkit";
 
-const initialState = {
-   
-}
+const initialState = {}
 
 export const AdminReducer = createReducer(initialState, {
+
+    // Admin Login
     LoginRequest: (state, action) => {
         state.loading = true;
         state.isAuthenticated = false;
@@ -85,6 +20,7 @@ export const AdminReducer = createReducer(initialState, {
         state.isAuthenticated = false;
     },
 
+    // Loading
     LoadRequest: (state, action) => {
         state.loading = true;
         state.isAuthenticated = false
@@ -99,42 +35,51 @@ export const AdminReducer = createReducer(initialState, {
         state.error = action.payload;
         state.isAuthenticated = false
     },
+
+
+    // Get Temprary Employee
     TempEmployeeRequest: (state, action) => {
         state.loading = true;
-       
+
     },
     TempEmployeeSuccess: (state, action) => {
         state.loading = false;
         state.empReq = action.payload;
-       
+
     },
     TempEmployeeFailure: (state, action) => {
         state.loading = false;
         state.error = action.payload;
-       
+
     },
+
+
+    // Confirm Temprary Employee
     CEmployeeRequest: (state, action) => {
         state.loading = true;
-       
+
     },
     CEmployeeSuccess: (state, action) => {
         state.loading = false;
         state.data = action.payload;
-       
+
     },
     CEmployeeFailure: (state, action) => {
         state.loading = false;
         state.error = action.payload;
-       
+
     },
+
+
+    //  Get Employee
     EmployeeRequest: (state, action) => {
         state.loading = true;
-       
+
     },
     EmployeeSuccess: (state, action) => {
         state.loading = false;
         state.emp = action.payload;
-       
+
     },
     EmployeeNull: (state, action) => {
         state.loading = false;
@@ -144,49 +89,118 @@ export const AdminReducer = createReducer(initialState, {
     EmployeeFailure: (state, action) => {
         state.loading = false;
         state.error = action.payload;
-       
+
     },
+
+    // Block Employee
     BlockRequest: (state, action) => {
         state.loading = true;
-       
+
     },
     BlockSuccess: (state, action) => {
         state.loading = false;
         state.admin = action.payload;
-       
+
     },
     BlockFailure: (state, action) => {
         state.loading = false;
         state.error = action.payload;
-       
+
     },
+    //  Get BLockEmployee
+    BlkEmployeeRequest: (state, action) => {
+        state.loading = true;
+
+    },
+    BlkEmployeeSuccess: (state, action) => {
+        state.loading = false;
+        state.blkemp = action.payload;
+
+    },
+    BlkEmployeeFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+
+    // UnBlock Employee
+    UnBlockRequest: (state, action) => {
+        state.loading = true;
+
+    },
+    UnBlockSuccess: (state, action) => {
+        state.loading = false;
+        state.unblkemp = action.payload;
+
+    },
+    UnBlockFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+
+    // Get User 
     GetUserRequest: (state, action) => {
         state.loading = true;
-       
+
     },
     GetUserSuccess: (state, action) => {
         state.loading = false;
         state.GetUser = action.payload;
-       
+
     },
     GetUserFailure: (state, action) => {
         state.loading = false;
         state.error = action.payload;
-       
+
     },
+
+    // BLock User 
     BlockUserRequest: (state, action) => {
         state.loading = true;
-       
+
     },
     BlockUserSuccess: (state, action) => {
         state.loading = false;
         state.BlkUser = action.payload;
-       
+
     },
     BlockUserFailure: (state, action) => {
         state.loading = false;
         state.error = action.payload;
-       
+
+    },
+
+     // Get Block User 
+     GetblkUserRequest: (state, action) => {
+        state.loading = true;
+
+    },
+    GetblkUserSuccess: (state, action) => {
+        state.loading = false;
+        state.blkuser = action.payload;
+
+    },
+    GetblkUserFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+
+     // UnBLock User 
+     unBlockUserRequest: (state, action) => {
+        state.loading = true;
+
+    },
+    unBlockUserSuccess: (state, action) => {
+        state.loading = false;
+        state.unblkuser = action.payload;
+
+    },
+    unBlockUserFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
     },
 
 

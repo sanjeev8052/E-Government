@@ -3,7 +3,7 @@ import { ColorModeContext, tokens } from "../../Global";
 
 import { Box, IconButton, useTheme, InputBase } from '@mui/material';
 
-import { LightModeOutlined, DarkModeOutlined, NotificationsOutlined, SettingsOutlined, PersonOutlined, SearchOutlined } from '@mui/icons-material';
+import { LightModeOutlined, DarkModeOutlined, NotificationsOutlined, SettingsOutlined, PersonOutlined, SearchOutlined, DarkModeTwoTone, LightModeTwoTone, SearchTwoTone, NotificationsTwoTone, SettingsTwoTone, ManageAccountsTwoTone, ExitToAppTwoTone } from '@mui/icons-material';
 
 const AdminTopbar = () => {
   const themes = useTheme()
@@ -23,23 +23,23 @@ const AdminTopbar = () => {
           >
             <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
             <IconButton tpye="button" sx={{ p: 1 }}>
-              <SearchOutlined />
+              <SearchTwoTone />
             </IconButton>
           </Box>
           {/* icon button */}
           <Box display="flex">
 
             <IconButton onClick={colorModes.toggleColorMode}>
-              {themes.palette.mode === "light" ? (<DarkModeOutlined />) : (<LightModeOutlined />)}
+              {themes.palette.mode === "light" ? (<DarkModeTwoTone />) : (<LightModeTwoTone />)}
             </IconButton>
             <IconButton>
-              <NotificationsOutlined />
+              <SettingsTwoTone />
             </IconButton>
             <IconButton>
-              <SettingsOutlined />
+              <ManageAccountsTwoTone />
             </IconButton>
             <IconButton>
-              <PersonOutlined />
+              <ExitToAppTwoTone />
             </IconButton>
           </Box>
         </Box>

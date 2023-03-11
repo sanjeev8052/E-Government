@@ -6,6 +6,7 @@ import App from './App';
 // import './index.css'
 import { Provider as AlertProvider, transitions, positions } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -16,6 +17,8 @@ const option ={
   positions: positions.MIDDLE,
 }
 root.render(
+  <Router>
+
   <React.StrictMode>
     <Provider store={store}>
       <AlertProvider  template={AlertTemplate} {...option}>
@@ -23,6 +26,7 @@ root.render(
       </AlertProvider>
     </Provider>
   </React.StrictMode>
+  </Router>
 
 );
 
