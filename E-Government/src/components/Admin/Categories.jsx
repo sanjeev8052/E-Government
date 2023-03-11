@@ -6,7 +6,7 @@ import Header from '../Global/Header'
 import { tokens } from '../../Global'
 import { Field, Form, Formik, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import { AddCircleOutlineTwoTone, CheckCircleOutlineTwoTone, DeleteForeverTwoTone, SpeakerNotesTwoTone} from '@mui/icons-material'
+import { AddCircleOutlineTwoTone, CheckCircleOutlineTwoTone, DeleteForeverTwoTone, SpeakerNotesTwoTone } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
 import { Addcomcat, Delcomcat, Getcomcat } from '../../Action/Admin/Categories'
 import { useEffect } from 'react'
@@ -19,7 +19,7 @@ const Categories = () => {
         setStatus(status)
     }
 
-    const {getcomcat} = useSelector((state) => (state.services))
+    const { getcomcat } = useSelector((state) => (state.services))
     const styles = {
         textfield: {
             width: "100%",
@@ -46,19 +46,24 @@ const Categories = () => {
         meterType: ""
     }
     const validationSchema = Yup.object().shape({
-        complaintType: Yup.string().required("!! Please Fill This Field..")
+        complaintType: Yup.string().required("!! Please Fill This Field.."),
+        billsType: Yup.string().required("!! Please Fill This Field.."),
+        certificateType: Yup.string().required("!! Please Fill This Field.."),
+        meterType: Yup.string().required("!! Please Fill This Field.."),
+
     })
-        //  complaint
-    const subcom =  (values, props) =>{
+    //  complaint
+    const subcom = (values, props) => {
         dispatch(Addcomcat(values))
     }
     const delcom = (id) => {
-            dispatch(Delcomcat(id))
+        dispatch(Delcomcat(id))
+        window.location.reload();
     }
     useEffect(() => {
-      dispatch(Getcomcat())
+        dispatch(Getcomcat())
     }, [])
-    
+
     return (
         <div className='app'>
             <AdminSidebar />
@@ -91,7 +96,7 @@ const Categories = () => {
                                     <Form>
                                         <Typography variant="h2" mt="5px" color="initial">Add Complaint Type </Typography>
                                         <Field as={TextField}
-                                            
+
                                             sx={styles.textfield}
                                             name="complaintType"
                                             label="Add Complaint Type"
@@ -118,26 +123,26 @@ const Categories = () => {
                                                     </TableHead>
                                                     <TableBody sx={{ backgroundColor: colors.grey[600] }}>
 
-                                        {getcomcat <= 0 ? <TableRow>
-                                            <TableCell colSpan={6}>
-                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Employee Data</Typography>
-                                            </TableCell>
-                                        </TableRow>
-                                            :
-                                            getcomcat?.map((data) => (
-                                                <TableRow key={data._id}>
-                                                    <TableCell >{data.complaintType}</TableCell>
-                                                    
-                                                    <TableCell >
-                                                        <IconButton aria-label="correct"  color="error" onClick={() => { delcom(data._id) }} >
-                                                          <DeleteForeverTwoTone/>
-                                                        </IconButton>
-                                                        
-                                                    </TableCell>
-                                                </TableRow>
-                                            ))
-                                        }
-                                    </TableBody>
+                                                        {getcomcat <= 0 ? <TableRow>
+                                                            <TableCell colSpan={6}>
+                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Employee Data</Typography>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                            :
+                                                            getcomcat?.map((data) => (
+                                                                <TableRow key={data._id}>
+                                                                    <TableCell >{data.complaintType}</TableCell>
+
+                                                                    <TableCell >
+                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delcom(data._id) }} >
+                                                                            <DeleteForeverTwoTone />
+                                                                        </IconButton>
+
+                                                                    </TableCell>
+                                                                </TableRow>
+                                                            ))
+                                                        }
+                                                    </TableBody>
                                                 </Table>
                                             </TableContainer>
                                         </Box>
@@ -149,18 +154,191 @@ const Categories = () => {
 
                     }
                     {
-                        status === 2 && <Box mt='20px' justifyContent='center' alignItems='center' display='flex'>
-                            <h1>Bills</h1>
+                        status === 2 &&
+                        <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
+                            <Formik initialValues={bills} validationSchema={validationSchema} onSubmit={subcom} >
+                                {(props) => (
+                                    <Form>
+                                        <Typography variant="h2" mt="5px" color="initial">Add Bill Type </Typography>
+                                        <Field as={TextField}
+                                            sx={styles.textfield}
+                                            name="billsType"
+                                            label="Add Complaint Type"
+                                            variant='standard'
+                                            type="text"
+                                            color='secondary'
+                                            placeholder='Enter Complaint Type..'
+                                            InputLabelProps={{ style: { fontSize: 20 } }}
+                                            InputProps={{
+                                                startAdornment: (<InputAdornment position="start"> <SpeakerNotesTwoTone color='secondary' /></InputAdornment>)
+                                            }}
+
+                                        />
+                                        <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='billsType' />}</Typography>
+                                        <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
+                                        <Box mt="10px">
+                                            <TableContainer component={Paper}>
+                                                <Table size="medium" >
+                                                    <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
+                                                        <TableRow>
+                                                            <TableCell>Name</TableCell>
+                                                            <TableCell>Delete</TableCell>
+                                                        </TableRow>
+                                                    </TableHead>
+                                                    <TableBody sx={{ backgroundColor: colors.grey[600] }}>
+
+                                                        {getcomcat <= 0 ? <TableRow>
+                                                            <TableCell colSpan={6}>
+                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Employee Data</Typography>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                            :
+                                                            getcomcat?.map((data) => (
+                                                                <TableRow key={data._id}>
+                                                                    <TableCell >{data.complaintType}</TableCell>
+
+                                                                    <TableCell >
+                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delcom(data._id) }} >
+                                                                            <DeleteForeverTwoTone />
+                                                                        </IconButton>
+
+                                                                    </TableCell>
+                                                                </TableRow>
+                                                            ))
+                                                        }
+                                                    </TableBody>
+                                                </Table>
+                                            </TableContainer>
+                                        </Box>
+                                    </Form>
+                                )}
+                            </Formik>
                         </Box>
                     }
                     {
-                        status === 3 && <Box justifyContent='center' alignItems='center' display='flex' mt='20px'>
-                            <h1>Meter</h1>
+                        status === 3 &&
+                        <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
+                            <Formik initialValues={com} validationSchema={validationSchema} onSubmit={subcom} >
+                                {(props) => (
+                                    <Form>
+                                        <Typography variant="h2" mt="5px" color="initial">Add Meter Type </Typography>
+                                        <Field as={TextField}
+
+                                            sx={styles.textfield}
+                                            name="complaintType"
+                                            label="Add Complaint Type"
+                                            variant='standard'
+                                            type="text"
+                                            color='secondary'
+                                            placeholder='Enter Complaint Type..'
+                                            InputLabelProps={{ style: { fontSize: 20 } }}
+                                            InputProps={{
+                                                startAdornment: (<InputAdornment position="start"> <SpeakerNotesTwoTone color='secondary' /></InputAdornment>)
+                                            }}
+
+                                        />
+                                        <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='complaintType' />}</Typography>
+                                        <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
+                                        <Box mt="10px">
+                                            <TableContainer component={Paper}>
+                                                <Table size="medium" >
+                                                    <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
+                                                        <TableRow>
+                                                            <TableCell>Name</TableCell>
+                                                            <TableCell>Delete</TableCell>
+                                                        </TableRow>
+                                                    </TableHead>
+                                                    <TableBody sx={{ backgroundColor: colors.grey[600] }}>
+
+                                                        {getcomcat <= 0 ? <TableRow>
+                                                            <TableCell colSpan={6}>
+                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Employee Data</Typography>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                            :
+                                                            getcomcat?.map((data) => (
+                                                                <TableRow key={data._id}>
+                                                                    <TableCell >{data.complaintType}</TableCell>
+
+                                                                    <TableCell >
+                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delcom(data._id) }} >
+                                                                            <DeleteForeverTwoTone />
+                                                                        </IconButton>
+
+                                                                    </TableCell>
+                                                                </TableRow>
+                                                            ))
+                                                        }
+                                                    </TableBody>
+                                                </Table>
+                                            </TableContainer>
+                                        </Box>
+                                    </Form>
+                                )}
+                            </Formik>
                         </Box>
                     }
                     {
-                        status === 4 && <Box justifyContent='center' alignItems='center' display='flex' mt='20px'>
-                            <h1>certificate</h1>
+                        status === 4 &&
+                        <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
+                            <Formik initialValues={com} validationSchema={validationSchema} onSubmit={subcom} >
+                                {(props) => (
+                                    <Form>
+                                        <Typography variant="h2" mt="5px" color="initial">Add Certificate Type </Typography>
+                                        <Field as={TextField}
+
+                                            sx={styles.textfield}
+                                            name="complaintType"
+                                            label="Add Complaint Type"
+                                            variant='standard'
+                                            type="text"
+                                            color='secondary'
+                                            placeholder='Enter Complaint Type..'
+                                            InputLabelProps={{ style: { fontSize: 20 } }}
+                                            InputProps={{
+                                                startAdornment: (<InputAdornment position="start"> <SpeakerNotesTwoTone color='secondary' /></InputAdornment>)
+                                            }}
+
+                                        />
+                                        <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='complaintType' />}</Typography>
+                                        <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
+                                        <Box mt="10px">
+                                            <TableContainer component={Paper}>
+                                                <Table size="medium" >
+                                                    <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
+                                                        <TableRow>
+                                                            <TableCell>Name</TableCell>
+                                                            <TableCell>Delete</TableCell>
+                                                        </TableRow>
+                                                    </TableHead>
+                                                    <TableBody sx={{ backgroundColor: colors.grey[600] }}>
+
+                                                        {getcomcat <= 0 ? <TableRow>
+                                                            <TableCell colSpan={6}>
+                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Employee Data</Typography>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                            :
+                                                            getcomcat?.map((data) => (
+                                                                <TableRow key={data._id}>
+                                                                    <TableCell >{data.complaintType}</TableCell>
+
+                                                                    <TableCell >
+                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delcom(data._id) }} >
+                                                                            <DeleteForeverTwoTone />
+                                                                        </IconButton>
+
+                                                                    </TableCell>
+                                                                </TableRow>
+                                                            ))
+                                                        }
+                                                    </TableBody>
+                                                </Table>
+                                            </TableContainer>
+                                        </Box>
+                                    </Form>
+                                )}
+                            </Formik>
                         </Box>
                     }
                 </Box>
