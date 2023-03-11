@@ -6,9 +6,9 @@ import Header from '../Global/Header'
 import { tokens } from '../../Global'
 import { Field, Form, Formik, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import { AddCircleOutlineTwoTone, CheckCircleOutlineTwoTone, DeleteForeverTwoTone, SpeakerNotesTwoTone } from '@mui/icons-material'
+import { AddCircleOutlineTwoTone, DeleteForeverTwoTone, SpeakerNotesTwoTone } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
-import { Addcomcat, Delcomcat, Getcomcat } from '../../Action/Admin/Categories'
+import { Addbillcat, Addcercat, Addcomcat, Addmetercat, Delbillcat, Delcercat, Delcomcat, Delmetercat, Getbillcat, Getcercat, Getcomcat, Getmetercat } from '../../Action/Admin/Categories'
 import { useEffect } from 'react'
 const Categories = () => {
     const themes = useTheme()
@@ -19,7 +19,7 @@ const Categories = () => {
         setStatus(status)
     }
 
-    const { getcomcat } = useSelector((state) => (state.services))
+    const { getcomcat, getbillcat, getmetercat, getcercat } = useSelector((state) => (state.services))
     const styles = {
         textfield: {
             width: "100%",
@@ -54,15 +54,46 @@ const Categories = () => {
     })
     //  complaint
     const subcom = (values, props) => {
-        dispatch(Addcomcat(values))
+        // dispatch(Addcomcat(values))
+        console.log(values)
+        console.log(props)
     }
     const delcom = (id) => {
         dispatch(Delcomcat(id))
         window.location.reload();
     }
+    // for bills
+    const subbill = (values, props) => {
+         dispatch(Addbillcat(values))
+        
+    }
+    const delbill = (id) => {
+        dispatch(Delbillcat(id))
+        window.location.reload();
+    }
+    // for meter
+    const submet = (values, props) => {
+        dispatch(Addmetercat(values))
+    }
+    const delmet = (id) => {
+        dispatch(Delmetercat(id))
+        window.location.reload();
+    }
+    // for certificate
+    const subcer = (values, props) => {
+        dispatch(Addcercat(values))
+    }
+    const delcer = (id) => {
+        dispatch(Delcercat(id))
+        window.location.reload();
+    }
+
     useEffect(() => {
         dispatch(Getcomcat())
-    }, [])
+        dispatch(Getbillcat())
+        dispatch(Getcercat())
+        dispatch(Getmetercat())
+    }, [dispatch])
 
     return (
         <div className='app'>
@@ -124,7 +155,7 @@ const Categories = () => {
                                                     <TableBody sx={{ backgroundColor: colors.grey[600] }}>
 
                                                         {getcomcat <= 0 ? <TableRow>
-                                                            <TableCell colSpan={6}>
+                                                            <TableCell colSpan={2}>
                                                                 <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Employee Data</Typography>
                                                             </TableCell>
                                                         </TableRow>
@@ -156,7 +187,7 @@ const Categories = () => {
                     {
                         status === 2 &&
                         <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
-                            <Formik initialValues={bills} validationSchema={validationSchema} onSubmit={subcom} >
+                            <Formik initialValues={bills} validationSchema={validationSchema} onSubmit={subbill} >
                                 {(props) => (
                                     <Form>
                                         <Typography variant="h2" mt="5px" color="initial">Add Bill Type </Typography>
@@ -187,18 +218,18 @@ const Categories = () => {
                                                     </TableHead>
                                                     <TableBody sx={{ backgroundColor: colors.grey[600] }}>
 
-                                                        {getcomcat <= 0 ? <TableRow>
-                                                            <TableCell colSpan={6}>
-                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Employee Data</Typography>
+                                                        {getbillcat <= 0 ? <TableRow>
+                                                            <TableCell colSpan={2}>
+                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Bill Type Data</Typography>
                                                             </TableCell>
                                                         </TableRow>
                                                             :
-                                                            getcomcat?.map((data) => (
+                                                            getbillcat?.map((data) => (
                                                                 <TableRow key={data._id}>
-                                                                    <TableCell >{data.complaintType}</TableCell>
+                                                                    <TableCell >{data.billsType}</TableCell>
 
                                                                     <TableCell >
-                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delcom(data._id) }} >
+                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delbill(data._id) }} >
                                                                             <DeleteForeverTwoTone />
                                                                         </IconButton>
 
@@ -218,14 +249,14 @@ const Categories = () => {
                     {
                         status === 3 &&
                         <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
-                            <Formik initialValues={com} validationSchema={validationSchema} onSubmit={subcom} >
+                            <Formik initialValues={meter} validationSchema={validationSchema} onSubmit={submet} >
                                 {(props) => (
                                     <Form>
                                         <Typography variant="h2" mt="5px" color="initial">Add Meter Type </Typography>
                                         <Field as={TextField}
 
                                             sx={styles.textfield}
-                                            name="complaintType"
+                                            name="meterType"
                                             label="Add Complaint Type"
                                             variant='standard'
                                             type="text"
@@ -237,7 +268,7 @@ const Categories = () => {
                                             }}
 
                                         />
-                                        <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='complaintType' />}</Typography>
+                                        <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='meterType' />}</Typography>
                                         <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
                                         <Box mt="10px">
                                             <TableContainer component={Paper}>
@@ -250,18 +281,18 @@ const Categories = () => {
                                                     </TableHead>
                                                     <TableBody sx={{ backgroundColor: colors.grey[600] }}>
 
-                                                        {getcomcat <= 0 ? <TableRow>
-                                                            <TableCell colSpan={6}>
-                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Employee Data</Typography>
+                                                        {getmetercat <= 0 ? <TableRow>
+                                                            <TableCell colSpan={2}>
+                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Meter Type</Typography>
                                                             </TableCell>
                                                         </TableRow>
                                                             :
-                                                            getcomcat?.map((data) => (
+                                                            getmetercat?.map((data) => (
                                                                 <TableRow key={data._id}>
-                                                                    <TableCell >{data.complaintType}</TableCell>
+                                                                    <TableCell >{data.meterType}</TableCell>
 
                                                                     <TableCell >
-                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delcom(data._id) }} >
+                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delcer(data._id) }} >
                                                                             <DeleteForeverTwoTone />
                                                                         </IconButton>
 
@@ -281,14 +312,14 @@ const Categories = () => {
                     {
                         status === 4 &&
                         <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
-                            <Formik initialValues={com} validationSchema={validationSchema} onSubmit={subcom} >
+                            <Formik initialValues={cer} validationSchema={validationSchema} onSubmit={subcer} >
                                 {(props) => (
                                     <Form>
                                         <Typography variant="h2" mt="5px" color="initial">Add Certificate Type </Typography>
                                         <Field as={TextField}
 
                                             sx={styles.textfield}
-                                            name="complaintType"
+                                            name="certificateType"
                                             label="Add Complaint Type"
                                             variant='standard'
                                             type="text"
@@ -300,7 +331,7 @@ const Categories = () => {
                                             }}
 
                                         />
-                                        <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='complaintType' />}</Typography>
+                                        <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='certificateType' />}</Typography>
                                         <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
                                         <Box mt="10px">
                                             <TableContainer component={Paper}>
@@ -313,15 +344,15 @@ const Categories = () => {
                                                     </TableHead>
                                                     <TableBody sx={{ backgroundColor: colors.grey[600] }}>
 
-                                                        {getcomcat <= 0 ? <TableRow>
-                                                            <TableCell colSpan={6}>
+                                                        {getcercat <= 0 ? <TableRow>
+                                                            <TableCell colSpan={2}>
                                                                 <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Employee Data</Typography>
                                                             </TableCell>
                                                         </TableRow>
                                                             :
-                                                            getcomcat?.map((data) => (
+                                                            getcercat?.map((data) => (
                                                                 <TableRow key={data._id}>
-                                                                    <TableCell >{data.complaintType}</TableCell>
+                                                                    <TableCell >{data.certificateType}</TableCell>
 
                                                                     <TableCell >
                                                                         <IconButton aria-label="correct" color="error" onClick={() => { delcom(data._id) }} >

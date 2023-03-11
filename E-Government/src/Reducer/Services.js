@@ -77,7 +77,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     getcomcatFailuer: (state, action) => {
         state.loading = false;
-        state.LoginError = action.payload;
+        state.error = action.payload;
 
     },
 
@@ -92,139 +92,139 @@ export const userServicesReducer = createReducer(initialState, {
     },
     delcomcatFailuer: (state, action) => {
         state.loading = false;
-        state.LoginError = action.payload;
+        state.error = action.payload;
 
     },
     // for add bills category
-    addcomcatRequset: (state) => {
+    addbillcatRequset: (state) => {
         state.loading = true;
     },
-    addcomcatSuccess: (state, action) => {
+    addbillcatSuccess: (state, action) => {
         state.loading = false;
         state.billcat = action.payload;
 
     },
-    addcomcatFailuer: (state, action) => {
+    addbillcatFailuer: (state, action) => {
         state.loading = false;
-        state.LoginError = action.payload;
+        state.error = action.payload;
 
     },
 
     // for get bills category
-    getcomcatRequset: (state) => {
+    getbillcatRequset: (state) => {
         state.loading = true;
     },
-    getcomcatSuccess: (state, action) => {
+    getbillcatSuccess: (state, action) => {
         state.loading = false;
         state.getbillcat = action.payload;
 
     },
-    getcomcatFailuer: (state, action) => {
+    getbillcatFailuer: (state, action) => {
         state.loading = false;
-        state.LoginError = action.payload;
+        state.error = action.payload;
 
     },
 
     // for delete bills category
-    delcomcatRequset: (state) => {
+    delbillcatRequset: (state) => {
         state.loading = true;
     },
-    delcomcatSuccess: (state, action) => {
+    delbillcatSuccess: (state, action) => {
         state.loading = false;
         state.delbillcat = action.payload;
 
     },
-    delcomcatFailuer: (state, action) => {
+    delbillcatFailuer: (state, action) => {
         state.loading = false;
-        state.LoginError = action.payload;
+        state.error = action.payload;
 
     },
     // for add meter category
-    addcomcatRequset: (state) => {
+    addmetercatRequset: (state) => {
         state.loading = true;
     },
-    addcomcatSuccess: (state, action) => {
+    addemetercatSuccess: (state, action) => {
         state.loading = false;
         state.metercat = action.payload;
 
     },
-    addcomcatFailuer: (state, action) => {
+    addmetercatFailuer: (state, action) => {
         state.loading = false;
-        state.LoginError = action.payload;
+        state.error = action.payload;
 
     },
 
     // for get meter category
-    getcomcatRequset: (state) => {
+    getmetercatRequset: (state) => {
         state.loading = true;
     },
-    getcomcatSuccess: (state, action) => {
+    getmetercatSuccess: (state, action) => {
         state.loading = false;
         state.getmetercat = action.payload;
 
     },
-    getcomcatFailuer: (state, action) => {
+    getmetercatFailuer: (state, action) => {
         state.loading = false;
-        state.LoginError = action.payload;
+        state.error = action.payload;
 
     },
 
     // for delete meter category
-    delcomcatRequset: (state) => {
+    delmetercatRequset: (state) => {
         state.loading = true;
     },
-    delcomcatSuccess: (state, action) => {
+    delmetercatSuccess: (state, action) => {
         state.loading = false;
         state.delmetercat = action.payload;
 
     },
-    delcomcatFailuer: (state, action) => {
+    delmetercatFailuer: (state, action) => {
         state.loading = false;
-        state.LoginError = action.payload;
+        state.error = action.payload;
 
     },
     // for add certificate category
-    addcomcatRequset: (state) => {
+    addcercatRequset: (state) => {
         state.loading = true;
     },
-    addcomcatSuccess: (state, action) => {
+    addcercatSuccess: (state, action) => {
         state.loading = false;
         state.cercat = action.payload;
 
     },
-    addcomcatFailuer: (state, action) => {
+    addcercatFailuer: (state, action) => {
         state.loading = false;
-        state.LoginError = action.payload;
+        state.error = action.payload;
 
     },
 
     // for get certificate category
-    getcomcatRequset: (state) => {
+    getcercatRequset: (state) => {
         state.loading = true;
     },
-    getcomcatSuccess: (state, action) => {
+    getcercatSuccess: (state, action) => {
         state.loading = false;
         state.getcercat = action.payload;
 
     },
-    getcomcatFailuer: (state, action) => {
+    getcercatFailuer: (state, action) => {
         state.loading = false;
-        state.LoginError = action.payload;
+        state.error = action.payload;
 
     },
 
     // for delete certificate category
-    delcomcatRequset: (state) => {
+    delcercatRequset: (state) => {
         state.loading = true;
     },
-    delcomcatSuccess: (state, action) => {
+    delcercatSuccess: (state, action) => {
         state.loading = false;
         state.delcercat = action.payload;
 
     },
-    delcomcatFailuer: (state, action) => {
+    delcercatFailuer: (state, action) => {
         state.loading = false;
-        state.LoginError = action.payload;
+        state.error = action.payload;
 
     },
 
