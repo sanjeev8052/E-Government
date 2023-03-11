@@ -99,7 +99,7 @@ export const AdminReducer = createReducer(initialState, {
     },
     BlockSuccess: (state, action) => {
         state.loading = false;
-        state.admin = action.payload;
+        state.blockData = action.payload;
 
     },
     BlockFailure: (state, action) => {

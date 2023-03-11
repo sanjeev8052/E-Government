@@ -27,12 +27,11 @@ import AdminComplaint from './components/Admin/AdminComplaint'
 import Empregister from './components/Employee/Empregister'
 import Emplogin from './components/Employee/Emplogin'
 import User from './components/Admin/User'
-<<<<<<< HEAD
+
 import Loader from './components/Layout/Loader'
 import BillPay from './components/Services/BillPay'
-=======
 import Categories from './components/Admin/Categories'
->>>>>>> 98b276590d8e71c4fb72900754c7e62d1f13e7a9
+
 
 const App = () => {
   const [theme, colorMode] = useMode()
@@ -72,11 +71,7 @@ const App = () => {
               <Route path="/aremployee" element={<RequestedEmployee />} />
               <Route path="/acomplaint" element={<AdminComplaint />} />
               <Route path="/auser" element={<User />} />
-<<<<<<< HEAD
               <Route path="/spiner" element={<Loader />} />
-=======
-              <Route path="/categories" element={<Categories />} />
->>>>>>> 98b276590d8e71c4fb72900754c7e62d1f13e7a9
 
 
 

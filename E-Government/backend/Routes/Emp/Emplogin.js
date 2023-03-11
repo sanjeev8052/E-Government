@@ -7,7 +7,7 @@ const { body, validationResult, } = require('express-validator');
 // For Employee Register
 router.post("/tempemployee", [
     body('email', "Enter Valid email").isEmail(),
-    body('name', 'Enter a valid Name').isLength({ min: 5 }),
+    body('name', 'Enter a valid Name').isLength({ min: 3 }),
     body('password', 'Enter minimum 5 length password').isLength({ min: 5 }),
     body('phone', "Enter phone number").isLength({ min: 10 })
  ] , async (req, res) => {
