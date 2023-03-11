@@ -25,7 +25,7 @@ router.post("/blockuser/:_id", isAuthenticate, async (req, res) => {
     }
 })
 
-router.get("/getuser", isAuthenticate, async (req, res) => {
+router.get("/getuser",  async (req, res) => {
     try {
         const user = await UserModel.find({})
         if (!user) {

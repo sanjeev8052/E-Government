@@ -44,15 +44,15 @@ export const userReducer = createReducer(initialState, {
 
     // UserLoad Reducers........
     UserLoadRequest: (state) => {
-        state.loading = true;
+        state.userLoading = true;
     },
     UserLoadSuccess: (state, action) => {
-        state.loading = false;
+        state.userLoading = false;
         state.userData = action.payload;
         state.isAuthenticated = true
     },
     UserLoadFailuer: (state, action) => {
-        state.loading = false;
+        state.userLoading = false;
         state.error = action.payload;
         state.isAuthenticated = false
     },

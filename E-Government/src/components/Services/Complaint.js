@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'
-import { Box, Button, FormControl, MenuItem, Select, Typography } from '@material-ui/core';
+import InputLabel from '@mui/material/InputLabel';
+import {tokens} from '../../Global'
+import { Box, Button, FormControl, MenuItem, Select, Typography, useTheme } from '@material-ui/core';
 import { Send } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Footer from '../Layout/Footer/Footer';
 import bgImage from '../../Images/bgImage3.jpg'
 import { useFormik } from 'formik'
@@ -12,6 +14,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LoadUser } from '../../Action/User';
 import Loader from '../Layout/Loader'
 import { CompReq } from '../../Action/Services/Services';
+import axios from 'axios';
+import { getUser } from '../../Action/Admin/User';
 
 
 const useStyles = makeStyles({
@@ -57,8 +61,29 @@ const useStyles = makeStyles({
 });
 
 const Complaint = () => {
-  const { userData , loading } = useSelector(state => state.user)
+  const { userData, userLoading, isAuthenticated } = useSelector(state => state.user)
+
+  const themes = useTheme()
+  const colors = tokens(themes.palette.mode)
+
+  const [user, setUser] = useState({
+    email: "",
+    name: "",
+    phone: ""
+  })
+
+
   const dispatch = useDispatch()
+
+  useEffect(() => {
+
+    userData ? setUser({
+      email: userData.email,
+      phone: userData.phone,
+      name: userData.name
+    }) : null
+  }, [userData]);
+
 
   const initialvalues = {
     complaintType: "",
@@ -67,27 +92,24 @@ const Complaint = () => {
     area: "",
     pincode: "",
     complaintDesc: "",
-    name: "",
-    email: "",
-    phone: "",
+
 
   }
   const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
 
     initialValues: initialvalues,
     validationSchema: complaintSchema,
-    
+
     onSubmit: (values) => {
-    
+
       console.log(values)
-      //  dispatch(CompReq(values))
+      dispatch(CompReq(user, values))
     }
 
 
   })
 
 
-  console.log(errors)
   const classes = useStyles();
   return (
 
@@ -96,25 +118,26 @@ const Complaint = () => {
       <form onSubmit={handleSubmit} className={classes.box} >
 
         <Typography variant="h4" sx={{ marginBottom: "20px" }} color="initial">New Complaint</Typography>
-
-        <Typography className={classes.label} variant="h6" color="initial">Complaint Category</Typography>
-        <FormControl className={classes.dropdown} >
-          <Select size='small'
-            name='complaintType'
+        <Typography variant="h6" color="initial">Compalint Type</Typography>
+        <FormControl fullWidth>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
             value={values.complaintType}
+            label="Age"
             onChange={handleChange}
-            onBlur={handleBlur}
+            name="complaintType"
           >
-
-            <MenuItem value={"Roads & Footpath"}>Roads & Footpath</MenuItem>
+           <MenuItem value={"Roads & Footpath"}>Roads & Footpath</MenuItem>
             <MenuItem value={"Water Suppy"}>Water Suppy</MenuItem>
             <MenuItem value={"Street Light"}>Street Light</MenuItem>
             <MenuItem value={"Dead Animals"}>Dead Animals</MenuItem>
             <MenuItem value={"Public Park And Garden"}>Public Park And Garden</MenuItem>
             <MenuItem value={"Food Safety Act"}>Food Safety Act</MenuItem>
-
           </Select>
         </FormControl>
+
+       
         {errors.complaintType && touched.complaintType ? (
           <Typography className={classes.error}   >{errors.complaintType}</Typography>
         ) : null}
@@ -194,46 +217,40 @@ const Complaint = () => {
           COMPLAINER'S PERSONAL DETAILS
         </Typography>
         <hr />
-        {
-          loading ? <Loader /> :
-            <>
-              <Typography variant="h6" color="initial">Name</Typography>
-              <TextField className={classes.fullInput}
-                id=""
-                placeholder='Enter First Name '
-                variant='outlined'
-                size='small'
-                name='name'
-            
-                value={ userData.name  && userData.name}
 
-              />
+        <Typography variant="h6" color="initial">Name</Typography>
+        <TextField className={classes.fullInput}
+          id=""
+          placeholder='Enter First Name '
+          variant='outlined'
+          size='small'
+          name='name'
+          value={user.name}
+
+        />
 
 
-              <Typography variant="h6" color="initial">Email</Typography>
-              <TextField className={classes.fullInput}
-                id=""
-                placeholder='Enter Enter Your Email '
-                variant='outlined'
-                size='small'
-                name='email'
-                onChange={handleChange}
-                value={userData.email  && userData.email }
+        <Typography variant="h6" color="initial">Email</Typography>
+        <TextField className={classes.fullInput}
+          id=""
+          placeholder='Enter Enter Your Email '
+          variant='outlined'
+          size='small'
+          name='email'
+          value={user.email}
 
-              />
-              <Typography variant="h6" color="initial">Mobile No.</Typography>
-              <TextField className={classes.fullInput}
-                id=""
-                placeholder='Enter Enter Your phone no '
-                variant='outlined'
-                size='small'
-                name='phone'
-                onChange={handleChange}
-                value={userData.phone && userData.phone }
-                
-              />
-            </>
-        }
+        />
+        <Typography variant="h6" color="initial">Mobile No.</Typography>
+        <TextField className={classes.fullInput}
+          id=""
+          placeholder='Enter Enter Your phone no '
+          variant='outlined'
+          size='small'
+          name='phone'
+          value={user.phone}
+
+        />
+
 
         <Button type='submit' className={classes.button} variant="contained" endIcon={<Send />}>
 

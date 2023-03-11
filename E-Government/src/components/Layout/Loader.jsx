@@ -7,8 +7,8 @@ import { makeStyles, Typography } from '@material-ui/core';
 
  const useStyle =  makeStyles({
     box:{
-      height:"100vh",
-      width:"100vw",
+      // height:"100vh",
+      // width:"100vw",
       display:"grid",
       placeItems:"center",
       backgroundColor:'white'

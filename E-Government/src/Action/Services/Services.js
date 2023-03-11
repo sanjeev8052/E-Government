@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-export const CompReq = (values) => async (dispatch) => {
+export const CompReq = (user,values) => async (dispatch) => {
     try {
         dispatch({
             type: "CompReqRequset",
         })
 
-        const { data } = await axios.post("api/comp/req",values, {
+        const { data } = await axios.post("api/comp/req",{values,user},{
             headers: {
                 "Content-Type": "application/json"
             }

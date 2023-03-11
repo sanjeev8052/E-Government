@@ -6,7 +6,7 @@ export const adminLogin = (admin) => async (dispatch) => {
         dispatch({
             type: "LoginRequest"
         })
-        const response = await axios.post(`/api/admin/alogin`, admin, {
+        const {data} = await axios.post(`/api/admin/alogin`, admin, {
             headers: {
                 "Content-Type": "application/json"
             }
@@ -14,7 +14,7 @@ export const adminLogin = (admin) => async (dispatch) => {
 
         dispatch({
             type: "LoginSuccess",
-            payload: response.admin
+            payload: data.token
         })
 
     } catch (error) {

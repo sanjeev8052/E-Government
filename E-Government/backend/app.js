@@ -2,11 +2,16 @@ const express = require('express');
 const ConnectDB = require('./config/database');
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
+const fileUpload = require("express-fileupload")
+
 const app = express();
 app.use(cors())
 app.use(express.json())
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }))
+app.use(fileUpload({
+    useTempFiles:true
+}))
 
 require('dotenv').config({ path: 'config/config.env' })
 ConnectDB();

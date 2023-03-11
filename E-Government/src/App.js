@@ -5,7 +5,6 @@ import Home from './components/Home/Home'
 import { LoadUser } from './Action/User'
 import  UserForgotPassword from  './components/User/ForgotPassword'
 import Complaint from './components/Services/Complaint'
-import BillPay from './components/User/BillPay'
 
 // package
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
@@ -29,6 +28,7 @@ import Empregister from './components/Employee/Empregister'
 import Emplogin from './components/Employee/Emplogin'
 import User from './components/Admin/User'
 import Loader from './components/Layout/Loader'
+import BillPay from './components/Services/BillPay'
 
 const App = () => {
   const [theme, colorMode] = useMode()
