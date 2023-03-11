@@ -10,6 +10,7 @@ import { AddCircleOutlineTwoTone, DeleteForeverTwoTone, SpeakerNotesTwoTone } fr
 import { useDispatch, useSelector } from 'react-redux'
 import { Addbillcat, Addcercat, Addcomcat, Addmetercat, Delbillcat, Delcercat, Delcomcat, Delmetercat, Getbillcat, Getcercat, Getcomcat, Getmetercat } from '../../Action/Admin/Categories'
 import { useEffect } from 'react'
+import { CircularProgress } from '@material-ui/core'
 const Categories = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
@@ -19,7 +20,7 @@ const Categories = () => {
         setStatus(status)
     }
 
-    const { getcomcat, getbillcat, getmetercat, getcercat } = useSelector((state) => (state.services))
+    const { getcomcat, getbillcat, getmetercat, getcercat , loading } = useSelector((state) => (state.services))
     const styles = {
         textfield: {
             width: "100%",
@@ -60,7 +61,7 @@ const Categories = () => {
     }
     const delcom = (id) => {
         dispatch(Delcomcat(id))
-        window.location.reload();
+    
     }
     // for bills
     const subbill = (values, props) => {
@@ -69,7 +70,7 @@ const Categories = () => {
     }
     const delbill = (id) => {
         dispatch(Delbillcat(id))
-        window.location.reload();
+   
     }
     // for meter
     const submet = (values, props) => {
@@ -77,7 +78,7 @@ const Categories = () => {
     }
     const delmet = (id) => {
         dispatch(Delmetercat(id))
-        window.location.reload();
+     
     }
     // for certificate
     const subcer = (values, props) => {
@@ -85,7 +86,7 @@ const Categories = () => {
     }
     const delcer = (id) => {
         dispatch(Delcercat(id))
-        window.location.reload();
+     
     }
 
     useEffect(() => {
@@ -165,8 +166,8 @@ const Categories = () => {
                                                                     <TableCell >{data.complaintType}</TableCell>
 
                                                                     <TableCell >
-                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delcom(data._id) }} >
-                                                                            <DeleteForeverTwoTone />
+                                                                        <IconButton disabled={loading} aria-label="correct" color="error" onClick={() => { delcom(data._id) }} >
+                                                                       <DeleteForeverTwoTone  />
                                                                         </IconButton>
 
                                                                     </TableCell>
@@ -229,7 +230,7 @@ const Categories = () => {
                                                                     <TableCell >{data.billsType}</TableCell>
 
                                                                     <TableCell >
-                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delbill(data._id) }} >
+                                                                        <IconButton disabled={loading} aria-label="correct" color="error" onClick={() => { delbill(data._id) }} >
                                                                             <DeleteForeverTwoTone />
                                                                         </IconButton>
 
