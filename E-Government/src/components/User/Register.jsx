@@ -64,7 +64,7 @@ const Register = () => {
     }
     const [user, setUser] = useState({
         name: "",
-        mobile: "",
+        phone: "",
         email: "",
         password: "",
         cpassword: ""
@@ -103,8 +103,8 @@ const Register = () => {
          InputLabelProps={{ style: { fontSize: 20 } }}
          InputProps={{ startAdornment: (<InputAdornment position="start">  <Phone /> </InputAdornment>) ,}}
          label='Enter Mobile No' variant='standard'
-         name="mobile"
-         value={user.mobile}
+         name="phone"
+         value={user.phone}
          onChange={handleInput}
      />
 

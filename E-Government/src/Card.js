@@ -1,36 +1,102 @@
 import React from 'react'
 var Slider = require('react-slick');
-import { Button } from '@material-ui/core'
+import { Button, makeStyles, Typography } from '@material-ui/core'
+import complaintImage from './Images/complaint.jpg'
+import billPayImage from './Images/billpay.jpg'
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import Menu from '@mui/material/Menu';
 
+import MenuItem from '@mui/material/MenuItem';
+import { Link } from 'react-router-dom';
+
+const useStyle = makeStyles({
+    cardBox: {
+        display: "flex",
+        backgroundColor: "gray",
+        padding: "2rem",
+        margin: "2rem",
+        border: " solid 1px",
+        borderRadius: "10px",
+
+    },
+    card: {
+        margin: "2rem",
+        borderRadius: "10px",
+        boxShadow: "3px 3px 6px ",
+        backgroundColor: "gray",
+        width: "20rem",
+        padding: "2rem"
+    },
+
+    button: {
+
+        width: "100%",
+        color: "primary",
+        marginTop: "1rem "
+    },
+    img: {
+        height: "17rem",
+        width: "16rem",
+        borderRadius: "5px",
+        boxShadow: "2px 2px 4px",
+        marginBottom: "1rem"
+    }
+
+})
 const Card = () => {
-    var settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    };
+
+    const css = useStyle();
+
     return (
-        <>
-            {/* <div className="card m-5" style={{ width: "10rem" }}>
-                <img src="" alt="Card" />
+        <div className={css.cardBox}>
+            <div className={css.card}>
+                <img className={css.img}  src={complaintImage} alt="Card" />
                 <div className="card-body">
-                    <h5>Card Titel</h5>
-                    <p>Lorem ipsum dolor sit amet  officia iusto quos? Atque dolore veniam consectetur rem?</p>
-                    <Button variant="text" color="default">
-                        Click me!
+                    <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">register your complaint and track the complaint status. </Typography>
+                    <Button className={css.button} variant="text" color="default">
+                        <PopupState variant="popover" popupId="demo-popup-menu">
+                            {(popupState) => (
+                                <React.Fragment>
+                                    <Button className={css.button} variant="contained" color='primary' {...bindTrigger(popupState)}>
+                                        Complaint
+                                    </Button>
+                                    <Menu  {...bindMenu(popupState)}>
+                                        <MenuItem component={Link} to='/complaint'>Add New Complaint</MenuItem>
+                                        <MenuItem >My account</MenuItem>
+                                        <MenuItem >Logout</MenuItem>
+                                    </Menu>
+                                </React.Fragment>
+                            )}
+                        </PopupState>
+
                     </Button>
                 </div>
-            </div> */}
-            {/* <Slider {...settings}>
-                <div><h3>1</h3></div>
-                <div><h3>2</h3></div>
-                <div><h3>3</h3></div>
-                <div><h3>4</h3></div>
-                <div><h3>5</h3></div>
-                <div><h3>6</h3></div>
-            </Slider> */}
-        </>
+            </div>
+            <div className={css.card}>
+                <img className={css.img}  src={billPayImage} alt="Card" />
+                <div className="card-body">
+                    <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">register your complaint and track the complaint status. </Typography>
+                    <Button className={css.button} variant="text" color="default">
+                        <PopupState variant="popover" popupId="demo-popup-menu">
+                            {(popupState) => (
+                                <React.Fragment>
+                                    <Button className={css.button} variant="contained" color='primary' {...bindTrigger(popupState)}>
+                                        Complaint
+                                    </Button>
+                                    <Menu  {...bindMenu(popupState)}>
+                                        <MenuItem onClick={popupState.close}>Profile</MenuItem>
+                                        <MenuItem onClick={popupState.close}>My account</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Logout</MenuItem>
+                                    </Menu>
+                                </React.Fragment>
+                            )}
+                        </PopupState>
+
+                    </Button>
+                </div>
+            </div>
+
+        </div>
 
     )
 }

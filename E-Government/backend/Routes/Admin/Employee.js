@@ -62,7 +62,7 @@ router.post("/blockemp/:_id", isAuthenticate, async (req, res) => {
 
 
         if (!emp) {
-            res.status(400).json({ message: "Employee Not Found" })
+            res.status(200).json({ message: "Employee Not Found" })
         }
 
         const blockemp = await Blockemployee.create(emp.toJSON());

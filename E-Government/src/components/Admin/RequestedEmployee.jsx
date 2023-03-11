@@ -23,7 +23,7 @@ const RequestedEmployee = () => {
     }, [isAuthenticated, dispatch, navigate])
     const confirm = (id) => {
         dispatch(conTempEmp(id));
-        window.location.reload();
+       
     }
 
     return (

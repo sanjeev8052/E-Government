@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true,'Name is required'],
     },
-    mobile: {
+    phone: {
         type: Number,
         required: true,
      

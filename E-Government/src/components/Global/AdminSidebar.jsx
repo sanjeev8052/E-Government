@@ -26,7 +26,7 @@ const AdminSidebar = ({admin}) => {
   const [selected, setSelected] = useState("empLogin")
 
   return (
-    <Box sx={{
+    <Box  sx={{
       "& .pro-sidebar-inner": {
         background: `${colors.primary[400]} !important`
       },

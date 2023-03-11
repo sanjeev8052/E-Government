@@ -1,17 +1,33 @@
 const express = require("express");
 const router = express.Router();
+const cloudinary = require('cloudinary').v2
 const User = require('../../models/User/UserModel')
 // const { body, validationResult, cookie } = require('express-validator');
 const { sendEmail } = require('../../middlewares/sendEmail')
 const crypto = require('crypto')
-
 const { errorHandler } = require("../../middlewares/Errorhandler");
 const { isAuthenticatedUser } = require("../../middlewares/auth");
 
+cloudinary.config({ 
+    cloud_name: process.env.cloud_name, 
+    api_key: process.env.api_key, 
+    api_secret: process.env.api_secret,
+    secure: true
+  }); 
+
+router.post("/upload", async(req, res)=>{
+    const file = req.files.image
+
+    const result = await cloudinary.uploader.upload(file.tempFilePath)
+    console.log(result)
+   
+})
+
 router.post("/user/new/",async (req, res) => {
+   
 
     try {
-        const { name, email, password, mobile } = req.body
+        const { name, email, password, phone } = req.body
         let user = await User.findOne({ email });
         if (user) {
             return res
@@ -19,7 +35,7 @@ router.post("/user/new/",async (req, res) => {
                 .json({ sucsess: false, message: "user already exists....." })
         }
 
-        user = await User.create({ name, email, mobile, password })
+        user = await User.create({ name, email, phone, password })
         user.save();
 
         res.status(201).json({

@@ -7,7 +7,21 @@ const initialState = {
 
 export const userServicesReducer = createReducer(initialState, {
 
-    // getCompreq Reducers........
+    //Compreq Reducers........
+    CompReqRequset: (state) => {
+        state.loading = true;
+    },
+    CompReqSuccess: (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+       
+    },
+    CompReqFailuer: (state, action) => {
+        state.loading = false;
+        state.LoginError = action.payload;
+       
+    },
+
     getCompReqRequset: (state) => {
         state.loading = true;
     },

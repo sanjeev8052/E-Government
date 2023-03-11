@@ -30,7 +30,8 @@ export const conTempEmp = (id) => async (dispatch) =>{
         dispatch({
             type: "CEmployeeSuccess",
             payload: response
-        })
+        })        
+        dispatch(getTempEmp())
         
     } catch (error) {
         dispatch({
@@ -63,12 +64,15 @@ export const blockEmp = (id) => async (dispatch) =>{
         dispatch({
             type: "BlockRequest"
         })
-        const response = await axios.post(`/api/admin/blockemp/${id}`)
+        const {data} = await axios.post(`/api/admin/blockemp/${id}`)
 
         dispatch({
             type: "BlockSuccess",
-            payload: response
+            payload: data
         })
+
+        dispatch(getEmp())
+         
     } catch (error) {
         dispatch({
             type: "BlockFailure",

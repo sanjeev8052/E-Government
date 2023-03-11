@@ -11,7 +11,7 @@ export const AdminReducer = createReducer(initialState, {
     },
     LoginSuccess: (state, action) => {
         state.loading = false;
-        state.admin = action.payload
+        state.token = action.payload
         state.isAuthenticated = true;
     },
     LoginFailure: (state, action) => {
@@ -81,6 +81,11 @@ export const AdminReducer = createReducer(initialState, {
         state.emp = action.payload;
 
     },
+    EmployeeNull: (state, action) => {
+        state.loading = false;
+        state.emp = null
+       
+    },
     EmployeeFailure: (state, action) => {
         state.loading = false;
         state.error = action.payload;
@@ -94,7 +99,7 @@ export const AdminReducer = createReducer(initialState, {
     },
     BlockSuccess: (state, action) => {
         state.loading = false;
-        state.admin = action.payload;
+        state.blockData = action.payload;
 
     },
     BlockFailure: (state, action) => {

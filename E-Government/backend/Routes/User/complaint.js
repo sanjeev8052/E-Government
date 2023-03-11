@@ -5,9 +5,21 @@ const UserComplaint = require('../../models/User/UserComplaint');
 const router = express.Router();
 
 router.post('/comp/req', isAuthenticatedUser, async(req, res) => {
-   
     try {
-        const  complaint = await UserComplaint.create(req.body)
+        const {values, user} = req.body
+
+        const create = {
+            name:user.name,
+            email:user.email,
+            phone:user.phone,
+            complaintType:values.complaintType,
+            city:values.city,
+            streetAddress:values.streetAddress,
+            area:values.area,
+            pincode:values.pincode,
+            complaintDesc:values.complaintDesc,
+        }
+        const  complaint = await UserComplaint.create(create)
         res.status(200).json({
             success:true,
             message:"Requset Success..",
@@ -27,9 +39,6 @@ router.get('/getComp/req', async(req, res) => {
        
         res.status(200).send(complaint)
            
-            
-        
-        
     } catch (error) {
         res
             .status(500)
