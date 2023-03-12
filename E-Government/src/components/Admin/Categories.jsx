@@ -34,7 +34,7 @@ const Categories = () => {
     }
 
     const com = {
-        complaintType: ""
+        complaint: "",
     }
     const bills = {
         billsType: ""
@@ -46,26 +46,30 @@ const Categories = () => {
         meterType: ""
     }
     const validationSchema = Yup.object().shape({
-        complaintType: Yup.string().required("!! Please Fill This Field.."),
+        complaint: Yup.string().required("!! Please Fill This Field.."),
         billsType: Yup.string().required("!! Please Fill This Field.."),
         certificateType: Yup.string().required("!! Please Fill This Field.."),
         meterType: Yup.string().required("!! Please Fill This Field.."),
 
     })
     //  complaint
-    const subcom = (values, props) => {
-        // dispatch(Addcomcat(values))
-        console.log(values)
+    // const onSubmit = (values, props) => {
+    //     // dispatch(Addcomcat(values))
+    //      console.log(values)
+    //      console.log(props)
+    // }
+    const onSubmit = (values, props) => {
         console.log(props)
-    }
+        console.log(values)
+      }
     const delcom = (id) => {
         dispatch(Delcomcat(id))
-        window.location.reload();
+         window.location.reload();
     }
     // for bills
     const subbill = (values, props) => {
-         dispatch(Addbillcat(values))
-        
+        //  dispatch(Addbillcat(values))
+        console.log(values)
     }
     const delbill = (id) => {
         dispatch(Delbillcat(id))
@@ -122,14 +126,13 @@ const Categories = () => {
                     {
                         status === 1 &&
                         <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
-                            <Formik initialValues={com} validationSchema={validationSchema} onSubmit={subcom} >
+                            <Formik initialValues={com}  onSubmit={onSubmit} validationSchema={validationSchema} >
                                 {(props) => (
                                     <Form>
                                         <Typography variant="h2" mt="5px" color="initial">Add Complaint Type </Typography>
                                         <Field as={TextField}
-
                                             sx={styles.textfield}
-                                            name="complaintType"
+                                            name="complaint"
                                             label="Add Complaint Type"
                                             variant='standard'
                                             type="text"
@@ -141,9 +144,11 @@ const Categories = () => {
                                             }}
 
                                         />
-                                        <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='complaintType' />}</Typography>
-                                        <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
-                                        <Box mt="10px">
+                                        <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='complaint' />}</Typography>
+                                        <Button type="submit" sx={styles.btn} variant="contained" color="secondary" 
+                                        // startIcon={<AddCircleOutlineTwoTone />}
+                                         >Add</Button>
+                                        <Box mt="10px" mb='20px'>
                                             <TableContainer component={Paper}>
                                                 <Table size="medium" >
                                                     <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
@@ -187,14 +192,14 @@ const Categories = () => {
                     {
                         status === 2 &&
                         <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
-                            <Formik initialValues={bills} validationSchema={validationSchema} onSubmit={subbill} >
+                            {/* <Formik initialValues={bills} validationSchema={validationSchema} onSubmit={subbill} >
                                 {(props) => (
                                     <Form>
                                         <Typography variant="h2" mt="5px" color="initial">Add Bill Type </Typography>
                                         <Field as={TextField}
                                             sx={styles.textfield}
                                             name="billsType"
-                                            label="Add Complaint Type"
+                                            label="Add Bills Type"
                                             variant='standard'
                                             type="text"
                                             color='secondary'
@@ -243,13 +248,13 @@ const Categories = () => {
                                         </Box>
                                     </Form>
                                 )}
-                            </Formik>
+                            </Formik> */}
                         </Box>
                     }
                     {
                         status === 3 &&
                         <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
-                            <Formik initialValues={meter} validationSchema={validationSchema} onSubmit={submet} >
+                            {/* <Formik initialValues={meter} validationSchema={validationSchema}  >
                                 {(props) => (
                                     <Form>
                                         <Typography variant="h2" mt="5px" color="initial">Add Meter Type </Typography>
@@ -257,7 +262,7 @@ const Categories = () => {
 
                                             sx={styles.textfield}
                                             name="meterType"
-                                            label="Add Complaint Type"
+                                            label="Add Meter Type"
                                             variant='standard'
                                             type="text"
                                             color='secondary'
@@ -292,7 +297,7 @@ const Categories = () => {
                                                                     <TableCell >{data.meterType}</TableCell>
 
                                                                     <TableCell >
-                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delcer(data._id) }} >
+                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delmet(data._id) }} >
                                                                             <DeleteForeverTwoTone />
                                                                         </IconButton>
 
@@ -306,13 +311,13 @@ const Categories = () => {
                                         </Box>
                                     </Form>
                                 )}
-                            </Formik>
+                            </Formik> */}
                         </Box>
                     }
                     {
                         status === 4 &&
                         <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
-                            <Formik initialValues={cer} validationSchema={validationSchema} onSubmit={subcer} >
+                            {/* <Formik initialValues={cer} validationSchema={validationSchema}  onSubmit={subcer}>
                                 {(props) => (
                                     <Form>
                                         <Typography variant="h2" mt="5px" color="initial">Add Certificate Type </Typography>
@@ -320,7 +325,7 @@ const Categories = () => {
 
                                             sx={styles.textfield}
                                             name="certificateType"
-                                            label="Add Complaint Type"
+                                            label="Add Certificate Type"
                                             variant='standard'
                                             type="text"
                                             color='secondary'
@@ -346,7 +351,7 @@ const Categories = () => {
 
                                                         {getcercat <= 0 ? <TableRow>
                                                             <TableCell colSpan={2}>
-                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Employee Data</Typography>
+                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Certificate Type</Typography>
                                                             </TableCell>
                                                         </TableRow>
                                                             :
@@ -355,7 +360,7 @@ const Categories = () => {
                                                                     <TableCell >{data.certificateType}</TableCell>
 
                                                                     <TableCell >
-                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delcom(data._id) }} >
+                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delcer(data._id) }} >
                                                                             <DeleteForeverTwoTone />
                                                                         </IconButton>
 
@@ -369,7 +374,7 @@ const Categories = () => {
                                         </Box>
                                     </Form>
                                 )}
-                            </Formik>
+                            </Formik> */}
                         </Box>
                     }
                 </Box>
