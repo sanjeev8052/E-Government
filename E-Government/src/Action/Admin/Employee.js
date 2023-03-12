@@ -40,6 +40,26 @@ export const conTempEmp = (id) => async (dispatch) =>{
         })
     }
 }
+export const rejTempEmp = (id) => async (dispatch) =>{
+    try {
+        dispatch({
+            type: "REmployeeRequest"
+        })
+        const response = await axios.delete(`/api/admin/rejectemp/${id}`)
+
+        dispatch({
+            type: "REmployeeSuccess",
+            payload: response
+        })        
+        dispatch(getTempEmp())
+        
+    } catch (error) {
+        dispatch({
+            type: "REmployeeFailure",
+            payload: error
+        })
+    }
+}
 export const getEmp = () => async (dispatch) =>{
     try {
         dispatch({

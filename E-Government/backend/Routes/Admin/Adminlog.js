@@ -83,6 +83,7 @@ router.post("/alogin", [
                 })
 
             }
+            
 
         }
 
@@ -104,5 +105,20 @@ router.get("/profile", isAuthenticate, async (req, res) => {
     }
 }
 )
+
+// For Logout
+router.get("/logout",async (req, res) => {
+    try {
+        res
+            .status(200)
+            .cookie("admintoken", null, { expires: new Date(Date.now()), httpOnly: true })
+            .json({ success: true, message: "Logout" })
+    } catch (error) {
+        res
+            .status(500)
+            .json({ success: false, Error: error.message })
+    }
+
+})
 
 module.exports = router

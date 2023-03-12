@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
 import Grid from '@mui/material/Grid'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
-import { TextField, Typography, Radio, FormControl, FormLabel, RadioGroup, FormControlLabel, Button, InputAdornment, IconButton } from '@mui/material'
+import { TextField, Typography, Radio, FormControl, FormLabel, RadioGroup, FormControlLabel, Button, InputAdornment, IconButton , Select ,MenuItem, InputLabel} from '@mui/material'
 import { LoginRounded, LocalPhoneTwoTone, VisibilityTwoTone, VisibilityOffTwoTone, PasswordTwoTone, Person3TwoTone, EmailTwoTone } from '@mui/icons-material'
 import * as Yup from 'yup'
 import signup from '../Images/Icons/signup1.jpg'
+import { useDispatch } from 'react-redux'
+import { Register } from '../../Action/Employee/register'
+
+
+
 const Empregister = () => {
+  const dispatch = useDispatch()
   const details = {
     name: "",
     email: "",
@@ -13,6 +19,7 @@ const Empregister = () => {
     phone: "",
     password: "",
     cpassword: "",
+    dept: ""
   }
   const [type, setType] = useState("password")
   const [visible, setVisible] = useState(false)
@@ -89,7 +96,7 @@ const Empregister = () => {
     btn: {
       width: "100%",
       margin: "10px auto",
-      borderRadius:"100px"
+      borderRadius: "100px"
     },
     link: {
       color: "blue",
@@ -104,18 +111,18 @@ const Empregister = () => {
 
   }
   const emailpattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
- 
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("!! Please Enter Your Name..").min(5, "!! Too Short..").max(8, "!! Very Long..."),
     email: Yup.string().email("!! Enter a Valid Email").required("!! Please Enter Email.. ").matches(emailpattern, "!! Enter Email Properly"),
     gender: Yup.string().oneOf(["male", "female"], "!! Please Select Gender..").required("!! Please Select Gender.."),
     phone: Yup.number().typeError("!! Please Enter Valid Phone Number..").required("!! Please Enter Phone Number..").positive("A phone number can't start with a minus").integer("A phone number can't include a decimal point").min(10, "Enter 10 Digit Only"),
     password: Yup.string().min(8, "!! Minimum Length Should be 8").required("!! Please Enter Your Password.."),
-    cpassword: Yup.string().oneOf([Yup.ref("password")], "Password Not Matched").required("!! Please Enter Your Confirm Password..")
+    cpassword: Yup.string().oneOf([Yup.ref("password")], "Password Not Matched").required("!! Please Enter Your Confirm Password.."),
+    dept: Yup.string().required("Select Department")
   })
   const onSubmit = (values, props) => {
-    console.log(props)
-    console.log(values)
+    dispatch(Register(values))
   }
   return (
     <>
@@ -187,6 +194,25 @@ const Empregister = () => {
 
                   />
                   <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='phone' />}</Typography>
+                  <FormControl fullWidth variant="standard" InputLabelProps={{ style: { fontSize: 20 } }} size="small">
+                    <InputLabel>Department</InputLabel>
+                    <Field as={Select}
+
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      name="dept"
+                      label="Department"
+                      InputLabelProps={{ style: { fontSize: 20 } }}
+                      placeholder="select Department"
+                      
+                    >
+                      <MenuItem value={"Road"}>Road</MenuItem>
+                      <MenuItem value={"Water"}>Water</MenuItem>
+                      <MenuItem value={"Drain"}>Draint</MenuItem>
+                    </Field>
+                  </FormControl>
+                  <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='dept' />}</Typography>
+
                   <Field as={TextField}
                     name="password"
                     label="Password"

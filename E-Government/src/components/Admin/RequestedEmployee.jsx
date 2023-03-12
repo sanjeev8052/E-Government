@@ -6,9 +6,9 @@ import Header from '../Global/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../Layout/Loader'
 import { tokens } from '../../Global'
-import { getTempEmp, conTempEmp } from '../../Action/Admin/Employee'
+import { getTempEmp, conTempEmp, rejTempEmp } from '../../Action/Admin/Employee'
 import { useNavigate } from 'react-router-dom'
-import { CheckCircleOutlineTwoTone } from '@mui/icons-material'
+import { CancelTwoTone, CheckCircleOutlineTwoTone } from '@mui/icons-material'
 
 const RequestedEmployee = () => {
     const themes = useTheme()
@@ -21,6 +21,10 @@ const RequestedEmployee = () => {
         isAuthenticated ? navigate('/aremployee') : navigate('/adlogin')
         dispatch(getTempEmp())
     }, [isAuthenticated, dispatch, navigate])
+
+    const reject = (id) => { 
+        dispatch(rejTempEmp(id))
+     }
     const confirm = (id) => {
         dispatch(conTempEmp(id));
        
@@ -49,6 +53,7 @@ const RequestedEmployee = () => {
                                             <TableCell>Email</TableCell>
                                             <TableCell>Gender</TableCell>
                                             <TableCell>Phone NO.</TableCell>
+                                            <TableCell>Department</TableCell>
                                             <TableCell>Actions</TableCell>
                                         </TableRow>
                                     </TableHead>
@@ -66,13 +71,14 @@ const RequestedEmployee = () => {
                                                     <TableCell >{data.email}</TableCell>
                                                     <TableCell >{data.gender}</TableCell>
                                                     <TableCell >{data.phone}</TableCell>
+                                                    <TableCell >{data.dept}</TableCell>
                                                     <TableCell >
-                                                        <IconButton aria-label="correct" onClick={() => { confirm(data._id) }}>
+                                                        <IconButton aria-label="correct" color='success' onClick={() => { confirm(data._id) }}>
                                                           <CheckCircleOutlineTwoTone/>
                                                         </IconButton>
-                                                        {/* <Button variant="contained" color="success" onClick={() => { confirm(data._id) }} sx={{borderRadius:"100px"}}>
-                                                            <CheckCircleOutlineTwoTone/>
-                                                        </Button> */}
+                                                        <IconButton aria-label="reject"  color='error' onClick={() => { reject(data._id) }}>
+                                                          <CancelTwoTone/>
+                                                        </IconButton>
                                                     </TableCell>
                                                 </TableRow>
                                             ))

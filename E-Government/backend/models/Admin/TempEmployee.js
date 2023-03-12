@@ -26,6 +26,10 @@ const TempEmpSchema = new mongoose.Schema({
         required: true
 
     },
+    dept :{
+        type:String,
+        required:true,
+    }
    
 })
 

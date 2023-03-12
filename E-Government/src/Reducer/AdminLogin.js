@@ -2,7 +2,8 @@ import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {}
 
-export const AdminReducer = createReducer(initialState, {
+export const AdminReducer = createReducer(initialState, 
+    {
 
     // Admin Login
     LoginRequest: (state, action) => {
@@ -19,6 +20,19 @@ export const AdminReducer = createReducer(initialState, {
         state.error = action.payload;
         state.isAuthenticated = false;
     },
+    // Admin logout
+    AdminLogoutRequest: (state) => {
+        state.loading = true;
+    },
+    AdminLogoutSuccess: (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = false
+    },
+    AdminLogoutFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
 
     // Loading
     LoadRequest: (state, action) => {
@@ -65,6 +79,21 @@ export const AdminReducer = createReducer(initialState, {
 
     },
     CEmployeeFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+    // Reject Temprary Employee
+    REmployeeRequest: (state, action) => {
+        state.loading = true;
+
+    },
+    REmployeeSuccess: (state, action) => {
+        state.loading = false;
+        state.remp = action.payload;
+
+    },
+    REmployeeFailure: (state, action) => {
         state.loading = false;
         state.error = action.payload;
 
