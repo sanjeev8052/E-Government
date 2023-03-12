@@ -51,7 +51,7 @@ export const Delcomcat  = (id) => async (dispatch) =>{
             type: "delcomcatSuccess",
             payload: data
         })
-        
+        dispatch(Getcomcat())
     } catch (error) {
         dispatch({
             type: "delcomcatFailuer",
@@ -110,7 +110,7 @@ export const Delbillcat  = (id) => async (dispatch) =>{
             type: "delbillcatSuccess",
             payload: data
         })
-        
+        dispatch(Getbillcat())
     } catch (error) {
         dispatch({
             type: "delbillcatFailuer",

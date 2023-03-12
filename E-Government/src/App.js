@@ -31,6 +31,7 @@ import User from './components/Admin/User'
 import Loader from './components/Layout/Loader'
 import BillPay from './components/Services/BillPay'
 import Categories from './components/Admin/Categories'
+import Cate from './components/Admin/Cate'
 
 
 const App = () => {
@@ -73,7 +74,13 @@ const App = () => {
               <Route path="/categories" element={<Categories />} />
               <Route path="/auser" element={<User />} />
               <Route path="/spiner" element={<Loader />} />
+              <Route path="/Categories" element={<Categories />} />
+              <Route path="/Cate" element={<Cate />} />
 
+               {/* Employee */}
+
+               <Route path="/empLogin" element={<Emplogin/>} />
+               <Route path="/empRegister" element={<Empregister/>} />
 
 
             </Routes>
