@@ -35,7 +35,7 @@ const Categories = () => {
     }
 
     const com = {
-        complaint: "",
+        complaintType: "",
     }
     const bills = {
         billsType: ""
@@ -46,35 +46,39 @@ const Categories = () => {
     const meter = {
         meterType: ""
     }
-    const validationSchema = Yup.object().shape({
-        complaint: Yup.string().required("!! Please Fill This Field.."),
+    const validationcomplaint = Yup.object().shape({
+        complaintType: Yup.string().required("!! Please Fill This Field.."),
+      
+    })
+    const validationbill = Yup.object().shape({
+        
         billsType: Yup.string().required("!! Please Fill This Field.."),
+        
+
+    })
+    const validationcertificate = Yup.object().shape({
+       
         certificateType: Yup.string().required("!! Please Fill This Field.."),
+       
+
+    })
+    const validationmeter = Yup.object().shape({
+       
         meterType: Yup.string().required("!! Please Fill This Field.."),
 
     })
-    //  complaint
-    // const onSubmit = (values, props) => {
-    //     // dispatch(Addcomcat(values))
-    //      console.log(values)
-    //      console.log(props)
-    // }
+   
     const onSubmit = (values, props) => {
-        console.log(props)
-        console.log(values)
+       dispatch(Addcomcat(values))
       }
     const delcom = (id) => {
         dispatch(Delcomcat(id))
-<<<<<<< HEAD
-         window.location.reload();
-=======
-    
->>>>>>> e8b96338ad5115c573f74f6412fd4ae9d80b5b4e
+       
     }
     // for bills
     const subbill = (values, props) => {
-        //  dispatch(Addbillcat(values))
-        console.log(values)
+          dispatch(Addbillcat(values))
+       
     }
     const delbill = (id) => {
         dispatch(Delbillcat(id))
@@ -131,13 +135,13 @@ const Categories = () => {
                     {
                         status === 1 &&
                         <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
-                            <Formik initialValues={com}  onSubmit={onSubmit} validationSchema={validationSchema} >
+                            <Formik initialValues={com}  onSubmit={onSubmit} validationSchema={validationcomplaint} >
                                 {(props) => (
                                     <Form>
                                         <Typography variant="h2" mt="5px" color="initial">Add Complaint Type </Typography>
                                         <Field as={TextField}
                                             sx={styles.textfield}
-                                            name="complaint"
+                                            name="complaintType"
                                             label="Add Complaint Type"
                                             variant='standard'
                                             type="text"
@@ -149,14 +153,14 @@ const Categories = () => {
                                             }}
 
                                         />
-                                        <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='complaint' />}</Typography>
+                                        <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='complaintType' />}</Typography>
                                         <Button type="submit" sx={styles.btn} variant="contained" color="secondary" 
                                         // startIcon={<AddCircleOutlineTwoTone />}
                                          >Add</Button>
                                         <Box mt="10px" mb='20px'>
-                                            <TableContainer component={Paper}>
-                                                <Table size="medium" >
-                                                    <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
+                                            <TableContainer  >
+                                                <Table size="medium"  >
+                                                    <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}  >
                                                         <TableRow>
                                                             <TableCell>Name</TableCell>
                                                             <TableCell>Delete</TableCell>
@@ -166,7 +170,7 @@ const Categories = () => {
 
                                                         {getcomcat <= 0 ? <TableRow>
                                                             <TableCell colSpan={2}>
-                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Employee Data</Typography>
+                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Compliant Type Added</Typography>
                                                             </TableCell>
                                                         </TableRow>
                                                             :
@@ -197,7 +201,7 @@ const Categories = () => {
                     {
                         status === 2 &&
                         <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
-                            {/* <Formik initialValues={bills} validationSchema={validationSchema} onSubmit={subbill} >
+                            <Formik initialValues={bills} validationSchema={validationbill} onSubmit={subbill} >
                                 {(props) => (
                                     <Form>
                                         <Typography variant="h2" mt="5px" color="initial">Add Bill Type </Typography>
@@ -217,8 +221,8 @@ const Categories = () => {
                                         />
                                         <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='billsType' />}</Typography>
                                         <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
-                                        <Box mt="10px">
-                                            <TableContainer component={Paper}>
+                                        <Box mt="10px"  mb="20px">
+                                            <TableContainer >
                                                 <Table size="medium" >
                                                     <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
                                                         <TableRow>
@@ -230,7 +234,7 @@ const Categories = () => {
 
                                                         {getbillcat <= 0 ? <TableRow>
                                                             <TableCell colSpan={2}>
-                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Bill Type Data</Typography>
+                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Bill Type Added</Typography>
                                                             </TableCell>
                                                         </TableRow>
                                                             :
@@ -253,13 +257,13 @@ const Categories = () => {
                                         </Box>
                                     </Form>
                                 )}
-                            </Formik> */}
+                            </Formik>
                         </Box>
                     }
                     {
                         status === 3 &&
                         <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
-                            {/* <Formik initialValues={meter} validationSchema={validationSchema}  >
+                            <Formik initialValues={meter} validationSchema={validationmeter}  onSubmit={submet}>
                                 {(props) => (
                                     <Form>
                                         <Typography variant="h2" mt="5px" color="initial">Add Meter Type </Typography>
@@ -280,8 +284,8 @@ const Categories = () => {
                                         />
                                         <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='meterType' />}</Typography>
                                         <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
-                                        <Box mt="10px">
-                                            <TableContainer component={Paper}>
+                                        <Box mt="10px"  mb="20px">
+                                            <TableContainer >
                                                 <Table size="medium" >
                                                     <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
                                                         <TableRow>
@@ -293,7 +297,7 @@ const Categories = () => {
 
                                                         {getmetercat <= 0 ? <TableRow>
                                                             <TableCell colSpan={2}>
-                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Meter Type</Typography>
+                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Meter Type Added </Typography>
                                                             </TableCell>
                                                         </TableRow>
                                                             :
@@ -316,13 +320,13 @@ const Categories = () => {
                                         </Box>
                                     </Form>
                                 )}
-                            </Formik> */}
+                            </Formik>
                         </Box>
                     }
                     {
                         status === 4 &&
                         <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
-                            {/* <Formik initialValues={cer} validationSchema={validationSchema}  onSubmit={subcer}>
+                            <Formik initialValues={cer} validationSchema={validationcertificate}  onSubmit={subcer}>
                                 {(props) => (
                                     <Form>
                                         <Typography variant="h2" mt="5px" color="initial">Add Certificate Type </Typography>
@@ -343,8 +347,8 @@ const Categories = () => {
                                         />
                                         <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='certificateType' />}</Typography>
                                         <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
-                                        <Box mt="10px">
-                                            <TableContainer component={Paper}>
+                                        <Box mt="10px" mb="20px">
+                                            <TableContainer >
                                                 <Table size="medium" >
                                                     <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
                                                         <TableRow>
@@ -356,7 +360,7 @@ const Categories = () => {
 
                                                         {getcercat <= 0 ? <TableRow>
                                                             <TableCell colSpan={2}>
-                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Certificate Type</Typography>
+                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Certificate Type Added</Typography>
                                                             </TableCell>
                                                         </TableRow>
                                                             :
@@ -379,7 +383,7 @@ const Categories = () => {
                                         </Box>
                                     </Form>
                                 )}
-                            </Formik> */}
+                            </Formik>
                         </Box>
                     }
                 </Box>

@@ -111,6 +111,7 @@ export const unblockEmp = (id) => async (dispatch) =>{
             type: "UnBlockSuccess",
             payload: response
         })
+        dispatch(getblkEmp())
     } catch (error) {
         dispatch({
             type: "UnBlockFailure",

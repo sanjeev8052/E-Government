@@ -11,6 +11,7 @@ export const Addcomcat  = (complaintType) => async (dispatch) =>{
             type: "addcomcatSuccess",
             payload: data
         })
+        dispatch(Getcomcat())
         
     } catch (error) {
         dispatch({
@@ -70,7 +71,7 @@ export const Addbillcat  = (billsType) => async (dispatch) =>{
             type: "addbillcatSuccess",
             payload: data
         })
-        
+        dispatch(Getbillcat())
     } catch (error) {
         dispatch({
             type: "addbillcatFailuer",
@@ -129,7 +130,7 @@ export const Addmetercat  = (meterType) => async (dispatch) =>{
             type: "addemetercatSuccess",
             payload: data
         })
-        
+        dispatch(Getmetercat())
     } catch (error) {
         dispatch({
             type: "addmetercatFailuer",
@@ -170,6 +171,7 @@ export const Delmetercat  = (id) => async (dispatch) =>{
             payload: data
         })
         
+        dispatch(Getmetercat())
     } catch (error) {
         dispatch({
             type: "delmetercatFailuer",
@@ -188,6 +190,7 @@ export const Addcercat  = (certificateType) => async (dispatch) =>{
             type: "addcercatSuccess",
             payload: data
         })
+        dispatch(Getcercat())
         
     } catch (error) {
         dispatch({
@@ -228,7 +231,7 @@ export const Delcercat  = (id) => async (dispatch) =>{
             type: "delcercatSuccess",
             payload: data
         })
-        
+        dispatch(Getcercat())
     } catch (error) {
         dispatch({
             type: "delcercatFailuer",
