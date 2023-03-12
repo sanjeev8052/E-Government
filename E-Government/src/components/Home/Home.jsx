@@ -13,7 +13,7 @@ const Home = () => {
     <Carousel/>
     <Typography sx={{width:"50%" , margin:" 3rem auto" , textAlign:"center"}} variant="h2" color="initial">
 
-    WELCOME TO PROFILE BASED E-GOVERNMENT ONLINE SERVICE PORTAL 
+    WELCOME TO PROFILE BASED E-GOVERNANCE ONLINE SERVICE PORTAL 
     </Typography>
     <Card/>
     <Footer/>

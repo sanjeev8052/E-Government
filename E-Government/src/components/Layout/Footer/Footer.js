@@ -15,10 +15,10 @@ const Footer = () => {
       </div>
 
       <div className="midFooter">
-        <h1>E-Government</h1>
+        <h1>E-Governance</h1>
         <p>High Quality is our first priority</p>
 
-        <p>Copyrights 2023 &copy; E-Government</p>
+        <p>Copyrights 2023 &copy; E-Governance</p>
       </div>
 
       <div className="rightFooter">

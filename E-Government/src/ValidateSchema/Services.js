@@ -8,3 +8,4 @@ export const complaintSchema = yup.object({
     pincode: yup.string().min(6).required("Please Enter Your zip No.... "),
     complaintDesc: yup.string().min(10).required("Please Enter Your Description..... "),
 })
+

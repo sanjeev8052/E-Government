@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'
 import InputLabel from '@mui/material/InputLabel';
-import {tokens} from '../../Global'
+import { tokens } from '../../Global'
 import { Box, Button, FormControl, MenuItem, Select, Typography, useTheme } from '@material-ui/core';
 import { Send } from '@mui/icons-material';
 import { Link, Navigate } from 'react-router-dom';
@@ -31,10 +31,18 @@ const useStyles = makeStyles({
     width: "80%",
     margin: "4rem auto",
     backgroundColor: "white",
-    padding: "2rem",
     boxShadow: "3px 3px 6px ",
     borderRadius: "10px",
+    border:" solid 1px black"
 
+  },
+  compField: {
+    padding: '2rem'
+  },
+  userField: {
+    padding: '2rem',
+    backgroundColor:"gray",
+    borderRadius: "0 0 10px 10px",
   },
 
   fullInput: {
@@ -117,145 +125,149 @@ const Complaint = () => {
     <div className={classes.Complaint}>
       <form onSubmit={handleSubmit} className={classes.box} >
 
-        <Typography variant="h4" sx={{ marginBottom: "20px" }} color="initial">New Complaint</Typography>
-        <Typography variant="h6" color="initial">Compalint Type</Typography>
-        <FormControl fullWidth>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={values.complaintType}
-            label="Age"
+        <div className={classes.compField}>
+          <Typography variant="h4" sx={{ marginBottom: "20px" }} color="initial">New Complaint</Typography>
+          <Typography variant="h6" color="initial">Compalint Type</Typography>
+          <FormControl fullWidth>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={values.complaintType}
+              label="Age"
+              onChange={handleChange}
+              name="complaintType"
+            >
+              <MenuItem value={"Roads & Footpath"}>Roads & Footpath</MenuItem>
+              <MenuItem value={"Water Suppy"}>Water Suppy</MenuItem>
+              <MenuItem value={"Street Light"}>Street Light</MenuItem>
+              <MenuItem value={"Dead Animals"}>Dead Animals</MenuItem>
+              <MenuItem value={"Public Park And Garden"}>Public Park And Garden</MenuItem>
+              <MenuItem value={"Food Safety Act"}>Food Safety Act</MenuItem>
+            </Select>
+          </FormControl>
+
+
+          {errors.complaintType && touched.complaintType ? (
+            <Typography className={classes.error}   >{errors.complaintType}</Typography>
+          ) : null}
+          <Typography variant="h6" color="initial">Address</Typography>
+          <TextField className={classes.fullInput}
+            id=""
+            placeholder='City'
+            variant='outlined'
+            size='small'
+            name='city'
             onChange={handleChange}
-            name="complaintType"
-          >
-           <MenuItem value={"Roads & Footpath"}>Roads & Footpath</MenuItem>
-            <MenuItem value={"Water Suppy"}>Water Suppy</MenuItem>
-            <MenuItem value={"Street Light"}>Street Light</MenuItem>
-            <MenuItem value={"Dead Animals"}>Dead Animals</MenuItem>
-            <MenuItem value={"Public Park And Garden"}>Public Park And Garden</MenuItem>
-            <MenuItem value={"Food Safety Act"}>Food Safety Act</MenuItem>
-          </Select>
-        </FormControl>
-
-       
-        {errors.complaintType && touched.complaintType ? (
-          <Typography className={classes.error}   >{errors.complaintType}</Typography>
-        ) : null}
-        <Typography variant="h6" color="initial">Address</Typography>
-        <TextField className={classes.fullInput}
-          id=""
-          placeholder='City'
-          variant='outlined'
-          size='small'
-          name='city'
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.city}
-        />
-        {errors.city && touched.city ? (
-          <Typography className={classes.error} >{errors.city}</Typography>
-        ) : null}
+            onBlur={handleBlur}
+            value={values.city}
+          />
+          {errors.city && touched.city ? (
+            <Typography className={classes.error} >{errors.city}</Typography>
+          ) : null}
 
 
-        <TextField className={classes.fullInput}
-          id=""
-          placeholder='Street Address '
-          variant='outlined'
-          size='small'
-          name='streetAddress'
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.streetAddress}
+          <TextField className={classes.fullInput}
+            id=""
+            placeholder='Street Address '
+            variant='outlined'
+            size='small'
+            name='streetAddress'
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.streetAddress}
 
 
-        />
-        {errors.streetAddress && touched.streetAddress ? (
-          <Typography className={classes.error} >{errors.streetAddress}</Typography>
-        ) : null}
+          />
+          {errors.streetAddress && touched.streetAddress ? (
+            <Typography className={classes.error} >{errors.streetAddress}</Typography>
+          ) : null}
 
-        <TextField className={classes.fullInput}
-          id=""
-          placeholder='Area Name '
-          variant='outlined'
-          size='small'
-          name='area'
-          onChange={handleChange}
-          value={values.area}
-          onBlur={handleBlur}
-        />
-        {errors.area && touched.area ? (
-          <Typography className={classes.error} >{errors.area}</Typography>
-        ) : null}
-        <TextField className={classes.fullInput}
-          id=""
-          placeholder='Zip No. '
-          variant='outlined'
-          size='small'
-          name='pincode'
-          onChange={handleChange}
-          value={values.pincode}
-          onBlur={handleBlur}
-        />
-        {errors.pincode && touched.pincode ? (
-          <Typography className={classes.error} >{errors.pincode}</Typography>
-        ) : null}
+          <TextField className={classes.fullInput}
+            id=""
+            placeholder='Area Name '
+            variant='outlined'
+            size='small'
+            name='area'
+            onChange={handleChange}
+            value={values.area}
+            onBlur={handleBlur}
+          />
+          {errors.area && touched.area ? (
+            <Typography className={classes.error} >{errors.area}</Typography>
+          ) : null}
+          <TextField className={classes.fullInput}
+            id=""
+            placeholder='Zip No. '
+            variant='outlined'
+            size='small'
+            name='pincode'
+            onChange={handleChange}
+            value={values.pincode}
+            onBlur={handleBlur}
+          />
+          {errors.pincode && touched.pincode ? (
+            <Typography className={classes.error} >{errors.pincode}</Typography>
+          ) : null}
 
-        <Typography variant="h6" color="initial">Compplaint Description </Typography>
-        <textarea
-          style={{ width: "71%", marginBottom: "15px" }}
-          name="complaintDesc"
-          id="" rows="5"
-          value={values.complaintDesc}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-        {errors.complaintDesc && touched.complaintDesc ? (
-          <Typography className={classes.error} >{errors.complaintDesc}</Typography>
-        ) : null}
-        <hr />
-        <Typography variant="h5" color="initial">
-          COMPLAINER'S PERSONAL DETAILS
-        </Typography>
-        <hr />
+          <Typography variant="h6" color="initial">Compplaint Description </Typography>
+          <textarea
+            style={{ width: "71%", marginBottom: "15px" }}
+            name="complaintDesc"
+            id="" rows="5"
+            value={values.complaintDesc}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {errors.complaintDesc && touched.complaintDesc ? (
+            <Typography className={classes.error} >{errors.complaintDesc}</Typography>
+          ) : null}
+        </div>
+        <div className={classes.userField}>
+          <hr />
+          <Typography variant="h5" color="initial">
+            COMPLAINER'S PERSONAL DETAILS
+          </Typography>
+          <hr />
 
-        <Typography variant="h6" color="initial">Name</Typography>
-        <TextField className={classes.fullInput}
-          id=""
-          placeholder='Enter First Name '
-          variant='outlined'
-          size='small'
-          name='name'
-          value={user.name}
+          <Typography variant="h6" color="initial">Name</Typography>
+          <TextField className={classes.fullInput}
+            id=""
+            placeholder='Enter First Name '
+            variant='outlined'
+            size='small'
+            name='name'
+            value={user.name}
 
-        />
-
-
-        <Typography variant="h6" color="initial">Email</Typography>
-        <TextField className={classes.fullInput}
-          id=""
-          placeholder='Enter Enter Your Email '
-          variant='outlined'
-          size='small'
-          name='email'
-          value={user.email}
-
-        />
-        <Typography variant="h6" color="initial">Mobile No.</Typography>
-        <TextField className={classes.fullInput}
-          id=""
-          placeholder='Enter Enter Your phone no '
-          variant='outlined'
-          size='small'
-          name='phone'
-          value={user.phone}
-
-        />
+          />
 
 
-        <Button type='submit' className={classes.button} variant="contained" endIcon={<Send />}>
+          <Typography variant="h6" color="initial">Email</Typography>
+          <TextField className={classes.fullInput}
+            id=""
+            placeholder='Enter Enter Your Email '
+            variant='outlined'
+            size='small'
+            name='email'
+            value={user.email}
 
-          Complaint Request
-        </Button>
+          />
+          <Typography variant="h6" color="initial">Mobile No.</Typography>
+          <TextField className={classes.fullInput}
+            id=""
+            placeholder='Enter Enter Your phone no '
+            variant='outlined'
+            size='small'
+            name='phone'
+            value={user.phone}
+
+          />
+
+
+          <Button type='submit' className={classes.button} variant="contained" endIcon={<Send />}>
+
+            Complaint Request
+          </Button>
+        </div>
 
       </form>
 
