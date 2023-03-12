@@ -11,6 +11,7 @@ export const Addcomcat  = (complaintType) => async (dispatch) =>{
             type: "addcomcatSuccess",
             payload: data
         })
+        dispatch(Getcomcat())
         
     } catch (error) {
         dispatch({
@@ -59,18 +60,18 @@ export const Delcomcat  = (id) => async (dispatch) =>{
         })
     }
 }
-export const Addbillcat  = (complaintType) => async (dispatch) =>{
+export const Addbillcat  = (billsType) => async (dispatch) =>{
     try {
         dispatch({
             type: "addbillcatRequset"
         })
-        const {data} = await axios.post(`/api/admin/addbillscat`, complaintType)
+        const {data} = await axios.post(`/api/admin/addbillscat`, billsType)
 
         dispatch({
             type: "addbillcatSuccess",
             payload: data
         })
-        
+        dispatch(Getbillcat())
     } catch (error) {
         dispatch({
             type: "addbillcatFailuer",
@@ -118,18 +119,18 @@ export const Delbillcat  = (id) => async (dispatch) =>{
         })
     }
 }
-export const Addmetercat  = (complaintType) => async (dispatch) =>{
+export const Addmetercat  = (meterType) => async (dispatch) =>{
     try {
         dispatch({
             type: "addmetercatRequset"
         })
-        const {data} = await axios.post(`/api/admin/addmetercat`, complaintType)
+        const {data} = await axios.post(`/api/admin/addmetercat`, meterType)
 
         dispatch({
             type: "addemetercatSuccess",
             payload: data
         })
-        
+        dispatch(Getmetercat())
     } catch (error) {
         dispatch({
             type: "addmetercatFailuer",
@@ -170,6 +171,7 @@ export const Delmetercat  = (id) => async (dispatch) =>{
             payload: data
         })
         
+        dispatch(Getmetercat())
     } catch (error) {
         dispatch({
             type: "delmetercatFailuer",
@@ -177,17 +179,18 @@ export const Delmetercat  = (id) => async (dispatch) =>{
         })
     }
 }
-export const Addcercat  = (complaintType) => async (dispatch) =>{
+export const Addcercat  = (certificateType) => async (dispatch) =>{
     try {
         dispatch({
             type: "addcercatRequset"
         })
-        const {data} = await axios.post(`/api/admin/addcertificatecat`, complaintType)
+        const {data} = await axios.post(`/api/admin/addcertificatecat`, certificateType)
 
         dispatch({
             type: "addcercatSuccess",
             payload: data
         })
+        dispatch(Getcercat())
         
     } catch (error) {
         dispatch({
@@ -228,7 +231,7 @@ export const Delcercat  = (id) => async (dispatch) =>{
             type: "delcercatSuccess",
             payload: data
         })
-        
+        dispatch(Getcercat())
     } catch (error) {
         dispatch({
             type: "delcercatFailuer",

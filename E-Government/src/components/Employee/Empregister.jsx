@@ -109,7 +109,7 @@ const Empregister = () => {
     name: Yup.string().required("!! Please Enter Your Name..").min(5, "!! Too Short..").max(8, "!! Very Long..."),
     email: Yup.string().email("!! Enter a Valid Email").required("!! Please Enter Email.. ").matches(emailpattern, "!! Enter Email Properly"),
     gender: Yup.string().oneOf(["male", "female"], "!! Please Select Gender..").required("!! Please Select Gender.."),
-    phone: Yup.number().typeError("!! Please Enter Valid Phone Number..").required("!! Please Enter Phone Number..").positive("A phone number can't start with a minus").integer("A phone number can't include a decimal point").min(10, "Enter 10 Digit Only").max(10, "Enter 10 Digit Only"),
+    phone: Yup.number().typeError("!! Please Enter Valid Phone Number..").required("!! Please Enter Phone Number..").positive("A phone number can't start with a minus").integer("A phone number can't include a decimal point").min(10, "Enter 10 Digit Only"),
     password: Yup.string().min(8, "!! Minimum Length Should be 8").required("!! Please Enter Your Password.."),
     cpassword: Yup.string().oneOf([Yup.ref("password")], "Password Not Matched").required("!! Please Enter Your Confirm Password..")
   })
