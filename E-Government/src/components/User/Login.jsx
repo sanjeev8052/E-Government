@@ -21,7 +21,7 @@ const Login = () => {
             width:"100vw",
             height:"55vh",
             paddingTop:"6rem",
-            backgroundImage:`url(${bgImage})`,
+            background: "linear-gradient(to top right ,rgb(48, 94, 234),rgb(214, 245, 214))",
             backgroundSize: "cover"
         },
         BoxStyle: {
@@ -76,7 +76,7 @@ const Login = () => {
     const alert = useAlert();
 
 
-    const { isAuthenticated } = useSelector((state) => state.user)
+    const { isAuthenticated , loading} = useSelector((state) => state.user)
     const { message, LoginError } = useSelector((state) => state.user)
 
     useEffect(() => {
@@ -191,7 +191,7 @@ const Login = () => {
                     {/* <ForgotPassword/> */}
                     <Button sx={{ marginLeft: 'auto', display: "block" }} variant='text' color="inherit"   >Forgot?</Button>
 
-                    <Button type='submit' sx={{ width: "100%" }} variant="contained" color="primary" endIcon={<LoginIcon />}>Login </Button>
+                    <Button type='submit' disabled={loading} sx={{ width: "100%" }} variant="contained" color="primary" endIcon={<LoginIcon />}>Login </Button>
 
                     <Typography sx={{ marginTop: "2rem" }} >
                         Not a member?
