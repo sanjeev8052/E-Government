@@ -31,6 +31,7 @@ import BillPay from './components/Services/BillPay'
 import Categories from './components/Admin/Categories'
 import Cate from './components/Admin/Cate'
 import UserHeader from './components/User/UserHeader/UserHeader'
+import MeterApply from './components/Services/MeterApply'
 
 
 const App = () => {
@@ -56,11 +57,12 @@ const App = () => {
               <Route path='/login' element={<Login />} />
               <Route path='/' element={<Home />} />
               <Route path='forgotpassword' element={<UserForgotPassword />} />
-              <Route path='/complaint' element={<Complaint />} />
-              <Route path='/billpay' element={<BillPay />} />
               <Route path='/userHeader' element={<UserHeader />} />
 
-
+              {/* Services */}
+              <Route path='/complaint' element={<Complaint />} />
+              <Route path='/billpay' element={<BillPay />} />
+              <Route path='/meterApply/' element={<MeterApply />} />
 
               {/* Admin */}
               

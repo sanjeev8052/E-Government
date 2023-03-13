@@ -4,6 +4,7 @@ import { Button, makeStyles, Typography } from '@material-ui/core'
 import complaintImage from './Images/complaint.jpg'
 import billPayImage from './Images/billpay.jpg'
 import certificateImage from './Images/certificate.png'
+import meterImage from './Images/meter.png'
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import Menu from '@mui/material/Menu';
 import bgImage from './Images/bgImage3.jpg'
@@ -50,6 +51,7 @@ const Card = () => {
     const css = useStyle();
 
     return (
+        
         <div className={css.cardBox}>
             <div className={css.card}>
                 <img className={css.img} src={complaintImage} alt="Card" />
@@ -97,7 +99,7 @@ const Card = () => {
                     </Button>
                 </div>
             </div>
-            <div className={css.card}>
+            {/* <div className={css.card}>
                 <img className={css.img} src={certificateImage} alt="Card" />
                 <div className="card-body">
                     <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">register your complaint and track the complaint status. </Typography>
@@ -107,6 +109,29 @@ const Card = () => {
                                 <React.Fragment>
                                     <Button className={css.button} variant="contained" color='primary' {...bindTrigger(popupState)}>
                                        Certificate
+                                    </Button>
+                                    <Menu  {...bindMenu(popupState)}>
+                                        <MenuItem onClick={popupState.close}>Profile</MenuItem>
+                                        <MenuItem onClick={popupState.close}>My account</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Logout</MenuItem>
+                                    </Menu>
+                                </React.Fragment>
+                            )}
+                        </PopupState>
+
+                    </Button>
+                </div>
+            </div> */}
+            <div className={css.card}>
+                <img className={css.img} src={meterImage} alt="Card" />
+                <div className="card-body">
+                    <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">register your complaint and track the complaint status. </Typography>
+                    <Button className={css.button} variant="text" color="default">
+                        <PopupState variant="popover" popupId="demo-popup-menu">
+                            {(popupState) => (
+                                <React.Fragment>
+                                    <Button className={css.button} variant="contained" color='primary' {...bindTrigger(popupState)}>
+                                      Apply Meter   
                                     </Button>
                                     <Menu  {...bindMenu(popupState)}>
                                         <MenuItem onClick={popupState.close}>Profile</MenuItem>

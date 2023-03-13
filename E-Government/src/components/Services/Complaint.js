@@ -20,10 +20,10 @@ import { getUser } from '../../Action/Admin/User';
 
 const useStyles = makeStyles({
   Complaint: {
-    width: "100vw",
+    width: "98.9vw",
     height: "50vh",
     paddingTop: "4rem",
-    backgroundImage: `url(${bgImage})`,
+    background: "linear-gradient(to top right ,rgb(48, 94, 234),rgb(214, 245, 214))",
     backgroundSize: "cover",
 
   },
@@ -263,7 +263,7 @@ const Complaint = () => {
           />
 
 
-          <Button type='submit' className={classes.button} variant="contained" endIcon={<Send />}>
+          <Button type='submit' color='primary' className={classes.button} variant="contained" endIcon={<Send />}>
 
             Complaint Request
           </Button>
