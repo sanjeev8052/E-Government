@@ -3,113 +3,103 @@ import React, { useEffect, useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik'
-import { Box, useTheme, Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography, FormControl, InputLabel, Select, MenuItem, } from '@mui/material'
+import { Button } from '@material-ui/core'
+import { Box, useTheme, Dialog, DialogTitle, DialogContent, DialogActions, Typography, FormControl, InputLabel, Select, MenuItem, } from '@mui/material'
 import { tokens } from '../../Global'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { loadCom } from '../../Action/Services/Services'
+import axios from 'axios';
+import { Assignment, Done } from '@mui/icons-material';
+const useStyle = makeStyles({
+  input: {
+    width: "100%",
+    margin: "0.5rem 0 "
+
+  }
+  , box: {
+    width: "50%"
+  }
+})
 
 
 const AssignModel = () => {
 
-
-
-
-  const [details, setDetails] = useState({
-    area: "",
-    city: "",
-    complaintDesc: "",
-    streetAddress: ""
-  })
-
-   const { loadcom } = useSelector(state => state.services)
-
-   const onChange = (e) => {
-    setUsers({ ...details, [e.target.name]: e.target.value })
-    // console.log(users)
-
-}
+  const classes = useStyle()
   const themes = useTheme()
   const colors = tokens(themes.palette.mode)
-  
-  const dispatch = useDispatch()
-
+  const { _id } = useParams();
+  const [details, setDetails] = useState({})
   useEffect(() => {
-     
-   
-
+    loaddetails()
   }, [])
-
-  useEffect(() => {
-    loadcom ? setDetails({
-      area: loadcom.area ,
-      city: loadcom.city ,
-      complaintDesc: loadcom.complaintDesc,
-      streetAddress: loadcom.streetAddress,
-    }) : null
-  }, [])
-
-
-  // const loaddetails = async () => {
-  //   const res =  dispatch(loadCom(_id))
-  // }
+  const loaddetails = async () => {
+    const response = await axios.get(`/api/admin/${_id}`)
+    setDetails(response.data)
+  }
 
 
   return (
     <>
-      <Box>
+
+      <Box >
         <Dialog open="true" maxWidth="md"
           PaperProps={{ sx: { width: "80%", position: "fixed", m: 0, top: 20, backgroundImage: 'radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%)', } }} >
           <DialogTitle>
-            <Typography variant="h4" color={colors.redAccent[400]}>Assign</Typography>
+            <Typography variant="h3" color={colors.redAccent[400]}>Assign</Typography>
           </DialogTitle>
           <DialogContent>
             <Box sx={{
               display: 'flex',
               flexDirection: 'column',
               m: 'auto',
-              width: 'fit-content',
+              width: '50%',
+              backgroundColor: "white",
+              padding: "2rem",
+              borderRadius: "10px",
+              boxShadow: "3px 3px 6px"
 
             }}>
               <TextField
-                //  className={classes.fullInput}
-                id=""
+                className={classes.input}
+                
                 placeholder='City'
                 variant='outlined'
                 size='small'
                 name='city'
-               value={details.city}
-               onChange={(e) => onChange(e)}
+                value={details.city}
+
               />
               <TextField
-                // className={classes.fullInput}
+                className={classes.input}
                 id=""
                 placeholder='Street Address '
                 variant='outlined'
                 size='small'
                 name='streetAddress'
-                onChange={(e) => onChange(e)}
+
                 value={details.streetAddress}
               />
               <TextField
-                //  className={classes.fullInput}
+                className={classes.input}
                 id=""
                 placeholder='Area Name '
                 variant='outlined'
                 size='small'
                 name='area'
                 value={details.area}
-                onChange={(e) => onChange(e)}
+
               />
               <Typography variant="h6" color="initial">Compplaint Description </Typography>
               <textarea
-                style={{ width: "71%", marginBottom: "15px" }}
+                className={classes.input}
                 name="complaintDesc"
-                id="" rows="5"
+                id="" rows="3"
                 value={details.complaintDesc}
-                onChange={(e) => onChange(e)}
+
               />
 
-              <FormControl fullWidth variant="standard" InputLabelProps={{ style: { fontSize: 20 } }} size="small">
+              <FormControl fullWidth variant="standard" sx={{marginBottom:"2rem"}}  InputLabelProps={{ style: { fontSize: 20 } }} size="small">
                 <InputLabel>Department</InputLabel>
                 <Select
 
@@ -126,6 +116,10 @@ const AssignModel = () => {
                   <MenuItem value="Drain">Draint</MenuItem>
                 </Select>
               </FormControl>
+
+              <Button variant='contained' color='primary'>
+                Asign 
+              </Button>
             </Box>
           </DialogContent>
           <DialogActions sx={{ ml: "10px" }}>
