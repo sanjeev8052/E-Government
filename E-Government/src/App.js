@@ -15,6 +15,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { LoadAdmin } from './Action/Admin/Login'
 
 // admin
+import AssignCom from './components/Admin/AssignCom'
+import AssignModel from './components/Global/AssignModel'
 import Dashboard from './components/Admin/Dashboard'
 import AdminLogin from './components/Admin/AdminLogin'
 import Employee from './components/Admin/Employee'
