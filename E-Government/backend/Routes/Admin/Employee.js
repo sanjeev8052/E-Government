@@ -136,15 +136,18 @@ router.post("/unblockemp/:_id", isAuthenticate, async (req, res) => {
 
 // For display department wise
 
-router.get("/deptwise" , isAuthenticate , async (req,res) => { 
+router.post("/deptwise" , isAuthenticate , async (req,res) => { 
     try {
-        const {dept } = req.body;
-        const deptwise = await Employee.findOne({dept})
+        const { dept } = req.body;
+        // if(!dept){
+        //     res.status(401).json({message:"dept not found"})
+        // }
+        const deptwise = await Employee.find({dept})
         res.status(200).
         json({
             success: true,
             message: "successfully display",
-            emp : deptwise
+            emp:deptwise
         })
     } catch (error) {
         res.status(500).json({ error: error.message })

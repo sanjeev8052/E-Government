@@ -74,12 +74,12 @@ const AssignCom = () => {
                                                     <TableCell >{data.pincode}</TableCell>
                                                     <TableCell component='th' scope='row'>{data.complaintDesc}</TableCell>
                                                     <TableCell >
-                                                        <Button variant="text" color="default" onClick={() => { asign(data._id) }} >
+                                                        {/* <Button variant="text" color="default" onClick={() => { asign(data._id) }} >
                                                           send
-                                                        </Button>
-                                                        {/* <Link to={`/assigncom/${data._id}`}>
+                                                        </Button> */}
+                                                        <Link to={`/assigncom/${data._id}`}>
                                                         <Button variant="contained" color="primary" size='small' sx={{ borderRadius: "100px" }} >Assign</Button>
-                                                        </Link> */}
+                                                        </Link>
                                                     </TableCell>
                                                 </TableRow>
                                             ))

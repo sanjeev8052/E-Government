@@ -15,8 +15,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { LoadAdmin } from './Action/Admin/Login'
 
 // admin
-import AssignCom from './components/Admin/AssignCom'
-import AssignModel from './components/Global/AssignModel'
+// import AssignCom from './components/Admin/AssignCom'
+// import AssignModel from './components/Global/AssignModel'
 import Dashboard from './components/Admin/Dashboard'
 import AdminLogin from './components/Admin/AdminLogin'
 import Employee from './components/Admin/Employee'
@@ -80,8 +80,8 @@ const App = () => {
               <Route path="/Categories" element={<Categories />} />
               <Route path="/Cate" element={<Cate />} />
               <Route path="/assign" element={<AssignCom/>} />
-              {/* <Route path="/assigncom/:_id" element={<AssignModel/>} /> */}
-              <Route path="/assigncom" element={<AssignModel/>} />
+              <Route path="/assigncom/:_id" element={<AssignModel/>} />
+              {/* <Route path="/assigncom" element={<AssignModel/>} /> */}
 
 
                {/* Employee */}
