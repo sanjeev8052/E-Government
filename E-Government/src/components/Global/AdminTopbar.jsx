@@ -4,11 +4,20 @@ import { ColorModeContext, tokens } from "../../Global";
 import { Box, IconButton, useTheme, InputBase } from '@mui/material';
 
 import { LightModeOutlined, DarkModeOutlined, NotificationsOutlined, SettingsOutlined, PersonOutlined, SearchOutlined, DarkModeTwoTone, LightModeTwoTone, SearchTwoTone, NotificationsTwoTone, SettingsTwoTone, ManageAccountsTwoTone, ExitToAppTwoTone } from '@mui/icons-material';
+import { useDispatch } from 'react-redux';
+import { AdminLogout } from '../../Action/Admin/Login';
+import { useNavigate } from 'react-router-dom';
 
 const AdminTopbar = () => {
   const themes = useTheme()
   const colors = tokens(themes.palette.mode)
   const colorModes = useContext(ColorModeContext)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const logout = () => { 
+    dispatch(AdminLogout())
+    navigate("/adlogin")
+   }
   return (
 
     <>
@@ -38,7 +47,7 @@ const AdminTopbar = () => {
             <IconButton>
               <ManageAccountsTwoTone />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={logout}>
               <ExitToAppTwoTone />
             </IconButton>
           </Box>

@@ -1,6 +1,8 @@
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 
+const jwt = require('jsonwebtoken');
+
 const EmpSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -26,15 +28,23 @@ const EmpSchema = new mongoose.Schema({
         required: true
 
     },
-   
+    dept :{
+        type:String,
+        required:true,
+    }
 })
 
-EmpSchema.pre('save', async function (next) {
-    if (this.isModified('password')) {
-        this.password = await bcrypt.hash(this.password, 12)
+
+
+// generate token
+EmpSchema.methods.generateEmpToken = async function () {
+    try {
+        let emptoken = jwt.sign({ _id: this._id }, process.env.EMP_SECRET_KEY)
+        return emptoken;
+    } catch (error) {
+        console.log(error)
     }
-    next();
-})
+}
 
 const Employee = mongoose.model("Employee", EmpSchema);
 module.exports = Employee;

@@ -40,6 +40,24 @@ router.post("/employee/:_id", isAuthenticate, async (req, res) => {
     }
 })
 
+// For Reject Request
+router.delete("/rejectemp/:_id" ,isAuthenticate, async (req,res) => { 
+    try {
+        const emp = await TempEmployee.findById(req.params._id)
+        if (!emp) {
+            res.status(400).json({ message: "Employee Not Found" })
+        }
+        const rejectemp = await  TempEmployee.deleteOne({ _id: req.params._id })
+        
+        res.status(200).json({
+            success: true,
+            message: "Su1ccessfully Rejected Complaint"
+            
+        })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+ })
 // For Get Confirm Employee Data
 router.get("/getemp", isAuthenticate, async (req, res) => {
     try {
@@ -115,6 +133,23 @@ router.post("/unblockemp/:_id", isAuthenticate, async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 })
+
+// For display department wise
+
+router.get("/deptwise" , isAuthenticate , async (req,res) => { 
+    try {
+        const {dept } = req.body;
+        const deptwise = await Employee.findOne({dept})
+        res.status(200).
+        json({
+            success: true,
+            message: "successfully display",
+            emp : deptwise
+        })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+ })
 
 module.exports = router
 

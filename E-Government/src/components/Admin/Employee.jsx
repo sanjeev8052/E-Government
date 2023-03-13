@@ -45,18 +45,13 @@ const Employee = () => {
         <div className='app'>
             <AdminSidebar />
             <main className='content'>
-                {/* <AdminTopbar />
+                 <AdminTopbar />
+            
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Employee" subtitle="Welcome Your Employee Details Page" />
                         {/* <EmpModel /> */}
-                <BlockEmployee />
-
-
-                <Box m="15px">
-                    <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <Header title="Employee" subtitle="Welcome Your Employee Details Page" />
-                        {/* <EmpModel /> */}
+                        <BlockEmployee />
 
                     </Box>
 
@@ -74,6 +69,7 @@ const Employee = () => {
                                             <TableCell>Email</TableCell>
                                             <TableCell>Gender</TableCell>
                                             <TableCell>Phone NO.</TableCell>
+                                            <TableCell>Department</TableCell>
                                             <TableCell>Actions</TableCell>
                                         </TableRow>
                                     </TableHead>
@@ -86,6 +82,7 @@ const Employee = () => {
                                                 <TableCell >{data.email}</TableCell>
                                                 <TableCell >{data.gender}</TableCell>
                                                 <TableCell >{data.phone}</TableCell>
+                                                <TableCell >{data.dept}</TableCell>
                                                 <TableCell >
                                                     <IconButton aria-label="block" color='error' onClick={() => { block(data._id) }}>
                                                         <Block />

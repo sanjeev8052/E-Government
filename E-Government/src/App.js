@@ -75,6 +75,9 @@ const App = () => {
               <Route path="/spiner" element={<Loader />} />
               <Route path="/Categories" element={<Categories />} />
               <Route path="/Cate" element={<Cate />} />
+              <Route path="/assign" element={<AssignCom/>} />
+              <Route path="/assigncom/:_id" element={<AssignModel/>} />
+
 
                {/* Employee */}
 

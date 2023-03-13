@@ -73,6 +73,57 @@ export const accCompReq = (id) => async (dispatch) => {
         })
     }
 }
+
+export const getAccCom = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: "getAccComRequset",
+        })
+
+        const { data } = await axios.get("api/admin/acceptedcom", {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+        dispatch({
+            type: "getAccComSuccess",
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: "getAccComFailuer",
+            payload: error
+        })
+    }
+}
+
+
+export const loadCom = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: "laodComRequset",
+        })
+
+        const { data } = await axios.get(`/api/admin/${id}`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+        dispatch({
+            type: "laodComSuccess",
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: "laodComFailuer",
+            payload: error
+        })
+    }
+}
 export const rejCompReq = (id) => async (dispatch) => {
     try {
         dispatch({
@@ -97,3 +148,4 @@ export const rejCompReq = (id) => async (dispatch) => {
         })
     }
 }
+

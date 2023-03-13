@@ -46,3 +46,24 @@ export const LoadAdmin = (admin) => async (dispatch) => {
 
     }
 };
+export const AdminLogout = () => async (dispatch) => {
+    try {
+
+        dispatch({
+            type: "AdminLogoutRequest"
+        })
+        await axios.get(`/api/admin/logout`)
+
+        dispatch({
+            type: "AdminLogoutSuccess",
+           
+        })
+
+    } catch (error) {
+        dispatch({
+            type: "AdminLogoutFailuer",
+            payload: error
+        })
+
+    }
+};

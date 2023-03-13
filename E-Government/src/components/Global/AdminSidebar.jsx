@@ -6,6 +6,7 @@ import Logo from '../Images/Icons/login.png';
 import { Link } from 'react-router-dom'
 import { tokens } from "../../Global";
 import {  MenuOutlined, DashboardTwoTone, CoPresentTwoTone, FactCheckTwoTone, Groups2TwoTone, SpeakerNotesTwoTone, CategoryTwoTone } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme()
@@ -19,9 +20,10 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   )
 
 }
-const AdminSidebar = ({admin}) => {
+const AdminSidebar = () => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
+  // const { admin} = useSelector((state) => (state.admin))
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [selected, setSelected] = useState("empLogin")
 
@@ -71,7 +73,7 @@ const AdminSidebar = ({admin}) => {
                   <img src={Logo} alt="admin" width="100px" height="100px" style={{ cursor: "pointer", borderRadius: "50%" }} />
                 </Box>
                 <Box textAlign="center">
-                  <Typography variant='h3' color={colors.grey[500]} fontWeight="bold" xs={{ m: "10px 0 0 0" }} >Hello,{admin && admin}</Typography>
+                  <Typography variant='h3' color={colors.grey[500]} fontWeight="bold" xs={{ m: "10px 0 0 0" }} >Hello  </Typography>
 
                 </Box>
               </Box>
@@ -104,6 +106,13 @@ const AdminSidebar = ({admin}) => {
             <Item
               title="Complaint"
               to="/acomplaint"
+              icon={<SpeakerNotesTwoTone />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title=" Assign Complaint"
+              to="/assign"
               icon={<SpeakerNotesTwoTone />}
               selected={selected}
               setSelected={setSelected}
