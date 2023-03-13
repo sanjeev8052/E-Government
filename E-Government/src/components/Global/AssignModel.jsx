@@ -7,7 +7,6 @@ import { Box, useTheme, Button, Dialog, DialogTitle, DialogContent, DialogAction
 import { tokens } from '../../Global'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { loadCom } from '../../Action/Services/Services'
 
 
 const AssignModel = () => {
@@ -31,12 +30,11 @@ const AssignModel = () => {
 }
   const themes = useTheme()
   const colors = tokens(themes.palette.mode)
-  const { _id , city , area } = useParams();
   
   const dispatch = useDispatch()
 
   useEffect(() => {
-     loaddetails()
+     
    
 
   }, [])
@@ -51,9 +49,9 @@ const AssignModel = () => {
   }, [])
 
 
-  const loaddetails = async () => {
-    const res =  dispatch(loadCom(_id))
-  }
+  // const loaddetails = async () => {
+  //   const res =  dispatch(loadCom(_id))
+  // }
 
 
   return (

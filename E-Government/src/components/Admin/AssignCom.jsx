@@ -1,5 +1,5 @@
 
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton, TextField, Button } from '@mui/material'
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton, TextField, } from '@mui/material'
 import React, { useEffect } from 'react'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
@@ -10,11 +10,12 @@ import Loader from '../Layout/Loader'
 import { tokens } from '../../Global'
 import { DangerousTwoTone, TaskTwoTone } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
-import {  getAccCom,  } from '../../Action/Services/Services'
+import {  getAccCom, loadCom,  } from '../../Action/Services/Services'
 
 
 import Header from '../Global/Header'
 import { Link } from 'react-router-dom'
+import { Button } from '@material-ui/core'
 const AssignCom = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
@@ -28,7 +29,10 @@ const AssignCom = () => {
         dispatch(getAccCom())
     }, [isAuthenticated, dispatch, navigate])
 
-
+    const asign = (id) => { 
+        dispatch(loadCom(id))
+        navigate('/assigncom')
+     }
 
     return (
         <div className='app'>
@@ -70,9 +74,12 @@ const AssignCom = () => {
                                                     <TableCell >{data.pincode}</TableCell>
                                                     <TableCell component='th' scope='row'>{data.complaintDesc}</TableCell>
                                                     <TableCell >
-                                                        <Link to={`/assigncom/${data._id}`}>
+                                                        <Button variant="text" color="default" onClick={() => { asign(data._id) }} >
+                                                          send
+                                                        </Button>
+                                                        {/* <Link to={`/assigncom/${data._id}`}>
                                                         <Button variant="contained" color="primary" size='small' sx={{ borderRadius: "100px" }} >Assign</Button>
-                                                        </Link>
+                                                        </Link> */}
                                                     </TableCell>
                                                 </TableRow>
                                             ))
