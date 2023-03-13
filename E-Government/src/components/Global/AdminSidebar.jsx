@@ -111,6 +111,13 @@ const AdminSidebar = () => {
               setSelected={setSelected}
             />
             <Item
+              title=" Assign Complaint"
+              to="/assign"
+              icon={<SpeakerNotesTwoTone />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Users"
               to="/auser"
               icon={<Groups2TwoTone />}

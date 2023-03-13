@@ -21,7 +21,7 @@ export const userServicesReducer = createReducer(initialState, {
         state.LoginError = action.payload;
        
     },
-
+    // get complaint request
     getCompReqRequset: (state) => {
         state.loading = true;
     },
@@ -64,6 +64,36 @@ export const userServicesReducer = createReducer(initialState, {
         state.LoginError = action.payload;
 
     },
+
+    // get accpeted complaint request
+    getAccComRequset: (state) => {
+        state.loading = true;
+    },
+    getAccComSuccess: (state, action) => {
+        state.loading = false;
+        state.getAccReq = action.payload;
+
+    },
+    getAccComFailuer: (state, action) => {
+        state.loading = false;
+        state.LoginError = action.payload;
+
+    },
+    // For Load Compllaint
+    laodComRequset: (state) => {
+        state.loading = true;
+    },
+    laodComSuccess: (state, action) => {
+        state.loading = false;
+        state.loadcom = action.payload;
+
+    },
+    laodComFailuer: (state, action) => {
+        state.loading = false;
+        state.LoginError = action.payload;
+
+    },
+
 
     // for add complaint category
     addcomcatRequset: (state) => {

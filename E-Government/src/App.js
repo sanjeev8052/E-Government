@@ -32,6 +32,8 @@ import Loader from './components/Layout/Loader'
 import BillPay from './components/Services/BillPay'
 import Categories from './components/Admin/Categories'
 import Cate from './components/Admin/Cate'
+import AssignCom from './components/Admin/AssignCom'
+import AssignModel from './components/Global/AssignModel'
 
 
 const App = () => {
@@ -76,6 +78,9 @@ const App = () => {
               <Route path="/spiner" element={<Loader />} />
               <Route path="/Categories" element={<Categories />} />
               <Route path="/Cate" element={<Cate />} />
+              <Route path="/assign" element={<AssignCom/>} />
+              <Route path="/assigncom/:_id" element={<AssignModel/>} />
+
 
                {/* Employee */}
 

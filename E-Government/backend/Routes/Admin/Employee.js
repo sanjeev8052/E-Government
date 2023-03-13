@@ -134,5 +134,22 @@ router.post("/unblockemp/:_id", isAuthenticate, async (req, res) => {
     }
 })
 
+// For display department wise
+
+router.get("/deptwise" , isAuthenticate , async (req,res) => { 
+    try {
+        const {dept } = req.body;
+        const deptwise = await Employee.findOne({dept})
+        res.status(200).
+        json({
+            success: true,
+            message: "successfully display",
+            emp : deptwise
+        })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+ })
+
 module.exports = router
 

@@ -75,4 +75,34 @@ router.delete("/rejectcomplaint/:_id", isAuthenticate, async (req, res) => {
     })
 
 })
+
+// for get accpted complaint
+router.get('/acceptedcom', isAuthenticate, async (req, res) => {
+
+    try {
+        const complaint = await AcceptedComplaint.find({})
+
+        res.status(200).send(complaint)
+
+
+
+
+    } catch (error) {
+        res
+            .status(500)
+            .json({ success: false, Error: error.message })
+    }
+})
+
+
+// FOr load Complaint
+router.get("/:_id", async (req, res) => {
+    // console.log(req.params._id)
+    try {
+        const comp = await AcceptedComplaint.findById(req.params._id)
+        res.status(200).json(comp)
+    } catch (error) {
+        console.log(error)
+    }
+})
 module.exports = router
