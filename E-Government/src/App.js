@@ -29,6 +29,8 @@ import BillPay from './components/Services/BillPay'
 import Categories from './components/Admin/Categories'
 import Cate from './components/Admin/Cate'
 import UserHeader from './components/User/UserHeader/UserHeader'
+import AssignCom from './components/Admin/AssignCom'
+import AssignModel from './components/Global/AssignModel'
 
 
 const App = () => {
