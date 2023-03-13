@@ -71,5 +71,17 @@ export const userReducer = createReducer(initialState, {
         state.loading = false;
         state.error = action.payload;
     },
+    
+    ForgotPassRequest: (state) => {
+        state.loading = true;
+    },
+    ForgotPassSuccess: (state, action) => {
+        state.loading = false;
+        state.data = action.payload
+    },
+    ForgotPassFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
 
 })

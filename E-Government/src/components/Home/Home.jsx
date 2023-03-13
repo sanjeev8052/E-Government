@@ -5,8 +5,10 @@ import Footer  from '../Layout/Footer/Footer'
 import './Home.css'
 import Card from '../../Card'
 import Typography from '@mui/material/Typography'
+import { useSelector } from 'react-redux'
 
 const Home = () => {
+  const {isAthenticated} = useSelector(state=>state.user)
   return (
     <div className='home' >
       <Header/>

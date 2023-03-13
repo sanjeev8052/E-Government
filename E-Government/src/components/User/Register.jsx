@@ -13,7 +13,7 @@ const Register = () => {
             width:"100vw",
             height:"55vh",
             paddingTop:"6rem",
-            backgroundImage:`url(${bgImage})`,
+            background: "linear-gradient(to top right ,rgb(48, 94, 234),rgb(214, 245, 214))",
             backgroundSize: "cover"
         },
         BoxStyle: {

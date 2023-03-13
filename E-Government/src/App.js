@@ -10,8 +10,6 @@ import Complaint from './components/Services/Complaint'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-
-
 import { ColorModeContext, useMode } from "./Global";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { LoadAdmin } from './Action/Admin/Login'
@@ -23,15 +21,14 @@ import Employee from './components/Admin/Employee'
 import RequestedEmployee from './components/Admin/RequestedEmployee'
 import Aforgetpassword from './components/Admin/Aforgetpassword'
 import AdminComplaint from './components/Admin/AdminComplaint'
-
 import Empregister from './components/Employee/Empregister'
 import Emplogin from './components/Employee/Emplogin'
 import User from './components/Admin/User'
-
 import Loader from './components/Layout/Loader'
 import BillPay from './components/Services/BillPay'
 import Categories from './components/Admin/Categories'
 import Cate from './components/Admin/Cate'
+import UserHeader from './components/User/UserHeader/UserHeader'
 
 
 const App = () => {
@@ -56,9 +53,11 @@ const App = () => {
               <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login />} />
               <Route path='/' element={<Home />} />
-              <Route path='/UserForgotPassword' element={<UserForgotPassword />} />
+              <Route path='forgotpassword' element={<UserForgotPassword />} />
               <Route path='/complaint' element={<Complaint />} />
               <Route path='/billpay' element={<BillPay />} />
+              <Route path='/userHeader' element={<UserHeader />} />
+
 
 
               {/* Admin */}
@@ -79,8 +78,8 @@ const App = () => {
 
                {/* Employee */}
 
-               <Route path="/empLogin" element={<Emplogin/>} />
-               <Route path="/empRegister" element={<Empregister/>} />
+               <Route path="emp/login" element={<Emplogin/>} />
+               <Route path="/emp/register" element={<Empregister/>} />
 
 
             </Routes>

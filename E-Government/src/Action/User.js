@@ -96,4 +96,28 @@ export const LogoutUser = () => async (dispatch) => {
 
 
 }
+export const forgotPass = (values) => async (dispatch) => {
+
+    try {
+        dispatch({
+            type: "ForgotPassRequest",
+        })
+             const {data}  = await  axios.post("api/forgot/password",values)
+
+        dispatch({
+            type: "ForgotPassSuccess",
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type: "ForgotPassFailuer",
+            payload: error
+        })
+    }
+
+
+
+}
+
+
 

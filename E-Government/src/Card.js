@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 const useStyle = makeStyles({
     cardBox: {
         display: "flex",
-        backgroundImage: `url(${bgImage})`,
+        background: "linear-gradient(to top right ,rgb(48, 94, 234),rgb(214, 245, 214))",
         padding: "2rem",
         margin: "2rem",
         border: " solid 1px",
