@@ -43,9 +43,6 @@ const AssignModel = () => {
     //loademp()
     const loademp = async (dept) =>{
       const res = await axios.post(`/api/admin/deptwise`, dept)
-     //const resv = await res.data()
-      // setEmp(await res.data)
-      // console.log(res.data)
       setEmp(res.data)
       console.log(emp)
     }
