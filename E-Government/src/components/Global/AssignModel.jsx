@@ -7,7 +7,7 @@ import { Button } from '@material-ui/core'
 import { Box, useTheme, Dialog, DialogTitle, DialogContent, DialogActions, Typography, FormControl, InputLabel, Select, MenuItem, } from '@mui/material'
 import { tokens } from '../../Global'
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Await, useParams } from 'react-router-dom';
 import { loadCom } from '../../Action/Services/Services'
 import axios from 'axios';
 import { Assignment, Done } from '@mui/icons-material';
@@ -24,7 +24,8 @@ const useStyle = makeStyles({
 
 
 const AssignModel = () => {
-
+  const [dept, setDept] = useState("");
+  const [emp, setEmp] = useState([]);
   const classes = useStyle()
   const themes = useTheme()
   const colors = tokens(themes.palette.mode)
@@ -37,6 +38,26 @@ const AssignModel = () => {
     const response = await axios.get(`/api/admin/${_id}`)
     setDetails(response.data)
   }
+
+  useEffect(() => {
+    //loademp()
+    const loademp = async (dept) =>{
+      const res = await axios.post(`/api/admin/deptwise`, dept)
+      setEmp(res.data)
+      console.log(emp)
+    }
+    loademp()
+  }, [dept])
+  
+
+
+  // const handledept = (event) => {
+  //   const getvalue = event.target.value;
+  //   console.log(getvalue)
+  //  setDept(getvalue);
+  //  //loademp()
+  //  console.log(dept)
+  // };
 
 
   return (
@@ -109,11 +130,11 @@ const AssignModel = () => {
                   label="Department"
                   InputLabelProps={{ style: { fontSize: 20 } }}
                   placeholder="select Department"
-
+                  onChange={(e) => { setDept(e.target.value) }}
                 >
-                  <MenuItem value="Road">Road</MenuItem>
+                  <MenuItem value="road">Road</MenuItem>
                   <MenuItem value="Water">Water</MenuItem>
-                  <MenuItem value="Drain">Draint</MenuItem>
+                  <MenuItem value="Drain">Drain</MenuItem>
                 </Select>
               </FormControl>
 
