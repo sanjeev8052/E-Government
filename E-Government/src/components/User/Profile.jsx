@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import './Profile.css'
 import AvatarImage from '../../Images/Avatar.png'
 import Footer from '../Layout/Footer/Footer'
-import { Edit, Email, KeyboardReturn, Person, PhoneAndroid } from '@mui/icons-material'
+import { Done, Edit, Email, KeyboardReturn, Person, PhoneAndroid } from '@mui/icons-material'
 import { useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 
@@ -11,11 +11,16 @@ const useStyle = makeStyles({
     input: {
         margin: "1.5rem 0",
         width: "100%"
+    },
+    addimage: {
+
     }
 })
 const Profile = () => {
     const style = useStyle();
 
+    
+    const [image, setImage] = useState();
     const { userData } = useSelector(state => state.user)
     const [user, setUser] = useState({});
 
@@ -53,8 +58,19 @@ const Profile = () => {
                     <div className="main ">
 
                         <div className="row m-5">
-                            <div className="col-sm-6">
+                            <div className="col-sm-6 profileBox">
                                 <img className='img' src={AvatarImage} alt="" />
+                                <div style={{ display: "flex", marginTop:"2rem", justifyItems:"center"}}>
+                                    <input className='input-upload'
+                                        id=""
+                                        label=""
+                                        type='file'
+                                    />
+                                {image && <Button variant="text" size='small' color="default">
+                                    click  <Edit />
+                                </Button>}
+                                </div>
+
                             </div>
                             <div id='details' className="col-sm-6">
                                 <div className="row">
