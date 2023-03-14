@@ -153,6 +153,24 @@ router.post("/deptwise" , isAuthenticate , async (req,res) => {
         res.status(500).json({ error: error.message })
     }
  })
+router.get("/deptwise/:dept" , isAuthenticate , async (req,res) => { 
+    try {
+        const { dept } = req.params.dept;
+         if(!dept){
+             res.status(401).json({message:"dept not found"})
+         }
+        // const deptwise = await Employee.find({dept})
+        // res.status(200).
+        // json({
+        //     success: true,
+        //     message: "successfully display",
+        //     emp:deptwise
+        // })
+        res.status(200).json(dept)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+ })
 
 module.exports = router
 

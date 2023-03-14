@@ -87,5 +87,19 @@ router.post("/elogin", [
     }
 })
 
+// For Logout
+router.get("/logoutemp",async (req, res) => {
+    try {
+        res
+            .status(200)
+            .cookie("emptoken", null, { expires: new Date(Date.now()), httpOnly: true })
+            .json({ success: true, message: "Logout" })
+    } catch (error) {
+        res
+            .status(500)
+            .json({ success: false, Error: error.message })
+    }
+
+})
 
 module.exports = router
