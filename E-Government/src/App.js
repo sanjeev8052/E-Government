@@ -32,6 +32,7 @@ import Categories from './components/Admin/Categories'
 import Cate from './components/Admin/Cate'
 import UserHeader from './components/User/UserHeader/UserHeader'
 import MeterApply from './components/Services/MeterApply'
+import Profile from './components/User/Profile'
 
 
 const App = () => {
@@ -58,6 +59,7 @@ const App = () => {
               <Route path='/' element={<Home />} />
               <Route path='forgotpassword' element={<UserForgotPassword />} />
               <Route path='/userHeader' element={<UserHeader />} />
+              <Route path='/Profile' element={<Profile />} />
 
               {/* Services */}
               <Route path='/complaint' element={<Complaint />} />
