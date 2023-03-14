@@ -34,9 +34,13 @@ router.post('/addcomplaintcat', [
         res.status(500).json({ error: error.message })
     }
 })
+router.get("/hello", (req, res)=>{
+    res.send("heyrs")
+})
 
-router.get('/getcomplaintcat', isAuthenticate, async (req, res) => {
+router.get('/getcomplaintcat', async (req, res) => {
     try {
+      
         const complaintcat = await ComplaintCat.find({})
         res.status(200).send(complaintcat)
     } catch (error) {

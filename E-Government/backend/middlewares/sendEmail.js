@@ -5,16 +5,15 @@ exports.sendEmail = async(options)=>{
 
     const transporter = nodemailer.createTransport({
         
-            host: "sandbox.smtp.mailtrap.io",
-            port: 2525,
+            host: "gamil.com",
             auth: {
-              user: "26f6d7d5d901c2",
-              pass: "7655f8cce8aac0"
+              user: "sanjeevgaund2002@gmail.com",
+              pass: "Sanjeevkr@8052"
             }
     })
 
     const mailOption ={
-        from: '26f6d7d5d901c2',
+        from: 'sanjeevgaund2002@gmail.com"',
         to:options.email,
         subject:options.subject,
         text:options.message,

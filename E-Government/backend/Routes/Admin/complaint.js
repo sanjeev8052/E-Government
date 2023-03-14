@@ -96,7 +96,7 @@ router.get('/acceptedcom', isAuthenticate, async (req, res) => {
 
 
 // FOr load Complaint
-router.get("/:_id", async (req, res) => {
+router.get("/compdata/:_id", async (req, res) => {
         
     try {
         const comp = await AcceptedComplaint.findById(req.params._id)

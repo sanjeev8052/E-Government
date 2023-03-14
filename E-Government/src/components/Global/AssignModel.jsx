@@ -31,11 +31,12 @@ const AssignModel = () => {
   const colors = tokens(themes.palette.mode)
   const { _id } = useParams();
   const [details, setDetails] = useState({})
+  
   useEffect(() => {
     loaddetails()
   }, [])
   const loaddetails = async () => {
-    const response = await axios.get(`/api/admin/${_id}`)
+    const response = await axios.get(`/api/admin/compdata/${_id}`)
     setDetails(response.data)
   }
 

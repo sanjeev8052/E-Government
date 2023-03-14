@@ -106,7 +106,7 @@ export const loadCom = (id) => async (dispatch) => {
             type: "laodComRequset",
         })
 
-        const { data } = await axios.get(`/api/admin/${id}`, {
+        const { data } = await axios.get(`/api/admin/compdata/${id}`, {
             headers: {
                 "Content-Type": "application/json"
             }
