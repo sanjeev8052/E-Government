@@ -1,0 +1,28 @@
+.box {
+     width: 98.9vw;
+    height: 50vh;
+    padding-top: 10rem; 
+    background-image: linear-gradient(to top right ,rgb(48, 94, 234),rgb(214, 245, 214));
+}
+.main {
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    width: 80%;
+    box-shadow: 3px 3px 6px;
+    margin: auto;
+
+}
+#details {
+   display: flex;
+   flex-direction: column;
+}
+.img {
+    display: block;
+    width: 12rem;
+    height: 12rem;
+    border: solid 1px black;
+    border-radius: 100px;
+   margin-left: auto;
+}
+
