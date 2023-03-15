@@ -33,6 +33,7 @@ import Cate from './components/Admin/Cate'
 import UserHeader from './components/User/UserHeader/UserHeader'
 import MeterApply from './components/Services/MeterApply'
 import Profile from './components/User/Profile'
+import Work from './components/Employee/Work'
 
 
 const App = () => {
@@ -68,7 +69,7 @@ const App = () => {
 
               {/* Admin */}
               
-              <Route path='/empregister' element={<Empregister />} />
+             
               <Route path='/adlogin' element={<AdminLogin />} />
               <Route path='/aforgot' element={<Aforgetpassword />} />
               <Route path='/emplogin' element={<Emplogin />} />
@@ -88,6 +89,8 @@ const App = () => {
                {/* Employee */}
 
                <Route path="/emplogin" element={<Emplogin/>} />
+               <Route path='/empregister' element={<Empregister />} />
+               <Route path='/work' element={<Work />} />
                {/* <Route path="/emp/register" element={<Empregister/>} /> */}
 
 

@@ -20,3 +20,24 @@ export const Register = (details) => async (dispatch) => {
         })
     }
 }
+
+export const Login = (details) => async (dispatch) => {
+    try {
+        dispatch({
+            type: "employeeLoginRequest"
+        })
+        const { data } = await axios.post(`/api/employee/elogin`, details)
+
+        dispatch({
+            type: "employeeLoginSuccess",
+            payload: data
+        })
+        dispatch(Getcomcat())
+
+    } catch (error) {
+        dispatch({
+            type: "employeeLoginFailuer",
+            payload: error
+        })
+    }
+}

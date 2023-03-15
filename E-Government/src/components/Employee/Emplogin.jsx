@@ -15,25 +15,20 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { Login } from '../../Action/Employee/register';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 const Emplogin = () => {
-
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     const data = new FormData(event.currentTarget);
-    //     console.log({
-    //         email: data.get('email'),
-    //         password: data.get('password'),
-    //     });
-    // };
 
     const initialevalues = {
         email: "",
         password: ""
 
     }
-
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const validationcomplaint = Yup.object().shape({
         email: Yup.string().email("Please Enter Valid Email").required("Please Enter Email"),
         password: Yup.string().required("Please Enter Your Password")
@@ -44,9 +39,9 @@ const Emplogin = () => {
         validationSchema: validationcomplaint,
 
         onSubmit: (values) => {
-
-            console.log(values)
-            //   dispatch(CompReq(user, values))
+                dispatch(Login(values))
+                navigate('/work')
+    
         }
     })
 

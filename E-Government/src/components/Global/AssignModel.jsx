@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles';
-import { useFormik } from 'formik'
+
+import { useFormik } from 'formik';
+import * as Yup from 'yup'
 import { Button } from '@material-ui/core'
-import { Box, useTheme, Dialog, DialogTitle, DialogContent, DialogActions, Typography, FormControl, InputLabel, Select, MenuItem, } from '@mui/material'
+import { Box, useTheme, Dialog, DialogTitle, DialogContent, DialogActions, Typography, FormControl, InputLabel, Select, MenuItem, TextareaAutosize } from '@mui/material'
 import { tokens } from '../../Global'
-import { useDispatch, useSelector } from 'react-redux';
-import { Await, useParams } from 'react-router-dom';
-import { loadCom } from '../../Action/Services/Services'
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Assignment, Done } from '@mui/icons-material';
 const useStyle = makeStyles({
   input: {
     width: "100%",
@@ -31,7 +30,7 @@ const AssignModel = () => {
   const colors = tokens(themes.palette.mode)
   const { _id } = useParams();
   const [details, setDetails] = useState({})
-  
+
   useEffect(() => {
     loaddetails()
   }, [])
@@ -41,25 +40,47 @@ const AssignModel = () => {
   }
 
   useEffect(() => {
-    //loademp()
-    const loademp = async (dept) =>{
-      const res = await axios.post(`/api/admin/deptwise`, dept)
-      setEmp(res.data)
-      console.log(emp)
+    const loademp = async () => {
+      const res = await axios.get(`/api/admin/deptwise?d=${dept}`)
+      const resv = await res.data.deptwise
+      setEmp(resv)
     }
     loademp()
   }, [dept])
-  
+
+  //console.log(emp)
+
+  const initialvalue = {
+    // city: "",
+    // streetAddress: "",
+    // area: "",
+    // complaintDesc: "",
+    dept: "",
+    emp: ""
+  }
+
+  const validationSchema = Yup.object().shape({
+    // city: Yup.string().required("Please Fill This Field"),
+    // streetAddress: Yup.string().required("Please Fill This Field"),
+    // area: Yup.string().required("Please Fill This Field"),
+    // complaintDesc: Yup.string().required("Please Fill This Field"),
+    dept: Yup.string().required("Please Select Department"),
+    emp: Yup.string().required("Please Select Employee"),
+  })
+
+  const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
+
+    initialValues: initialvalue,
+    validationSchema: validationSchema,
+
+    onSubmit: (values) => {
+
+      console.log(values)
+      //dispatch(CompReq(user, values))
+    }
 
 
-  // const handledept = (event) => {
-  //   const getvalue = event.target.value;
-  //   console.log(getvalue)
-  //  setDept(getvalue);
-  //  //loademp()
-  //  console.log(dept)
-  // };
-
+  })
 
   return (
     <>
@@ -71,6 +92,7 @@ const AssignModel = () => {
             <Typography variant="h3" color={colors.redAccent[400]}>Assign</Typography>
           </DialogTitle>
           <DialogContent>
+
             <Box sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -82,66 +104,89 @@ const AssignModel = () => {
               boxShadow: "3px 3px 6px"
 
             }}>
-              <TextField
-                className={classes.input}
-                
-                placeholder='City'
-                variant='outlined'
-                size='small'
-                name='city'
-                value={details.city}
+              <form onSubmit={handleSubmit}> 
+                <TextField
+                  className={classes.input}
+                  label="City"
+                  placeholder='City'
+                  variant='outlined'
+                  size='small'
+                  name='city'
+                  value={details.city}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                <TextField
+                  className={classes.input}
+                  id=""
+                  label="StreetAddress"
+                  placeholder='Street Address '
+                  variant='outlined'
+                  size='small'
+                  onChange={handleChange}
+                  name='streetAddress'
+                  onBlur={handleBlur}
+                  value={details.streetAddress}
+                />
+                <TextField
+                  className={classes.input}
+                  id=""
+                  placeholder='Area Name '
+                  variant='outlined'
+                  size='small'
+                  name='area'
+                  onChange={handleChange}
+                  value={details.area}
+                  onBlur={handleBlur}
+                />
+                <Typography variant="h6" color="initial">Compplaint Description </Typography>
+                <TextareaAutosize
+                  className={classes.input}
+                  name="complaintDesc"
+                  id="" minRows={3}
+                  value={details.complaintDesc}
+                  onBlur={handleBlur}
 
-              />
-              <TextField
-                className={classes.input}
-                id=""
-                placeholder='Street Address '
-                variant='outlined'
-                size='small'
-                name='streetAddress'
+                />
 
-                value={details.streetAddress}
-              />
-              <TextField
-                className={classes.input}
-                id=""
-                placeholder='Area Name '
-                variant='outlined'
-                size='small'
-                name='area'
-                value={details.area}
+                <FormControl fullWidth variant="standard" sx={{ marginBottom: "2rem" }} InputLabelProps={{ style: { fontSize: 20 } }} size="small">
+                  <InputLabel>Department</InputLabel>
+                  <Select
 
-              />
-              <Typography variant="h6" color="initial">Compplaint Description </Typography>
-              <textarea
-                className={classes.input}
-                name="complaintDesc"
-                id="" rows="3"
-                value={details.complaintDesc}
-
-              />
-
-              <FormControl fullWidth variant="standard" sx={{marginBottom:"2rem"}}  InputLabelProps={{ style: { fontSize: 20 } }} size="small">
-                <InputLabel>Department</InputLabel>
-                <Select
-
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  name="dept"
-                  label="Department"
-                  InputLabelProps={{ style: { fontSize: 20 } }}
-                  placeholder="select Department"
-                  onChange={(e) => { setDept(e.target.value) }}
-                >
-                  <MenuItem value="road">Road</MenuItem>
-                  <MenuItem value="Water">Water</MenuItem>
-                  <MenuItem value="Drain">Drain</MenuItem>
-                </Select>
-              </FormControl>
-
-              <Button variant='contained' color='primary'>
-                Asign 
-              </Button>
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    name="dept"
+                    label="Department"
+                    value={dept}
+                    InputLabelProps={{ style: { fontSize: 20 } }}
+                    placeholder="select Department"
+                    onChange={(e) => setDept(e.target.value)}
+                  >
+                    <MenuItem value="road">Road</MenuItem>
+                    <MenuItem value="Water">Water</MenuItem>
+                    <MenuItem value="Drain">Drain</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl fullWidth variant="standard" sx={{ marginBottom: "2rem" }} InputLabelProps={{ style: { fontSize: 20 } }} size="small">
+                  <InputLabel>Employee</InputLabel>
+                  <Select
+                    name='emp'
+                    label="Employee"
+                    InputLabelProps={{ style: { fontSize: 20 } }}
+                    placeholder="select Department"
+                    onChange={handleChange}
+                  >
+                    {
+                      emp.map((data) => (
+                        <MenuItem value={data.name}>{data.name}</MenuItem>
+                      ))
+                    }
+                  </Select>
+                </FormControl>
+                <Button variant='contained' color='primary' type='submit'>
+                  Asign
+                </Button>
+              </form>
             </Box>
           </DialogContent>
           <DialogActions sx={{ ml: "10px" }}>
