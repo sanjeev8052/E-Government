@@ -55,7 +55,7 @@ const AssignModel = () => {
     // streetAddress: "",
     // area: "",
     // complaintDesc: "",
-    dept: "",
+    dept: dept,
     emp: ""
   }
 
@@ -71,7 +71,7 @@ const AssignModel = () => {
   const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
 
     initialValues: initialvalue,
-    validationSchema: validationSchema,
+    // validationSchema: validationSchema,
 
     onSubmit: (values) => {
 
