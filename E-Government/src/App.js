@@ -70,7 +70,7 @@ const App = () => {
 
               {/* Admin */}
               
-              <Route path='/empregister' element={<Empregister />} />
+             
               <Route path='/adlogin' element={<AdminLogin />} />
               <Route path='/aforgot' element={<Aforgetpassword />} />
               <Route path='/emplogin' element={<Emplogin />} />
@@ -89,8 +89,10 @@ const App = () => {
 
                {/* Employee */}
 
-               <Route path="emp/login" element={<Emplogin/>} />
-               <Route path="/emp/register" element={<Empregister/>} />
+               <Route path="/emplogin" element={<Emplogin/>} />
+               <Route path='/empregister' element={<Empregister />} />
+               <Route path='/work' element={<Work />} />
+               {/* <Route path="/emp/register" element={<Empregister/>} /> */}
 
 
             </Routes>

@@ -18,5 +18,33 @@ export const Employee = createReducer(initialState, {
         state.error = action.payload;
 
     },
+    // For Login
+    employeeLoginRequest: (state) => {
+        state.loading = true;
+    },
+    employeeLoginSuccess: (state, action) => {
+        state.loading = false;
+        state.log = action.payload;
+
+    },
+    employeeLoginFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+    // // For Login
+    // employeeLoginRequest: (state) => {
+    //     state.loading = true;
+    // },
+    // employeeLoginSuccess: (state, action) => {
+    //     state.loading = false;
+    //     state.log = action.payload;
+
+    // },
+    // employeeLoginFailuer: (state, action) => {
+    //     state.loading = false;
+    //     state.error = action.payload;
+
+    // },
 
 });
