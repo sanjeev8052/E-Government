@@ -8,23 +8,23 @@ const crypto = require('crypto')
 const { errorHandler } = require("../../middlewares/Errorhandler");
 const { isAuthenticatedUser } = require("../../middlewares/auth");
 
-cloudinary.config({ 
-    cloud_name: process.env.cloud_name, 
-    api_key: process.env.api_key, 
+cloudinary.config({
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
     api_secret: process.env.api_secret,
     secure: true
-  }); 
+});
 
-router.post("/upload", async(req, res)=>{
+router.post("/upload", async (req, res) => {
     const file = req.files.image
 
     const result = await cloudinary.uploader.upload(file.tempFilePath)
     console.log(result)
-   
+
 })
 
-router.post("/user/new/",async (req, res) => {
-   
+router.post("/user/new/", async (req, res) => {
+
 
     try {
         const { name, email, password, phone } = req.body
@@ -34,10 +34,14 @@ router.post("/user/new/",async (req, res) => {
                 .status(400)
                 .json({ sucsess: false, message: "user already exists....." })
         }
-
+        const message = "WELCOME TO PROFILE BASED E-GOVERNANCE ONLINE SERVICE PORTAL"
         user = await User.create({ name, email, phone, password })
         user.save();
-
+        await sendEmail({
+            email: user.email,
+            subject: "Register Succesfull",
+            message
+        });
         res.status(201).json({
             sucsess: true,
             user
@@ -46,14 +50,14 @@ router.post("/user/new/",async (req, res) => {
         res.status(500).json({ sucsess: false, message: error.message })
     }
 });
-router.post("/user/login",async (req, res) => {
+router.post("/user/login", async (req, res) => {
 
 
     try {
         const { email, password } = req.body
 
         let user = await User.findOne({ email }).select("+password");
-       
+
         if (!user) {
             return res
                 .status(400)
@@ -86,16 +90,16 @@ router.post("/user/login",async (req, res) => {
 
 
 });
-router.get("/me" ,isAuthenticatedUser,async (req, res) => {
+router.get("/me", isAuthenticatedUser, async (req, res) => {
     try {
         const user = await User.findById(req.user._id)
         res.send(user)
     } catch (error) {
-        res.status(500).json({    sucsess: false, message: error.message })
+        res.status(500).json({ sucsess: false, message: error.message })
     }
 
 });
-router.get("/logout",async (req, res) => {
+router.get("/logout", async (req, res) => {
     try {
         res
             .status(200)
@@ -108,7 +112,7 @@ router.get("/logout",async (req, res) => {
     }
 
 })
-router.get("/search/:id",async (req, res) => {
+router.get("/search/:id", async (req, res) => {
     const user = await User.findById(req.params.id)
 
     if (!user) {
@@ -122,7 +126,7 @@ router.get("/search/:id",async (req, res) => {
 
 
 })
-router.post("/forgot/password",async (req, res) => {
+router.post("/forgot/password", async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
         if (!user) {
@@ -135,7 +139,7 @@ router.post("/forgot/password",async (req, res) => {
 
         await user.save();
 
-        const resetUrl = `${req.protocol}://${req.get("host")}/api/reset/password/${resetPasswordToken}`;
+        const resetUrl = `${req.protocol}://localhost:3000/reset/password/${resetPasswordToken}`;
         const message = `reset your password by clicking on the link below: \n\n${resetUrl}`
         try {
             await sendEmail({
@@ -162,7 +166,7 @@ router.post("/forgot/password",async (req, res) => {
         res.status(500).json({ sucsess: false, message: error.message })
     }
 })
-router.put("/reset/password/:token",async (req, res) => {
+router.put("/reset/password/:token", async (req, res) => {
 
     try {
         const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex")
@@ -196,6 +200,21 @@ router.put("/reset/password/:token",async (req, res) => {
     }
 
 })
+router.post("/update/profile/:id", async (req, res) => {
 
-module.exports = router  
+    try {
+        let user = await User.findById(req.params.id)
+
+        user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        res.json({
+            message:"Profile Updated.."
+        })
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message: error.message })
+
+    }
+
+})
+
+module.exports = router
 
