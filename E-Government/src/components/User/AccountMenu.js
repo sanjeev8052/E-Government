@@ -9,9 +9,10 @@ import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import { useDispatch, useSelector } from 'react-redux';
 import { LogoutUser } from '../../Action/User';
-import { Email, Person } from '@mui/icons-material';
+import { Edit, Email, Person } from '@mui/icons-material';
 import { Typography } from '@mui/material'
 import profileDP from '../../Images/Avatar.jpg'
+import { Link } from 'react-router-dom';
 
 export default function AccountMenu() {
   const { userData, userLoading } = useSelector(state => state.user)
@@ -73,6 +74,13 @@ export default function AccountMenu() {
           </ListItemIcon>
           <Typography variant="body1" color="initial">{userData && userData.email}</Typography>
         </MenuItem>
+        <MenuItem  component={Link} to="/Profile">
+          <ListItemIcon>
+            <Edit/>
+          </ListItemIcon>
+          <Typography variant="body1" color="initial">Edit Profile</Typography>
+        </MenuItem>
+        
         <MenuItem onClick={logout}>
           <ListItemIcon >
             <Logout fontSize="small" />

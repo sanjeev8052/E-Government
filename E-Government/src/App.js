@@ -33,7 +33,7 @@ import Cate from './components/Admin/Cate'
 import UserHeader from './components/User/UserHeader/UserHeader'
 import MeterApply from './components/Services/MeterApply'
 import Profile from './components/User/Profile'
-import Work from './components/Employee/Work'
+import ResetPassword from './components/User/ResetPassword'
 
 
 const App = () => {
@@ -51,7 +51,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className=''>
-
+ 
          
             <Routes>
               {/* User */}
@@ -59,6 +59,7 @@ const App = () => {
               <Route path='/login' element={<Login />} />
               <Route path='/' element={<Home />} />
               <Route path='forgotpassword' element={<UserForgotPassword />} />
+              <Route path='reset/password/:token' element={< ResetPassword/>} />
               <Route path='/userHeader' element={<UserHeader />} />
               <Route path='/Profile' element={<Profile />} />
 

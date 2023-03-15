@@ -17,10 +17,10 @@ import Footer from '../Layout/Footer/Footer'
 
 const Login = () => {
     const styles = {
-        mainBox:{
-            width:"100vw",
-            height:"55vh",
-            paddingTop:"6rem",
+        mainBox: {
+            width: "100vw",
+            height: "55vh",
+            paddingTop: "6rem",
             background: "linear-gradient(to top right ,rgb(48, 94, 234),rgb(214, 245, 214))",
             backgroundSize: "cover"
         },
@@ -47,7 +47,7 @@ const Login = () => {
             width: '100%',
             margin: "10px 0",
             padding: '5px 0',
-            color:"white"
+            color: "white"
         },
 
         account: {
@@ -76,7 +76,7 @@ const Login = () => {
     const alert = useAlert();
 
 
-    const { isAuthenticated , loading} = useSelector((state) => state.user)
+    const { isAuthenticated, loading } = useSelector((state) => state.user)
     const { message, LoginError } = useSelector((state) => state.user)
 
     useEffect(() => {
@@ -202,7 +202,7 @@ const Login = () => {
 
                 </form>
             </Grid>
-            <Footer/>
+            <Footer />
         </Grid>
     )
 }
