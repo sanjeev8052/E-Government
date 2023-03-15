@@ -154,14 +154,14 @@ router.post("/completecom/:_id", async (req,res) => {
     }
 })
 
-router.get("/getcompletecom", async (req,res) => { 
-    try {
-        const complaint = await CompleteComplaint.find({})
-        res.status(200).send(complaint)
-    } catch (error) {
-        res
-            .status(500)
-            .json({ success: false, Error: error.message })
-    }
- })
+// router.get("/getcompletecom", async (req,res) => { 
+//     try {
+//         const complaint = await CompleteComplaint.find({})
+//         res.status(200).send(complaint)
+//     } catch (error) {
+//         res
+//             .status(500)
+//             .json({ success: false, Error: error.message })
+//     }
+//  })
 module.exports = router
