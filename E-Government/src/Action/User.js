@@ -118,6 +118,28 @@ export const forgotPass = (values) => async (dispatch) => {
 
 
 }
+export const updateProfile = (user,id) => async (dispatch) => {
+
+    try {
+        dispatch({
+            type: "UpdateProfileRequest",
+        })
+             const {data}  = await  axios.post(`api/update/profile/${id}`,user)
+
+        dispatch({
+            type: "UpdateProfileSuccess",
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type: "UpdateProfileFailuer",
+            payload: error
+        })
+    }
+
+
+
+}
 
 
 

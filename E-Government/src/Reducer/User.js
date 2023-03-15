@@ -24,6 +24,7 @@ export const userReducer = createReducer(initialState, {
     ClearMessage: (state) => {
         state.message = null;
         state.LoginError = null;
+        state.error = null;
     },
 
 
@@ -57,7 +58,7 @@ export const userReducer = createReducer(initialState, {
         state.isAuthenticated = false
     },
 
-    
+
 
     //logout User
     LogoutRequest: (state) => {
@@ -71,7 +72,7 @@ export const userReducer = createReducer(initialState, {
         state.loading = false;
         state.error = action.payload;
     },
-    
+
     ForgotPassRequest: (state) => {
         state.loading = true;
     },
@@ -84,4 +85,16 @@ export const userReducer = createReducer(initialState, {
         state.error = action.payload;
     },
 
+    UpdateProfileRequest: (state) => {
+        state.loading = true;
+    },
+    UpdateProfileSuccess: (state, action) => {
+        state.loading = false;
+        state.editMessage = action.payload
+    },
+    UpdateProfileFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+   
 })

@@ -31,13 +31,13 @@ const userSchema = mongoose.Schema({
 
     gender: String,
     DOB: Date,
-    houseName: String,
+    houseNO: String,
     societyName: String,
-    Address: String,
+    area: String,
     city: String,
     state: String,
-    aadhaarId: Number,
-
+    pincode: Number,
+    status:String,
     resetPasswordToken: String,
     resetPasswordExpire: Date
 
