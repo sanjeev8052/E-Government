@@ -56,8 +56,8 @@ router.post("/user/login", async (req, res) => {
     try {
         const { email, password } = req.body
 
-        let user = await User.findOne({ email }).select("+password");
-
+        let user = await User.findOne({ email:email , status:undefined }).select("+password");
+        // let statuses = await User.find({ status: "block" })
         if (!user) {
             return res
                 .status(400)
@@ -207,7 +207,7 @@ router.post("/update/profile/:id", async (req, res) => {
 
         user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
         res.json({
-            message:"Profile Updated.."
+            message: "Profile Updated.."
         })
     } catch (error) {
         res.status(500).json({ sucsess: false, message: error.message })

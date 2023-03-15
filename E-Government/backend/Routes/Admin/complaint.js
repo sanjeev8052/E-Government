@@ -1,10 +1,9 @@
 const { isAuthenticate } = require('../../middlewares/Adminmiddle');
 const { isAuthenticatedUser } = require('../../middlewares/auth');
 const UserComplaint = require('../../models/User/UserComplaint');
-const AcceptedComplaint = require('../../models/Admin/AcceptedComplaint')
 const express = require("express");
 const AssignComplaint = require('../../models/Admin/AssignComplaint');
-const CompleteComplaint = require('../../models/Emp/ComplateCom');
+const CompleteComplaint = require('../../models/Emp/CompleteCom');
 const router = express.Router();
 
 // For Complaint Request
@@ -28,7 +27,7 @@ router.post('/comp/req', isAuthenticatedUser, async (req, res) => {
 router.get('/getComp/req', isAuthenticate, async (req, res) => {
 
     try {
-        const complaint = await UserComplaint.find({})
+        const complaint = await UserComplaint.find({ status:"Requested"})
         res.status(200).send(complaint)
     } catch (error) {
         res
@@ -44,10 +43,10 @@ router.post('/acceptcomplaint/:_id', isAuthenticate, async (req, res) => {
         if (!complaint) {
             res.status(401).json({ message: "Complaint Not Found" })
         }
-        // res.status(200).json({message :"true",
-        // complaint:complaint})
-        const acceptcomp = await AcceptedComplaint.create(complaint.toJSON())
-        const deletecomp = await UserComplaint.deleteOne({ _id: req.params._id })
+        complaint.status = "Accepted"
+        await complaint.save()
+        // const acceptcomp = await AcceptedComplaint.create(complaint.toJSON())
+        // const deletecomp = await UserComplaint.deleteOne({ _id: req.params._id })
         res.status(200).json({
             success: true,
             message: "Accepted Complaint"
@@ -77,13 +76,12 @@ router.delete("/rejectcomplaint/:_id", isAuthenticate, async (req, res) => {
 router.get('/acceptedcom', isAuthenticate, async (req, res) => {
 
     try {
-        const complaint = await AcceptedComplaint.find({})
+        const complaint = await UserComplaint.find({ status:"Accepted"})
+        if (!complaint) {
+            res.status(401).json({ message: "Complaint Not Found" })
+        }
 
         res.status(200).send(complaint)
-
-
-
-
     } catch (error) {
         res
             .status(500)
@@ -96,7 +94,7 @@ router.get('/acceptedcom', isAuthenticate, async (req, res) => {
 router.get("/compdata/:_id", async (req, res) => {
 
     try {
-        const comp = await AcceptedComplaint.findById(req.params._id)
+        const comp = await UserComplaint.findById(req.params._id)
         res.status(200).json(comp)
     } catch (error) {
         res
@@ -154,14 +152,5 @@ router.post("/completecom/:_id", async (req,res) => {
     }
 })
 
-// router.get("/getcompletecom", async (req,res) => { 
-//     try {
-//         const complaint = await CompleteComplaint.find({})
-//         res.status(200).send(complaint)
-//     } catch (error) {
-//         res
-//             .status(500)
-//             .json({ success: false, Error: error.message })
-//     }
-//  })
+
 module.exports = router

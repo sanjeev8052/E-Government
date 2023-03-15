@@ -31,10 +31,21 @@ const EmpSchema = new mongoose.Schema({
     dept :{
         type:String,
         required:true,
-    }
+    },
+    request:{
+        type:Boolean,
+        default: true
+    },
+    status:String,
 })
 
-
+// Hashing Password
+EmpSchema.pre('save', async function (next) {
+    if (this.isModified('password')) {
+        this.password = await bcrypt.hash(this.password, 12)
+    }
+    next();
+})
 
 // generate token
 EmpSchema.methods.generateEmpToken = async function () {
