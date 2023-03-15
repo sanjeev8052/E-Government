@@ -18,6 +18,7 @@ router.post('/comp/req', isAuthenticatedUser, async(req, res) => {
             area:values.area,
             pincode:values.pincode,
             complaintDesc:values.complaintDesc,
+            status:"Requested"
         }
         const  complaint = await UserComplaint.create(create)
         res.status(200).json({
@@ -35,7 +36,7 @@ router.post('/comp/req', isAuthenticatedUser, async(req, res) => {
 router.get('/getComp/req', async(req, res) => {
    
     try {
-        const  complaint = await UserComplaint.find({})
+        const  complaint = await UserComplaint.find({ status:"Requested" })
        
         res.status(200).send(complaint)
            

@@ -37,7 +37,8 @@ const UserComplaintSchema = mongoose.Schema({
         type:String,
         require:true
     },
-    date: Date
+    date: Date,
+    status:String,
 })
 
 
