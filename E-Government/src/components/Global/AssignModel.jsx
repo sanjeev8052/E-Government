@@ -55,10 +55,11 @@ const AssignModel = () => {
     // streetAddress: "",
     // area: "",
     // complaintDesc: "",
-    dept: dept,
+   
     emp: ""
   }
-
+  console.log(details)
+  console.log(dept)
   const validationSchema = Yup.object().shape({
     // city: Yup.string().required("Please Fill This Field"),
     // streetAddress: Yup.string().required("Please Fill This Field"),
@@ -67,21 +68,22 @@ const AssignModel = () => {
     dept: Yup.string().required("Please Select Department"),
     emp: Yup.string().required("Please Select Employee"),
   })
-
+  
   const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
-
+    
     initialValues: initialvalue,
     // validationSchema: validationSchema,
-
+    
     onSubmit: (values) => {
-
+      
       console.log(values)
       //dispatch(CompReq(user, values))
     }
-
-
+    
+    
   })
-
+  
+  console.log(values)
   return (
     <>
 
