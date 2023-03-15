@@ -17,4 +17,23 @@ router.post('/addfeeback', async (req,res) => {
     }
  })
 
+ router.get("/getfeedback", async (req,res) => { 
+    try {
+        const feedback = await Feedback.find({})
+        res.status(200).send(feedback)
+    } catch (error) {
+        res
+            .status(500)
+            .json({ success: false, Error: error.message })
+    }
+ })
+
+router.delete("/delfeedback", async (req,res) => { 
+    try {
+        
+    } catch (error) {
+        res.status(500)
+        .json({ success: false, Error: error.message })
+    }
+ })
  module.exports = router
