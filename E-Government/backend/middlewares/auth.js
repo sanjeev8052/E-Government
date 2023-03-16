@@ -31,7 +31,7 @@ exports.isAuthenticatedEmp = async (req, res, next)=>{
                 .json({message:" Please login first"})
             }
          const decoded = jwt.verify(token,process.env.SECRET_KEY)
-         req.user = await User.findById(decoded._id)
+         req.emp = await User.findById(decoded._id)
           next();
     } catch (error) {
         res.status(500).json({
