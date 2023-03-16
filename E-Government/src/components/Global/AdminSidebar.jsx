@@ -5,7 +5,7 @@ import { Box, IconButton, Typography, useTheme } from '@mui/material'
 import Logo from '../Images/Icons/login.png';
 import { Link } from 'react-router-dom'
 import { tokens } from "../../Global";
-import {  MenuOutlined, DashboardTwoTone, CoPresentTwoTone, FactCheckTwoTone, Groups2TwoTone, SpeakerNotesTwoTone, CategoryTwoTone } from '@mui/icons-material';
+import {  MenuOutlined, DashboardTwoTone, CoPresentTwoTone, FactCheckTwoTone, Groups2TwoTone, SpeakerNotesTwoTone, CategoryTwoTone, CommentTwoTone } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -128,6 +128,13 @@ const AdminSidebar = () => {
               title="Categories"
               to="/categories"
               icon={<CategoryTwoTone />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Feedback"
+              to="/feedback"
+              icon={<CommentTwoTone />}
               selected={selected}
               setSelected={setSelected}
             />

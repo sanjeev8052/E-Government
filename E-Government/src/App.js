@@ -5,7 +5,7 @@ import Login from './components/User/Login'
 import Home from './components/Home/Home'
 import { LoadUser } from './Action/User'
 import UserForgotPassword from './components/User/ForgotPassword'
-import UserHeader from './components/User/UserHeader/UserHeader'
+import Complaint from './components/Services/Complaint'
 import Profile from './components/User/Profile'
 import ResetPassword from './components/User/ResetPassword'
 
@@ -27,7 +27,10 @@ import Aforgetpassword from './components/Admin/Aforgetpassword'
 import AdminComplaint from './components/Admin/AdminComplaint'
 import User from './components/Admin/User'
 import Categories from './components/Admin/Categories'
-import Cate from './components/Admin/Cate'
+import UserHeader from './components/User/UserHeader/UserHeader'
+import MeterApply from './components/Services/MeterApply'
+import Work from './components/Employee/Work'
+
 
 // Employee
 import Empregister from './components/Employee/Empregister'
@@ -89,9 +92,10 @@ const App = () => {
               <Route path="/auser" element={<User />} />
               <Route path="/spiner" element={<Loader />} />
               <Route path="/Categories" element={<Categories />} />
-              <Route path="/Cate" element={<Cate />} />
               <Route path="/assign" element={<AssignCom/>} />
               <Route path="/assigncom/:_id" element={<AssignModel/>} />
+              <Route path="/feedback" element={<Feedback  />} />
+
 
 
                {/* Employee */}

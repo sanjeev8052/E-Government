@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const { body, validationResult, } = require('express-validator');
 const { isAuthenticate } = require("../../middlewares/Adminmiddle");
-const { ComplaintCat, CertificateCat , BillsCat , MeterCat} = require('../../models/Admin/Categories');
+const { ComplaintCat, CertificateCat , BillsCat , MeterCat ,Dept} = require('../../models/Admin/Categories');
 
 // For Complaint
 router.post('/addcomplaintcat', [
@@ -13,11 +13,8 @@ router.post('/addcomplaintcat', [
     if (!errors.isEmpty()) {
         return res.status(404).json({ errors: errors.array() });
     }
-
     const { complaintType } = req.body;
-
     const chcomplainttype = await ComplaintCat.findOne({ complaintType })
-
     try {
         if (chcomplainttype) {
             res.status(400).json({ error: "ComplaintType is already Exist" })
@@ -34,9 +31,7 @@ router.post('/addcomplaintcat', [
         res.status(500).json({ error: error.message })
     }
 })
-router.get("/hello", (req, res)=>{
-    res.send("heyrs")
-})
+
 
 router.get('/getcomplaintcat', async (req, res) => {
     try {
@@ -256,6 +251,70 @@ router.delete("/deletemetercat/:_id", isAuthenticate, async (req, res) => {
             })
         }
         const deletecat = await  MeterCat.deleteOne({ _id: req.params._id })
+        
+        res.status(200).json({
+            success: true,
+            message: "Su1ccessfully Delete Meter Type"
+            
+        })
+    } catch (error) {
+        res.status(500).json({
+            error: error.message
+        })
+    }
+})
+// For Depratment
+
+router.post('/adddept', [
+    body('deptType', "Plaese Fill the field").notEmpty()
+], isAuthenticate, async (req, res) => {
+    // if there are error then send bad request
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(404).json({ errors: errors.array() });
+    }
+
+    const { deptType } = req.body;
+
+    const chdeptType = await  Dept.findOne({ deptType })
+
+    try {
+        if (chdeptType) {
+             return res.status(400).json({ error: "Depratment is already Exist" })
+        }
+        else {
+            const add = await  Dept.create({ deptType })
+            add.save();
+            res.status(201).json({
+                success: true,
+                message: "Succefully Added"
+            })
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
+
+router.get('/getdept', isAuthenticate, async (req, res) => {
+    try {
+        const dept = await  Dept.find({})
+        res.status(200).send(dept)
+    } catch (error) {
+        res.status(500).json({ success: false, Error: error.message })
+    }
+})
+
+
+router.delete("/deletedept/:_id", isAuthenticate, async (req, res) => {
+    try {
+        const dept = await  Dept.findById(req.params._id)
+        if (!dept) {
+             return res.status(401).json({
+                success: true,
+                message: "Meter Type Not Found"
+            })
+        }
+        const deletecat = await  Dept.deleteOne({ _id: req.params._id })
         
         res.status(200).json({
             success: true,
