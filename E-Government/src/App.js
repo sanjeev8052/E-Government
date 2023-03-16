@@ -5,11 +5,7 @@ import Login from './components/User/Login'
 import Home from './components/Home/Home'
 import { LoadUser } from './Action/User'
 import UserForgotPassword from './components/User/ForgotPassword'
-<<<<<<< HEAD
-import Complaint from './components/Services/Complaint'
-=======
 import UserHeader from './components/User/UserHeader/UserHeader'
->>>>>>> eea8b25a6c35e443b551a2c372cbdc28a73dd3e8
 import Profile from './components/User/Profile'
 import ResetPassword from './components/User/ResetPassword'
 
@@ -32,13 +28,6 @@ import AdminComplaint from './components/Admin/AdminComplaint'
 import User from './components/Admin/User'
 import Categories from './components/Admin/Categories'
 import Cate from './components/Admin/Cate'
-<<<<<<< HEAD
-import UserHeader from './components/User/UserHeader/UserHeader'
-import MeterApply from './components/Services/MeterApply'
-import Work from './components/Employee/Work'
-=======
-
->>>>>>> eea8b25a6c35e443b551a2c372cbdc28a73dd3e8
 
 // Employee
 import Empregister from './components/Employee/Empregister'

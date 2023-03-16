@@ -23,7 +23,7 @@ const User = () => {
    
     const Block = (id) => { 
         dispatch(BLockUser(id))
-        window.location.reload();
+       
      }
    
     return (
@@ -56,7 +56,7 @@ const User = () => {
                                         GetUser?.map((data) => (
                                             <TableRow key={data._id}>
                                                 <TableCell >{data.name}</TableCell>
-                                                <TableCell >{data.mobile}</TableCell>
+                                                <TableCell >{data.phone}</TableCell>
                                                 <TableCell >{data.email}</TableCell>
                                          
                                                 <TableCell >
