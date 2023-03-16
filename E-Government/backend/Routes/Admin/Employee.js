@@ -65,7 +65,7 @@ router.get("/getemp", isAuthenticate, async (req, res) => {
             return res.status(404).json({ message: "Employee Not Find" })
         }
         return res.status(200).json(employee)
-       
+
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
@@ -138,10 +138,10 @@ router.get("/deptwise", isAuthenticate, async (req, res) => {
         if (!dep) {
             return res.status(401).json({ message: "dept not found" })
         }
-            const deptwise = await Employee.find({ dept: dep , request:false, status:undefined })
-             res.status(200).
-                json(deptwise)
-      
+        const deptwise = await Employee.find({ dept: dep, request: false, status: undefined })
+        res.status(200).
+            json(deptwise)
+
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

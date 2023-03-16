@@ -37,6 +37,12 @@ const EmpSchema = new mongoose.Schema({
         default: true
     },
     status:String,
+    complaints:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"Complaint"
+        }
+    ]
 })
 
 // Hashing Password
@@ -50,7 +56,7 @@ EmpSchema.pre('save', async function (next) {
 // generate token
 EmpSchema.methods.generateEmpToken = async function () {
     try {
-        let emptoken = jwt.sign({ _id: this._id }, process.env.EMP_SECRET_KEY)
+        let emptoken = jwt.sign({ _id: this._id }, process.env.SECRET_KEY)
         return emptoken;
     } catch (error) {
         console.log(error)

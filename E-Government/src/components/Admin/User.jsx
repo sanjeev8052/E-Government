@@ -23,7 +23,7 @@ const User = () => {
    
     const Block = (id) => { 
         dispatch(BLockUser(id))
-        window.location.reload();
+       
      }
    
     return (
