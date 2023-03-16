@@ -38,6 +38,7 @@ import Work from './components/Employee/Work'
 // Others
 import AssignModel from './components/Global/AssignModel'
 import Loader from './components/Layout/Loader'
+import Feedback from './components/Admin/Feedback'
 
 // Services
 import MeterApply from './components/Services/MeterApply'
