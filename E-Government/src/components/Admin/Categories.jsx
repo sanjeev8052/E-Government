@@ -109,6 +109,7 @@ const Categories = () => {
     }
     // for dept
     const subdept = (values, props) => {
+        
          dispatch(Adddept(values))
         // console.log(values)
     }
