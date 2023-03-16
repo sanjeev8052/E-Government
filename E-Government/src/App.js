@@ -26,6 +26,7 @@ import Aforgetpassword from './components/Admin/Aforgetpassword'
 import AdminComplaint from './components/Admin/AdminComplaint'
 import User from './components/Admin/User'
 import Categories from './components/Admin/Categories'
+import Feedback from './components/Admin/Feedback'
 import UserHeader from './components/User/UserHeader/UserHeader'
 
 

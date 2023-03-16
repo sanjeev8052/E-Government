@@ -120,6 +120,25 @@ export const getblkEmp = () => async (dispatch) =>{
     }
 }
 
+export const getEmpDetails = () => async (dispatch) =>{
+    try {
+        dispatch({
+            type: "GetEMppRequest"
+        })
+        const response = await axios.post(`/api/employee//get/profile/${id}`)
+
+        dispatch({
+            type: "GetEMppSuccess",
+            payload: response
+        })
+        dispatch(getblkEmp())
+    } catch (error) {
+        dispatch({
+            type: "GetEMppFailuer",
+            payload: error
+        })
+    }
+}
 export const unblockEmp = (id) => async (dispatch) =>{
     try {
         dispatch({

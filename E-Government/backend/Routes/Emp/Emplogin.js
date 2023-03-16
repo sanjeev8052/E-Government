@@ -5,6 +5,7 @@ const { body, validationResult, } = require('express-validator');
 const bcrypt = require("bcrypt")
 
 const jwt = require('jsonwebtoken');
+const { isAuthenticatedEmp } = require("../../middlewares/auth");
 
 // For Employee Register
 router.post("/tempemployee", [
@@ -90,6 +91,20 @@ router.get("/logoutemp", async (req, res) => {
             .status(200)
             .cookie("emptoken", null, { expires: new Date(Date.now()), httpOnly: true })
             .json({ success: true, message: "Logout" })
+    } catch (error) {
+        res
+            .status(500)
+            .json({ success: false, Error: error.message })
+    }
+
+})
+
+router.get("/get/profile", isAuthenticatedEmp ,async (req, res) => {
+    try {
+        
+            const emp = await Employee.findById(req.emp)
+            res.status(200).send(emp)
+
     } catch (error) {
         res
             .status(500)
