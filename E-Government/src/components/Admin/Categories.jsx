@@ -1,4 +1,4 @@
-import { Box, FormControl, TextField, RadioGroup, FormControlLabel, Radio, Typography, useTheme, InputAdornment, Button, TableContainer, Table, TableHead, TableRow, TableCell, Paper, TableBody, IconButton } from '@mui/material'
+import { Box, FormControl, TextField, RadioGroup, FormControlLabel, Radio, Typography, useTheme, InputAdornment, Button, TableContainer, Table, TableHead, TableRow, TableCell,  TableBody, IconButton } from '@mui/material'
 import React, { useState } from 'react'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
@@ -8,9 +8,8 @@ import { Field, Form, Formik, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { AddCircleOutlineTwoTone, DeleteForeverTwoTone, SpeakerNotesTwoTone } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
-import { Addbillcat, Addcercat, Addcomcat, Addmetercat, Delbillcat, Delcercat, Delcomcat, Delmetercat, Getbillcat, Getcercat, Getcomcat, Getmetercat } from '../../Action/Admin/Categories'
+import { Addbillcat, Addcercat, Addcomcat, Addmetercat, Delbillcat, Delcercat, Delcomcat, Delmetercat, Getbillcat, Getcercat, Getcomcat, Getmetercat ,Adddept,Deldept,Getdept } from '../../Action/Admin/Categories'
 import { useEffect } from 'react'
-import { CircularProgress } from '@material-ui/core'
 const Categories = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
@@ -20,7 +19,7 @@ const Categories = () => {
         setStatus(status)
     }
 
-    const { getcomcat, getbillcat, getmetercat, getcercat , loading } = useSelector((state) => (state.services))
+    const { getcomcat, getbillcat, getmetercat, getcercat , getdept, loading } = useSelector((state) => (state.services))
     const styles = {
         textfield: {
             width: "100%",
@@ -46,6 +45,9 @@ const Categories = () => {
     const meter = {
         meterType: ""
     }
+    const dept = {
+        deptType: ""
+    }
     const validationcomplaint = Yup.object().shape({
         complaintType: Yup.string().required("!! Please Fill This Field.."),
       
@@ -65,6 +67,11 @@ const Categories = () => {
     const validationmeter = Yup.object().shape({
        
         meterType: Yup.string().required("!! Please Fill This Field.."),
+
+    })
+    const validationdept = Yup.object().shape({
+       
+        deptType: Yup.string().required("!! Please Fill This Field.."),
 
     })
    
@@ -100,12 +107,22 @@ const Categories = () => {
         dispatch(Delcercat(id))
      
     }
+    // for dept
+    const subdept = (values, props) => {
+         dispatch(Adddept(values))
+        // console.log(values)
+    }
+    const deldept = (id) => {
+        dispatch(Deldept(id))
+     
+    }
 
     useEffect(() => {
         dispatch(Getcomcat())
         dispatch(Getbillcat())
         dispatch(Getcercat())
         dispatch(Getmetercat())
+        dispatch(Getdept())
     }, [dispatch])
 
     return (
@@ -128,6 +145,8 @@ const Categories = () => {
                                 <FormControlLabel value='meterype' label={<Typography variant="h4" color={colors.greenAccent[600]}> Meter Type</Typography>} control={<Radio onClick={(e) => handler(3)} />}></FormControlLabel>
 
                                 <FormControlLabel value='certificatetype' label={<Typography variant="h4" color={colors.greenAccent[600]}> Certificate Type</Typography>} control={<Radio onClick={(e) => handler(4)} />}></FormControlLabel>
+
+                                <FormControlLabel value='department' label={<Typography variant="h4" color={colors.greenAccent[600]}> Department</Typography>} control={<Radio onClick={(e) => handler(5)} />}></FormControlLabel>
 
                             </RadioGroup>
                         </FormControl>
@@ -385,6 +404,69 @@ const Categories = () => {
                                 )}
                             </Formik>
                         </Box>
+                    }
+                    {
+                         status === 5 &&
+                         <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
+                             <Formik initialValues={dept} validationSchema={validationdept}  onSubmit={subdept}>
+                                 {(props) => (
+                                     <Form>
+                                         <Typography variant="h2" mt="5px" color="initial">Add Department</Typography>
+                                         <Field as={TextField}
+ 
+                                             sx={styles.textfield}
+                                             name="deptType"
+                                             label="Add Department"
+                                             variant='standard'
+                                             type="text"
+                                             color='secondary'
+                                             placeholder='Enter Department..'
+                                             InputLabelProps={{ style: { fontSize: 20 } }}
+                                             InputProps={{
+                                                 startAdornment: (<InputAdornment position="start"> <SpeakerNotesTwoTone color='secondary' /></InputAdornment>)
+                                             }}
+ 
+                                         />
+                                         <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='deptType' />}</Typography>
+                                         <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
+                                         <Box mt="10px" mb="20px">
+                                             <TableContainer >
+                                                 <Table size="medium" >
+                                                     <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
+                                                         <TableRow>
+                                                             <TableCell>Name</TableCell>
+                                                             <TableCell>Delete</TableCell>
+                                                         </TableRow>
+                                                     </TableHead>
+                                                     <TableBody sx={{ backgroundColor: colors.grey[600] }}>
+ 
+                                                         {getdept <= 0 ? <TableRow>
+                                                             <TableCell colSpan={2}>
+                                                                 <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Department Added</Typography>
+                                                             </TableCell>
+                                                         </TableRow>
+                                                             :
+                                                             getdept?.map((data) => (
+                                                                 <TableRow key={data._id}>
+                                                                     <TableCell >{data.deptType}</TableCell>
+ 
+                                                                     <TableCell >
+                                                                         <IconButton aria-label="correct" color="error" onClick={() => { deldept(data._id) }} >
+                                                                             <DeleteForeverTwoTone />
+                                                                         </IconButton>
+ 
+                                                                     </TableCell>
+                                                                 </TableRow>
+                                                             ))
+                                                         }
+                                                     </TableBody>
+                                                 </Table>
+                                             </TableContainer>
+                                         </Box>
+                                     </Form>
+                                 )}
+                             </Formik>
+                         </Box>
                     }
                 </Box>
             </main>

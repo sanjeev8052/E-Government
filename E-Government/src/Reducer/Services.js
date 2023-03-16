@@ -272,6 +272,52 @@ export const userServicesReducer = createReducer(initialState, {
 
     },
 
+      // for dept
+    addDeptRequset: (state) => {
+        state.loading = true;
+    },
+    addDeptSuccess: (state, action) => {
+        state.loading = false;
+        state.dept = action.payload;
+
+    },
+   addDeptFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+
+    // for get Dept
+    getDeptRequset: (state) => {
+        state.loading = true;
+    },
+    getDeptSuccess: (state, action) => {
+        state.loading = false;
+        state.getdept = action.payload;
+
+    },
+    getDeptFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+
+    // for delete certificate category
+    delDeptRequset: (state) => {
+        state.loading = true;
+    },
+    delDeptSuccess: (state, action) => {
+        state.loading = false;
+        state.deldept= action.payload;
+
+    },
+    delDeptFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+
+
     
 
 })

@@ -27,7 +27,7 @@ import Aforgetpassword from './components/Admin/Aforgetpassword'
 import AdminComplaint from './components/Admin/AdminComplaint'
 import User from './components/Admin/User'
 import Categories from './components/Admin/Categories'
-import Cate from './components/Admin/Cate'
+import Feedback from './components/Admin/Feedback'
 
 
 // Employee
@@ -90,9 +90,10 @@ const App = () => {
               <Route path="/auser" element={<User />} />
               <Route path="/spiner" element={<Loader />} />
               <Route path="/Categories" element={<Categories />} />
-              <Route path="/Cate" element={<Cate />} />
               <Route path="/assign" element={<AssignCom/>} />
               <Route path="/assigncom/:_id" element={<AssignModel/>} />
+              <Route path="/feedback" element={<Feedback  />} />
+
 
 
                {/* Employee */}

@@ -240,3 +240,63 @@ export const Delcercat  = (id) => async (dispatch) =>{
     }
 }
 
+export const Adddept  = (deptType) => async (dispatch) =>{
+    try {
+        dispatch({
+            type: "addDeptRequset"
+        })
+        const {data} = await axios.post(`/api/admin/adddept`, deptType)
+
+        dispatch({
+            type: "addDeptSuccess",
+            payload: data
+        })
+        dispatch(Getdept())
+        
+    } catch (error) {
+        dispatch({
+            type: "addDeptFailuer",
+            payload: error
+        })
+    }
+}
+
+export const Getdept = () => async (dispatch) =>{
+    try {
+        dispatch({
+            type: "getDeptRequset"
+        })
+        const {data} = await axios.get(`/api/admin/getdept`)
+
+        dispatch({
+            type: "getDeptSuccess",
+            payload: data
+        })
+        
+    } catch (error) {
+        dispatch({
+            type: "getDeptFailuer",
+            payload: error
+        })
+    }
+}
+
+export const Deldept  = (id) => async (dispatch) =>{
+    try {
+        dispatch({
+            type: "delDeptRequset"
+        })
+        const {data} = await axios.delete(`/api/admin/deletedept/${id}`)
+
+        dispatch({
+            type: "delDeptSuccess",
+            payload: data
+        })
+        dispatch(Getdept())
+    } catch (error) {
+        dispatch({
+            type: "delDeptFailuer",
+            payload: error
+        })
+    }
+}

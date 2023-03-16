@@ -53,14 +53,10 @@ router.post("/elogin", [
     const { email, password } = req.body;
     try {
         let emptoken;
-        const emp = await Employee.findOne({ email });
-        const status = await Employee.find({ status: "block" })
+        const emp = await Employee.findOne({ email:email , status:undefined , request:false });
         if (!emp) {
             return res.status(404).json({ message: "Email is not Found" })
         }
-        else if (status) {
-            return res.status(404).json({ message: "You are Blocked" })
-         }
         else {
             const chpassword = await bcrypt.compare(password, emp.password);
 
