@@ -103,6 +103,8 @@ const AdminSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+             <Typography variant="h5" color={colors.grey[500]} sx={{m:"10px 0 5px 15px"}}
+            >Complaint</Typography>
             <Item
               title="Complaint"
               to="/acomplaint"
@@ -113,6 +115,13 @@ const AdminSidebar = () => {
             <Item
               title=" Assign Complaint"
               to="/assign"
+              icon={<SpeakerNotesTwoTone />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Completed Complaint"
+              to="/completecom"
               icon={<SpeakerNotesTwoTone />}
               selected={selected}
               setSelected={setSelected}

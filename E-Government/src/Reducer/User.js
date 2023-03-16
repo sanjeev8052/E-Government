@@ -96,5 +96,17 @@ export const userReducer = createReducer(initialState, {
         state.loading = false;
         state.error = action.payload;
     },
+    // For deisplay feedback
+    getFeedbackRequest: (state) => {
+        state.loading = true;
+    },
+    getFeedbackSuccess: (state, action) => {
+        state.loading = false;
+        state.getfeedback = action.payload
+    },
+    getFeedbackFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
    
 })

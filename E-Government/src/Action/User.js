@@ -141,5 +141,25 @@ export const updateProfile = (user,id) => async (dispatch) => {
 
 }
 
+export const Getfeedback = () => async (dispatch) => {
+     try {
+        dispatch({
+            type: "getFeedbackRequest",
+        })
+             const {data}  = await  axios.get(`api/getfeedback`)
+
+        dispatch({
+            type: "getFeedbackSuccess",
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type: "getFeedbackFailuer",
+            payload: error
+        })
+    }
+
+}
+
 
 
