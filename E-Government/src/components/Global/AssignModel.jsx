@@ -8,8 +8,10 @@ import * as Yup from 'yup'
 import { Button } from '@material-ui/core'
 import { Box, useTheme, Dialog, DialogTitle, DialogContent, DialogActions, Typography, FormControl, InputLabel, Select, MenuItem, TextareaAutosize } from '@mui/material'
 import { tokens } from '../../Global'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { Getdept } from '../../Action/Admin/Categories';
 const useStyle = makeStyles({
   input: {
     width: "100%",
@@ -23,38 +25,42 @@ const useStyle = makeStyles({
 
 
 const AssignModel = () => {
-  const [emp, setEmp] = useState([]);
-  const [dept, setDept] = useState({ })
 
-  console.log(dept)
-    
-  
+
+  const dispatch = useDispatch()
+  const { getdept, loading } = useSelector((state) => (state.services))
+
+  const [emp, setEmp] = useState([]);
+  const [dept, setDept] = useState({})
   const classes = useStyle()
   const themes = useTheme()
   const colors = tokens(themes.palette.mode)
   const { _id } = useParams();
   const [details, setDetails] = useState({})
-
+  
+  const navigate = useNavigate()
   useEffect(() => {
+    dispatch(Getdept())
     loaddetails()
   }, [])
+  console.log(dept)
   const loaddetails = async () => {
     const response = await axios.get(`/api/admin/compdata/${_id}`)
     setDetails(response.data)
   }
-
-
   const handleDetpt = async (e) => {
-
     const deptValue = e.target.value
-    const {data} = await axios.get(`/api/admin/deptwise?d=${deptValue}`)
+    const { data } = await axios.get(`/api/admin/deptwise?d=${deptValue}`)
     setDept(deptValue)
     setEmp(data)
   }
   const initialvalue = {
-    
+
   }
- 
+
+  const Back = () => {
+    navigate('/assign')
+  }
   const validationSchema = Yup.object().shape({
     // city: Yup.string().required("Please Fill This Field"),
     // streetAddress: Yup.string().required("Please Fill This Field"),
@@ -71,7 +77,8 @@ const AssignModel = () => {
 
     onSubmit: (values) => {
 
-       axios.post("/api/admin/assigncom",{empId:values.empId ,compId:details._id})
+      axios.post("/api/admin/assigncom", { empId: values.empId, compId: details._id })
+      // navigate('/assign')
       //dispatch(CompReq(user, values))
     }
 
@@ -102,9 +109,9 @@ const AssignModel = () => {
 
             }}>
               <form onSubmit={handleSubmit}>
+              <Typography variant="h6" color="initial">City :-</Typography>
                 <TextField
                   className={classes.input}
-                  label="City"
                   placeholder='City'
                   variant='outlined'
                   size='small'
@@ -113,10 +120,10 @@ const AssignModel = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                 <Typography variant="h6" color="initial">Street Address :-</Typography>
                 <TextField
                   className={classes.input}
                   id=""
-                  label="StreetAddress"
                   placeholder='Street Address '
                   variant='outlined'
                   size='small'
@@ -125,6 +132,7 @@ const AssignModel = () => {
                   onBlur={handleBlur}
                   value={details.streetAddress}
                 />
+                 <Typography variant="h6" color="initial">Area Name :-</Typography>
                 <TextField
                   className={classes.input}
                   id=""
@@ -140,7 +148,8 @@ const AssignModel = () => {
                 <TextareaAutosize
                   className={classes.input}
                   name="complaintDesc"
-                  id="" minRows={3}
+                   minRows={3}
+                  maxRows={3}
                   value={details.complaintDesc}
                   onBlur={handleBlur}
 
@@ -160,9 +169,14 @@ const AssignModel = () => {
                     onChange={handleDetpt}
 
                   >
-                    <MenuItem value="road">Road</MenuItem>
+                    {
+                      getdept?.map((data) => (
+                        <MenuItem value={data.deptType}>{data.deptType}</MenuItem>
+                      ))
+                    }
+                    {/* <MenuItem value="road">Road</MenuItem>
                     <MenuItem value="Water">Water</MenuItem>
-                    <MenuItem value="Drain">Drain</MenuItem>
+                    <MenuItem value="Drain">Drain</MenuItem> */}
                   </Select>
                 </FormControl>
                 <FormControl fullWidth variant="standard" sx={{ marginBottom: "2rem" }} InputLabelProps={{ style: { fontSize: 20 } }} size="small">
@@ -180,15 +194,15 @@ const AssignModel = () => {
                     }
                   </Select>
                 </FormControl>
-                <Button variant='contained' color='primary' type='submit'>
-                  Asign
+                <Button variant='contained' color='primary' type='submit'sx={{ mt :"8px" }}>
+                  Assign
                 </Button>
               </form>
             </Box>
           </DialogContent>
-          <DialogActions sx={{ ml: "10px" }}>
-            <Button color="error" variant="contained" sx={{ borderRadius: "100px", mr: '10px', mb: '5px' }}>
-              Close
+          <DialogActions sx={{ ml: "10px"  }}>
+            <Button color="error" variant="contained" sx={{ borderRadius: "100px", mr: '10px', mb: '5px' }} onClick={Back} >
+              Back
             </Button>
           </DialogActions>
         </Dialog>

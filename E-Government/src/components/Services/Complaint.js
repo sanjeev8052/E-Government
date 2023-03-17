@@ -16,6 +16,7 @@ import Loader from '../Layout/Loader'
 import { CompReq } from '../../Action/Services/Services';
 import axios from 'axios';
 import { getUser } from '../../Action/Admin/User';
+import { Getdept } from '../../Action/Admin/Categories';
 
 
 const useStyles = makeStyles({
@@ -33,7 +34,7 @@ const useStyles = makeStyles({
     backgroundColor: "white",
     boxShadow: "3px 3px 6px ",
     borderRadius: "10px",
-    border:" solid 1px black"
+    border: " solid 1px black"
 
   },
   compField: {
@@ -41,7 +42,7 @@ const useStyles = makeStyles({
   },
   userField: {
     padding: '2rem',
-    backgroundColor:"gray",
+    backgroundColor: "gray",
     borderRadius: "0 0 10px 10px",
   },
 
@@ -70,7 +71,7 @@ const useStyles = makeStyles({
 
 const Complaint = () => {
   const { userData, userLoading, isAuthenticated } = useSelector(state => state.user)
-
+  const { getdept } = useSelector((state) => (state.services))
   const themes = useTheme()
   const colors = tokens(themes.palette.mode)
 
@@ -84,6 +85,7 @@ const Complaint = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(Getdept())
 
     userData ? setUser({
       email: userData.email,
@@ -137,12 +139,17 @@ const Complaint = () => {
               onChange={handleChange}
               name="complaintType"
             >
-              <MenuItem value={"Roads & Footpath"}>Roads & Footpath</MenuItem>
+              {
+                getdept?.map((data) => (
+                  <MenuItem value={data.deptType}>{data.deptType}</MenuItem>
+                ))
+              }
+              {/* <MenuItem value={"Roads & Footpath"}>Roads & Footpath</MenuItem>
               <MenuItem value={"Water Suppy"}>Water Suppy</MenuItem>
               <MenuItem value={"Street Light"}>Street Light</MenuItem>
               <MenuItem value={"Dead Animals"}>Dead Animals</MenuItem>
               <MenuItem value={"Public Park And Garden"}>Public Park And Garden</MenuItem>
-              <MenuItem value={"Food Safety Act"}>Food Safety Act</MenuItem>
+              <MenuItem value={"Food Safety Act"}>Food Safety Act</MenuItem> */}
             </Select>
           </FormControl>
 

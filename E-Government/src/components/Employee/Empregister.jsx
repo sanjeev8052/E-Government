@@ -1,17 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Grid from '@mui/material/Grid'
+import Loader from '../Layout/Loader'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
-import { TextField, Typography, Radio, FormControl, FormLabel, RadioGroup, FormControlLabel, Button, InputAdornment, IconButton , Select ,MenuItem, InputLabel} from '@mui/material'
+import { TextField, Typography, Radio, FormControl, FormLabel, RadioGroup, FormControlLabel, Button, InputAdornment, IconButton, Select, MenuItem, InputLabel } from '@mui/material'
 import { LoginRounded, LocalPhoneTwoTone, VisibilityTwoTone, VisibilityOffTwoTone, PasswordTwoTone, Person3TwoTone, EmailTwoTone } from '@mui/icons-material'
 import * as Yup from 'yup'
 import signup from '../Images/Icons/signup1.jpg'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Register } from '../../Action/Employee/register'
+import { Getdept } from '../../Action/Admin/Categories'
 
 
 
 const Empregister = () => {
   const dispatch = useDispatch()
+  const { getdept, loading } = useSelector((state) => (state.services))
   const details = {
     name: "",
     email: "",
@@ -112,8 +115,13 @@ const Empregister = () => {
   }
   const emailpattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
+  useEffect(() => {
+    dispatch(Getdept())
+  }, [dispatch])
+
+
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("!! Please Enter Your Name..").min(5, "!! Too Short..").max(8, "!! Very Long..."),
+    name: Yup.string().required("!! Please Enter Your Name..").min(5, "!! Too Short..").max(15, "!! Very Long..."),
     email: Yup.string().email("!! Enter a Valid Email").required("!! Please Enter Email.. ").matches(emailpattern, "!! Enter Email Properly"),
     gender: Yup.string().oneOf(["male", "female"], "!! Please Select Gender..").required("!! Please Select Gender.."),
     phone: Yup.number().typeError("!! Please Enter Valid Phone Number..").required("!! Please Enter Phone Number..").positive("A phone number can't start with a minus").integer("A phone number can't include a decimal point").min(10, "Enter 10 Digit Only"),
@@ -126,155 +134,157 @@ const Empregister = () => {
   }
   return (
     <>
-      <Grid container sx={styles.main}>
-        <Grid row sx={styles.Box} >
-          <Formik initialValues={details} onSubmit={onSubmit} validationSchema={validationSchema}>
-            {
-              (props) => (
-                <Form>
-                  <Typography variant="h4" color="primary" >Sign Up</Typography>
+      {loading ? <Loader /> :
+        <Grid container sx={styles.main}>
+          <Grid row sx={styles.Box} >
+            <Formik initialValues={details} onSubmit={onSubmit} validationSchema={validationSchema}>
+              {
+                (props) => (
+                  <Form>
+                    <Typography variant="h3" color="primary" >Sign Up</Typography>
 
-                  <Field as={TextField}
-                    sx={styles.textfield}
-                    name="name"
-                    label="Name"
-                    variant='standard'
-                    type="text"
-                    color='secondary'
-                    placeholder='Enter Your Name..'
-                    InputLabelProps={{ style: { fontSize: 20 } }}
-                    InputProps={{
-                      startAdornment: (<InputAdornment position="start"> <Person3TwoTone color='secondary' /></InputAdornment>)
-                    }}
-
-                  />
-                  <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='name' />}</Typography>
-                  <Field as={TextField}
-                    sx={styles.textfield}
-                    name="email"
-                    label="Email"
-                    type="email"
-                    variant='standard'
-                    color='secondary'
-                    placeholder='Enter Your Email..'
-
-                    InputLabelProps={{ style: { fontSize: 20 } }}
-                    InputProps={{
-                      startAdornment: (<InputAdornment position="start"> <EmailTwoTone color='secondary' /></InputAdornment>)
-                    }}
-
-                  />
-                  <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='email' />}</Typography>
-                  <FormControl>
-                    <FormLabel id="gender-label" color='secondary' component="legend">Gender</FormLabel>
-                    <Field as={RadioGroup} row
-                      aria-labelledby="gender"
-                      defaultValue="female"
-                      name="gender"
+                    <Field as={TextField}
+                      sx={styles.textfield}
+                      name="name"
+                      label="Name"
+                      variant='standard'
+                      type="text"
                       color='secondary'
-                    >
-                      <FormControlLabel value="female" control={<Radio color='secondary' />} label="Female" />
-                      <FormControlLabel value="male" control={<Radio color='secondary' />} label="Male" />
-                    </Field>
-                  </FormControl>
-                  <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='gender' />}</Typography>
-
-                  <Field as={TextField}
-                    name="phone"
-                    label="Phone No."
-                    sx={styles.textfield}
-                    type="number"
-                    variant='standard'
-                    placeholder='Enter Your Phone No.'
-                    color='secondary'
-                    InputLabelProps={{ style: { fontSize: 20 } }}
-                    InputProps={{
-                      startAdornment: (<InputAdornment position="start"> <LocalPhoneTwoTone color='secondary' /></InputAdornment>)
-                    }}
-
-                  />
-                  <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='phone' />}</Typography>
-                  <FormControl fullWidth variant="standard" InputLabelProps={{ style: { fontSize: 20 } }} size="small">
-                    <InputLabel>Department</InputLabel>
-                    <Field as={Select}
-
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      name="dept"
-                      label="Department"
+                      placeholder='Enter Your Name..'
                       InputLabelProps={{ style: { fontSize: 20 } }}
-                      placeholder="select Department"
-                      
-                    >
-                      <MenuItem value={"Road"}>Road</MenuItem>
-                      <MenuItem value={"Water"}>Water</MenuItem>
-                      <MenuItem value={"Drain"}>Draint</MenuItem>
-                    </Field>
-                  </FormControl>
-                  <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='dept' />}</Typography>
+                      InputProps={{
+                        startAdornment: (<InputAdornment position="start"> <Person3TwoTone color='secondary' /></InputAdornment>)
+                      }}
 
-                  <Field as={TextField}
-                    name="password"
-                    label="Password"
-                    sx={styles.textfield}
-                    variant='standard'
-                    placeholder='Enter Your Password..'
+                    />
+                    <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='name' />}</Typography>
+                    <Field as={TextField}
+                      sx={styles.textfield}
+                      name="email"
+                      label="Email"
+                      type="email"
+                      variant='standard'
+                      color='secondary'
+                      placeholder='Enter Your Email..'
 
-                    type={type}
-                    color="secondary"
-                    InputLabelProps={{ style: { fontSize: 20 } }}
-                    InputProps={{
-                      startAdornment: (<InputAdornment position="start"> <PasswordTwoTone color='secondary' /></InputAdornment>)
-                      ,
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton aria-label="icon" color="secondary" onClick={showclick}>
-                            {icon}
-                          </IconButton>
-                        </InputAdornment>
-                      )
-                    }}
+                      InputLabelProps={{ style: { fontSize: 20 } }}
+                      InputProps={{
+                        startAdornment: (<InputAdornment position="start"> <EmailTwoTone color='secondary' /></InputAdornment>)
+                      }}
 
-                  />
-                  <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='password' />}</Typography>
-                  <Field as={TextField}
-                    name="cpassword"
-                    label="Confirm Password"
-                    sx={styles.textfield}
-                    variant='standard'
-                    placeholder='Enter Your Comfirm Password'
+                    />
+                    <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='email' />}</Typography>
+                    <FormControl>
+                      <FormLabel id="gender-label" color='secondary' component="legend">Gender</FormLabel>
+                      <Field as={RadioGroup} row
+                        aria-labelledby="gender"
+                        defaultValue="female"
+                        name="gender"
+                        color='secondary'
+                      >
+                        <FormControlLabel value="female" control={<Radio color='secondary' />} label="Female" />
+                        <FormControlLabel value="male" control={<Radio color='secondary' />} label="Male" />
+                      </Field>
+                    </FormControl>
+                    <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='gender' />}</Typography>
 
-                    type={type}
-                    color="secondary"
-                    InputLabelProps={{ style: { fontSize: 20 } }}
-                    InputProps={{
-                      startAdornment: (<InputAdornment position="start"> <PasswordTwoTone color='secondary' /></InputAdornment>)
-                      ,
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton aria-label="icon" color="secondary" onClick={showclick}>
-                            {icon}
-                          </IconButton>
-                        </InputAdornment>
-                      )
-                    }}
+                    <Field as={TextField}
+                      name="phone"
+                      label="Phone No."
+                      sx={styles.textfield}
+                      type="number"
+                      variant='standard'
+                      placeholder='Enter Your Phone No.'
+                      color='secondary'
+                      InputLabelProps={{ style: { fontSize: 20 } }}
+                      InputProps={{
+                        startAdornment: (<InputAdornment position="start"> <LocalPhoneTwoTone color='secondary' /></InputAdornment>)
+                      }}
 
-                  />
-                  <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='cpassword' />}</Typography>
-                  <Button type="submit" sx={styles.btn} variant="contained" color="secondary" endIcon={<LoginRounded />} >
-                    Sign Up
-                  </Button>
-                </Form>
-              )
-            }
-          </Formik>
+                    />
+                    <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='phone' />}</Typography>
+                    <FormControl fullWidth variant="standard" InputLabelProps={{ style: { fontSize: 20 } }} size="small">
+                      <InputLabel>Department</InputLabel>
+                      <Field as={Select}
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        name="dept"
+                        label="Department"
+                        InputLabelProps={{ style: { fontSize: 20 } }}
+                        placeholder="select Department"
+
+                      >
+                        {
+                          getdept?.map((data) =>(
+                            <MenuItem value={data.billsType}>{data.billsType}</MenuItem>
+                          ))
+                        }
+                      </Field>
+                    </FormControl>
+                    <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='dept' />}</Typography>
+
+                    <Field as={TextField}
+                      name="password"
+                      label="Password"
+                      sx={styles.textfield}
+                      variant='standard'
+                      placeholder='Enter Your Password..'
+
+                      type={type}
+                      color="secondary"
+                      InputLabelProps={{ style: { fontSize: 20 } }}
+                      InputProps={{
+                        startAdornment: (<InputAdornment position="start"> <PasswordTwoTone color='secondary' /></InputAdornment>)
+                        ,
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton aria-label="icon" color="secondary" onClick={showclick}>
+                              {icon}
+                            </IconButton>
+                          </InputAdornment>
+                        )
+                      }}
+
+                    />
+                    <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='password' />}</Typography>
+                    <Field as={TextField}
+                      name="cpassword"
+                      label="Confirm Password"
+                      sx={styles.textfield}
+                      variant='standard'
+                      placeholder='Enter Your Comfirm Password'
+
+                      type={type}
+                      color="secondary"
+                      InputLabelProps={{ style: { fontSize: 20 } }}
+                      InputProps={{
+                        startAdornment: (<InputAdornment position="start"> <PasswordTwoTone color='secondary' /></InputAdornment>)
+                        ,
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton aria-label="icon" color="secondary" onClick={showclick}>
+                              {icon}
+                            </IconButton>
+                          </InputAdornment>
+                        )
+                      }}
+
+                    />
+                    <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='cpassword' />}</Typography>
+                    <Button type="submit" sx={styles.btn} variant="contained" color="secondary" endIcon={<LoginRounded />} >
+                      Sign Up
+                    </Button>
+                  </Form>
+                )
+              }
+            </Formik>
+          </Grid>
+          <Grid row sx={styles.Box1} >
+            <img src={signup} alt="" style={styles.img} />
+          </Grid>
         </Grid>
-        <Grid row sx={styles.Box1} >
-          <img src={signup} alt="" style={styles.img} />
-        </Grid>
-      </Grid>
 
-
+      }
     </>
   )
 }

@@ -319,6 +319,50 @@ export const userServicesReducer = createReducer(initialState, {
 
     },
 
+      // for Add Bills
+      addBillRequset: (state) => {
+        state.loading = true;
+    },
+    addBillSuccess: (state, action) => {
+        state.loading = false;
+        state.addbill = action.payload;
+
+    },
+   addBillFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+
+    // for get Pending Bill
+    getPendingBillRequset: (state) => {
+        state.loading = true;
+    },
+    getPendingBillSuccess: (state, action) => {
+        state.loading = false;
+        state.getpenbill = action.payload;
+
+    },
+    getPendingBillFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+    // for get Paid Bill
+    getPaidBillRequset: (state) => {
+        state.loading = true;
+    },
+    getPaidBillSuccess: (state, action) => {
+        state.loading = false;
+        state.getpaidbill = action.payload;
+
+    },
+    getPaidBillFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+
 
     
 

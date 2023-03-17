@@ -5,7 +5,7 @@ import { Box, IconButton, Typography, useTheme } from '@mui/material'
 import Logo from '../Images/Icons/login.png';
 import { Link } from 'react-router-dom'
 import { tokens } from "../../Global";
-import {  MenuOutlined, DashboardTwoTone, CoPresentTwoTone, FactCheckTwoTone, Groups2TwoTone, SpeakerNotesTwoTone, CategoryTwoTone, CommentTwoTone } from '@mui/icons-material';
+import {  MenuOutlined, DashboardTwoTone, CoPresentTwoTone, FactCheckTwoTone, Groups2TwoTone, SpeakerNotesTwoTone, CategoryTwoTone, CommentTwoTone, ReceiptTwoTone } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -103,6 +103,8 @@ const AdminSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+             <Typography variant="h5" color={colors.grey[500]} sx={{m:"10px 0 5px 15px"}}
+            >Complaint</Typography>
             <Item
               title="Complaint"
               to="/acomplaint"
@@ -118,6 +120,13 @@ const AdminSidebar = () => {
               setSelected={setSelected}
             />
             <Item
+              title="Completed Complaint"
+              to="/completecom"
+              icon={<SpeakerNotesTwoTone />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Users"
               to="/auser"
               icon={<Groups2TwoTone />}
@@ -128,6 +137,27 @@ const AdminSidebar = () => {
               title="Categories"
               to="/categories"
               icon={<CategoryTwoTone />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Add Bills"
+              to="/abills"
+              icon={<ReceiptTwoTone />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Pending Bills"
+              to="/pbills"
+              icon={<ReceiptTwoTone />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Paid Bills"
+              to="/pabills"
+              icon={<ReceiptTwoTone />}
               selected={selected}
               setSelected={setSelected}
             />
