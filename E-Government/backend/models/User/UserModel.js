@@ -28,6 +28,12 @@ const userSchema = mongoose.Schema({
         required: true,
 
     },
+    paidBills:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"bills"
+        }
+    ],
 
     gender: String,
     DOB: Date,

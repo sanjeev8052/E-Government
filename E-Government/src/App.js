@@ -27,6 +27,10 @@ import AdminComplaint from './components/Admin/AdminComplaint'
 import User from './components/Admin/User'
 import Categories from './components/Admin/Categories'
 import Feedback from './components/Admin/Feedback'
+import CompletedComplaint from './components/Admin/CompletedComplaint'
+import Bills from './components/Admin/Bills'
+import PendingBills from './components/Admin/PendingBills'
+import PaidBills from './components/Admin/PaidBills'
 import UserHeader from './components/User/UserHeader/UserHeader'
 
 
@@ -38,7 +42,6 @@ import Work from './components/Employee/Work'
 // Others
 import AssignModel from './components/Global/AssignModel'
 import Loader from './components/Layout/Loader'
-import Feedback from './components/Admin/Feedback'
 
 // Services
 import MeterApply from './components/Services/MeterApply'
@@ -94,6 +97,11 @@ const App = () => {
               <Route path="/assign" element={<AssignCom/>} />
               <Route path="/assigncom/:_id" element={<AssignModel/>} />
               <Route path="/feedback" element={<Feedback  />} />
+              <Route path="/completecom" element={<CompletedComplaint />} />
+              <Route path="/abills" element={<Bills />} />
+              <Route path="/pbills" element={<PendingBills />} />
+              <Route path="/pabills" element={<PaidBills />} />
+              
 
 
 

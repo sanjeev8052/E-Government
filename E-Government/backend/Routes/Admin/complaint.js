@@ -62,8 +62,6 @@ router.post('/acceptcomplaint/:_id', isAuthenticate, async (req, res) => {
         }
         complaint.status = "Accepted"
         await complaint.save()
-        // const acceptcomp = await AcceptedComplaint.create(complaint.toJSON())
-        // const deletecomp = await UserComplaint.deleteOne({ _id: req.params._id })
         res.status(200).json({
             success: true,
             message: "Accepted Complaint"
