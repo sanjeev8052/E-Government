@@ -21,10 +21,10 @@ export const userReducer = createReducer(initialState, {
         state.LoginError = action.payload;
         state.isAuthenticated = false
     },
-    ClearMessage: (state) => {
+    ClearLoginMessage: (state) => {
         state.message = null;
         state.LoginError = null;
-        state.error = null;
+        
     },
 
 
@@ -34,14 +34,21 @@ export const userReducer = createReducer(initialState, {
     },
     RagisterSuccess: (state, action) => {
         state.loading = false;
-        state.data = action.payload;
-
+        state.message = action.payload;
+ 
     },
     RagisterFailuer: (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.regisetrError = action.payload;
 
     },
+    ClearRegisterMessage: (state) => {
+        state.message = null;
+        state.regisetrError = null;
+      
+    },
+
+    
 
     // UserLoad Reducers........
     UserLoadRequest: (state) => {
@@ -96,5 +103,30 @@ export const userReducer = createReducer(initialState, {
         state.loading = false;
         state.error = action.payload;
     },
-   
+
+
+    LoadProfileImageRequest: (state) => {
+        state.loading = true;
+    },
+    LoadProfileImageSuccess: (state, action) => {
+        state.loading = false;
+        state.profileImage = action.payload
+    },
+    LoadProfileImageFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        
+    },
+    UpdateImageRequest: (state) => {
+        state.loading = true;
+    },
+    UpdateImageSuccess: (state, action) => {
+        state.loading = false;
+        state.data = action.payload
+    },
+    UpdateImageFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
 })

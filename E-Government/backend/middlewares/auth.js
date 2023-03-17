@@ -1,5 +1,6 @@
 const  User = require('../models/User/UserModel')
 const jwt = require('jsonwebtoken');
+const Employee = require('../models/Emp/Employee');
 exports.isAuthenticatedUser = async (req, res, next)=>{
     try {
         const {token} = req.cookies;
@@ -23,15 +24,16 @@ exports.isAuthenticatedUser = async (req, res, next)=>{
 
 exports.isAuthenticatedEmp = async (req, res, next)=>{
     try {
-        const {empToken} = req.cookies;
+        const {emptoken} = req.cookies;
+       
     
-    if(!token){
+    if(!emptoken){
                 return res
                 .status(401)
                 .json({message:" Please login first"})
             }
-         const decoded = jwt.verify(token,process.env.SECRET_KEY)
-         req.emp = await User.findById(decoded._id)
+         const decoded = jwt.verify(emptoken,process.env.SECRET_KEY)
+         req.emp = await Employee.findById(decoded._id)
           next();
     } catch (error) {
         res.status(500).json({

@@ -20,9 +20,9 @@
 .img {
     display: block;
     width: 12rem;
-    border: solid 1px black;
+   
     border-radius: 30px;
-    margin-left: auto;
+    box-shadow: 3px 3px 6px;
 }
 input::file-selector-button {
     visibility: hidden;

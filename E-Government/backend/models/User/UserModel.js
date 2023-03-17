@@ -5,7 +5,6 @@ const crypto = require('crypto')
 
 const userSchema = mongoose.Schema({
     avatar: {
-        type: String,
         public_id: String,
         url: String
     },

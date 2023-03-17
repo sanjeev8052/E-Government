@@ -33,15 +33,16 @@ export const Employee = createReducer(initialState, {
 
     },
     // For Login
-    GetEMppRequest: (state) => {
+    
+    GetEmpRequest: (state) => {
         state.loading = true;
     },
-    GetEMppSuccess: (state, action) => {
+    GetEmpSuccess: (state, action) => {
         state.loading = false;
         state.getEmpData = action.payload;
 
     },
-    GetEMppFailuer: (state, action) => {
+    GetEmpFailuer: (state, action) => {
         state.loading = false;
         state.error = action.payload;
 

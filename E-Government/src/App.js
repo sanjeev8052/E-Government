@@ -3,7 +3,7 @@ import './App.css'
 import Register from './components/User/Register'
 import Login from './components/User/Login'
 import Home from './components/Home/Home'
-import { LoadUser } from './Action/User'
+import { getProfileImage, LoadUser } from './Action/User'
 import UserForgotPassword from './components/User/ForgotPassword'
 import Profile from './components/User/Profile'
 import ResetPassword from './components/User/ResetPassword'
@@ -38,7 +38,6 @@ import Work from './components/Employee/Work'
 // Others
 import AssignModel from './components/Global/AssignModel'
 import Loader from './components/Layout/Loader'
-import Feedback from './components/Admin/Feedback'
 
 // Services
 import MeterApply from './components/Services/MeterApply'
@@ -53,6 +52,7 @@ const App = () => {
   useEffect(() => {
     dispatch(LoadUser())
     dispatch(LoadAdmin())
+    dispatch(getProfileImage())
   }, [dispatch])
 
   return (

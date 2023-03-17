@@ -140,6 +140,57 @@ export const updateProfile = (user,id) => async (dispatch) => {
 
 
 }
+export const getProfileImage = () => async (dispatch) => {
+
+    try {
+        dispatch({
+            type: "LoadProfileImageRequest",
+
+        })
+             const {data}  = await  axios.get(`api/profile/image`)
+
+        dispatch({
+            type: "LoadProfileImageSuccess",
+
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type: "LoadProfileImageFailuer",
+
+            payload: error
+        })
+    }
+
+
+
+}
+export const updateProfileImage = (formData) => async (dispatch) => {
+
+    try {
+        dispatch({
+            type: "UpdateImageRequest",
+
+        })
+        const { data } = await axios.put('/api/upload/update', formData)
+
+        dispatch({
+            type: "UpdateImageSuccess",
+
+            payload:data
+        })
+
+        dispatch(getProfileImage())
+    } catch (error) {
+        dispatch({
+            type: "UpdateImageFailuer",
+            payload: error
+        })
+    }
+
+
+
+}
 
 
 

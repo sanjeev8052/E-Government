@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt")
 
 const jwt = require('jsonwebtoken');
 const { isAuthenticatedEmp } = require("../../middlewares/auth");
+const UserComplaint = require("../../models/User/UserComplaint");
 
 // For Employee Register
 router.post("/tempemployee", [
@@ -29,7 +30,7 @@ router.post("/tempemployee", [
             res.status(401).json({ error: "Email is already Exist" })
         }
         else {
-            const empregister = new Employee({ name, email, gender, phone, password, dept , request:true})
+            const empregister = new Employee({ name, email, gender, phone, password, dept, request: true })
             await empregister.save();
             res.status(201).json({ msg: "Successfully Send Register Requst to Admin" })
         }
@@ -54,7 +55,7 @@ router.post("/elogin", [
     const { email, password } = req.body;
     try {
         let emptoken;
-        const emp = await Employee.findOne({ email:email , status:undefined , request:false });
+        const emp = await Employee.findOne({ email: email, status: undefined, request: false });
         if (!emp) {
             return res.status(404).json({ message: "Email is not Found" })
         }
@@ -99,12 +100,71 @@ router.get("/logoutemp", async (req, res) => {
 
 })
 
-router.get("/get/profile", isAuthenticatedEmp ,async (req, res) => {
+router.get("/get/eProfile", isAuthenticatedEmp, async (req, res) => {
     try {
-        
-            const emp = await Employee.findById(req.emp)
-            res.status(200).send(emp)
 
+        const emp = await Employee.findById(req.emp).populate("complaints")
+        res.status(200).send(emp)
+
+    } catch (error) {
+        res
+            .status(500)
+            .json({ success: false, Error: error.message })
+    }
+})
+// router.get("/get/comp/asign", isAuthenticatedEmp, async (req, res) => {
+//     try {
+
+//         const emp = await Employee.findById(req.emp).populate("complaints")
+//         res.status(200).send(emp)
+
+//     } catch (error) {
+//         res
+//             .status(500)
+//             .json({ success: false, Error: error.message })
+//     }
+// })
+router.post("/comp/copmlete", isAuthenticatedEmp, async (req, res) => {
+    try {
+
+        const emp = await Employee.findById(req.emp).populate("complaints")
+        const empComp =  emp.complaints
+        res.send(empComp)
+
+        
+    } catch (error) {
+        res
+            .status(500)
+            .json({ success: false, Error: error.message })
+    }
+})
+
+
+
+router.get("/comp/complete/:_id", isAuthenticatedEmp, async (req, res) => {
+
+    const complaint = await UserComplaint.findById(req.params.id)
+    try {
+
+        const complaint = await UserComplaint.findById(req.params._id)
+        if (!complaint) {
+            return res
+                .status(404)
+                .json({ success: false, message: "complaint not found..." })
+        }
+        complaint.status = "complete"
+        await complaint.save()
+
+
+        // if (post.likes.includes(req.user._id)) {
+        //     const index = post.likes.indexOf(req.user._id)
+        //     post.likes.splice(index, 1)
+        //     await post.save();
+
+        //     return res
+        //         .status(200)
+        //         .json({ success: true, message: "post UnLiked" })
+        // }
     } catch (error) {
         res
             .status(500)
@@ -112,5 +172,8 @@ router.get("/get/profile", isAuthenticatedEmp ,async (req, res) => {
     }
 
 })
+
+
+
 
 module.exports = router

@@ -41,3 +41,23 @@ export const Login = (details) => async (dispatch) => {
         })
     }
 }
+export const getEmpDetails = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: "GetEmpRequest"
+        })
+        const { data } = await axios.get(`api/employee/get/eProfile`)
+
+        dispatch({
+            type: "GetEmpSuccess",
+            payload: data
+        })
+       
+
+    } catch (error) {
+        dispatch({
+            type: "GetEmpFailuer",
+            payload: error
+        })
+    }
+}

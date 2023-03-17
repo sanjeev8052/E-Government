@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 
 export default function AccountMenu() {
   const { userData, userLoading } = useSelector(state => state.user)
-
+  const { error, profileImage  } = useSelector(state => state.user)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -61,7 +61,7 @@ export default function AccountMenu() {
 
         <MenuItem >
         
-          <img style={{ width: '10rem', height: '10rem', margin:"auto" , borderRadius:"20%" , border:"solid 2px black" }} src={profileDP} alt='Avetar' />
+          <img style={{ width: '10rem', height: '10rem', margin:"auto" , borderRadius:"20%" , border:"solid 2px black" }} src={profileImage} alt='Avetar' />
         </MenuItem>   <MenuItem >
           <ListItemIcon >
             <Person />

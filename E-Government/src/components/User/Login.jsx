@@ -9,10 +9,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { userLogin } from '../../Action/User'
 import { useAlert } from 'react-alert'
 import { useFormik } from 'formik'
-import { signUpSchema } from '../../ValidateSchema/User'
 import loginuimage from '../../Images/login.jpg'
 import bgImage from '../../Images/bgImage3.jpg'
 import Footer from '../Layout/Footer/Footer'
+import { signInSchema } from '../../ValidateSchema/User'
 
 
 const Login = () => {
@@ -82,13 +82,13 @@ const Login = () => {
     useEffect(() => {
         if (message) {
             alert.success(message)
-            dispatch({ type: "ClearMessage" })
+            dispatch({ type: "ClearLoginMessage" })
         }
 
         if (LoginError) {
             alert.error(LoginError.response.data.message)
 
-            dispatch({ type: "ClearMessage" })
+            dispatch({ type: "ClearLoginMessage" })
         }
     }, [message, LoginError, alert, dispatch])
 
@@ -116,15 +116,11 @@ const Login = () => {
     }
 
     const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
-
         initialValues: initialValues,
-        validationSchema: signUpSchema,
-
+        validationSchema: signInSchema,
         onSubmit: (values) => {
             dispatch(userLogin(values))
-
         }
-
     })
 
 

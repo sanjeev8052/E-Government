@@ -1,6 +1,8 @@
 import { FormControl, FormControlLabel, FormLabel, makeStyles, Radio, RadioGroup, TextField, Typography, Button, InputAdornment } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import './Profile.css'
+import { Avatar, } from '@material-ui/core';
+
 import AvatarImage from '../../Images/Avatar.png'
 import Footer from '../Layout/Footer/Footer'
 import { Done, Edit, Email, KeyboardReturn, Person, PhoneAndroid } from '@mui/icons-material'
@@ -9,44 +11,38 @@ import { useFormik } from 'formik'
 import { updateProfile } from '../../Action/User'
 import { useAlert } from 'react-alert'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import UpadateImagedialog from './UpadateImagedialog'
+import { Skeleton } from '@mui/material';
+
+
 
 const useStyle = makeStyles({
     input: {
         margin: "0.5rem   0 2rem 0",
         width: "100%"
     },
-    addimage: {
+    Avatar: {
 
+        height: "15rem",
+        width: "15rem",
     }
+
+
 })
 const Profile = () => {
     const style = useStyle();
+    const { profileImage, loading } = useSelector(state => state.user)
 
-
-    const [image, setImage] = useState();
-    const handleImage = (e) => {
-        const file = e.target.files[0];
-
-        const reader = new FileReader();
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                setImage(reader.result)
-            }
-        }
-        reader.readAsDataURL(file)
-
-    }
-    const { userData, error,  editMessage } = useSelector(state => state.user)
+    const { userData, error, } = useSelector(state => state.user)
     const [user, setUser] = useState({});
     const alert = useAlert();
     const dispatch = useDispatch();
-   
+
 
     useEffect(() => {
         userData ? setUser(userData) : null
     }, [userData]);
-
-
     const handleInput = (e) => {
         const { value, name } = e.target
 
@@ -78,18 +74,15 @@ const Profile = () => {
                     <div className="main ">
 
                         <div className="row m-5">
-                            <div className="col-sm-6 profileBox">
-                                <img className='img' src={image ? image : AvatarImage} alt="" />
-                                <div style={{ display: "flex", marginTop: "2rem", justifyItems: "center" }}>
-                                    <input
-                                        id=""
-                                        label=""
-                                        type='file'
-                                        onChange={handleImage}
-                                    />
-                                    {image && <Button variant="text" size='small' color="default">
-                                        click  <Edit />
-                                    </Button>}
+                            <div className="col-sm-6 " style={{display:"flex" ,justifyContent:"center"}}>
+
+                                <div className="row">
+                                    <div className="col-lg-12">
+                                       {loading ?  <Skeleton sx={{width:"12rem", height:"12rem"}}/>: <img className='img' src={profileImage ? profileImage : AvatarImage} alt="" />}
+                                    </div>
+                                    <div className="col-lg-12" style={{margin:"2rem  0 0 3.2rem"}}>
+                                        <UpadateImagedialog />
+                                    </div>
                                 </div>
 
                             </div>
