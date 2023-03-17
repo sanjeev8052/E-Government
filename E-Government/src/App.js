@@ -45,7 +45,7 @@ import Loader from './components/Layout/Loader'
 
 // Services
 import MeterApply from './components/Services/MeterApply'
-import BillPay from './components/Services/BillPay'
+import BillPay from './components/Services/BillPayment/BillPay'
 import Complaint from './components/Services/Complaint'
 
 const App = () => {

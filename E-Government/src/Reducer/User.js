@@ -106,7 +106,7 @@ export const userReducer = createReducer(initialState, {
 
 
     LoadProfileImageRequest: (state) => {
-        state.loading = true;
+        state.loading = false;
     },
     LoadProfileImageSuccess: (state, action) => {
         state.loading = false;
