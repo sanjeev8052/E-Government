@@ -20,3 +20,6 @@ export const meterSchema = yup.object({
     complaintDesc: yup.string().min(10).required("Please Enter Your Description..... "),
 })
 
+export const billPaySchema = yup.object({
+tenament_No: yup.number().min(1000000000,['Phone no is not valid']).max(9999999999,['Phone no is not valid']).required(),
+})

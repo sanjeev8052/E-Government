@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("/addbills", async (req, res) => {
     try {
         const { billType, ownerName, tenamentNo, streetAddress, area, amount } = req.body;
-        const bills = new Bills({billType, ownerName, tenamentNo, streetAddress, area, amount , status: "Pending"})
+        const bills = new Bills({ billType, ownerName, tenamentNo, streetAddress, area, amount, status: "Pending" })
         await bills.save();
         res.status(200).json({
             success: true,
@@ -55,6 +55,9 @@ router.post('/paybills', isAuthenticate, async (req, res) => {
         if (!User) {
             return res.status(401).json({ message: "User Not Found" })
         }
+        console.log(bills)
+        console.log(User)
+
         User.paidBills.push(bills)
         await User.save()
         bills.status = "Paid"
@@ -72,12 +75,21 @@ router.post('/paybills', isAuthenticate, async (req, res) => {
 
 
 // For Search Bill
-router.get("/searchbills", async (req, res) => {
+router.post("/searchbills", async (req, res) => {
     try {
-        const tenament = req.query.t;
-        const result = await Bills.find({ tenamentNo: tenament })
-        res.status(200).json(result)
+        const tenamentNo = req.body.tno;
+        const billType = req.body.billType
+
+        const bill = await Bills.find({ tenamentNo, billType, status: "Pending" })
+
+        if (bill < 1) {
+            return res
+                .status(404)
+                .json({message:"Invalid Input Enterd or No bill due.... "})
+        }
+        res.status(200).send(bill)
     } catch (error) {
+
         res.status(500).json({
             error: error.message
         })

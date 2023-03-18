@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TextField, InputAdornment, Typography, Button, FormControlLabel, Checkbox, Grid } from '@mui/material'
-import { Person, Login, Email, Password, Phone } from '@mui/icons-material'
+import { Person, Login, Email, Password, Phone, CloudDone } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { userRegister } from '../../Action/User'
-import bgImage from '../../Images/bgImage3.jpg'
+import { useDispatch, useSelector } from 'react-redux'
 import signUpImage from '../../Images/bgImage4.jpg'
 import Footer from '../Layout/Footer/Footer'
+import { useFormik } from 'formik'
+import { signUpSchema } from '../../ValidateSchema/User'
+import { userRegister } from '../../Action/User'
+import { useAlert } from 'react-alert'
 const Register = () => {
-    const styles = { 
-        mainBox:{
-            width:"100vw",
-            height:"55vh",
-            paddingTop:"6rem",
+    const styles = {
+        mainBox: {
+            width: "100vw",
+            height: "55vh",
+            paddingTop: "6rem",
             background: "linear-gradient(to top right ,rgb(48, 94, 234),rgb(214, 245, 214))",
             backgroundSize: "cover"
         },
@@ -39,7 +41,7 @@ const Register = () => {
             width: '100%',
             margin: "10px 0",
             padding: '5px 0',
-            color:"white"
+            color: "white"
         },
 
         account: {
@@ -62,98 +64,141 @@ const Register = () => {
 
         }
     }
-    const [user, setUser] = useState({
+
+    const alert = useAlert()
+    const [checked, setChecked] = useState(false);
+    const dispatch = useDispatch();
+    const { message , regisetrError, loading } = useSelector(state => state.user)
+    console.log(regisetrError)
+    useEffect(() => {
+        if (data) {
+            alert.success(data.message)
+            dispatch({
+                type: "ClearRegisterMessage"
+            })
+        }
+        if (error) {
+            alert.error(regisetrError.response.data.message)
+            dispatch({
+                type: "ClearRegisterMessage"
+            })
+        }
+    }, [data, regisetrError]);
+
+    const initialvalues = {
         name: "",
         phone: "",
         email: "",
         password: "",
-        cpassword: ""
+        confirm_password: ""
+    }
+    const { values, touched, errors, handleBlur, handleChange, handleSubmit, } = useFormik({
+        initialValues: initialvalues,
+        validationSchema: signUpSchema,
+        onSubmit: (values) => {
+            checked ? dispatch(userRegister(values)) : alert(" Pleas Check Terms and Condition")
+        }
     })
-    const handleInput = (event) => {
-        const { value, name } = event.target
-        setUser({
-            ...user,
-            [name]: value
-        })
-    }
 
-    const dispatch = useDispatch();
-    const handleSubmit =()=>{
-         dispatch(userRegister(user))
-    }
-   
     return (
         <Grid sx={styles.mainBox}>
             <Grid sx={styles.BoxStyle}>
 
-               
-         <form style={styles.signUpBox}>
-         <Typography variant="h2" mb={3}>Create Account</Typography>
-     
-     <TextField sx={styles.inputStyle}
-         InputLabelProps={{ style: { fontSize: 20 } }}
-         InputProps={{ startAdornment: (<InputAdornment position="start">  <Person /> </InputAdornment>) }}
-         label='Enter Name' variant='standard'
-         name="name"
-         value={user.name}
-         onChange={handleInput}
-     />
 
-     <TextField sx={styles.inputStyle}
-         InputLabelProps={{ style: { fontSize: 20 } }}
-         InputProps={{ startAdornment: (<InputAdornment position="start">  <Phone /> </InputAdornment>) ,}}
-         label='Enter Mobile No' variant='standard'
-         name="phone"
-         value={user.phone}
-         onChange={handleInput}
-     />
+                <form onSubmit={handleSubmit} style={styles.signUpBox}>
+                    <Typography variant="h2" mb={3}>Create Account</Typography>
 
-     <TextField sx={styles.inputStyle}
-         InputLabelProps={{ style: { fontSize: 20 } }}
-         InputProps={{ startAdornment: (<InputAdornment position="start">  <Email /> </InputAdornment>) }}
-         label='Enter Email' variant='standard'
-         name="email"
-         value={user.email}
-         onChange={handleInput}
-     />
+                    <TextField sx={styles.inputStyle}
+                        InputLabelProps={{ style: { fontSize: 20 } }}
+                        InputProps={{ startAdornment: (<InputAdornment position="start">  <Person /> </InputAdornment>) }}
+                        label='Enter Name' variant='standard'
+                        name="name"
+                        value={values.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+                    {errors.name && touched.name ? (
+                        <Typography color="red">{errors.name}</Typography>
+                    ) : null}
 
-     <TextField sx={styles.inputStyle}
-         InputLabelProps={{ style: { fontSize: 20 } }} type='password'
-         InputProps={{ startAdornment: (<InputAdornment position="start">  <Password /> </InputAdornment>) }}
-         label='Enter Password' variant='standard'
-         name="password"
-         value={user.password}
-         onChange={handleInput}
-     />
+                    <TextField sx={styles.inputStyle}
+                        InputLabelProps={{ style: { fontSize: 20 } }}
+                        InputProps={{ startAdornment: (<InputAdornment position="start">  <Phone /> </InputAdornment>), }}
+                        label='Enter Mobile No' variant='standard'
+                        name="phone"
+                        value={values.phone}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
 
-     <TextField sx={styles.inputStyle}
-         InputLabelProps={{ style: { fontSize: 20 } }} type='password'
-         InputProps={{ startAdornment: (<InputAdornment position="start">  <Password /> </InputAdornment>) }}
-         label='Confirm Password' variant='standard'
-         name="cpassword"
-         value={user.cpassword}
-         onChange={handleInput}
-     />
-     <FormControlLabel
-         label="I agree to the terms and condition "
-         control={
-             <Checkbox
-                 value=""
-                 color="primary"
-             />
-         }
-     />
-     <Button sx={{ width: "100%" }} onClick={handleSubmit} variant="contained" color="primary">
-         Register
-     </Button>
+                    />
+                    {errors.phone && touched.phone ? (
+                        <Typography color="red">{errors.phone}</Typography>
+                    ) : null}
 
-     <Typography sx={{ marginTop: "2rem" }} >Have an already account <Button component={Link} to='/login' variant="text" endIcon={<Login />}>
-         Login
-     </Button> </Typography>
-         </form>
-         <img src={signUpImage} style={styles.LoginImage} alt="" />
+                    <TextField sx={styles.inputStyle}
+                        InputLabelProps={{ style: { fontSize: 20 } }}
+                        InputProps={{ startAdornment: (<InputAdornment position="start">  <Email /> </InputAdornment>) }}
+                        label='Enter Email' variant='standard'
+                        name="email"
+                        value={values.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+
+                    />
+                    {errors.email && touched.email ? (
+                        <Typography color="red">{errors.email}</Typography>
+                    ) : null}
+                    <TextField sx={styles.inputStyle}
+                        InputLabelProps={{ style: { fontSize: 20 } }} type='password'
+                        InputProps={{ startAdornment: (<InputAdornment position="start">  <Password /> </InputAdornment>) }}
+                        label='Enter Password' variant='standard'
+                        name="password"
+                        value={values.password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+
+                    />
+                    {errors.password && touched.password ? (
+                        <Typography color="red">{errors.password}</Typography>
+                    ) : null}
+                    <TextField sx={styles.inputStyle}
+                        InputLabelProps={{ style: { fontSize: 20 } }} type='password'
+                        InputProps={{ startAdornment: (<InputAdornment position="start">  <Password /> </InputAdornment>) }}
+                        label='Confirm Password' variant='standard'
+                        name="confirm_password"
+                        value={values.confirm_password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+
+                    />
+                    {errors.confirm_password && touched.confirm_password ? (
+                        <Typography color="red">{errors.confirm_password}</Typography>
+                    ) : null}
+                    <FormControlLabel
+                        label="I agree to the terms and condition "
+                        control={
+                            <Checkbox
+                                onChange={(e) => setChecked(e.target.checked)}
+                                checked={checked}
+                                name="term"
+                                color="primary"
+
+                            />
+                        }
+                    />
+
+
+                    <Button sx={{ width: "100%" }} type='submit' variant="contained" color="primary">
+                        Register
+                    </Button>
+
+                    <Typography sx={{ marginTop: "2rem" }} >Have an already account <Button component={Link} to='/login' variant="text" endIcon={<Login />}>
+                        Login
+                    </Button> </Typography>
+                </form>
+                <img src={signUpImage} style={styles.LoginImage} alt="" />
             </Grid>
-            <Footer/>
+            <Footer />
         </Grid>
     )
 }

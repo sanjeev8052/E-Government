@@ -3,7 +3,7 @@ import Carousel from '../Layout/Carousel'
 import Header from '../Layout/Header/Header'
 import Footer  from '../Layout/Footer/Footer'
 import './Home.css'
-import Card from '../../Card'
+import Card from '../Layout/Card'
 import Typography from '@mui/material/Typography'
 import { useSelector } from 'react-redux'
 

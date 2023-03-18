@@ -66,6 +66,7 @@ export const accCompReq = (id) => async (dispatch) => {
             payload: data
         })
 
+        dispatch(getCompReq())
     } catch (error) {
         dispatch({
             type: "AcceptCompReqFailuer",
@@ -141,6 +142,7 @@ export const rejCompReq = (id) => async (dispatch) => {
             payload: data
         })
 
+        dispatch(getCompReq())
     } catch (error) {
         dispatch({
             type: "RejectCompReqFailuer",

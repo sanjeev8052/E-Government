@@ -15,12 +15,93 @@ cloudinary.config({
     secure: true
 });
 
-router.post("/upload", async (req, res) => {
-    const file = req.files.image
+router.post("/upload", isAuthenticatedUser, async (req, res) => {
+    try {
 
-    const result = await cloudinary.uploader.upload(file.tempFilePath)
-    console.log(result)
+        const file = req.files.image
+        const user = req.user
+        if (!file) {
+            return res
+                .status(400)
+                .json({ sucsess: false, message: "Somthing Went Wroung..." })
+        }
+        const { public_id, url } = await cloudinary.uploader.upload(file.tempFilePath, {
+            folder: "User_Profile"
+        })
+        const avatar = {
+            public_id,
+            url
+        }
+        user.avatar = avatar
+        await user.save();
+        res.status(200).json({
+            success: true,
+            message: " Profile Added"
+        })
 
+    } catch (error) {
+
+    }
+
+})
+router.put("/upload/update", isAuthenticatedUser, async (req, res) => {
+    try {
+
+
+        const file = req.files.image
+        const user = req.user
+        const p_id = req.user.avatar.public_id
+        if (!file) {
+            return res
+                .status(400)
+                .json({ sucsess: false, message: "Somthing Went Wroung..." })
+        }
+        const { public_id, url } = await cloudinary.uploader.upload(file.tempFilePath, {
+            public_id: p_id,
+            overwrite: true
+        })
+        const avatar = {
+            public_id,
+            url
+        }
+        user.avatar = avatar
+        await user.save();
+        res.status(200).json({
+            success: true,
+            message: " Profile Updated"
+        })
+
+    } catch (error) {
+
+    }
+})
+router.delete("/upload/delete", isAuthenticatedUser, async (req, res) => {
+    try {
+
+        const user = req.user
+        const avatar = {
+            public_id: undefined,
+            url: undefined
+        }
+        user.avatar = avatar
+        await user.save();
+        res.status(200).json({
+            success: true,
+            message: " Profile Image Deleted"
+        })
+
+    } catch (error) {
+
+    }
+})
+router.get("/profile/image", isAuthenticatedUser, async (req, res) => {
+    try {
+
+        const avatar = req.user.avatar.url
+        res.status(200).send(avatar)
+    } catch (error) {
+
+    }
 })
 
 
@@ -42,12 +123,12 @@ router.post("/user/new/", async (req, res) => {
         user.save();
         await sendEmail({
             email: user.email,
-            subject: "Register Succesfull",
+            subject: "Register Successfull",
             message
         });
         res.status(201).json({
             sucsess: true,
-            user
+            message : "Register Success."
         })
     } catch (error) {
         res.status(500).json({ sucsess: false, message: error.message })
@@ -59,7 +140,7 @@ router.post("/user/login", async (req, res) => {
     try {
         const { email, password } = req.body
 
-        let user = await User.findOne({ email:email , status:undefined }).select("+password");
+        let user = await User.findOne({ email: email, status: undefined }).select("+password");
         // let statuses = await User.find({ status: "block" })
         if (!user) {
             return res

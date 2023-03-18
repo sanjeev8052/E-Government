@@ -1,13 +1,12 @@
 import React from 'react'
 var Slider = require('react-slick');
 import { Button, makeStyles, Typography } from '@material-ui/core'
-import complaintImage from './Images/complaint.jpg'
-import billPayImage from './Images/billpay.jpg'
-import certificateImage from './Images/certificate.png'
-import meterImage from './Images/meter.png'
+import complaintImage from '../../Images/complaint.jpg'
+import billPayImage from '../../Images/billpay.jpg'
+import certificateImage from '../../Images/certificate.png'
+import meterImage from '../../Images/meter.png'
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import Menu from '@mui/material/Menu';
-import bgImage from './Images/bgImage3.jpg'
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 
@@ -88,9 +87,8 @@ const Card = () => {
                                         Bill payment
                                     </Button>
                                     <Menu  {...bindMenu(popupState)}>
-                                        <MenuItem onClick={popupState.close}>Profile</MenuItem>
-                                        <MenuItem onClick={popupState.close}>My account</MenuItem>
-                                        <MenuItem onClick={popupState.close}>Logout</MenuItem>
+                                        <MenuItem component={Link} to='/billPay'>New Payment</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Your Transactions</MenuItem>
                                     </Menu>
                                 </React.Fragment>
                             )}

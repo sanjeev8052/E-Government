@@ -2,26 +2,13 @@ const { isAuthenticate } = require('../../middlewares/Adminmiddle');
 const { isAuthenticatedUser } = require('../../middlewares/auth');
 const UserComplaint = require('../../models/User/UserComplaint');
 const express = require("express");
+const { sendEmail } = require('../../middlewares/sendEmail')
+
 
 const AssignComplaint = require('../../models/Admin/AssignComplaint');
-const CompleteComplaint = require('../../models/Emp/CompleteCom');
 const Employee = require('../../models/Emp/Employee');
 const router = express.Router();
 
-// get asign Complaint 
-
-router.get("/getasignWork", async (req, res) => {
-    try {
-         const employee = await Employee.findById("6411ee7b3f9795bbb64433be").populate('complaints')
-        // if (!employee) {
-        //     return res.status(404).json({ message: "Employee Not Find" })
-        // }
-        // return res.status(200).json(employee)
-        res.send(employee)
-    } catch (error) {
-        res.status(500).json({ error: error.message })
-    }
-})
 // For Complaint Request
 
 router.post('/comp/req', isAuthenticatedUser, async (req, res) => {
@@ -62,10 +49,18 @@ router.post('/acceptcomplaint/:_id', isAuthenticate, async (req, res) => {
         }
         complaint.status = "Accepted"
         await complaint.save()
+        // const acceptcomp = await AcceptedComplaint.create(complaint.toJSON())
+        // const deletecomp = await UserComplaint.deleteOne({ _id: req.params._id })
+        const message = " your Complaint is Accepted..."
         res.status(200).json({
             success: true,
             message: "Accepted Complaint"
         })
+        await sendEmail({
+            email: complaint.email,
+            subject: "Complaint Accepted...",
+            message
+        });
     } catch (error) {
         res.status(500).json({
             error: error.message
@@ -80,10 +75,16 @@ router.delete("/rejectcomplaint/:_id", isAuthenticate, async (req, res) => {
         res.status(401).json({ message: "Complaint not Found" })
     }
     const rejcomplaint = await UserComplaint.deleteOne({ _id: req.params._id })
+    const message = " your Complaint is Rejected Due TO Some Reason..."
     res.status(200).json({
         success: true,
         message: "Successfully Rejected Complaint"
     })
+    await sendEmail({
+        email: complaint.email,
+        subject: "Complaint Rejected...",
+        message
+    });
 
 })
 
@@ -120,12 +121,13 @@ router.get("/compdata/:_id", async (req, res) => {
 
 router.post("/assigncom", async (req, res) => {
     try {
-        console.log(req.body)
+       
          const complaint = await UserComplaint.findById(req.body.compId)
          const emp = await Employee.findById(req.body.empId )
         emp.complaints.push(complaint)
         await emp.save()
         complaint.status = "asign"
+        await complaint.save()
         
     } catch (error) {
         res
