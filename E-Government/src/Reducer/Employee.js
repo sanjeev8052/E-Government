@@ -32,7 +32,7 @@ export const Employee = createReducer(initialState, {
         state.error = action.payload;
 
     },
-    // For Login
+    // For Get Details
     
     GetEmpRequest: (state) => {
         state.loading = true;
@@ -47,5 +47,44 @@ export const Employee = createReducer(initialState, {
         state.error = action.payload;
 
     },
+
+    
+    UpdateEmpProfileRequest: (state) => {
+        state.loading = true;
+    },
+    UpdateEmpProfileSuccess: (state, action) => {
+        state.loading = false;
+        state.empEditMessage = action.payload
+    },
+    UpdateEmpProfileFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+
+    LoadEmpProfileImageRequest: (state) => {
+        state.loading = false;
+    },
+    LoadEmpProfileImageSuccess: (state, action) => {
+        state.loading = false;
+        state.empProfileImage = action.payload
+    },
+    LoadEmpProfileImageFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        
+    },
+    UpdateEmpImageRequest: (state) => {
+        state.loading = true;
+    },
+    UpdateEmpImageSuccess: (state, action) => {
+        state.loading = false;
+        state.Empudata = action.payload
+    },
+    UpdateEmpImageFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
 
 });

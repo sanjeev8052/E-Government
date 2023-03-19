@@ -38,19 +38,37 @@ const User = () => {
                     </Box>
                     {
                             loading ? <Loader/> : 
-                            <Box alignItems="center" justifyContent="center" m="15px" >
+                            <Box alignItems="center" justifyContent="center" m="15px" 
+                            sx={{
+                                "& .MuiTable-root": {
+                                    border: "none"
+                                },
+                                "& .MuiTableCell-root": {
+                                    borderBottom: "none"
+                                },
+                                "& .name-column--cell": {
+                                    color: colors.greenAccent[300]
+                                },
+                                "& .MuiTableHead-root": {
+                                    backgroundColor: colors.blueAccent[400],
+                                    borderBottom: "none"
+                                }
+                            }}
+                            >
                                 <Typography variant="h3" color={colors.redAccent[600]}>User Details</Typography>
-                                <TableContainer sx={{ mt: "10px" }} component={Paper}>
+                                <TableContainer  component={Paper} sx={{mt: "10px",
+                                    height:"400px", overflow:"auto",  backgroundColor: colors.primary[600]
+                                }}>
                                     <Table size='small' >
                                         <TableHead  >
-                                            <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
+                                            <TableRow >
                                                 <TableCell>Name</TableCell>
                                                 <TableCell>Mobile No.</TableCell>
                                                 <TableCell>Email</TableCell>
                                                 <TableCell>Action</TableCell>
                                             </TableRow>
                                         </TableHead>
-                                        <TableBody>
+                                        <TableBody sx={{ backgroundColor: colors.primary[600]}}>
                                            
                                             {
                                         GetUser?.map((data) => (

@@ -32,12 +32,29 @@ const PaidBills = () => {
             </Box>
             {
                  loading ? <Loader /> :
-                <Box alignItems="center" justifyContent="center" m="15px" >
+                <Box alignItems="center" justifyContent="center" m="15px" 
+                sx={{
+                    "& .MuiTable-root": {
+                        border: "none"
+                    },
+                    "& .MuiTableCell-root": {
+                        borderBottom: "none"
+                    },
+                    "& .name-column--cell": {
+                        color: colors.greenAccent[300]
+                    },
+                    "& .MuiTableHead-root": {
+                        backgroundColor: colors.blueAccent[400],
+                        borderBottom: "none"
+                    }
+                }}
+
+                >
                     <Typography variant="h3" color={colors.redAccent[600]}>Paid Bill Details</Typography>
-                    <TableContainer sx={{ mt: "10px", minWidth: 200 }} component={Paper}>
+                    <TableContainer sx={{ mt: "10px", minWidth: 200 ,height:"400px", overflow:"auto",  backgroundColor: colors.primary[600] }} component={Paper}>
                         <Table size='small' >
                             <TableHead  >
-                                <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
+                                <TableRow >
                                     <TableCell>Bill Type</TableCell>
                                     <TableCell>Owner Name</TableCell>
                                     <TableCell>Tenament No.</TableCell>
@@ -46,7 +63,7 @@ const PaidBills = () => {
                                     <TableCell>Amount</TableCell>
                                 </TableRow>
                             </TableHead>
-                            <TableBody>
+                            <TableBody sx={{ backgroundColor: colors.primary[600]}}>
 
                                 {
                                     getpaidbill <= 0 ? <TableRow>

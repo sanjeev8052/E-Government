@@ -12,7 +12,8 @@ import { width } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import { getProfileImage, LoadUser, updateProfileImage } from '../../Action/User';
+import { getEmpProfileImage, getProfileImage, updateEmpProfileImage, updateProfileImage } from '../../Action/Employee/register';
+
 const useStyle = makeStyles({
     main: {
         textAlign: "center"
@@ -28,10 +29,10 @@ const useStyle = makeStyles({
 
 })
 
-const UpadateImagedialog = () => {
+const UpdateEmpImagedialogbox = () => {
     const [selectedFile, setSelectedFile] = React.useState()
-    const {  profileImage } = useSelector(state => state.user)
-    const [image, setImage] = React.useState(profileImage);
+    const {  empProfileImage } = useSelector(state => state.employee)
+    const [image, setImage] = React.useState(empProfileImage);
 
     const handleClose = () => {
         setOpen(false);
@@ -45,8 +46,8 @@ const UpadateImagedialog = () => {
 
     React.useEffect(() => {
         // userData ? setUser(userData) : null
-        profileImage ? setImage(profileImage) : null
-    }, [profileImage])
+        empProfileImage ? setImage(empProfileImage) : null
+    }, [empProfileImage])
 
 
 
@@ -68,7 +69,7 @@ const UpadateImagedialog = () => {
             const formData = new FormData();
             formData.append("image", selectedFile);
             handleClose();
-            dispatch(updateProfileImage(formData))
+            dispatch(updateEmpProfileImage(formData))
 
         } else {
             alert("Pleas First Select Image...")
@@ -79,9 +80,9 @@ const UpadateImagedialog = () => {
 
             const formData = new FormData();
             formData.append("image", selectedFile);
-            const { data } = await axios.post('api/upload', formData)
+            const { data } = await axios.post('api/employee/upload', formData)
             
-            data ? dispatch(getProfileImage()) : null
+            data ? dispatch(getEmpProfileImage()) : null
             data ? handleClose() : null
         } else {
             alert("Pleas First Select Image...")
@@ -89,8 +90,8 @@ const UpadateImagedialog = () => {
     }
     const handleDeleteImage = async () => {
 
-        const { data } = await axios.delete('api/upload/delete')
-        data ? dispatch(getProfileImage()) : null
+        const { data } = await axios.delete('api/employee/upload/delete')
+        data ? dispatch(getEmpProfileImage()) : null
         data ? handleClose() : null
     }
 
@@ -99,51 +100,50 @@ const UpadateImagedialog = () => {
 
     const handleClickOpen = () => {
         setOpen(true);
-        setImage(profileImage)
+        setImage(empProfileImage)
     };
 
+  return (
+    <div>
+    <Button variant="outlined" onClick={handleClickOpen}>
+        <CameraAlt />
+    </Button>
+    <Dialog open={open} onClose={handleClose}>
+        <DialogTitle> To manage your Profile Avatar</DialogTitle>
+        <DialogContent className={style.main}>
+            <Avatar src={image} className={style.Avatar} />
+            <TextField
 
-    return (
-        <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                <CameraAlt />
-            </Button>
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle> To manage your Profile Avatar</DialogTitle>
-                <DialogContent className={style.main}>
-                    <Avatar src={image} className={style.Avatar} />
-                    <TextField
+                sx={{ margin: "2rem 0 ", }}
+                id="name"
+                onChange={handleImage}
+                InputProps={{ startAdornment: (<InputAdornment position="start">   </InputAdornment>) }}
+                type="file"
 
-                        sx={{ margin: "2rem 0 ", }}
-                        id="name"
-                        onChange={handleImage}
-                        InputProps={{ startAdornment: (<InputAdornment position="start">   </InputAdornment>) }}
-                        type="file"
+            /> <br />
 
-                    /> <br />
+            {
+                empProfileImage ?
+                    <>
+                        <Button variant="contained" onClick={handleUpadteImage} color="primary">
+                            <Edit />
+                        </Button>
+                        <Button sx={{ margin: "0 1rem" }} onClick={handleDeleteImage} variant="contained" color="primary">
+                            <Delete />
+                        </Button>
+                    </>
+                    : <Button variant="contained" onClick={handleUploadImage} color="primary">
+                        <Add />
+                    </Button>
+            }
 
-                    {
-                        profileImage ?
-                            <>
-                                <Button variant="contained" onClick={handleUpadteImage} color="primary">
-                                    <Edit />
-                                </Button>
-                                <Button sx={{ margin: "0 1rem" }} onClick={handleDeleteImage} variant="contained" color="primary">
-                                    <Delete />
-                                </Button>
-                            </>
-                            : <Button variant="contained" onClick={handleUploadImage} color="primary">
-                                <Add />
-                            </Button>
-                    }
+        </DialogContent>
+        <DialogActions>
 
-                </DialogContent>
-                <DialogActions>
-
-                </DialogActions>
-            </Dialog>
-        </div>
-    );
+        </DialogActions>
+    </Dialog>
+</div>
+  )
 }
 
-export default UpadateImagedialog
+export default UpdateEmpImagedialogbox

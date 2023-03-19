@@ -139,8 +139,8 @@ export const themeSettings = (mode) => {
 
                     },
                     neutral: {
-                        main: colors.grey[500],
-                        dark: colors.grey[700],
+                        main: colors.grey[700],
+                        dark: colors.grey[500],
                         light: colors.grey[100]
                     },
                     background: {
@@ -150,7 +150,7 @@ export const themeSettings = (mode) => {
 
                 } : {
                     primary: {
-                        main: colors.blueAccent[600],
+                        main: colors.primary[100],
 
                     },
                     secondary: {
@@ -168,22 +168,22 @@ export const themeSettings = (mode) => {
                 }),
         },
         typography: {
-            fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
-            FontSize: 12,
+            fontFamily: ["Yrsa", "serif"].join(","),
+            fontSize:14,
             h1: {
-                fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+                fontFamily: ["Yrsa", "serif"].join(","),
                 fontSize: 40,
             },
             h2: {
-                fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+                fontFamily: ["Yrsa", "serif"].join(","),
                 fontSize: 32,
             },
             h3: {
-                fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+                fontFamily: ["Yrsa", "serif"].join(","),
                 fontSize: 24,
             },
             h4: {
-                fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+                fontFamily: ["Yrsa", "serif"].join(","),
                 fontSize: 20,
             },
             h5: {

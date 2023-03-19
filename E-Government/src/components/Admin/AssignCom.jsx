@@ -10,7 +10,7 @@ import Loader from '../Layout/Loader'
 import { tokens } from '../../Global'
 import { DangerousTwoTone, TaskTwoTone } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
-import {  getAccCom, loadCom,  } from '../../Action/Services/Services'
+import { getAccCom, loadCom, } from '../../Action/Services/Services'
 
 
 import Header from '../Global/Header'
@@ -29,10 +29,10 @@ const AssignCom = () => {
         dispatch(getAccCom())
     }, [isAuthenticated, dispatch, navigate])
 
-    const asign = (id) => { 
+    const asign = (id) => {
         dispatch(loadCom(id))
         navigate('/assigncom')
-     }
+    }
 
     return (
         <div className='app'>
@@ -45,10 +45,30 @@ const AssignCom = () => {
                         <Header title="Assign Complaint" subtitle="Welcome Your Assign Complaint Page" />
                     </Box>
                     {
-                    loading ? <Loader /> :
-                            <Box alignItems="center" justifyContent="center" m="15px" >
+                        loading ? <Loader /> :
+                            <Box alignItems="center" justifyContent="center" m="15px"
+                                sx={{
+                                    "& .MuiTable-root": {
+                                        border: "none"
+                                    },
+                                    "& .MuiTableCell-root": {
+                                        borderBottom: "none"
+                                    },
+                                    "& .name-column--cell": {
+                                        color: colors.greenAccent[300]
+                                    },
+                                    "& .MuiTableHead-root": {
+                                        backgroundColor: colors.blueAccent[400],
+                                        borderBottom: "none"
+                                    }
+                                }}
+
+                            >
                                 <Typography variant="h3" color={colors.redAccent[600]}>Complaint Details</Typography>
-                                <TableContainer sx={{ mt: "10px", minWidth: 200 }} component={Paper}>
+                                <TableContainer sx={{
+                                    mt: "10px",
+                                    height: "400px", overflow: "auto", backgroundColor: colors.primary[600]
+                                }} component={Paper}>
                                     <Table size='small' >
                                         <TableHead  >
                                             <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
@@ -60,7 +80,7 @@ const AssignCom = () => {
                                                 <TableCell>Actions</TableCell>
                                             </TableRow>
                                         </TableHead>
-                                        <TableBody>
+                                        <TableBody sx={{ backgroundColor: colors.primary[600]}}>
 
                                             {getAccReq <= 0 ? <TableRow>
                                                 <TableCell colSpan={6}>
@@ -78,7 +98,7 @@ const AssignCom = () => {
                                                           send
                                                         </Button> */}
                                                         <Link to={`/assigncom/${data._id}`}>
-                                                        <Button variant="contained" color="primary" size='small' sx={{ borderRadius: "100px" }} >Assign</Button>
+                                                            <Button variant="contained" color="primary" size='small' sx={{ borderRadius: "100px" }} >Assign</Button>
                                                         </Link>
                                                     </TableCell>
                                                 </TableRow>

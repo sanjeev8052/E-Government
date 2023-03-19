@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar"
+import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar"
 import 'react-pro-sidebar/dist/css/styles.css'
 import { Box, IconButton, Typography, useTheme } from '@mui/material'
 import Logo from '../Images/Icons/login.png';
 import { Link } from 'react-router-dom'
 import { tokens } from "../../Global";
-import {  MenuOutlined, DashboardTwoTone, CoPresentTwoTone, FactCheckTwoTone, Groups2TwoTone, SpeakerNotesTwoTone, CategoryTwoTone, CommentTwoTone, ReceiptTwoTone } from '@mui/icons-material';
+import { MenuOutlined, DashboardTwoTone, CoPresentTwoTone, FactCheckTwoTone, Groups2TwoTone, SpeakerNotesTwoTone, CategoryTwoTone, CommentTwoTone, ReceiptTwoTone } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -28,7 +28,7 @@ const AdminSidebar = () => {
   const [selected, setSelected] = useState("empLogin")
 
   return (
-    <Box  sx={{
+    <Box sx={{
       "& .pro-sidebar-inner": {
         background: `${colors.primary[400]} !important`
       },
@@ -44,6 +44,7 @@ const AdminSidebar = () => {
       "& .pro-menu-item.active": {
         color: "#6870fa !important"
       },
+
 
     }}>
       <ProSidebar collapsed={isCollapsed}>
@@ -87,45 +88,24 @@ const AdminSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Typography variant="h5" color={colors.grey[500]} sx={{m:"10px 0 5px 15px"}}
-            >Employees</Typography>
-            <Item
-              title="Empployee"
-              to="/aemployee"
-              icon={<CoPresentTwoTone />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="RequestedEmpployee"
-              to="/aremployee"
-              icon={<FactCheckTwoTone/>}
-              selected={selected}
-              setSelected={setSelected}
-            />
-             <Typography variant="h5" color={colors.grey[500]} sx={{m:"10px 0 5px 15px"}}
-            >Complaint</Typography>
-            <Item
-              title="Complaint"
-              to="/acomplaint"
-              icon={<SpeakerNotesTwoTone />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title=" Assign Complaint"
-              to="/assign"
-              icon={<SpeakerNotesTwoTone />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Completed Complaint"
-              to="/completecom"
-              icon={<SpeakerNotesTwoTone />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+
+            <Menu iconShape="square" style={{ color: colors.grey[100], backgroundColor: colors.primary[400] }} >
+              {/* <MenuItem>Employee</MenuItem> */}
+              <SubMenu title="Employee" icon={<CoPresentTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
+                <Item
+                  title="Empployee"
+                  to="/aemployee"
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="RequestedEmpployee"
+                  to="/aremployee"
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              </SubMenu>
+            </Menu>
             <Item
               title="Users"
               to="/auser"
@@ -133,6 +113,33 @@ const AdminSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+
+            <Menu iconShape="square" style={{ color: colors.grey[100], backgroundColor: colors.primary[400] }} >
+              {/* <MenuItem>Employee</MenuItem> */}
+              <SubMenu title="Complaint" icon={<SpeakerNotesTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
+                <Item
+                  title="Complaint"
+                  to="/acomplaint"
+
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title=" Assign Complaint"
+                  to="/assign"
+
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Completed Complaint"
+                  to="/completecom"
+
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              </SubMenu>
+            </Menu>
             <Item
               title="Categories"
               to="/categories"
@@ -140,27 +147,33 @@ const AdminSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Add Bills"
-              to="/abills"
-              icon={<ReceiptTwoTone />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pending Bills"
-              to="/pbills"
-              icon={<ReceiptTwoTone />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Paid Bills"
-              to="/pabills"
-              icon={<ReceiptTwoTone />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+
+            <Menu iconShape="square" style={{ color: colors.grey[100], backgroundColor: colors.primary[400] }} >
+              {/* <MenuItem>Employee</MenuItem> */}
+              <SubMenu title="Bills" icon={<ReceiptTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
+                <Item
+                  title="Add Bills"
+                  to="/abills"
+
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Pending Bills"
+                  to="/pbills"
+
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Paid Bills"
+                  to="/pabills"
+
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              </SubMenu>
+            </Menu>
             <Item
               title="Feedback"
               to="/feedback"
@@ -168,7 +181,7 @@ const AdminSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-          
+
           </Box>
         </Menu>
       </ProSidebar>

@@ -48,12 +48,12 @@ const Bills = () => {
     const styles = {
         Box: {
 
-            backgroundColor: "lightblue",
+            backgroundColor:  colors.primary[600],
             color: "black",
             width: "70%",
             margin: "5px auto",
             padding: "30px 30px",
-            borderRadius: "10px",
+            borderRadius: "10px",height: "400px", overflow: "auto",
             // boxShadow: "3px 3px 6px",
             // float: "left"
 
@@ -139,7 +139,7 @@ const Bills = () => {
                         <Header title="Add Bills" subtitle="Welcome To Add Bills Page" />
                     </Box>
                     <Box justifyContent="center" alignItems="center" display="flex">
-                        <Box sx={styles.Box}>
+                        <Box sx={styles.Box} >
                             <form onSubmit={handleSubmit}>
                                 <Typography variant="h3" sx={{ marginBottom: "20px" }} color="initial">New Bill</Typography>
                                 <FormControl fullWidth variant="standard" sx={{ marginBottom: "2rem" }} InputLabelProps={{ style: { fontSize: 20 } }} size="small">

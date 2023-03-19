@@ -45,8 +45,8 @@ const Employee = () => {
         <div className='app'>
             <AdminSidebar />
             <main className='content'>
-                 <AdminTopbar />
-            
+                <AdminTopbar />
+
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Employee" subtitle="Welcome Your Employee Details Page" />
@@ -54,49 +54,66 @@ const Employee = () => {
                         <BlockEmployee />
 
                     </Box>
+                    {
+                        loading ? <Loader /> :
+                            <Box m="40px 0 0 0" 
+                             sx={{
+                                "& .MuiTable-root": {
+                                    border: "none"
+                                },
+                                "& .MuiTableCell-root": {
+                                    borderBottom: "none"
+                                },
+                                "& .name-column--cell": {
+                                    color: colors.greenAccent[300]
+                                },
+                                "& .MuiTableHead-root": {
+                                    backgroundColor: colors.blueAccent[400],
+                                    borderBottom: "none"
+                                }
+                            }}
+                             >
+                                {/* <Typography variant="h3" color={colors.redAccent[600]}>Employees Details</Typography> */}
+                                <TableContainer component={Paper} sx={{
+                                    height:"400px", overflow:"auto",  backgroundColor: colors.primary[600]
+                                }} >
+                                    {
+                                        <Table size='small'  >
+                                            <TableHead  >
+                                                <TableRow >
+                                                    <TableCell>Name</TableCell>
+                                                    <TableCell>Email</TableCell>
+                                                    <TableCell>Gender</TableCell>
+                                                    <TableCell>Phone NO.</TableCell>
+                                                    <TableCell>Department</TableCell>
+                                                    <TableCell>Actions</TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody  sx={{ backgroundColor: colors.primary[600]}}>
 
-                    <Box alignItems="center" justifyContent="center" m="15px" />
 
+                                                {emp?.map((data) => (
+                                                    <TableRow key={data._id}>
+                                                        <TableCell className='name-column--cell'>{data.name}</TableCell>
+                                                        <TableCell >{data.email}</TableCell>
+                                                        <TableCell >{data.gender}</TableCell>
+                                                        <TableCell >{data.phone}</TableCell>
+                                                        <TableCell >{data.dept}</TableCell>
+                                                        <TableCell >
+                                                            <IconButton aria-label="block" color='error' onClick={() => { block(data._id) }}>
+                                                                <Block />
 
-                    <Box alignItems="center" justifyContent="center" m="15px">
-                        <Typography variant="h3" color={colors.redAccent[600]}>Employees Details</Typography>
-                        <TableContainer sx={{ mt: "10px", maxWidth: "md" }} component={Paper}  >
-                            {loading ? <Loader /> :
-                                <Table size='small'  >
-                                    <TableHead  >
-                                        <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
-                                            <TableCell>Name</TableCell>
-                                            <TableCell>Email</TableCell>
-                                            <TableCell>Gender</TableCell>
-                                            <TableCell>Phone NO.</TableCell>
-                                            <TableCell>Department</TableCell>
-                                            <TableCell>Actions</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
+                                                            </IconButton>
 
-
-                                        {emp?.map((data) => (
-                                            <TableRow key={data._id}>
-                                                <TableCell >{data.name}</TableCell>
-                                                <TableCell >{data.email}</TableCell>
-                                                <TableCell >{data.gender}</TableCell>
-                                                <TableCell >{data.phone}</TableCell>
-                                                <TableCell >{data.dept}</TableCell>
-                                                <TableCell >
-                                                    <IconButton aria-label="block" color='error' onClick={() => { block(data._id) }}>
-                                                        <Block />
-
-                                                    </IconButton>
-
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            }
-                        </TableContainer>
-                    </Box>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                ))}
+                                            </TableBody>
+                                        </Table>
+                                    }
+                                </TableContainer>
+                            </Box>
+                    }
                     <Box />
                 </Box>
             </main>

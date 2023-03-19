@@ -31,6 +31,7 @@ import CompletedComplaint from './components/Admin/CompletedComplaint'
 import Bills from './components/Admin/Bills'
 import PendingBills from './components/Admin/PendingBills'
 import PaidBills from './components/Admin/PaidBills'
+import Tester from './components/Admin/Tester'
 import UserHeader from './components/User/UserHeader/UserHeader'
 
 
@@ -38,6 +39,7 @@ import UserHeader from './components/User/UserHeader/UserHeader'
 import Empregister from './components/Employee/Empregister'
 import Emplogin from './components/Employee/Emplogin'
 import Work from './components/Employee/Work'
+import EProfile from './components/Employee/Profile'
 
 // Others
 import AssignModel from './components/Global/AssignModel'
@@ -47,6 +49,7 @@ import Loader from './components/Layout/Loader'
 import MeterApply from './components/Services/MeterApply'
 import BillPay from './components/Services/BillPayment/BillPay'
 import Complaint from './components/Services/Complaint'
+import { getEmpDetails, getEmpProfileImage } from './Action/Employee/register'
 
 const App = () => {
   const [theme, colorMode] = useMode()
@@ -56,7 +59,9 @@ const App = () => {
   useEffect(() => {
     dispatch(LoadUser())
     dispatch(LoadAdmin())
+    dispatch(getEmpDetails())
     dispatch(getProfileImage())
+    dispatch(getEmpProfileImage())
   }, [dispatch])
 
   return (
@@ -102,6 +107,7 @@ const App = () => {
               <Route path="/abills" element={<Bills />} />
               <Route path="/pbills" element={<PendingBills />} />
               <Route path="/pabills" element={<PaidBills />} />
+              <Route path="/tester" element={<Tester />} />
               
 
 
@@ -111,6 +117,7 @@ const App = () => {
                <Route path="/emplogin" element={<Emplogin/>} />
                <Route path='/empregister' element={<Empregister />} />
                <Route path='/work' element={<Work />} />
+               <Route path='/eprofile' element={<EProfile />} />
                {/* <Route path="/emp/register" element={<Empregister/>} /> */}
 
 

@@ -1,6 +1,7 @@
+
 import React, { useContext } from 'react'
 import { ColorModeContext, tokens } from "../../Global";
-import '../../index1.css'
+import './admin.css'
 import { Box, IconButton, useTheme, InputBase } from '@mui/material';
 
 import { LightModeOutlined, DarkModeOutlined, NotificationsOutlined, SettingsOutlined, PersonOutlined, SearchOutlined, DarkModeTwoTone, LightModeTwoTone, SearchTwoTone, NotificationsTwoTone, SettingsTwoTone, ManageAccountsTwoTone, ExitToAppTwoTone } from '@mui/icons-material';

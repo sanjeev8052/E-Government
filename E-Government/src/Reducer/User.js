@@ -79,7 +79,7 @@ export const userReducer = createReducer(initialState, {
         state.loading = false;
         state.error = action.payload;
     },
-
+//  Fro forget Password
     ForgotPassRequest: (state) => {
         state.loading = true;
     },

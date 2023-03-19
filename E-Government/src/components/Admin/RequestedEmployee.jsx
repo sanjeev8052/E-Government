@@ -8,7 +8,7 @@ import Loader from '../Layout/Loader'
 import { tokens } from '../../Global'
 import { getTempEmp, conTempEmp, rejTempEmp } from '../../Action/Admin/Employee'
 import { useNavigate } from 'react-router-dom'
-import { CancelTwoTone, CheckCircleOutlineTwoTone } from '@mui/icons-material'
+import { CancelTwoTone, CheckCircleOutlineTwoTone, Height } from '@mui/icons-material'
 
 const RequestedEmployee = () => {
     const themes = useTheme()
@@ -43,12 +43,26 @@ const RequestedEmployee = () => {
 
                     </Box>
                     {loading ? <Loader /> :
-                        <Box alignItems="center" justifyContent="center" m="15px" >
+                        <Box alignItems="center" justifyContent="center" m="15px" sx={{
+                            "& .MuiTable-root": {
+                                border: "none"
+                            },
+                            "& .MuiTableCell-root": {
+                                borderBottom: "none"
+                            },
+                            "& .name-column--cell": {
+                                color: colors.greenAccent[300]
+                            },
+                            "& .MuiTableHead-root": {
+                                backgroundColor: colors.blueAccent[400],
+                                borderBottom: "none"
+                            }
+                        }} >
                             <Typography variant="h3" color={colors.redAccent[600]}>Requested Employees Details</Typography>
-                            <TableContainer sx={{ mt: "10px" , maxWidth:1000 }} component={Paper} >
-                                <Table size='small' >
+                            <TableContainer sx={{ mt: "10px" , height:"400px", overflow:"auto" , backgroundColor: colors.primary[600]}} component={Paper} >
+                                <Table size='small'  sx={{ backgroundColor: colors.blueAccent[400]}}>
                                     <TableHead  >
-                                        <TableRow sx={{ backgroundColor: colors.greenAccent[700] }}>
+                                        <TableRow >
                                             <TableCell>Name</TableCell>
                                             <TableCell>Email</TableCell>
                                             <TableCell>Gender</TableCell>
@@ -57,7 +71,7 @@ const RequestedEmployee = () => {
                                             <TableCell>Actions</TableCell>
                                         </TableRow>
                                     </TableHead>
-                                    <TableBody sx={{ backgroundColor: colors.grey[600] }}>
+                                    <TableBody sx={{ backgroundColor: colors.primary[600]}}>
 
                                         {empReq <= 0 ? <TableRow>
                                             <TableCell colSpan={6}>
