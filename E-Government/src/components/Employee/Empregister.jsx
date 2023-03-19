@@ -216,7 +216,7 @@ const Empregister = () => {
                       >
                         {
                           getdept?.map((data) =>(
-                            <MenuItem value={data.billsType}>{data.billsType}</MenuItem>
+                            <MenuItem value={data.deptType}>{data.deptType}</MenuItem>
                           ))
                         }
                       </Field>

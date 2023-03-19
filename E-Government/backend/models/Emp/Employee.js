@@ -1,9 +1,13 @@
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
-
+const crypto = require('crypto')
 const jwt = require('jsonwebtoken');
 
 const EmpSchema = new mongoose.Schema({
+    avatar: {
+        public_id: String,
+        url: String
+    },
     name: {
         type: String,
         required: true
@@ -42,7 +46,16 @@ const EmpSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref:"Complaint"
         }
-    ]
+    ],
+    DOB: Date,
+    houseNO: String,
+    societyName: String,
+    area: String,
+    city: String,
+    state: String,
+    pincode: Number,
+    resetPasswordToken: String,
+    resetPasswordExpire: Date
 })
 
 // Hashing Password
@@ -63,5 +76,12 @@ EmpSchema.methods.generateEmpToken = async function () {
     }
 }
 
+EmpSchema.methods.getResetPasswordEmpToken = async function () {
+
+    const resetToken = crypto.randomBytes(20).toString('hex')
+    this.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest('hex')
+    this.resetPasswordExpire = Date.now() + 10 + 60 + 1000;
+    return resetToken
+}
 const Employee = mongoose.model("Employee", EmpSchema);
 module.exports = Employee;

@@ -30,7 +30,7 @@ const useStyle = makeStyles({
 
 const UpadateImagedialog = () => {
     const [selectedFile, setSelectedFile] = React.useState()
-    const { userData, error, profileImage } = useSelector(state => state.user)
+    const {  profileImage } = useSelector(state => state.user)
     const [image, setImage] = React.useState(profileImage);
     const [loading , setLoading] =React.useState(false)
 

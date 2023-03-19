@@ -63,12 +63,28 @@ const AdminComplaint = () => {
                     </Button>
                     {
                         loading ? <Loader /> :
-                            <Box alignItems="center" justifyContent="center" m="15px" >
+                            <Box alignItems="center" justifyContent="center" m="15px"
+                            sx={{
+                                "& .MuiTable-root": {
+                                    border: "none"
+                                },
+                                "& .MuiTableCell-root": {
+                                    borderBottom: "none"
+                                },
+                                "& .name-column--cell": {
+                                    color: colors.greenAccent[300]
+                                },
+                                "& .MuiTableHead-root": {
+                                    backgroundColor: colors.blueAccent[400],
+                                    borderBottom: "none"
+                                }
+                            }}
+                            >
                                 <Typography variant="h3" color={colors.redAccent[600]}>Complaint Details</Typography>
-                                <TableContainer sx={{ mt: "10px", minWidth: 200 }} component={Paper}>
+                                <TableContainer sx={{ mt: "10px", minWidth: 200 , height:"400px", overflow:"auto",  backgroundColor: colors.primary[600]}} component={Paper}>
                                     <Table size='small' >
                                         <TableHead  >
-                                            <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
+                                            <TableRow >
                                                 <TableCell>Name</TableCell>
                                                 <TableCell>Email</TableCell>
                                                 <TableCell>Phone NO.</TableCell>
@@ -81,7 +97,7 @@ const AdminComplaint = () => {
                                                 <TableCell>Actions</TableCell>
                                             </TableRow>
                                         </TableHead>
-                                        <TableBody>
+                                        <TableBody sx={{ backgroundColor: colors.primary[600]}}>
 
                                             {getComReq <= 0 ? <TableRow>
                                                 <TableCell colSpan={6}>
@@ -100,10 +116,10 @@ const AdminComplaint = () => {
                                                     <TableCell component='th' scope='row'>{data.complaintDesc}</TableCell>
                                                     <TableCell >
                                                         <IconButton aria-label="block" color='success' onClick={() => { accept(data._id) }}>
-                                                            <TaskTwoTone />
+                                                            <TaskTwoTone  color='success'/>
                                                         </IconButton>
                                                         <IconButton aria-label="block" color='error' onClick={() => { reject(data._id) }}>
-                                                            <DangerousTwoTone />
+                                                            <DangerousTwoTone color='error' />
                                                         </IconButton>
                                                         {/* <Button variant="contained" color="primary" size='small' sx={{ borderRadius: "100px" }} onClick={() => { block(data._id) }}><BlockTwoTone /> Block
                                                         </Button> */}

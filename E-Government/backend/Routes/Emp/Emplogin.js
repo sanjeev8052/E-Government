@@ -3,10 +3,128 @@ const router = express.Router()
 const Employee = require("../../models/Emp/Employee")
 const { body, validationResult, } = require('express-validator');
 const bcrypt = require("bcrypt")
+const cloudinary = require('cloudinary').v2
 
 const jwt = require('jsonwebtoken');
 const { isAuthenticatedEmp } = require("../../middlewares/auth");
 const UserComplaint = require("../../models/User/UserComplaint");
+
+const crypto = require('crypto')
+
+cloudinary.config({
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
+    api_secret: process.env.api_secret,
+    secure: true
+});
+
+router.post("/upload", isAuthenticatedEmp, async (req, res) => {
+    try {
+
+        const file = req.files.image
+        const emp = req.emp
+        if (!file) {
+            return res
+                .status(400)
+                .json({ sucsess: false, message: "Somthing Went Wroung..." })
+        }
+        const { public_id, url } = await cloudinary.uploader.upload(file.tempFilePath, {
+            folder: "User_Profile"
+        })
+        const avatar = {
+            public_id,
+            url
+        }
+        emp.avatar = avatar
+        await emp.save();
+        res.status(200).json({
+            success: true,
+            message: " Profile Added"
+        })
+
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message: error.message })
+    }
+
+})
+
+router.put("/upload/update", isAuthenticatedEmp, async (req, res) => {
+    try {
+
+
+        const file = req.files.image
+        const user = req.emp
+        const p_id = req.emp.avatar.public_id
+        if (!file) {
+            return res
+                .status(400)
+                .json({ sucsess: false, message: "Somthing Went Wroung..." })
+        }
+        const { public_id, url } = await cloudinary.uploader.upload(file.tempFilePath, {
+            public_id: p_id,
+            overwrite: true
+        })
+        const avatar = {
+            public_id,
+            url
+        }
+        user.avatar = avatar
+        await user.save();
+        res.status(200).json({
+            success: true,
+            message: " Profile Updated"
+        })
+
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message: error.message })
+    }
+})
+router.delete("/upload/delete", isAuthenticatedEmp, async (req, res) => {
+    try {
+
+        const user = req.emp
+        const avatar = {
+            public_id: undefined,
+            url: undefined
+        }
+        user.avatar = avatar
+        await user.save();
+        res.status(200).json({
+            success: true,
+            message: " Profile Image Deleted"
+        })
+
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message: error.message })
+    }
+})
+router.get("/profile/image", isAuthenticatedEmp, async (req, res) => {
+    try {
+
+        const avatar = req.emp.avatar.url
+        res.status(200).send(avatar)
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message: error.message })
+    }
+})
+
+router.post("/update/profile/:id", async (req, res) => {
+
+    try {
+        let emp = await Employee.findById(req.params.id)
+
+        emp = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        res.json({
+            message: "Profile Updated.."
+        })
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message: error.message })
+
+    }
+
+})
+
+
 
 // For Employee Register
 router.post("/tempemployee", [
@@ -76,7 +194,7 @@ router.post("/elogin", [
                 res.status(201).cookie("emptoken", emptoken, option).json({
                     success: true,
                     message: "Welcome Back",
-                    token: emptoken
+                    Emptoken: emptoken
                 })
             }
         }
@@ -112,26 +230,15 @@ router.get("/get/eProfile", isAuthenticatedEmp, async (req, res) => {
             .json({ success: false, Error: error.message })
     }
 })
-// router.get("/get/comp/asign", isAuthenticatedEmp, async (req, res) => {
-//     try {
 
-//         const emp = await Employee.findById(req.emp).populate("complaints")
-//         res.status(200).send(emp)
-
-//     } catch (error) {
-//         res
-//             .status(500)
-//             .json({ success: false, Error: error.message })
-//     }
-// })
 router.post("/comp/copmlete", isAuthenticatedEmp, async (req, res) => {
     try {
 
         const emp = await Employee.findById(req.emp).populate("complaints")
-        const empComp =  emp.complaints
+        const empComp = emp.complaints
         res.send(empComp)
 
-        
+
     } catch (error) {
         res
             .status(500)
@@ -154,17 +261,6 @@ router.get("/comp/complete/:_id", isAuthenticatedEmp, async (req, res) => {
         }
         complaint.status = "complete"
         await complaint.save()
-
-
-        // if (post.likes.includes(req.user._id)) {
-        //     const index = post.likes.indexOf(req.user._id)
-        //     post.likes.splice(index, 1)
-        //     await post.save();
-
-        //     return res
-        //         .status(200)
-        //         .json({ success: true, message: "post UnLiked" })
-        // }
     } catch (error) {
         res
             .status(500)
