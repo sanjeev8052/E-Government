@@ -132,7 +132,7 @@ const Card = () => {
                                       Apply Meter   
                                     </Button>
                                     <Menu  {...bindMenu(popupState)}>
-                                        <MenuItem onClick={popupState.close}>Profile</MenuItem>
+                                        <MenuItem component={Link} to='meterApply'>Apply Meter</MenuItem>
                                         <MenuItem onClick={popupState.close}>My account</MenuItem>
                                         <MenuItem onClick={popupState.close}>Logout</MenuItem>
                                     </Menu>

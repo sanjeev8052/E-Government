@@ -32,7 +32,7 @@ const useStyle = makeStyles({
 })
 const Profile = () => {
     const style = useStyle();
-    const { profileImage, loading } = useSelector(state => state.user)
+    const { profileImage, loading, editMessage } = useSelector(state => state.user)
 
     const { userData, error, } = useSelector(state => state.user)
     const [user, setUser] = useState({});
@@ -42,7 +42,8 @@ const Profile = () => {
 
     useEffect(() => {
         userData ? setUser(userData) : null
-    }, [userData]);
+        editMessage ? alert.success(editMessage.message) : null
+    }, [userData, editMessage]);
     const handleInput = (e) => {
         const { value, name } = e.target
 
@@ -61,7 +62,7 @@ const Profile = () => {
 
         onSubmit: () => {
             dispatch(updateProfile(user, user._id))
-            alert.success("Profile Updated")
+
         }
 
     })
@@ -74,13 +75,13 @@ const Profile = () => {
                     <div className="main ">
 
                         <div className="row m-5">
-                            <div className="col-sm-6 " style={{display:"flex" ,justifyContent:"center"}}>
+                            <div className="col-sm-6 " style={{ display: "flex", justifyContent: "center" }}>
 
                                 <div className="row">
                                     <div className="col-lg-12">
-                                       {loading ?  <Skeleton sx={{width:"12rem", height:"12rem"}}/>: <img className='img' src={profileImage ? profileImage : AvatarImage} alt="" />}
+                                        {loading ?  <Skeleton sx={{ width: "12rem", height: "12rem" }} /> :  <img className='img' src={profileImage ? profileImage : AvatarImage} alt="" />}
                                     </div>
-                                    <div className="col-lg-12" style={{margin:"2rem  0 0 3.2rem"}}>
+                                    <div className="col-lg-12" style={{ margin: "2rem  0 0 3.2rem" }}>
                                         <UpadateImagedialog />
                                     </div>
                                 </div>
@@ -126,21 +127,22 @@ const Profile = () => {
                                     name="name"
                                     value={user && user.name}
                                 />
-                                <FormControl>
+                                {user.gender &&
+                                    <FormControl>
 
-                                    <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-                                    <RadioGroup
-                                        row
-                                        aria-labelledby="demo-radio-buttons-group-label"
-                                        onChange={handleInput}
-                                        name="gender"
-                                        defaultValue={user.gender}
-                                    >
-                                        <FormControlLabel value="female" control={<Radio />} label="Female" />
-                                        <FormControlLabel value="male" control={<Radio />} label="Male" />
-                                        <FormControlLabel value="other" control={<Radio />} label="Other" />
-                                    </RadioGroup>
-                                </FormControl>
+                                        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+                                        <RadioGroup
+                                            row
+                                            aria-labelledby="demo-radio-buttons-group-label"
+                                            onChange={handleInput}
+                                            name="gender"
+                                            defaultValue={user.gender}
+                                        >
+                                            <FormControlLabel value="female" control={<Radio />} label="Female" />
+                                            <FormControlLabel value="male" control={<Radio />} label="Male" />
+                                            <FormControlLabel value="other" control={<Radio />} label="Other" />
+                                        </RadioGroup>
+                                    </FormControl>}
                             </div>
                             <div className="col-sm-4">
                                 <TextField className={style.input}

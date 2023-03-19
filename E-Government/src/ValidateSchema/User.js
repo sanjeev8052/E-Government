@@ -13,6 +13,14 @@ export const signUpSchema = yup.object({
     confirm_password: yup.string().required().oneOf([yup.ref("password"), null], "password must match"),
 })
 
+export const ResetSchema = yup.object({
+    password: yup.string().min(6).required('Please Enter password'),
+    confirm_password: yup.string().required().oneOf([yup.ref("password"), null], "password must match"),
+
+})
+
+
+
 export const forgotSchema = yup.object({
     email: yup.string().email().matches(/^(?!.*@[^,]*,)/).required("Please Enter Your Email.."),
 })

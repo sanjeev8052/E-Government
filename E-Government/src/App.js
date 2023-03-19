@@ -7,7 +7,7 @@ import { getProfileImage, LoadUser } from './Action/User'
 import UserForgotPassword from './components/User/ForgotPassword'
 import Profile from './components/User/Profile'
 import ResetPassword from './components/User/ResetPassword'
-
+import UserDashboard from './components/User/Dashboard'
 // package
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useEffect } from 'react'
@@ -47,6 +47,7 @@ import Loader from './components/Layout/Loader'
 import MeterApply from './components/Services/MeterApply'
 import BillPay from './components/Services/BillPayment/BillPay'
 import Complaint from './components/Services/Complaint'
+import Temp from './components/Temp'
 
 const App = () => {
   const [theme, colorMode] = useMode()
@@ -64,58 +65,61 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className=''>
- 
-         
-            <Routes>
-              {/* User */}
-              <Route path='/register' element={<Register />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/' element={<Home />} />
-              <Route path='forgotpassword' element={<UserForgotPassword />} />
-              <Route path='reset/password/:token' element={< ResetPassword/>} />
-              <Route path='/userHeader' element={<UserHeader />} />
-              <Route path='/Profile' element={<Profile />} />
-
-              {/* Services */}
-              <Route path='/complaint' element={<Complaint />} />
-              <Route path='/billpay' element={<BillPay />} />
-              <Route path='/meterApply/' element={<MeterApply />} />
-
-              {/* Admin */}
-              
-             
-              <Route path='/adlogin' element={<AdminLogin />} />
-              <Route path='/aforgot' element={<Aforgetpassword />} />
-              <Route path='/emplogin' element={<Emplogin />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/aemployee" element={<Employee />} />
-              <Route path="/aremployee" element={<RequestedEmployee />} />
-              <Route path="/acomplaint" element={<AdminComplaint />} />
-              <Route path="/categories" element={<Categories />} />
-              <Route path="/auser" element={<User />} />
-              <Route path="/spiner" element={<Loader />} />
-              <Route path="/Categories" element={<Categories />} />
-              <Route path="/assign" element={<AssignCom/>} />
-              <Route path="/assigncom/:_id" element={<AssignModel/>} />
-              <Route path="/feedback" element={<Feedback  />} />
-              <Route path="/completecom" element={<CompletedComplaint />} />
-              <Route path="/abills" element={<Bills />} />
-              <Route path="/pbills" element={<PendingBills />} />
-              <Route path="/pabills" element={<PaidBills />} />
-              
 
 
+          <Routes>
+            {/* User */}
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/' element={<Home />} />
+            <Route path='forgotpassword' element={<UserForgotPassword />} />
+            <Route path='reset/password/:token' element={< ResetPassword />} />
+            <Route path='/userHeader' element={<UserHeader />} />
+            <Route path='/Profile' element={<Profile />} />
+            <Route path='/UserDashboard' element={<UserDashboard />} />
 
-               {/* Employee */}
+            
+            {/* Services */}
+            <Route path='/complaint' element={<Complaint />} />
+            <Route path='/billpay' element={<BillPay />} />
+            <Route path='/meterApply/' element={<MeterApply />} />
+            <Route path='/Temp/' element={<Temp />} />
 
-               <Route path="/emplogin" element={<Emplogin/>} />
-               <Route path='/empregister' element={<Empregister />} />
-               <Route path='/work' element={<Work />} />
-               {/* <Route path="/emp/register" element={<Empregister/>} /> */}
+            {/* Admin */}
 
 
-            </Routes>
-         
+            <Route path='/adlogin' element={<AdminLogin />} />
+            <Route path='/aforgot' element={<Aforgetpassword />} />
+            <Route path='/emplogin' element={<Emplogin />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/aemployee" element={<Employee />} />
+            <Route path="/aremployee" element={<RequestedEmployee />} />
+            <Route path="/acomplaint" element={<AdminComplaint />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/auser" element={<User />} />
+            <Route path="/spiner" element={<Loader />} />
+            <Route path="/Categories" element={<Categories />} />
+            <Route path="/assign" element={<AssignCom />} />
+            <Route path="/assigncom/:_id" element={<AssignModel />} />
+            <Route path="/feedback" element={<Feedback />} />
+            <Route path="/completecom" element={<CompletedComplaint />} />
+            <Route path="/abills" element={<Bills />} />
+            <Route path="/pbills" element={<PendingBills />} />
+            <Route path="/pabills" element={<PaidBills />} />
+
+
+
+
+            {/* Employee */}
+
+            <Route path="/emplogin" element={<Emplogin />} />
+            <Route path='/empregister' element={<Empregister />} />
+            <Route path='/work' element={<Work />} />
+            {/* <Route path="/emp/register" element={<Empregister/>} /> */}
+
+
+          </Routes>
+
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>

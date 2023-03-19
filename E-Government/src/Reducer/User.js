@@ -89,15 +89,19 @@ export const userReducer = createReducer(initialState, {
     },
     ForgotPassFailuer: (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.Forgoterror = action.payload;
+    },
+    ForgotErrorMessage: (state, action) => {
+        state.loading = false;
+        state.Forgoterror = null
     },
 
     UpdateProfileRequest: (state) => {
         state.loading = true;
     },
     UpdateProfileSuccess: (state, action) => {
-        state.loading = false;
         state.editMessage = action.payload
+        state.loading = false;
     },
     UpdateProfileFailuer: (state, action) => {
         state.loading = false;
