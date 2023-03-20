@@ -251,7 +251,7 @@ router.put("/reset/password/:token", async (req, res) => {
 
         const user = await User.findOne({
             resetPasswordToken,
-            //  resetPasswordExpire :{$gt: Date.now()}
+            resetPasswordExpire :{$gt: Date.now()}
         })
 
 

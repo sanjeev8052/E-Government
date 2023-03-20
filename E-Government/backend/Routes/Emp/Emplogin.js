@@ -53,7 +53,7 @@ router.put("/upload/update", isAuthenticatedEmp, async (req, res) => {
 
 
         const file = req.files.image
-        const user = req.emp
+        const emp = req.emp
         const p_id = req.emp.avatar.public_id
         if (!file) {
             return res
@@ -68,8 +68,8 @@ router.put("/upload/update", isAuthenticatedEmp, async (req, res) => {
             public_id,
             url
         }
-        user.avatar = avatar
-        await user.save();
+        emp.avatar = avatar
+        await emp.save();
         res.status(200).json({
             success: true,
             message: " Profile Updated"
@@ -82,13 +82,13 @@ router.put("/upload/update", isAuthenticatedEmp, async (req, res) => {
 router.delete("/upload/delete", isAuthenticatedEmp, async (req, res) => {
     try {
 
-        const user = req.emp
+        const emp = req.emp
         const avatar = {
             public_id: undefined,
             url: undefined
         }
-        user.avatar = avatar
-        await user.save();
+        emp.avatar = avatar
+        await emp.save();
         res.status(200).json({
             success: true,
             message: " Profile Image Deleted"
@@ -265,6 +265,79 @@ router.get("/comp/complete/:_id", isAuthenticatedEmp, async (req, res) => {
         res
             .status(500)
             .json({ success: false, Error: error.message })
+    }
+
+})
+
+router.post("/forgot/password", async (req, res) => {
+    try {
+        const emp = await Employee.findOne({ email: req.body.email });
+        if (!emp) {
+            return res
+                .status(400)
+                .json({ success: false, message: "Email does not exists.." })
+        }
+
+        const resetPasswordToken = await emp.getResetPasswordEmpToken();
+
+        await emp.save();
+
+        const resetUrl = `${req.protocol}://localhost:3000/ereset/password/${resetPasswordToken}`;
+        const message = `reset your password by clicking on the link below: \n\n${resetUrl}`
+        try {
+            await sendEmail({
+                email: emp.email,
+                subject: "reset Password",
+                message
+            });
+
+            res.status(200).json({
+                success: true,
+                message: `Forgot password link sent to ${emp.email}........`,
+            })
+        } catch (error) {
+            emp.resetPasswordToken = undefined;
+            emp.resetpasswordExpire = undefined;
+            await emp.save();
+
+
+        }
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message:"sumthig wrong" })
+    }
+})
+router.put("/reset/password/:token", async (req, res) => {
+
+    try {
+
+        console.log(req.body.password)
+        const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex")
+
+        const emp = await User.findOne({
+            resetPasswordToken,
+            resetPasswordExpire :{$gt: Date.now()}
+        })
+
+
+        if (!emp) {
+            return res
+                .status(401)
+                .json({ success: false, message: "Token is invalid or has expired.." })
+        }
+
+        emp.password = req.body.password;
+
+        emp.resetPasswordToken = undefined;
+        emp.resetPasswordExpire = undefined;
+        await emp.save()
+        console.log(emp)
+        res.status(200).json({ success: true, message: "Password Updadet..", password: emp.password })
+
+
+
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message: "sumthig went wrong" })
+
     }
 
 })
