@@ -1,5 +1,5 @@
 
-import { Box , useTheme } from '@mui/material'
+import { Box, useTheme, Card, CardContent, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Getfeedback } from '../../Action/User'
@@ -12,11 +12,11 @@ const Feedback = () => {
     const { getfeedback } = useSelector((state) => (state.user))
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-const dispatch = useDispatch()
+    const dispatch = useDispatch()
     useEffect(() => {
-      dispatch(Getfeedback())
+        dispatch(Getfeedback())
     }, [])
-    
+
     return (
         <div className='app'>
             <AdminSidebar />
@@ -26,8 +26,23 @@ const dispatch = useDispatch()
                     <Box justifyContent="space-between" alignItems="center" display='flex'>
                         <Header title="Feedback" subtitle="Welcome to Feedback Page" />
                     </Box>
-                    <Box  display="flex" mt="5px">
-                        
+                    <Box display="flex" mt="5px">
+                        <Card variant='outlined' sx={{}}>
+                            <CardContent>
+                                <Typography variant="h4" component="div">
+                                    benevolent
+                                </Typography>
+                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                    adjective
+                                </Typography>
+                                <Typography variant="body2">
+                                    well meaning and kindly.
+                                    <br />
+                                    {'"a benevolent smile"'}
+                                </Typography>
+                            </CardContent>
+
+                        </Card>
                     </Box>
                 </Box>
             </main>

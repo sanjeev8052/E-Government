@@ -1,45 +1,41 @@
-import { Box } from '@mui/material'
-import { DataGrid } from '@mui/x-data-grid';
-import axios from 'axios';
-import { getTempEmp, conTempEmp, rejTempEmp } from '../../Action/Admin/Employee'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
-import Loader from '../Layout/Loader'
-import { useMemo } from 'react';
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
+export default function Snakbar() {
+  const [open, setOpen] = React.useState(false);
 
-const Tester = () => {
-   
-    const [requestEmp, setRequestEmp] = useState([])
-    const dispatch = useDispatch()
-    const { empReq, loading } = useSelector((state) => (state.admin))
-    useEffect(  () => {
-       dispatch(getTempEmp())
-        // loaddetails()
-        //  empReq?setRequestEmp(empReq): null   
-          
-    }, [])
-    // const loaddetails = async () => {
-    //     const response = await axios.get(`/api/admin/gettempemp`)
-    //     setRequestEmp(response.data)
-    //   }
-    const columns= useMemo(() => [
-        { field: 'id', headerName: 'ID', width: 70 ,flex:1},
-        { field: 'dept', headerName: 'Dept', width: 110, flex:1},
-        { field: 'gender', headerName: 'Gender', width: 110, flex:1},
-        { field: 'name', headerName: 'Name', width: 110, flex:1},
-    ],[])
-     console.log(empReq)
-    // console.log(requestEmp)
-   
+  const handleClick = () => {
+    setOpen(true);
+  };
 
-    return (
-        <Box>
-             <DataGrid rows={empReq} columns={columns}  pageSize={12} getRowId={row => row._id}   rowsPerPageOptions={[10, 25, 50]}  checkboxSelection
-  disableSelectionOnClick />
-        </Box>
-    )
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+  return (
+    <Stack spacing={2} sx={{ width: '100%' }}>
+      <Button variant="outlined" onClick={handleClick}>
+        Open success snackbar
+      </Button>
+      <Snackbar open={open} autoHideDuration={2000}>
+        <Alert  severity="success" sx={{ width: '100%' }}>
+          This is a success message!
+        </Alert>
+      </Snackbar>
+      <Alert severity="error">This is an error message!</Alert>
+      <Alert severity="warning">This is a warning message!</Alert>
+      <Alert severity="info">This is an information message!</Alert>
+      <Alert severity="success">This is a success message!</Alert>
+    </Stack>
+  );
 }
-
-export default Tester
