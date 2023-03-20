@@ -144,12 +144,7 @@ const Complaint = () => {
                   <MenuItem value={data.deptType}>{data.deptType}</MenuItem>
                 ))
               }
-              {/* <MenuItem value={"Roads & Footpath"}>Roads & Footpath</MenuItem>
-              <MenuItem value={"Water Suppy"}>Water Suppy</MenuItem>
-              <MenuItem value={"Street Light"}>Street Light</MenuItem>
-              <MenuItem value={"Dead Animals"}>Dead Animals</MenuItem>
-              <MenuItem value={"Public Park And Garden"}>Public Park And Garden</MenuItem>
-              <MenuItem value={"Food Safety Act"}>Food Safety Act</MenuItem> */}
+             
             </Select>
           </FormControl>
 

@@ -26,7 +26,7 @@ const Header = () => {
                         <Tab component={Link} label="ContactUs" />
 
 
-                        <Tab sx={{display:"block" , marginLeft:"54rem"}} title='Dasboard' component={Link} label={<Dashboard label="Dasboard"/>} />
+                        <Tab sx={{display:"block" , marginLeft:"54rem"}} title='Dasboard' component={Link} to='/UserDashBoard' label={<Dashboard label="Dasboard"/>} />
 
 
                     </Tabs>

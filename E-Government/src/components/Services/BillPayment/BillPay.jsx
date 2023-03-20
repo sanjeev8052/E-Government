@@ -61,17 +61,17 @@ const BillPay = () => {
           {!billData &&
             <FormControl>
               <RadioGroup row aria-label="categories" defaultValue="Gas" name='categories group'>
-                <div className="col-sm-4">
+                <div className="col-4">
                   <img src={GasBillImage} alt="" />
                   <FormControlLabel value='Gas' label={<Typography variant="h6" >  Gas  BillPayment</Typography>} control={<Radio onClick={(e) => handler(e.target.value)} />}  ></FormControlLabel>
 
                 </div>
-                <div className="col-sm-4">
+                <div className="col-4">
                   <img src={electrBilliImage} alt="" />
                   <FormControlLabel value='Eelectricity' label={<Typography variant="h6" >Electric BillPayment</Typography>} control={<Radio onClick={(e) => handler(e.target.value)} />}></FormControlLabel>
 
                 </div>
-                <div className="col-sm-4">
+                <div className="col-4">
                   <img src={waterBillImage} alt="" />
                   <FormControlLabel value='Water' label={<Typography variant="h6" > Water BillPayment</Typography>} control={<Radio onClick={(e) => handler(e.target.value)} />}></FormControlLabel>
 

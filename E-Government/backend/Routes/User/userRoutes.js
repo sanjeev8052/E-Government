@@ -8,12 +8,7 @@ const crypto = require('crypto')
 const { errorHandler } = require("../../middlewares/Errorhandler");
 const { isAuthenticatedUser } = require("../../middlewares/auth");
 
-cloudinary.config({
-    cloud_name: process.env.cloud_name,
-    api_key: process.env.api_key,
-    api_secret: process.env.api_secret,
-    secure: true
-});
+
 
 router.post("/upload", isAuthenticatedUser, async (req, res) => {
     try {
@@ -128,7 +123,7 @@ router.post("/user/new/", async (req, res) => {
         });
         res.status(201).json({
             sucsess: true,
-            message : "Register Success."
+            message: "Register Success."
         })
     } catch (error) {
         res.status(500).json({ sucsess: false, message: error.message })
@@ -234,39 +229,36 @@ router.post("/forgot/password", async (req, res) => {
 
             res.status(200).json({
                 success: true,
-                message: `Email sent to ${user.email}`,
+                message: `Forgot password link sent to ${user.email}........`,
             })
         } catch (error) {
             user.resetPasswordToken = undefined;
             user.resetpasswordExpire = undefined;
             await user.save();
 
-            res.status(500).json({
-                sucsess: false,
-                message: error.message
-            })
+
         }
     } catch (error) {
-        res.status(500).json({ sucsess: false, message: error.message })
+        res.status(500).json({ sucsess: false, message:"sumthig wrong" })
     }
 })
 router.put("/reset/password/:token", async (req, res) => {
 
     try {
+
+        console.log(req.body.password)
         const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex")
-
-
 
         const user = await User.findOne({
             resetPasswordToken,
-            // resetPasswordExpire :{$gt: Date.now()}
+            //  resetPasswordExpire :{$gt: Date.now()}
         })
 
 
         if (!user) {
             return res
                 .status(401)
-                .json({ success: false, message: "Token is invalid or hax expired.." })
+                .json({ success: false, message: "Token is invalid or has expired.." })
         }
 
         user.password = req.body.password;
@@ -274,12 +266,13 @@ router.put("/reset/password/:token", async (req, res) => {
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined;
         await user.save()
+        console.log(user)
         res.status(200).json({ success: true, message: "Password Updadet..", password: user.password })
 
 
 
     } catch (error) {
-        res.status(500).json({ sucsess: false, message: error.message })
+        res.status(500).json({ sucsess: false, message: "sumthig went wrong" })
 
     }
 

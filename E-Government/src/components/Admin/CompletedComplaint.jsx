@@ -21,8 +21,6 @@ const CompletedComplaint = () => {
     // const navigate = useNavigate()
     // const dispatch = useDispatch()
 
-  
-   
     return (
         <div className='app'>
             <AdminSidebar />
@@ -70,24 +68,24 @@ const CompletedComplaint = () => {
                                         <TableBody>
 
                                             {
-                                                // getComReq <= 0 ? <TableRow>
-                                                //     <TableCell colSpan={6}>
-                                                //         <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Complaint Data</Typography>
-                                                //     </TableCell>
-                                                // </TableRow> : getComReq?.map((data) => (
-                                                //     <TableRow key={data._id}>
-                                                //         <TableCell >{data.name}</TableCell>
-                                                //         <TableCell >{data.email}</TableCell>
-                                                //         <TableCell >{data.phone}</TableCell>
-                                                //         <TableCell >{data.complaintType}</TableCell>
-                                                //         <TableCell >{data.city}</TableCell>
-                                                //         <TableCell >{data.streetAddress}</TableCell>
-                                                //         <TableCell >{data.area}</TableCell>
-                                                //         <TableCell >{data.pincode}</TableCell>
-                                                //         <TableCell component='th' scope='row'>{data.complaintDesc}</TableCell>
+                                                getComReq <= 0 ? <TableRow>
+                                                    <TableCell colSpan={6}>
+                                                        <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Complaint Data</Typography>
+                                                    </TableCell>
+                                                </TableRow> : getComReq?.map((data) => (
+                                                    <TableRow key={data._id}>
+                                                        <TableCell >{data.name}</TableCell>
+                                                        <TableCell >{data.email}</TableCell>
+                                                        <TableCell >{data.phone}</TableCell>
+                                                        <TableCell >{data.complaintType}</TableCell>
+                                                        <TableCell >{data.city}</TableCell>
+                                                        <TableCell >{data.streetAddress}</TableCell>
+                                                        <TableCell >{data.area}</TableCell>
+                                                        <TableCell >{data.pincode}</TableCell>
+                                                        <TableCell component='th' scope='row'>{data.complaintDesc}</TableCell>
 
-                                                //     </TableRow>
-                                                // ))
+                                                    </TableRow>
+                                                ))
                                             }
                                         </TableBody>
                                     </Table>

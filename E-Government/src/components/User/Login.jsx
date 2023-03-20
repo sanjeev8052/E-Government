@@ -175,17 +175,9 @@ const Login = () => {
                     {errors.password && touched.password ? (
                         <Typography color="red">{errors.password}</Typography>
                     ) : null}
-                    <FormControlLabel
-                        label="Remeber me"
-                        control={
-                            <Checkbox
-                                value=""
-                                color="primary"
-                            />
-                        }
-                    />
+                  
                     {/* <ForgotPassword/> */}
-                    <Button sx={{ marginLeft: 'auto', display: "block" }} variant='text' color="inherit"   >Forgot?</Button>
+                    <Button sx={{ marginLeft: 'auto', display: "block" }} component={Link}  to='/forgotpassword' variant='text' color="inherit"   >Forgot?</Button>
 
                     <Button type='submit' disabled={loading} sx={{ width: "100%" }} variant="contained" color="primary" endIcon={<LoginIcon />}>Login </Button>
 

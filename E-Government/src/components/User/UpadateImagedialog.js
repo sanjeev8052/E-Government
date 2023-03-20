@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Add, CameraAlt, CameraAltOutlined, CameraAltRounded, Delete, Edit, Image, SelectAll } from '@mui/icons-material';
-import { Avatar, InputAdornment, makeStyles } from '@material-ui/core';
+import { Avatar, CircularProgress, InputAdornment, makeStyles } from '@material-ui/core';
 import { width } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -32,6 +32,7 @@ const UpadateImagedialog = () => {
     const [selectedFile, setSelectedFile] = React.useState()
     const {  profileImage } = useSelector(state => state.user)
     const [image, setImage] = React.useState(profileImage);
+    const [loading , setLoading] =React.useState(false)
 
     const handleClose = () => {
         setOpen(false);
@@ -76,14 +77,15 @@ const UpadateImagedialog = () => {
     }
     const handleUploadImage = async () => {
         if (selectedFile) {
-
+            setLoading(true)
             const formData = new FormData();
             formData.append("image", selectedFile);
             const { data } = await axios.post('api/upload', formData)
-            
+            data ? setLoading(false) : null
             data ? dispatch(getProfileImage()) : null
             data ? handleClose() : null
         } else {
+            error ? setLoading(false) : null
             alert("Pleas First Select Image...")
         }
     }
@@ -133,7 +135,7 @@ const UpadateImagedialog = () => {
                                 </Button>
                             </>
                             : <Button variant="contained" onClick={handleUploadImage} color="primary">
-                                <Add />
+                            {loading ? <CircularProgress/> : <Add />}
                             </Button>
                     }
 
