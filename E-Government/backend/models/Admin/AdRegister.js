@@ -4,6 +4,10 @@ const jwt = require('jsonwebtoken');
 
 const { Schema } = mongoose;
 const Adschema = new Schema({
+    avatar: {
+        public_id: String,
+        url: String
+    },
     name: {
         type: String,
         required: true,

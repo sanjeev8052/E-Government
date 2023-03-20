@@ -67,3 +67,56 @@ export const AdminLogout = () => async (dispatch) => {
 
     }
 };
+
+
+export const getAdmnProfileImage = () => async (dispatch) => {
+
+    try {
+        dispatch({
+            type: "LoadadminProfileImageRequest",
+
+        })
+             const {data}  = await  axios.get(`api/admin/profile/image`)
+
+        dispatch({
+            type: "LoadadminProfileImageSuccess",
+
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type: "LoadadminProfileImageFailuer",
+
+            payload: error
+        })
+    }
+
+
+
+}
+export const updateAdminProfileImage = (formData) => async (dispatch) => {
+
+    try {
+        dispatch({
+            type: "UpdateadminImageRequest",
+
+        })
+        const { data } = await axios.put('/api/admin/upload/update', formData)
+
+        dispatch({
+            type: "UpdateadminImageSuccess",
+
+            payload:data
+        })
+
+        dispatch(getProfileImage())
+    } catch (error) {
+        dispatch({
+            type: "UpdateadminImageFailuer",
+            payload: error
+        })
+    }
+
+
+
+}

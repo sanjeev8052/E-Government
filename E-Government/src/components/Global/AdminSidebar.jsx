@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar"
 import 'react-pro-sidebar/dist/css/styles.css'
-import { Box, IconButton, Typography, useTheme } from '@mui/material'
+import { Box, IconButton, Typography, useTheme, Button, Avatar } from '@mui/material'
 import Logo from '../Images/Icons/login.png';
 import { Link } from 'react-router-dom'
 import { tokens } from "../../Global";
-import { MenuOutlined, DashboardTwoTone, CoPresentTwoTone, FactCheckTwoTone, Groups2TwoTone, SpeakerNotesTwoTone, CategoryTwoTone, CommentTwoTone, ReceiptTwoTone } from '@mui/icons-material';
+import { MenuOutlined, DashboardTwoTone, CoPresentTwoTone, Groups2TwoTone, SpeakerNotesTwoTone, CategoryTwoTone, CommentTwoTone, ReceiptTwoTone } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
+import ImageUploader from './ImageUploader';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme()
@@ -23,9 +24,14 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const AdminSidebar = () => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  // const { admin} = useSelector((state) => (state.admin))
+  const { admin ,adminProfileImage } = useSelector((state) => (state.admin))
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [selected, setSelected] = useState("empLogin")
+  const [names, setNames] = useState()
+
+  useEffect(() => {
+    admin ? setNames(admin.name):null
+}, [])
 
   return (
     <Box sx={{
@@ -71,11 +77,11 @@ const AdminSidebar = () => {
             !isCollapsed && (
               <Box mb="25px">
                 <Box display="flex" justifyContent="center" alignItems="center">
-                  <img src={Logo} alt="admin" width="100px" height="100px" style={{ cursor: "pointer", borderRadius: "50%" }} />
+                  <Avatar  alt="admin" src={adminProfileImage} style={{ cursor: "pointer", borderRadius: "50%" , height:"100px" , width:"100px" }} />
                 </Box>
                 <Box textAlign="center">
-                  <Typography variant='h3' color={colors.grey[500]} fontWeight="bold" xs={{ m: "10px 0 0 0" }} >Hello  </Typography>
-
+                  <Typography variant='h3' color={colors.grey[500]} fontWeight="bold" xs={{ m: "10px 0 0 0" }} >Hello {names}  </Typography>
+                  <Typography variant="h4" color="initial"><ImageUploader/></Typography>
                 </Box>
               </Box>
             )}

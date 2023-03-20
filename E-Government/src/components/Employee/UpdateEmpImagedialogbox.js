@@ -4,15 +4,12 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Add, CameraAlt, CameraAltOutlined, CameraAltRounded, Delete, Edit, Image, SelectAll } from '@mui/icons-material';
+import { Add, CameraAlt,  Delete, Edit, } from '@mui/icons-material';
 import { Avatar, InputAdornment, makeStyles } from '@material-ui/core';
-import { width } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
-import { useFormik } from 'formik';
 import axios from 'axios';
-import { getEmpProfileImage, getProfileImage, updateEmpProfileImage, updateProfileImage } from '../../Action/Employee/register';
+import { getEmpProfileImage, updateEmpProfileImage,  } from '../../Action/Employee/register';
 
 const useStyle = makeStyles({
     main: {
