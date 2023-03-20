@@ -2,9 +2,9 @@
 import React, { useContext } from 'react'
 import { ColorModeContext, tokens } from "../../Global";
 import './admin.css'
-import { Box, IconButton, useTheme, InputBase } from '@mui/material';
+import { Box, IconButton, useTheme,  Typography } from '@mui/material';
 
-import { LightModeOutlined, DarkModeOutlined, NotificationsOutlined, SettingsOutlined, PersonOutlined, SearchOutlined, DarkModeTwoTone, LightModeTwoTone, SearchTwoTone, NotificationsTwoTone, SettingsTwoTone, ManageAccountsTwoTone, ExitToAppTwoTone } from '@mui/icons-material';
+import {  DarkModeTwoTone, LightModeTwoTone,  SettingsTwoTone, ManageAccountsTwoTone, ExitToAppTwoTone } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import { AdminLogout } from '../../Action/Admin/Login';
 import { useNavigate } from 'react-router-dom';
@@ -28,13 +28,10 @@ const AdminTopbar = () => {
           {/* search bar */}
           <Box
             display="flex"
-            backgroundColor={colors.primary[400]}
+            // backgroundColor={colors.primary[400]}
             borderRadius="3px"
           >
-            <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
-            <IconButton tpye="button" sx={{ p: 1 }}>
-              <SearchTwoTone />
-            </IconButton>
+            <Typography variant="h1" color="initial">E-Governance</Typography>
           </Box>
           {/* icon button */}
           <Box display="flex">

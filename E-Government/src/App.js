@@ -14,7 +14,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { ColorModeContext, useMode } from "./Global";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { LoadAdmin } from './Action/Admin/Login'
+import { LoadAdmin ,getAdmnProfileImage} from './Action/Admin/Login'
 
 // admin
 import AssignCom from './components/Admin/AssignCom'
@@ -62,6 +62,7 @@ const App = () => {
     dispatch(getEmpDetails())
     dispatch(getProfileImage())
     dispatch(getEmpProfileImage())
+    dispatch(getAdmnProfileImage())
   }, [dispatch])
 
   return (

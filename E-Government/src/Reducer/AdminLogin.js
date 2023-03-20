@@ -233,4 +233,30 @@ export const AdminReducer = createReducer(initialState,
     },
 
 
+    // Images
+    LoadadminProfileImageRequest: (state) => {
+        state.loading = false;
+    },
+    LoadadminProfileImageSuccess: (state, action) => {
+        state.loading = false;
+        state.adminProfileImage = action.payload
+    },
+    LoadadminProfileImageFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        
+    },
+    UpdateadminImageRequest: (state) => {
+        state.loading = true;
+    },
+    UpdateadminImageSuccess: (state, action) => {
+        state.loading = false;
+        state.adminudata = action.payload
+    },
+    UpdateadminImageFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+
 });

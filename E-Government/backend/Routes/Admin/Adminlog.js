@@ -2,10 +2,17 @@ const express = require("express");
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken');
 const router = express.Router();
+const cloudinary = require('cloudinary').v2
 const AdRegister = require("../../models/Admin/AdRegister")
 const { body, validationResult, } = require('express-validator');
 const { isAuthenticate } = require("../../middlewares/Adminmiddle");
 
+cloudinary.config({
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
+    api_secret: process.env.api_secret,
+    secure: true
+});
 
 // For Admin Register
 router.post("/aregister", [
@@ -121,4 +128,95 @@ router.get("/logout",async (req, res) => {
 
 })
 
+// For Image
+router.get("/profile/image", isAuthenticate, async (req, res) => {
+    try {
+
+        const avatar = req.admin.avatar.url
+        res.status(200).send(avatar)
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message: error.message })
+    }
+})
+
+router.put("/upload/update", isAuthenticate, async (req, res) => {
+    try {
+
+
+        const file = req.files.image
+        const user = req.admin
+        const p_id = req.admin.avatar.public_id
+        if (!file) {
+            return res
+                .status(400)
+                .json({ sucsess: false, message: "Somthing Went Wroung..." })
+        }
+        const { public_id, url } = await cloudinary.uploader.upload(file.tempFilePath, {
+            public_id: p_id,
+            overwrite: true
+        })
+        const avatar = {
+            public_id,
+            url
+        }
+        user.avatar = avatar
+        await user.save();
+        res.status(200).json({
+            success: true,
+            message: " Profile Updated"
+        })
+
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message: error.message })
+    }
+})
+
+router.post("/upload", isAuthenticate, async (req, res) => {
+    try {
+
+        const file = req.files.image
+        const admin = req.admin
+        if (!file) {
+            return res
+                .status(400)
+                .json({ sucsess: false, message: "Somthing Went Wroung..." })
+        }
+        const { public_id, url } = await cloudinary.uploader.upload(file.tempFilePath, {
+            folder: "User_Profile"
+        })
+        const avatar = {
+            public_id,
+            url
+        }
+        admin.avatar = avatar
+        await admin.save();
+        res.status(200).json({
+            success: true,
+            message: " Profile Added"
+        })
+
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message: error.message })
+    }
+
+})
+router.delete("/upload/delete", isAuthenticate, async (req, res) => {
+    try {
+
+        const user = req.admin
+        const avatar = {
+            public_id: undefined,
+            url: undefined
+        }
+        user.avatar = avatar
+        await user.save();
+        res.status(200).json({
+            success: true,
+            message: " Profile Image Deleted"
+        })
+
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message: error.message })
+    }
+})
 module.exports = router
