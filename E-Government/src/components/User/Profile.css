@@ -33,9 +33,9 @@ input::file-selector-button {
 }
 
 .input-upload::before {
-    content: "Add Profile +";
+    content: "Add Proof Id";
     display: block;
-    width: 30%;
+    width: 50%;
     background-image: linear-gradient(to top right ,rgb(48, 94, 234),rgb(214, 245, 214));
     border: 1px solid #999;
     border-radius: 3px;

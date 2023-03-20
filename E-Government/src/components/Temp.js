@@ -15,9 +15,7 @@ const Temp = () => {
     field4: "value4",
   };
 useEffect(() => {
-  formData.append('objectData', JSON.stringify(objectData));
-
-  // Make the Axios request with the FormData object
+  formData.append('objectData', JSON.stringify(objectData)); 
   axios.post('/api/endpoint', formData, {
     headers: {
       'Content-Type': 'multipart/form-data'

@@ -25,7 +25,14 @@ const billSchema = mongoose.Schema({
         type:Number,
         required:true
     },
-    date:Date,
+    addDate:{
+        type:Date,
+        default:Date.now
+    },
+    lastDate:{
+        type:Date,
+        require:true
+    },
     status:String,
 
 })
