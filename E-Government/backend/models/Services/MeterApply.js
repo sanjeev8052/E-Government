@@ -34,8 +34,8 @@ const MeterApplySchema = mongoose.Schema({
         require:true
     },
     proof:{
-        url:String,
-        public_id:String,
+      type:String,
+      require:true
         
     }
 })
