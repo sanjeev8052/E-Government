@@ -284,7 +284,9 @@ router.post("/update/profile/:id", async (req, res) => {
 
         user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
         res.json({
-            message: "Profile Updated.."
+            message: "Profile Updated..",
+            type:"success"
+
         })
     } catch (error) {
         res.status(500).json({ sucsess: false, message: error.message })
