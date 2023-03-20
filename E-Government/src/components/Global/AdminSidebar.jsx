@@ -14,7 +14,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   const colors = tokens(theme.palette.mode)
 
   return (
-    <MenuItem active={selected === title} style={{ color: colors.grey[100] }} onClick={() => setSelected(title)} icon={icon}>
+    <MenuItem active={selected === title} style={{ color: colors.grey[900] }} onClick={() => setSelected(title)} icon={icon}>
       <Typography>{title}</Typography>
       <Link to={to} />
     </MenuItem>
@@ -59,7 +59,7 @@ const AdminSidebar = () => {
           <MenuItem onClick={() => setIsCollapsed(!isCollapsed)} icon={isCollapsed ? <MenuOutlined /> : undefined}
             style={{
               margin: "10px 0 20px 0",
-              color: colors.grey[600]
+              color: colors.grey[900]
             }}>
             {!isCollapsed && (
               <Box display="flex" justifyContent="space-between" alignItems="center" ml="10px">
@@ -80,8 +80,8 @@ const AdminSidebar = () => {
                   <Avatar  alt="admin" src={adminProfileImage} style={{ cursor: "pointer", borderRadius: "50%" , height:"100px" , width:"100px" }} />
                 </Box>
                 <Box textAlign="center">
-                  <Typography variant='h3' color={colors.grey[500]} fontWeight="bold" xs={{ m: "10px 0 0 0" }} >Hello {names}  </Typography>
-                  <Typography variant="h4" color="initial"><ImageUploader/></Typography>
+                  <Typography variant='h3' color={colors.grey[900]} fontWeight="bold" xs={{ m: "10px 0 0 0" }} >Hello {names}  </Typography>
+                  <Typography variant="h4"   color={colors.grey[900]} ><ImageUploader/></Typography>
                 </Box>
               </Box>
             )}
@@ -95,7 +95,7 @@ const AdminSidebar = () => {
               setSelected={setSelected}
             />
 
-            <Menu iconShape="square" style={{ color: colors.grey[100], backgroundColor: colors.primary[400] }} >
+            <Menu iconShape="square" style={{ color: colors.grey[900], backgroundColor: colors.primary[400] }} >
               {/* <MenuItem>Employee</MenuItem> */}
               <SubMenu title="Employee" icon={<CoPresentTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
                 <Item
@@ -120,7 +120,7 @@ const AdminSidebar = () => {
               setSelected={setSelected}
             />
 
-            <Menu iconShape="square" style={{ color: colors.grey[100], backgroundColor: colors.primary[400] }} >
+            <Menu iconShape="square" style={{ color: colors.grey[900], backgroundColor: colors.primary[400] }} >
               {/* <MenuItem>Employee</MenuItem> */}
               <SubMenu title="Complaint" icon={<SpeakerNotesTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
                 <Item
@@ -154,7 +154,7 @@ const AdminSidebar = () => {
               setSelected={setSelected}
             />
 
-            <Menu iconShape="square" style={{ color: colors.grey[100], backgroundColor: colors.primary[400] }} >
+            <Menu iconShape="square" style={{ color: colors.grey[900], backgroundColor: colors.primary[400] }} >
               {/* <MenuItem>Employee</MenuItem> */}
               <SubMenu title="Bills" icon={<ReceiptTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
                 <Item

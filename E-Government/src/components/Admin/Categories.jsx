@@ -178,10 +178,26 @@ const Categories = () => {
                                         <Button type="submit" sx={styles.btn} variant="contained" color="secondary"
                                         // startIcon={<AddCircleOutlineTwoTone />}
                                         >Add</Button>
-                                        <Box mt="10px" mb='20px'>
+                                        <Box mt="10px" mb='20px'
+                                         sx={{
+                                            "& .MuiTable-root": {
+                                                border: "none"
+                                            },
+                                            "& .MuiTableCell-root": {
+                                                borderBottom: "none"
+                                            },
+                                            "& .name-column--cell": {
+                                                color: colors.greenAccent[300]
+                                            },
+                                            "& .MuiTableHead-root": {
+                                                backgroundColor: colors.blueAccent[400],
+                                                borderBottom: "none"
+                                            }
+                                        }}
+                                        >
                                             <TableContainer 
                                             sx={{
-                                                height: 200
+                                                height: 200, overflow:"auto",  backgroundColor: colors.primary[600]
                                             }} 
                                             >
                                                 <Table size="medium" 
@@ -189,13 +205,13 @@ const Categories = () => {
                                                 //     height: "max-content"
                                                 // }}
                                                  >
-                                                    <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}  >
+                                                    <TableHead   >
                                                         <TableRow>
                                                             <TableCell>Name</TableCell>
                                                             <TableCell>Delete</TableCell>
                                                         </TableRow>
                                                     </TableHead>
-                                                    <TableBody sx={{ backgroundColor: colors.grey[600] }}>
+                                                    <TableBody sx={{   backgroundColor: colors.primary[600]}}>
 
                                                         {getcomcat <= 0 ? <TableRow>
                                                             <TableCell colSpan={2}>
@@ -250,18 +266,34 @@ const Categories = () => {
                                         />
                                         <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='billsType' />}</Typography>
                                         <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
-                                        <Box mt="10px" mb="20px">
+                                        <Box mt="10px" mb="20px"
+                                         sx={{
+                                            "& .MuiTable-root": {
+                                                border: "none"
+                                            },
+                                            "& .MuiTableCell-root": {
+                                                borderBottom: "none"
+                                            },
+                                            "& .name-column--cell": {
+                                                color: colors.greenAccent[300]
+                                            },
+                                            "& .MuiTableHead-root": {
+                                                backgroundColor: colors.blueAccent[400],
+                                                borderBottom: "none"
+                                            }
+                                        }}
+                                        >
                                             <TableContainer  sx={{
-                                                height: 200
+                                                height: 200 ,overflow:"auto",  backgroundColor: colors.primary[600]
                                             }} >
                                                 <Table size="medium" sx={{height:"max-content"}}>
-                                                    <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
+                                                    <TableHead >
                                                         <TableRow>
                                                             <TableCell>Name</TableCell>
                                                             <TableCell>Delete</TableCell>
                                                         </TableRow>
                                                     </TableHead>
-                                                    <TableBody sx={{ backgroundColor: colors.grey[600] }}>
+                                                    <TableBody sx={{  backgroundColor: colors.primary[600] }}>
 
                                                         {getbillcat <= 0 ? <TableRow>
                                                             <TableCell colSpan={2}>
@@ -315,18 +347,34 @@ const Categories = () => {
                                         />
                                         <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='meterType' />}</Typography>
                                         <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
-                                        <Box mt="10px" mb="20px">
+                                        <Box mt="10px" mb="20px" 
+                                          sx={{
+                                            "& .MuiTable-root": {
+                                                border: "none"
+                                            },
+                                            "& .MuiTableCell-root": {
+                                                borderBottom: "none"
+                                            },
+                                            "& .name-column--cell": {
+                                                color: colors.greenAccent[300]
+                                            },
+                                            "& .MuiTableHead-root": {
+                                                backgroundColor: colors.blueAccent[400],
+                                                borderBottom: "none"
+                                            }
+                                        }}
+                                        >
                                             <TableContainer  sx={{
-                                                height: 200
+                                                height: 200 ,overflow:"auto",  backgroundColor: colors.primary[600]
                                             }} >
                                                 <Table size="medium"  sx={{height:"max-content"}}>
-                                                    <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
+                                                    <TableHead >
                                                         <TableRow>
                                                             <TableCell>Name</TableCell>
                                                             <TableCell>Delete</TableCell>
                                                         </TableRow>
                                                     </TableHead>
-                                                    <TableBody sx={{ backgroundColor: colors.grey[600] }}>
+                                                    <TableBody sx={{   backgroundColor: colors.primary[600] }}>
 
                                                         {getmetercat <= 0 ? <TableRow>
                                                             <TableCell colSpan={2}>
@@ -380,18 +428,34 @@ const Categories = () => {
                                         />
                                         <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='certificateType' />}</Typography>
                                         <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
-                                        <Box mt="10px" mb="20px">
+                                        <Box mt="10px" mb="20px" 
+                                         sx={{
+                                            "& .MuiTable-root": {
+                                                border: "none"
+                                            },
+                                            "& .MuiTableCell-root": {
+                                                borderBottom: "none"
+                                            },
+                                            "& .name-column--cell": {
+                                                color: colors.greenAccent[300]
+                                            },
+                                            "& .MuiTableHead-root": {
+                                                backgroundColor: colors.blueAccent[400],
+                                                borderBottom: "none"
+                                            }
+                                        }}
+                                        >
                                             <TableContainer  sx={{
-                                                height: 200
+                                                height: 200 ,overflow:"auto",  backgroundColor: colors.primary[600]
                                             }}>
                                                 <Table size="medium" sx={{height:"max-content"}} >
-                                                    <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
+                                                    <TableHead>
                                                         <TableRow>
                                                             <TableCell>Name</TableCell>
                                                             <TableCell>Delete</TableCell>
                                                         </TableRow>
                                                     </TableHead>
-                                                    <TableBody sx={{ backgroundColor: colors.grey[600] }}>
+                                                    <TableBody sx={{  backgroundColor: colors.primary[600] }}>
 
                                                         {getcercat <= 0 ? <TableRow>
                                                             <TableCell colSpan={2}>
@@ -445,18 +509,34 @@ const Categories = () => {
                                         />
                                         <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='deptType' />}</Typography>
                                         <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
-                                        <Box mt="10px" mb="20px">
+                                        <Box mt="10px" mb="20px"
+                                          sx={{
+                                            "& .MuiTable-root": {
+                                                border: "none"
+                                            },
+                                            "& .MuiTableCell-root": {
+                                                borderBottom: "none"
+                                            },
+                                            "& .name-column--cell": {
+                                                color: colors.greenAccent[300]
+                                            },
+                                            "& .MuiTableHead-root": {
+                                                backgroundColor: colors.blueAccent[400],
+                                                borderBottom: "none"
+                                            }
+                                        }}
+                                        >
                                             <TableContainer  sx={{
-                                                height: 200
+                                                height: 200 ,overflow:"auto",  backgroundColor: colors.primary[600]
                                             }} >
                                                 <Table size="medium" sx={{height:"max-content"}} >
-                                                    <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
+                                                    <TableHead >
                                                         <TableRow>
                                                             <TableCell>Name</TableCell>
                                                             <TableCell>Delete</TableCell>
                                                         </TableRow>
                                                     </TableHead>
-                                                    <TableBody sx={{ backgroundColor: colors.grey[600] }}>
+                                                    <TableBody sx={{   backgroundColor: colors.primary[600] }}>
 
                                                         {getdept <= 0 ? <TableRow>
                                                             <TableCell colSpan={2}>

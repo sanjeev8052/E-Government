@@ -145,16 +145,17 @@ export const themeSettings = (mode) => {
                     },
                     background: {
                         default: colors.primary[500],
-
+                        
                     },
+                    
 
                 } : {
                     primary: {
-                        main: colors.primary[100],
+                        main: colors.blueAccent[500],
 
                     },
                     secondary: {
-                        main: colors.blueAccent[500],
+                        main: colors.grey[500],
 
                     },
                     neutral: {
@@ -164,12 +165,14 @@ export const themeSettings = (mode) => {
                     },
                     background: {
                         default: "#fcfcfc",
+                        
                     }
                 }),
         },
         typography: {
             fontFamily: ["Yrsa", "serif"].join(","),
             fontSize:14,
+
             h1: {
                 fontFamily: ["Yrsa", "serif"].join(","),
                 fontSize: 40,
@@ -187,11 +190,11 @@ export const themeSettings = (mode) => {
                 fontSize: 20,
             },
             h5: {
-                fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+                fontFamily: ["Yrsa", "serif"].join(","),
                 fontSize: 16,
             },
             h6: {
-                fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+                fontFamily: ["Yrsa", "serif"].join(","),
                 fontSize: 14,
             },
         },

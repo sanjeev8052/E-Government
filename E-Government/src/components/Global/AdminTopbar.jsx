@@ -39,12 +39,12 @@ const AdminTopbar = () => {
             <IconButton onClick={colorModes.toggleColorMode}>
               {themes.palette.mode === "light" ? (<DarkModeTwoTone />) : (<LightModeTwoTone />)}
             </IconButton>
-            <IconButton>
+            {/* <IconButton>
               <SettingsTwoTone />
-            </IconButton>
-            <IconButton>
+            </IconButton> */}
+            {/* <IconButton>
               <ManageAccountsTwoTone />
-            </IconButton>
+            </IconButton> */}
             <IconButton onClick={logout}>
               <ExitToAppTwoTone />
             </IconButton>

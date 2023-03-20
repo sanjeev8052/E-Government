@@ -16,6 +16,7 @@ font-family: Yrsa , serif;
 }
 ::-webkit-scrollbar{
   width: 10px;
+  border-radius: 15px;
 }
 
 ::-webkit-scrollbar-track{
