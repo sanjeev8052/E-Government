@@ -14,7 +14,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { ColorModeContext, useMode } from "./Global";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { LoadAdmin ,getAdmnProfileImage} from './Action/Admin/Login'
+import { LoadAdmin, getAdmnProfileImage } from './Action/Admin/Login'
 
 // admin
 import AssignCom from './components/Admin/AssignCom'
@@ -40,6 +40,8 @@ import Empregister from './components/Employee/Empregister'
 import Emplogin from './components/Employee/Emplogin'
 import Work from './components/Employee/Work'
 import EProfile from './components/Employee/Profile'
+import EmpforgetPasswrod from './components/Employee/EmpforgetPasswrod'
+import EmpreserPassword from './components/Employee/EmpreserPassword'
 
 // Others
 import AssignModel from './components/Global/AssignModel'
@@ -83,7 +85,7 @@ const App = () => {
             <Route path='/Profile' element={<Profile />} />
             <Route path='/UserDashboard' element={<UserDashboard />} />
 
-            
+
             {/* Services */}
             <Route path='/complaint' element={<Complaint />} />
             <Route path='/billpay' element={<BillPay />} />
@@ -111,29 +113,7 @@ const App = () => {
             <Route path="/abills" element={<Bills />} />
             <Route path="/pbills" element={<PendingBills />} />
             <Route path="/pabills" element={<PaidBills />} />
-              {/* Admin */}
-              
-              <Route path='/adlogin' element={<AdminLogin />} />
-              <Route path='/aforgot' element={<Aforgetpassword />} />
-              <Route path='/emplogin' element={<Emplogin />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/aemployee" element={<Employee />} />
-              <Route path="/aremployee" element={<RequestedEmployee />} />
-              <Route path="/acomplaint" element={<AdminComplaint />} />
-              <Route path="/categories" element={<Categories />} />
-              <Route path="/auser" element={<User />} />
-              <Route path="/spiner" element={<Loader />} />
-              <Route path="/Categories" element={<Categories />} />
-              <Route path="/assign" element={<AssignCom/>} />
-              <Route path="/assigncom/:_id" element={<AssignModel/>} />
-              <Route path="/feedback" element={<Feedback  />} />
-              <Route path="/completecom" element={<CompletedComplaint />} />
-              <Route path="/abills" element={<Bills />} />
-              <Route path="/pbills" element={<PendingBills />} />
-              <Route path="/pabills" element={<PaidBills />} />
-              <Route path="/tester" element={<Tester />} />
-              
-
+          
 
 
 
@@ -142,12 +122,14 @@ const App = () => {
             <Route path="/emplogin" element={<Emplogin />} />
             <Route path='/empregister' element={<Empregister />} />
             <Route path='/work' element={<Work />} />
+            <Route path='eforgotpassword' element={<EmpforgetPasswrod />} />
+            <Route path='ereset/password/:token' element={< EmpreserPassword />} />
             {/* <Route path="/emp/register" element={<Empregister/>} /> */}
-               <Route path="/emplogin" element={<Emplogin/>} />
-               <Route path='/empregister' element={<Empregister />} />
-               <Route path='/work' element={<Work />} />
-               <Route path='/eprofile' element={<EProfile />} />
-               {/* <Route path="/emp/register" element={<Empregister/>} /> */}
+            <Route path="/emplogin" element={<Emplogin />} />
+            <Route path='/empregister' element={<Empregister />} />
+            <Route path='/work' element={<Work />} />
+            <Route path='/eprofile' element={<EProfile />} />
+            {/* <Route path="/emp/register" element={<Empregister/>} /> */}
 
 
           </Routes>

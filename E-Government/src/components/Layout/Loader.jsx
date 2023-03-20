@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import spiner2 from '../Images/running-man.gif'
+import {CircularProgress  } from '@material-ui/core'
 import { makeStyles,  } from '@material-ui/core';
 
  const useStyle =  makeStyles({

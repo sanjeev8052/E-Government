@@ -38,9 +38,8 @@ const useStyle = makeStyles({
 
 })
 
-
-const ResetPassword = () => {
-  const navigate = useNavigate()
+const EmpreserPassword = () => {
+    const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const { token } = useParams()
   const alert = useAlert();
@@ -69,35 +68,35 @@ const ResetPassword = () => {
   const style = useStyle();
   return (
     <Box className={style.conatiner}>
-      <form onSubmit={handleSubmit} className={style.form}>
-        <Typography variant="h1" color="initial">Set New Password</Typography>
-        <TextField className={style.input}
-          id=""
-          fullWidth
-          variant='outlined'
-          size='small'
-          label='Enter New Password'
-          name='password'
-          onChange={handleChange}
-        />
-        <Typography className={style.error} >{errors.password}</Typography>
+    <form onSubmit={handleSubmit} className={style.form}>
+      <Typography variant="h1" color="initial">Set New Password</Typography>
+      <TextField className={style.input}
+        id=""
+        fullWidth
+        variant='outlined'
+        size='small'
+        label='Enter New Password'
+        name='password'
+        onChange={handleChange}
+      />
+      <Typography className={style.error} >{errors.password}</Typography>
 
-        <TextField className={style.input}
-          id=""
-          fullWidth
-          variant='outlined'
-          size='small'
-          label='Enter New Password'
-          name='confirm_password'
-          onChange={handleChange}
-        />
-        <Typography className={style.error} >{errors.confirm_password}</Typography>
-        <Button fullWidth type='submit' disabled={loading} className="mt-3" variant="contained" color="primary">
-         { loading ?  <CircularProgress /> : "Set Password"}
-        </Button>
-      </form>
-    </Box>
+      <TextField className={style.input}
+        id=""
+        fullWidth
+        variant='outlined'
+        size='small'
+        label='Enter New Password'
+        name='confirm_password'
+        onChange={handleChange}
+      />
+      <Typography className={style.error} >{errors.confirm_password}</Typography>
+      <Button fullWidth type='submit' disabled={loading} className="mt-3" variant="contained" color="primary">
+       { loading ?  <CircularProgress /> : "Set Password"}
+      </Button>
+    </form>
+  </Box>
   )
 }
 
-export default ResetPassword
+export default EmpreserPassword
