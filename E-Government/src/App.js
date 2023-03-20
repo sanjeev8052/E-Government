@@ -49,11 +49,8 @@ import Loader from './components/Layout/Loader'
 import MeterApply from './components/Services/MeterApply'
 import BillPay from './components/Services/BillPayment/BillPay'
 import Complaint from './components/Services/Complaint'
-<<<<<<< HEAD
 import Temp from './components/Temp'
-=======
 import { getEmpDetails, getEmpProfileImage } from './Action/Employee/register'
->>>>>>> 59b14b82b10cd17dd12245777fb3c5cb8b5a09f3
 
 const App = () => {
   const [theme, colorMode] = useMode()
@@ -75,10 +72,8 @@ const App = () => {
         <div className=''>
 
 
-<<<<<<< HEAD
           <Routes>
             {/* User */}
-            <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/' element={<Home />} />
             <Route path='forgotpassword' element={<UserForgotPassword />} />
@@ -115,10 +110,8 @@ const App = () => {
             <Route path="/abills" element={<Bills />} />
             <Route path="/pbills" element={<PendingBills />} />
             <Route path="/pabills" element={<PaidBills />} />
-=======
               {/* Admin */}
               
-             
               <Route path='/adlogin' element={<AdminLogin />} />
               <Route path='/aforgot' element={<Aforgetpassword />} />
               <Route path='/emplogin' element={<Emplogin />} />
@@ -139,25 +132,20 @@ const App = () => {
               <Route path="/pabills" element={<PaidBills />} />
               <Route path="/tester" element={<Tester />} />
               
->>>>>>> 59b14b82b10cd17dd12245777fb3c5cb8b5a09f3
 
 
 
-
-<<<<<<< HEAD
             {/* Employee */}
 
             <Route path="/emplogin" element={<Emplogin />} />
             <Route path='/empregister' element={<Empregister />} />
             <Route path='/work' element={<Work />} />
             {/* <Route path="/emp/register" element={<Empregister/>} /> */}
-=======
                <Route path="/emplogin" element={<Emplogin/>} />
                <Route path='/empregister' element={<Empregister />} />
                <Route path='/work' element={<Work />} />
                <Route path='/eprofile' element={<EProfile />} />
                {/* <Route path="/emp/register" element={<Empregister/>} /> */}
->>>>>>> 59b14b82b10cd17dd12245777fb3c5cb8b5a09f3
 
 
           </Routes>
