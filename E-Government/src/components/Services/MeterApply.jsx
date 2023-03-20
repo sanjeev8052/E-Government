@@ -12,7 +12,8 @@ import { complaintSchema, meterSchema } from '../../ValidateSchema/Services';
 import { useDispatch, useSelector } from 'react-redux';
 import { CompReq } from '../../Action/Services/Services';
 
-
+import avatar from '../../Images/Avatar.jpg'
+import axios from 'axios';
 
 const useStyles = makeStyles({
     Complaint: {
@@ -65,52 +66,51 @@ const useStyles = makeStyles({
 });
 
 const MeterApply = () => {
-    const { userData, userLoading, isAuthenticated } = useSelector(state => state.user)
 
-    const themes = useTheme()
-    const colors = tokens(themes.palette.mode)
+    const [file, setFile] = useState();
+    const [image, setImage] = useState();
 
-    const [user, setUser] = useState({
-        email: "",
-        name: "",
-        phone: ""
-    })
+    const hnadleFile = (e) => {
+        const file = e.target.files[0]
+        setFile(file)
 
+        const reader = new FileReader()
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setImage(reader.result)
+            }
+        }
+        reader.readAsDataURL(file)
+    }
 
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-
-        userData ? setUser({
-            email: userData.email,
-            phone: userData.phone,
-            name: userData.name
-        }) : null
-    }, [userData]);
 
 
     const initialvalues = {
-        name:"",
-        email:"",
-        phone:"",
-        meterType: "",
-        city: "",
-        streetAddress: "",
-        area: "",
-        pincode: "",
-        complaintDesc: "",
-
-
     }
     const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
 
         initialValues: initialvalues,
-        validationSchema: meterSchema,
+        // validationSchema: meterSchema,
 
         onSubmit: (values) => {
+            try {
+                if (file) {
+                    const formData = new FormData()
+                    formData.append("file", file)
+                    formData.append('data', JSON.stringify(values));
 
-            console.log(values)
-            dispatch(CompReq(user, values))
+                    axios.post('/api/meterApplyReq', formData, {
+                        headers: {
+                          'Content-Type': 'multipart/form-data'
+                        }
+                    })
+
+                    return
+                }
+                alert("please select file")
+            } catch (error) {
+
+            }
         }
 
 
@@ -135,8 +135,12 @@ const MeterApply = () => {
                         name='name'
                         value={values.name}
                         onChange={handleChange}
+                        onBlur={handleBlur}
 
                     />
+                    {errors.name && touched.name ? (
+                        <Typography className={classes.error}   >{errors.name}</Typography>
+                    ) : null}
                     <Typography variant="h6" color="initial">Email</Typography>
                     <TextField className={classes.fullInput}
                         id=""
@@ -146,8 +150,12 @@ const MeterApply = () => {
                         name='email'
                         value={values.email}
                         onChange={handleChange}
+                        onBlur={handleBlur}
 
                     />
+                    {errors.email && touched.email ? (
+                        <Typography className={classes.error}   >{errors.email}</Typography>
+                    ) : null}
                     <Typography variant="h6" color="initial">Mobile No.</Typography>
                     <TextField className={classes.fullInput}
                         id=""
@@ -157,9 +165,13 @@ const MeterApply = () => {
                         name='phone'
                         value={values.phone}
                         onChange={handleChange}
-
+                        onBlur={handleBlur}
                     />
-                    <Typography variant="h6" color="initial">Compalint Type</Typography>
+
+                    {errors.phone && touched.phone ? (
+                        <Typography className={classes.error}   >{errors.phone}</Typography>
+                    ) : null}
+                    <Typography variant="h6" color="initial">Meter Type</Typography>
                     <FormControl className={classes.fullInput}>
                         <Select
                             labelId="demo-simple-select-label"
@@ -168,12 +180,9 @@ const MeterApply = () => {
                             onChange={handleChange}
                             name="meterType"
                         >
-                            <MenuItem value={"Roads & Footpath"}>Roads & Footpath</MenuItem>
-                            <MenuItem value={"Water Suppy"}>Water Suppy</MenuItem>
-                            <MenuItem value={"Street Light"}>Street Light</MenuItem>
-                            <MenuItem value={"Dead Animals"}>Dead Animals</MenuItem>
-                            <MenuItem value={"Public Park And Garden"}>Public Park And Garden</MenuItem>
-                            <MenuItem value={"Food Safety Act"}>Food Safety Act</MenuItem>
+                            <MenuItem value={"WaterMeter"}>Water Meter</MenuItem>
+                            <MenuItem value={"GasMeter"}>Gas Meter</MenuItem>
+                            <MenuItem value={"ElectricityMeter"}>Electricity Meter</MenuItem>
                         </Select>
                     </FormControl>
 
@@ -181,6 +190,21 @@ const MeterApply = () => {
                     {errors.complaintType && touched.complaintType ? (
                         <Typography className={classes.error}   >{errors.complaintType}</Typography>
                     ) : null}
+                    <Typography variant="h6" color="initial">Tenament No</Typography>
+                    <TextField className={classes.fullInput}
+                        id=""
+                        placeholder='tenament_No'
+                        variant='outlined'
+                        size='small'
+                        name='tenament_No'
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.tenament_No}
+                    />
+                    {errors.tenament_No && touched.tenament_No ? (
+                        <Typography className={classes.error} >{errors.tenament_No}</Typography>
+                    ) : null}
+
                     <Typography variant="h6" color="initial">Address</Typography>
                     <TextField className={classes.fullInput}
                         id=""
@@ -228,33 +252,33 @@ const MeterApply = () => {
                     ) : null}
                     <TextField className={classes.fullInput}
                         id=""
-                        placeholder='Zip No. '
+                        placeholder='pincode No. '
                         variant='outlined'
                         size='small'
-                        name='pincode'
+                        name='pincodeNo'
                         onChange={handleChange}
                         value={values.pincode}
                         onBlur={handleBlur}
                     />
-                    {errors.pincode && touched.pincode ? (
-                        <Typography className={classes.error} >{errors.pincode}</Typography>
+                    {errors.pincodeNo && touched.pincodeNo ? (
+                        <Typography className={classes.error} >{errors.pincodeNo}</Typography>
                     ) : null}
 
                     <Typography variant="h6" color="initial">Compplaint Description </Typography>
-                    <textarea
-                        style={{ width: "71%", marginBottom: "15px" }}
-                        name="complaintDesc"
-                        id="" rows="5"
-                        value={values.complaintDesc}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                    />
-                    {errors.complaintDesc && touched.complaintDesc ? (
-                        <Typography className={classes.error} >{errors.complaintDesc}</Typography>
-                    ) : null}
+                    <div className="row">
+                        <div className="col-sm-6 mt-5 mb-5">
+                            <input type="file" className='input-upload' onChange={hnadleFile} name="" id="" />
+                        </div>
+                        <div className="col-sm-6 mt-1 mb-2" >
+                            <img style={{ width: "10rem" }} src={image} alt="" />
+
+                        </div>
+
+
+
+                    </div>
 
                     <Button type='submit' color='primary' className={classes.button} variant="contained" endIcon={<Send />}>
-
                         Complaint Request
                     </Button>
                 </div>
