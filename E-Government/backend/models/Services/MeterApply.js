@@ -1,3 +1,4 @@
+const { status } = require('init')
 const mongoose = require('mongoose')
 
 const MeterApplySchema = mongoose.Schema({
@@ -37,7 +38,8 @@ const MeterApplySchema = mongoose.Schema({
       type:String,
       require:true
         
-    }
+    },
+    status:String
 })
 
 

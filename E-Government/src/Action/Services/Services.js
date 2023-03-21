@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+
+// For Complaint
 export const CompReq = (user,values) => async (dispatch) => {
     try {
         dispatch({
@@ -146,6 +148,32 @@ export const rejCompReq = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: "RejectCompReqFailuer",
+            payload: error
+        })
+    }
+}
+
+// For Meter Apply Req
+export const getMeterApplyReq = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: "getMeterReqRequset",
+        })
+
+        const { data } = await axios.get("api/getmeterreq", {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+        dispatch({
+            type: "getMeterReqSuccess",
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: "getMeterReqFailuer",
             payload: error
         })
     }

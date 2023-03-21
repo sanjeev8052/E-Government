@@ -362,6 +362,20 @@ export const userServicesReducer = createReducer(initialState, {
         state.error = action.payload;
 
     },
+     // for get Meter Req
+     getMeterReqRequset: (state) => {
+        state.loading = true;
+    },
+    getMeterReqSuccess: (state, action) => {
+        state.loading = false;
+        state.getMeterReq = action.payload;
+
+    },
+    getMeterReqFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
 
 
     

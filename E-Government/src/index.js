@@ -7,7 +7,8 @@ import App from './App';
 import { Provider as AlertProvider, transitions, positions } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-
+// import * as dotenv from "dotenv";
+// dotenv.config();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const option ={
