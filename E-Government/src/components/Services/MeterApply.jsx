@@ -90,7 +90,7 @@ const MeterApply = () => {
     const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
 
         initialValues: initialvalues,
-        // validationSchema: meterSchema,
+        //validationSchema: meterSchema,
 
         onSubmit: (values) => {
             try {
@@ -99,7 +99,7 @@ const MeterApply = () => {
                     formData.append("file", file)
                     formData.append('data', JSON.stringify(values));
 
-                    axios.post('/api/meterApplyReq', formData, {
+                    axios.post('/api/meterreq', formData, {
                         headers: {
                           'Content-Type': 'multipart/form-data'
                         }
@@ -122,7 +122,7 @@ const MeterApply = () => {
 
 
         <div className={classes.Complaint}>
-            <form onSubmit={handleSubmit} className={classes.box} >
+            <form onSubmit={handleSubmit} className={classes.box}  enctype="multipart/form-data">
 
                 <div className={classes.compField}>
                     <Typography variant="h4" sx={{ marginBottom: "20px" }} color="initial">Apply Meter</Typography>
@@ -196,7 +196,7 @@ const MeterApply = () => {
                         placeholder='tenament_No'
                         variant='outlined'
                         size='small'
-                        name='tenament_No'
+                        name='tenamentNo'
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.tenament_No}

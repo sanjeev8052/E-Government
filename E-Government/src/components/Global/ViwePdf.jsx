@@ -44,7 +44,7 @@ const ViwePdf = () => {
         <div className="App">
             <input type="file" onChange={handleImage} />
             <header className="App-header">
-                <Document file={image} onLoadSuccess={onDocumentLoadSuccess}>
+                <Document file="http://localhost:5000/PDF/1679330457005_.net%20theory%20assignment-3.pdf" onLoadSuccess={onDocumentLoadSuccess}>
                     <Page height="600" pageNumber={pageNumber} />
                 </Document>
                 <p> Page {pageNumber} of {numPages}</p>

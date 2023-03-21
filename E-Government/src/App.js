@@ -31,6 +31,7 @@ import CompletedComplaint from './components/Admin/CompletedComplaint'
 import Bills from './components/Admin/Bills'
 import PendingBills from './components/Admin/PendingBills'
 import PaidBills from './components/Admin/PaidBills'
+import GetmeterReq from './components/Admin/GetmeterReq'
 import Tester from './components/Admin/Tester'
 import UserHeader from './components/User/UserHeader/UserHeader'
 
@@ -53,6 +54,7 @@ import BillPay from './components/Services/BillPayment/BillPay'
 import Complaint from './components/Services/Complaint'
 import Temp from './components/Temp'
 import { getEmpDetails, getEmpProfileImage } from './Action/Employee/register'
+import ViewPdf from './components/Global/ViewPdf'
 
 const App = () => {
   const [theme, colorMode] = useMode()
@@ -91,6 +93,7 @@ const App = () => {
             <Route path='/billpay' element={<BillPay />} />
             <Route path='/meterApply/' element={<MeterApply />} />
             <Route path='/Temp/' element={<Temp />} />
+            <Route path='/view' element={<ViewPdf />} />
 
             {/* Admin */}
 
@@ -113,6 +116,7 @@ const App = () => {
             <Route path="/abills" element={<Bills />} />
             <Route path="/pbills" element={<PendingBills />} />
             <Route path="/pabills" element={<PaidBills />} />
+            <Route path="/getmeterreq" element={<GetmeterReq />} />
           
 
 

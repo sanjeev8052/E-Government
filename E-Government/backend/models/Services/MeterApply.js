@@ -1,3 +1,4 @@
+const { status } = require('init')
 const mongoose = require('mongoose')
 
 const MeterApplySchema = mongoose.Schema({
@@ -34,10 +35,11 @@ const MeterApplySchema = mongoose.Schema({
         require:true
     },
     proof:{
-        url:String,
-        public_id:String,
+      type:String,
+      require:true
         
-    }
+    },
+    status:String
 })
 
 
