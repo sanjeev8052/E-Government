@@ -1,4 +1,4 @@
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper,  IconButton } from '@mui/material'
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton, Button } from '@mui/material'
 import React, { useEffect } from 'react'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
@@ -11,10 +11,10 @@ import { CancelTwoTone, CheckCircleOutlineTwoTone, Height } from '@mui/icons-mat
 import { getMeterApplyReq } from '../../Action/Services/Services'
 
 const GetmeterReq = () => {
-
+    const redirect = "http://locahost:5000/PDF/"
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    const { loading, getMeterReq} = useSelector((state) => (state.services))
+    const { loading, getMeterReq } = useSelector((state) => (state.services))
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -23,23 +23,21 @@ const GetmeterReq = () => {
         dispatch(getMeterApplyReq())
     }, [dispatch])
 
-    // const reject = (id) => { 
-    //     dispatch(rejTempEmp(id))
-    //  }
+    
     // const confirm = (id) => {
     //     dispatch(conTempEmp(id));
-       
+
     // }
 
-  return (
-    <div className='app'>
+    return (
+        <div className='app'>
             <AdminSidebar />
             <main className='content'>
                 <AdminTopbar />
 
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <Header title="Requested Employees" subtitle="Welcome Your Requested Employees Details Page" />
+                        <Header title="Meter Request" subtitle="Welcome Your Meter Request Details Page" />
 
 
                     </Box>
@@ -59,20 +57,23 @@ const GetmeterReq = () => {
                                 borderBottom: "none"
                             }
                         }} >
-                            <Typography variant="h3" color={colors.redAccent[600]}>Requested Employees Details</Typography>
-                            <TableContainer sx={{ mt: "10px" , height:"400px", overflow:"auto" , backgroundColor: colors.primary[600]}} component={Paper} >
-                                <Table size='small'  sx={{ backgroundColor: colors.blueAccent[400]}}>
+                           
+                            <TableContainer sx={{ mt: "10px", height: "400px", overflow: "auto", backgroundColor: colors.primary[600] }} component={Paper} >
+                                <Table size='small' sx={{ backgroundColor: colors.blueAccent[400] }}>
                                     <TableHead  >
                                         <TableRow >
                                             <TableCell>Name</TableCell>
                                             <TableCell>Email</TableCell>
-                                            <TableCell>Gender</TableCell>
                                             <TableCell>Phone NO.</TableCell>
-                                            <TableCell>Department</TableCell>
+                                            <TableCell>MeterType</TableCell>
+                                            <TableCell>Tenament NO.</TableCell>
+                                            <TableCell>City</TableCell>
+                                            <TableCell>Area</TableCell>
+                                            <TableCell>Proof</TableCell>
                                             <TableCell>Actions</TableCell>
                                         </TableRow>
                                     </TableHead>
-                                    <TableBody sx={{ backgroundColor: colors.primary[600]}}>
+                                    <TableBody sx={{ backgroundColor: colors.primary[600] }}>
 
                                         {getMeterReq <= 0 ? <TableRow>
                                             <TableCell colSpan={6}>
@@ -80,20 +81,30 @@ const GetmeterReq = () => {
                                             </TableCell>
                                         </TableRow>
                                             :
-                                            empReq?.map((data) => (
+                                            getMeterReq?.map((data) => (
                                                 <TableRow key={data._id}>
                                                     <TableCell >{data.name}</TableCell>
                                                     <TableCell >{data.email}</TableCell>
-                                                    <TableCell >{data.gender}</TableCell>
                                                     <TableCell >{data.phone}</TableCell>
-                                                    <TableCell >{data.dept}</TableCell>
+                                                    <TableCell >{data.meterType}</TableCell>
+                                                    <TableCell >{data.tenamentNo}</TableCell>
+                                                    <TableCell >{data.city}</TableCell>
+                                                    <TableCell >{data.area}</TableCell>
                                                     <TableCell >
-                                                        {/* <IconButton aria-label="correct" color='success' onClick={() => { confirm(data._id) }}>
-                                                          <CheckCircleOutlineTwoTone/>
+                                                        <Button variant="contained" color="primary"   >
+                                                        <a href={`http://localhost:5000/PDF/${data.proof}`} style={{textDecoration:"none" , color:"white"}} target="_blank" rel="noopener noreferrer">View</a>
+                                                            
+                                                        </Button>
+
+                                                        {/* {data.proof} */}
+                                                    </TableCell>
+                                                    <TableCell >
+                                                        <IconButton aria-label="correct" color='success'  >
+                                                            <CheckCircleOutlineTwoTone />
                                                         </IconButton>
-                                                        <IconButton aria-label="reject"  color='error' onClick={() => { reject(data._id) }}>
-                                                          <CancelTwoTone/>
-                                                        </IconButton> */}
+                                                        <IconButton aria-label="reject" color='error' >
+                                                            <CancelTwoTone />
+                                                        </IconButton>
                                                     </TableCell>
                                                 </TableRow>
                                             ))
@@ -107,7 +118,7 @@ const GetmeterReq = () => {
                 </Box>
             </main>
         </div>
-  )
+    )
 }
 
 export default GetmeterReq

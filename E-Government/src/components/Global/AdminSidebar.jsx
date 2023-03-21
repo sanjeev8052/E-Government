@@ -24,14 +24,14 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const AdminSidebar = () => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  const { admin ,adminProfileImage } = useSelector((state) => (state.admin))
+  const { admin, adminProfileImage } = useSelector((state) => (state.admin))
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [selected, setSelected] = useState("empLogin")
   const [names, setNames] = useState()
 
   useEffect(() => {
-    admin ? setNames(admin.name):null
-}, [])
+    admin ? setNames(admin.name) : null
+  }, [])
 
   return (
     <Box sx={{
@@ -77,11 +77,11 @@ const AdminSidebar = () => {
             !isCollapsed && (
               <Box mb="25px">
                 <Box display="flex" justifyContent="center" alignItems="center">
-                  <Avatar  alt="admin" src={adminProfileImage} style={{ cursor: "pointer", borderRadius: "50%" , height:"100px" , width:"100px" }} />
+                  <Avatar alt="admin" src={adminProfileImage} style={{ cursor: "pointer", borderRadius: "50%", height: "100px", width: "100px" }} />
                 </Box>
                 <Box textAlign="center">
                   <Typography variant='h3' color={colors.grey[900]} fontWeight="bold" xs={{ m: "10px 0 0 0" }} >Hello {names}  </Typography>
-                  <Typography variant="h4"   color={colors.grey[900]} ><ImageUploader/></Typography>
+                  <Typography variant="h4" color={colors.grey[900]} ><ImageUploader /></Typography>
                 </Box>
               </Box>
             )}
@@ -178,6 +178,32 @@ const AdminSidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
+              </SubMenu>
+            </Menu>
+            <Menu iconShape="square" style={{ color: colors.grey[900], backgroundColor: colors.primary[400] }} >
+              {/* <MenuItem>Employee</MenuItem> */}
+              <SubMenu title="Meter Request" icon={<ReceiptTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
+                <Item
+                  title="Meter Request"
+                  to="/getmeterreq"
+
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                {/* <Item
+                  title="Pending Bills"
+                  to="/pbills"
+
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Paid Bills"
+                  to="/pabills"
+
+                  selected={selected}
+                  setSelected={setSelected}
+                /> */}
               </SubMenu>
             </Menu>
             <Item

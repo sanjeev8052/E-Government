@@ -1,14 +1,16 @@
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper,  IconButton } from '@mui/material'
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton } from '@mui/material'
 import React, { useEffect } from 'react'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
+import Pdf from '../Global/Pdf'
+
 import Header from '../Global/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../Layout/Loader'
 import { tokens } from '../../Global'
 import { getTempEmp, conTempEmp, rejTempEmp } from '../../Action/Admin/Employee'
 import { useNavigate } from 'react-router-dom'
-import { CancelTwoTone, CheckCircleOutlineTwoTone, Height } from '@mui/icons-material'
+import { CancelTwoTone, CheckCircleOutlineTwoTone, Height, PictureAsPdfRounded } from '@mui/icons-material'
 
 const RequestedEmployee = () => {
     const themes = useTheme()
@@ -22,12 +24,12 @@ const RequestedEmployee = () => {
         dispatch(getTempEmp())
     }, [isAuthenticated, dispatch, navigate])
 
-    const reject = (id) => { 
+    const reject = (id) => {
         dispatch(rejTempEmp(id))
-     }
+    }
     const confirm = (id) => {
         dispatch(conTempEmp(id));
-       
+
     }
 
     return (
@@ -39,11 +41,11 @@ const RequestedEmployee = () => {
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Requested Employees" subtitle="Welcome Your Requested Employees Details Page" />
-
+                        <Pdf contentId="bid" downloadFileName="req"  />
 
                     </Box>
                     {loading ? <Loader /> :
-                        <Box alignItems="center" justifyContent="center" m="15px" sx={{
+                        <Box alignItems="center"  id="bid" justifyContent="center" m="15px" sx={{
                             "& .MuiTable-root": {
                                 border: "none"
                             },
@@ -59,8 +61,8 @@ const RequestedEmployee = () => {
                             }
                         }} >
                             <Typography variant="h3" color={colors.redAccent[600]}>Requested Employees Details</Typography>
-                            <TableContainer sx={{ mt: "10px" , height:"400px", overflow:"auto" , backgroundColor: colors.primary[600]}} component={Paper} >
-                                <Table size='small'  sx={{ backgroundColor: colors.blueAccent[400]}}>
+                            <TableContainer sx={{ mt: "10px", height: "400px", overflow: "auto", backgroundColor: colors.primary[600] }} component={Paper} >
+                                <Table size='small' sx={{ backgroundColor: colors.blueAccent[400] }}>
                                     <TableHead  >
                                         <TableRow >
                                             <TableCell>Name</TableCell>
@@ -71,7 +73,7 @@ const RequestedEmployee = () => {
                                             <TableCell>Actions</TableCell>
                                         </TableRow>
                                     </TableHead>
-                                    <TableBody sx={{ backgroundColor: colors.primary[600]}}>
+                                    <TableBody sx={{ backgroundColor: colors.primary[600] }}>
 
                                         {empReq <= 0 ? <TableRow>
                                             <TableCell colSpan={6}>
@@ -88,10 +90,10 @@ const RequestedEmployee = () => {
                                                     <TableCell >{data.dept}</TableCell>
                                                     <TableCell >
                                                         <IconButton aria-label="correct" color='success' onClick={() => { confirm(data._id) }}>
-                                                          <CheckCircleOutlineTwoTone/>
+                                                            <CheckCircleOutlineTwoTone />
                                                         </IconButton>
-                                                        <IconButton aria-label="reject"  color='error' onClick={() => { reject(data._id) }}>
-                                                          <CancelTwoTone/>
+                                                        <IconButton aria-label="reject" color='error' onClick={() => { reject(data._id) }}>
+                                                            <CancelTwoTone />
                                                         </IconButton>
                                                     </TableCell>
                                                 </TableRow>

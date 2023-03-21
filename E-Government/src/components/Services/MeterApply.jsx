@@ -90,7 +90,7 @@ const MeterApply = () => {
     const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
 
         initialValues: initialvalues,
-        // validationSchema: meterSchema,
+        //validationSchema: meterSchema,
 
         onSubmit: (values) => {
             try {
@@ -99,7 +99,7 @@ const MeterApply = () => {
                     formData.append("file", file)
                     formData.append('data', JSON.stringify(values));
 
-                    axios.post('/api/req', formData, {
+                    axios.post('/api/meterreq', formData, {
                         headers: {
                           'Content-Type': 'multipart/form-data'
                         }
