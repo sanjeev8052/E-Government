@@ -22,7 +22,7 @@ router.post('/meterreq', upload.single('file'), async (req, res) => {
 
     try {
         const proof = (req.file) ? req.file.filename : null
-        const { name, email, phone, meterType, tenamentNo, city, streetAddress, area } = req.body
+        const { name, email, phone, meterType, tenamentNo, city, streetAddress, area } = req.body.data
         const status = "Requested"
         const meter = new MeterApply({ name, email, phone, meterType, tenamentNo, city, streetAddress, area, proof, status: status })
         await meter.save();
