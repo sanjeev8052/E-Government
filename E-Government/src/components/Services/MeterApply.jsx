@@ -196,7 +196,7 @@ const MeterApply = () => {
                         placeholder='tenament_No'
                         variant='outlined'
                         size='small'
-                        name='tenament_No'
+                        name='tenamentNo'
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.tenament_No}

@@ -4,6 +4,7 @@ const router = express.Router();
 const cloudinary = require('cloudinary')
 const multer = require('multer');
 const { isAuthenticate } = require('../../middlewares/Adminmiddle');
+const { json } = require('body-parser');
 
 
 // For Multer Storage
@@ -22,14 +23,19 @@ router.post('/meterreq', upload.single('file'), async (req, res) => {
 
     try {
         const proof = (req.file) ? req.file.filename : null
-        const { name, email, phone, meterType, tenamentNo, city, streetAddress, area } = req.body.data
-        const status = "Requested"
-        const meter = new MeterApply({ name, email, phone, meterType, tenamentNo, city, streetAddress, area, proof, status: status })
-        await meter.save();
-        res.status(200).json({
-            message: "Successfully Added",
-            meter: meter
-        })
+        const data = req.body.data
+        
+        
+        const object = JSON.parse(data)
+        const { name, email, phone, meterType, tenamentNo, city, streetAddress, area } = object
+    //    console.log(object)
+         const status = "Requested"
+         const meter = new MeterApply({ name, email, phone, meterType, tenamentNo, city, streetAddress, area, proof, status: status })
+         await meter.save();
+         res.status(200).json({
+             message: "Successfully Added",
+             meter: meter
+         })
     } catch (error) {
         res.status(500).json({
             error: error.message
