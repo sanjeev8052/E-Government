@@ -42,7 +42,7 @@ const Bills = () => {
         onSubmit: (values) => {
            //console.log(values)
            dispatch(AddBill(values))
-        navigate('/pbills')
+        // navigate('/pbills')
         }
     })
     const styles = {

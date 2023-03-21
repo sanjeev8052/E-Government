@@ -22,12 +22,11 @@ const BillPay = () => {
   const handler = (billType) => {
     setStatus(billType)
   }
-  console.log(billData)
-  console.log(error)
+
   const initialValues = {}
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
-    // validateYupSchema: billPaySchema,
+    validateYupSchema: billPaySchema,
 
     onSubmit: async (values) => {
       try {
@@ -53,6 +52,8 @@ const BillPay = () => {
     }
   }
 
+ 
+
 
   return (
     <Box className='box'>
@@ -60,7 +61,7 @@ const BillPay = () => {
         <div className="row">
           {!billData &&
             <FormControl>
-              <RadioGroup row aria-label="categories" defaultValue="Gas" name='categories group'>
+              <RadioGroup row aria-label="categories" defaultValue={billType ? billType : "Gas"} name='categories group'>
                 <div className="col-4">
                   <img src={GasBillImage} alt="" />
                   <FormControlLabel value='Gas' label={<Typography variant="h6" >  Gas  BillPayment</Typography>} control={<Radio onClick={(e) => handler(e.target.value)} />}  ></FormControlLabel>
@@ -68,7 +69,7 @@ const BillPay = () => {
                 </div>
                 <div className="col-4">
                   <img src={electrBilliImage} alt="" />
-                  <FormControlLabel value='Eelectricity' label={<Typography variant="h6" >Electric BillPayment</Typography>} control={<Radio onClick={(e) => handler(e.target.value)} />}></FormControlLabel>
+                  <FormControlLabel value='Electricity' label={<Typography variant="h6" >Electric BillPayment</Typography>} control={<Radio onClick={(e) => handler(e.target.value)} />}></FormControlLabel>
 
                 </div>
                 <div className="col-4">
@@ -82,28 +83,33 @@ const BillPay = () => {
             </FormControl>
 
           }
+
           <div className="col-12">
             <div style={{ display: "flex" }}>
-              <h2>{ billType} Bill Payment</h2> {billData && <Close onClick={() => setBillData(null)} sx={{ marginLeft: "auto" }} />}
+              <h2>{billType} Bill Payment</h2> {billData && <Close onClick={()=>setBillData(null)} sx={{ marginLeft: "auto" }} />}
             </div>
-            <br /><br />
-            <TextField sx={{ marginTop: "2rem" }}
-              fullWidth
-              id=""
-              label=""
-              size='small'
-              name='tenamentNo'
-              variant='outlined'
-              onChange={handleChange}
-              placeholder='Enter Tenament No.'
-              InputProps={{ startAdornment: (<InputAdornment position="start"> <Home /></InputAdornment>) }}
-              required
-              type='number'
-            />
-            .
-            <Button variant="contained" type='submit' fullWidth color="primary">
-              Check Payment
-            </Button>
+
+            {!billData && <>
+              <br /><br />
+              <TextField sx={{ marginTop: "2rem" }}
+                fullWidth
+                id=""
+                label=""
+                size='small'
+                name='tenamentNo'
+                variant='outlined'
+                onChange={handleChange}
+                placeholder='Enter Tenament No.'
+                InputProps={{ startAdornment: (<InputAdornment position="start"> <Home /></InputAdornment>) }}
+                required
+                type='number'
+              />
+              .
+              <Button variant="contained" type='submit' fullWidth color="primary">
+                Check Payment
+              </Button>
+            </>}
+
           </div>
           {error &&
             <div className="col-12">
@@ -117,17 +123,19 @@ const BillPay = () => {
               <div className='row'>
                 <div className="col-sm-5">
                   <Typography variant="h6" color="initial">Tenament No</Typography><hr />
+                  <Typography variant="h6" color="initial">Area Name</Typography><hr />
                   <Typography variant="h6" color="initial">Customenr Name </Typography><hr />
                   <Typography variant="h6" color="initial">Bill</Typography><hr />
                   <Typography variant="h6" color="initial">Bill Date</Typography><hr />
                   <Typography variant="h6" color="initial">Last Due Date</Typography><hr />
                   <Typography variant="h6" color="initial">Past Due Amount</Typography><hr />
                   <Typography variant="h6" color="initial">Amout</Typography>
-     
+
 
                 </div>
                 <div className="col-sm-5">
                   <Typography variant="h6" color="initial">{billData.tenamentNo}</Typography><hr />
+                  <Typography variant="h6" color="initial">{billData.area}</Typography><hr />
                   <Typography variant="h6" color="initial">{billData.ownerName}</Typography><hr />
                   <Typography variant="h6" color="initial">{billData.billType}</Typography><hr />
                   <Typography variant="h6" color="initial">{billData.addDate}</Typography><hr />

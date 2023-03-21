@@ -148,7 +148,7 @@ const Complaint = () => {
             </Select>
           </FormControl>
 
-
+            
           {errors.complaintType && touched.complaintType ? (
             <Typography className={classes.error}   >{errors.complaintType}</Typography>
           ) : null}

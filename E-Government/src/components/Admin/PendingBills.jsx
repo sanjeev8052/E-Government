@@ -71,7 +71,7 @@ const PendingBills = () => {
 
                                         { getpenbill &&
                                             getpenbill <= 0 ? <TableRow>
-                                                <TableCell colSpan={6}>
+                                                <TableCell rowSpan={3} colSpan={10}>
                                                     <Typography className='text-center' sx={{ margin: "10px auto", display:"block" }} variant="h2" color="primary">No Bill Pending Data</Typography>
                                                 </TableCell>
                                             </TableRow> : getpenbill?.map((data) => (
