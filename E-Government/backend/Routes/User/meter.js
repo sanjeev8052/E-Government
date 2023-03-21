@@ -9,6 +9,8 @@ router.post('/meterApplyReq', async (req, res) => {
         const file = req.files.file
         const data = req.body.data
         
+        console.log(file)
+        console.log(data)
 
         // if (!file) {
         //     return res.send('file not found ')
