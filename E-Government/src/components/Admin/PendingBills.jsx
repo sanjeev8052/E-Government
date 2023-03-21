@@ -18,7 +18,7 @@ const PendingBills = () => {
         // dispatch(Getbillcat())
         dispatch(GetPendingBill())
     }, [])
-
+    console.log(getpenbill)
     return (
         <div className='app'>
             <AdminSidebar />
@@ -60,26 +60,32 @@ const PendingBills = () => {
                                             <TableCell>Tenament No.</TableCell>
                                             <TableCell>Street Address</TableCell>
                                             <TableCell>Area</TableCell>
+                                            <TableCell>Past Due Amount </TableCell>
                                             <TableCell>Amount</TableCell>
+                                            <TableCell>Totel</TableCell>
+                                            <TableCell>Bill Date</TableCell>
+                                            <TableCell>Last Due Date</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody sx={{ backgroundColor: colors.primary[600]}}>
 
-                                        {
+                                        { getpenbill &&
                                             getpenbill <= 0 ? <TableRow>
                                                 <TableCell colSpan={6}>
-                                                    <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Complaint Data</Typography>
+                                                    <Typography className='text-center' sx={{ margin: "10px auto", display:"block" }} variant="h2" color="primary">No Bill Pending Data</Typography>
                                                 </TableCell>
                                             </TableRow> : getpenbill?.map((data) => (
                                                 <TableRow key={data._id}>
                                                     <TableCell >{data.billType}</TableCell>
                                                     <TableCell >{data.ownerName}</TableCell>
                                                     <TableCell >{data.tenamentNo}</TableCell>
-                                                    
                                                     <TableCell >{data.streetAddress}</TableCell>
                                                     <TableCell >{data.area}</TableCell>
+                                                    <TableCell >{data.pastDueAmt}</TableCell>
                                                     <TableCell >{data.amount}</TableCell>
-
+                                                    <TableCell >{data.totelAmt}</TableCell>
+                                                    <TableCell >{data.addDate}</TableCell>
+                                                    <TableCell >{data.lastDueDate}</TableCell>
                                                 </TableRow>
                                             ))
                                         }
