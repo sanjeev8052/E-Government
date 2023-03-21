@@ -18,7 +18,7 @@ const PendingBills = () => {
         // dispatch(Getbillcat())
         dispatch(GetPendingBill())
     }, [])
-
+    console.log(getpenbill)
     return (
         <div className='app'>
             <AdminSidebar />
@@ -69,7 +69,7 @@ const PendingBills = () => {
                                     </TableHead>
                                     <TableBody sx={{ backgroundColor: colors.primary[600]}}>
 
-                                        {
+                                        { getpenbill &&
                                             getpenbill <= 0 ? <TableRow>
                                                 <TableCell colSpan={6}>
                                                     <Typography className='text-center' sx={{ margin: "10px auto", display:"block" }} variant="h2" color="primary">No Bill Pending Data</Typography>

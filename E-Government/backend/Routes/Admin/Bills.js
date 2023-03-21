@@ -43,16 +43,10 @@ router.post("/addbills", async (req, res) => {
 })
 
 // FOr Get PEnding BIlls 
-router.post("/getpendingbill", async (req, res) => {
+router.get("/getpendingbill", async (req, res) => {
     try {
-        const bill = await Bills.findOne({ status: "Pending" })
+        const bill = await Bills.find({ status: "Pending" })
 
-
-        for (var i = 0; i < bill.length; i++) {
-            bill[i].status = "Paid"
-            
-        }
-  
         res.status(200).json(bill)
         
                 console.log(bill)
