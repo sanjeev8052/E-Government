@@ -117,22 +117,29 @@ const BillPay = () => {
               <div className='row'>
                 <div className="col-sm-5">
                   <Typography variant="h6" color="initial">Tenament No</Typography><hr />
-                  <Typography variant="h6" color="initial">Bill Type </Typography><hr />
                   <Typography variant="h6" color="initial">Customenr Name </Typography><hr />
+                  <Typography variant="h6" color="initial">Bill</Typography><hr />
+                  <Typography variant="h6" color="initial">Bill Date</Typography><hr />
+                  <Typography variant="h6" color="initial">Last Due Date</Typography><hr />
+                  <Typography variant="h6" color="initial">Past Due Amount</Typography><hr />
                   <Typography variant="h6" color="initial">Amout</Typography>
+     
 
                 </div>
                 <div className="col-sm-5">
                   <Typography variant="h6" color="initial">{billData.tenamentNo}</Typography><hr />
-                  <Typography variant="h6" color="initial">{billData.billType}</Typography><hr />
                   <Typography variant="h6" color="initial">{billData.ownerName}</Typography><hr />
+                  <Typography variant="h6" color="initial">{billData.billType}</Typography><hr />
+                  <Typography variant="h6" color="initial">{billData.addDate}</Typography><hr />
+                  <Typography variant="h6" color="initial">{billData.lastDueDate}</Typography><hr />
+                  <Typography variant="h6" color="initial">{billData.pastDueAmt}</Typography><hr />
                   <Typography variant="h6" color="initial">{billData.amount}</Typography>
                 </div>
                 <div className='col-10'>
                   <hr />
                   <div className="row">
                     <div className='col-6'>
-                      <Typography variant="h6" color="initial">Total Amount : {billData.amount}</Typography>
+                      <Typography variant="h6" color="initial">Total Amount : {billData.totelAmt}</Typography>
 
                     </div>
                     <div className='col-6'>

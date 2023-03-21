@@ -8,13 +8,33 @@ const router = express.Router();
 router.post("/addbills", async (req, res) => {
     try {
         const { billType, ownerName, tenamentNo, streetAddress, area, amount } = req.body;
-        const bills = new Bills({ billType, ownerName, tenamentNo, streetAddress, area, amount, status: "Pending" })
-        await bills.save();
-        res.status(200).json({
-            success: true,
-            message: "Bill Added..",
-        })
+        const findBill = await Bills.find({ tenamentNo: tenamentNo, billType, status: "Pending" }).sort({ _id: -1 })
 
+        if (findBill) {
+
+            const create = {
+                billType, ownerName, tenamentNo, streetAddress, area, amount,
+                status: "Pending",
+                pastDueAmt: findBill[0].totelAmt,
+                totelAmt: findBill[0].totelAmt + amount,
+
+            }
+            const bill = await Bills.create(create)
+            res.send(false)
+            console.log(bill)
+            return
+        }
+
+        // const create = {
+        //     billType, ownerName, tenamentNo, streetAddress, area, amount,
+        //     status: "pending",
+        //     pastDueAmt: 00,
+        //     totelAmt: amount,
+
+        // }
+        // const bill = await Bills.create(create)
+
+        res.send(true)
     } catch (error) {
         res
             .status(500)
@@ -23,10 +43,19 @@ router.post("/addbills", async (req, res) => {
 })
 
 // FOr Get PEnding BIlls 
-router.get("/getpendingbill", async (req, res) => {
+router.post("/getpendingbill", async (req, res) => {
     try {
-        const bill = await Bills.find({ status: "Pending" })
+        const bill = await Bills.findOne({ status: "Pending" })
+
+
+        for (var i = 0; i < bill.length; i++) {
+            bill[i].status = "Paid"
+            
+        }
+  
         res.status(200).json(bill)
+        
+                console.log(bill)
     } catch (error) {
         res
             .status(500)
@@ -85,9 +114,9 @@ router.post("/searchbills", async (req, res) => {
         if (bill < 1) {
             return res
                 .status(404)
-                .json({message:"Invalid Input Enterd or No bill due.... "})
+                .json({ message: "Invalid Input Enterd or No bill due.... " })
         }
-        res.status(200).send(bill)
+        res.status(200).send(bill.reverse())
     } catch (error) {
 
         res.status(500).json({

@@ -21,7 +21,15 @@ const billSchema = mongoose.Schema({
         type:String,
         required:true
     },
+    pastDueAmt:{
+        type:Number,
+        require:true
+    },
     amount:{
+        type:Number,
+        required:true
+    },
+    totelAmt:{
         type:Number,
         required:true
     },
@@ -29,9 +37,9 @@ const billSchema = mongoose.Schema({
         type:Date,
         default:Date.now
     },
-    lastDate:{
+    lastDueDate:{
         type:Date,
-        require:true
+        default:Date.now() + 20 * 24 * 60 * 60 * 1000
     },
     status:String,
 
