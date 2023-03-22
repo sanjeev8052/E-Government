@@ -31,7 +31,7 @@ const AdminTopbar = () => {
             // backgroundColor={colors.primary[400]}
             borderRadius="3px"
           >
-            <Typography variant="h1" color="initial">E-Governance</Typography>
+            <Typography variant="h1" color={colors.grey[600]}>E-Governance</Typography>
           </Box>
           {/* icon button */}
           <Box display="flex">

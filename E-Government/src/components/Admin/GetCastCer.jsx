@@ -1,37 +1,37 @@
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton } from '@mui/material'
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton, Button } from '@mui/material'
 import React, { useEffect } from 'react'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
-import Pdf from '../Global/Pdf'
-
 import Header from '../Global/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from './AdminLoader'
 import { tokens } from '../../Global'
-import { getTempEmp, conTempEmp, rejTempEmp } from '../../Action/Admin/Employee'
+import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
-import { CancelTwoTone, CheckCircleOutlineTwoTone, Height, PictureAsPdfRounded } from '@mui/icons-material'
-
-const RequestedEmployee = () => {
+import { CancelTwoTone, CheckCircleOutlineTwoTone, Height } from '@mui/icons-material'
+import { getCastCer, accCastCerReq, rejCastCerReq } from '../../Action/Services/Cast'
+const GetCastCer = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    const { isAuthenticated, loading, empReq } = useSelector((state) => (state.admin))
-
+    const { loading, getCastCerReq,accCastCerReqMs , rejectCastCerReqMs } = useSelector((state) => (state.services))
+    const alert = useAlert();
     const dispatch = useDispatch()
     const navigate = useNavigate();
     useEffect(() => {
-        isAuthenticated ? navigate('/aremployee') : navigate('/adlogin')
-        dispatch(getTempEmp())
-    }, [isAuthenticated, dispatch, navigate])
+        dispatch(getCastCer())
+    }, [dispatch])
 
-    const reject = (id) => {
-        dispatch(rejTempEmp(id))
-    }
+    useEffect(() => {
+        accCastCerReqMs ? alert.success(accCastCerReqMs.message) : null
+        rejectCastCerReqMs ? alert.success(rejectCastCerReqMs.message) : null
+    }, [accCastCerReqMs, rejectCastCerReqMs, alert])
+
     const confirm = (id) => {
-        dispatch(conTempEmp(id));
-
+        dispatch(accCastCerReq(id));
     }
-
+    const reject = (id) => {
+        dispatch(rejCastCerReq(id));
+    }
     return (
         <div className='app'>
             <AdminSidebar />
@@ -40,12 +40,12 @@ const RequestedEmployee = () => {
 
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <Header title="Requested Employees" subtitle="Welcome Your Requested Employees Details Page" />
-                        <Pdf contentId="bid" downloadFileName="req"  />
+                        <Header title="Cast Certificate Request" subtitle="Welcome Your Cast Certificate Request Details Page" />
+
 
                     </Box>
                     {loading ? <Loader /> :
-                        <Box alignItems="center"  id="bid" justifyContent="center" m="15px" sx={{
+                        <Box alignItems="center" justifyContent="center" m="15px" sx={{
                             "& .MuiTable-root": {
                                 border: "none"
                             },
@@ -60,39 +60,50 @@ const RequestedEmployee = () => {
                                 borderBottom: "none"
                             }
                         }} >
-                            <Typography variant="h3" color={colors.redAccent[600]}>Requested Employees Details</Typography>
+
                             <TableContainer sx={{ mt: "10px", height: "400px", overflow: "auto", backgroundColor: colors.primary[600] }} component={Paper} >
                                 <Table size='small' sx={{ backgroundColor: colors.blueAccent[400] }}>
                                     <TableHead  >
                                         <TableRow >
                                             <TableCell>Name</TableCell>
                                             <TableCell>Email</TableCell>
-                                            <TableCell>Gender</TableCell>
                                             <TableCell>Phone NO.</TableCell>
-                                            <TableCell>Department</TableCell>
+                                            <TableCell>Address</TableCell>
+                                            <TableCell>Father Name</TableCell>
+                                            <TableCell>Mother Name</TableCell>
+                                            <TableCell>Cast</TableCell>
+                                            <TableCell>Proof</TableCell>
                                             <TableCell>Actions</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody sx={{ backgroundColor: colors.primary[600] }}>
 
-                                        {empReq <= 0 ? <TableRow>
-                                            <TableCell colSpan={6}>
-                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Requested Employee Data</Typography>
+                                        {getCastCerReq <= 0 ? <TableRow>
+                                            <TableCell colSpan={9}>
+                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h1" color="primary">No Cast Cerficate Request</Typography>
                                             </TableCell>
                                         </TableRow>
                                             :
-                                            empReq?.map((data) => (
+                                            getCastCerReq?.map((data) => (
                                                 <TableRow key={data._id}>
                                                     <TableCell >{data.name}</TableCell>
                                                     <TableCell >{data.email}</TableCell>
-                                                    <TableCell >{data.gender}</TableCell>
                                                     <TableCell >{data.phone}</TableCell>
-                                                    <TableCell >{data.dept}</TableCell>
+                                                    <TableCell >{data.address}</TableCell>
+                                                    <TableCell >{data.fatherName}</TableCell>
+                                                    <TableCell >{data.motherName}</TableCell>
+                                                    <TableCell >{data.cast}</TableCell>
                                                     <TableCell >
-                                                        <IconButton aria-label="correct" color='success' onClick={() => { confirm(data._id) }}>
+                                                        <Button variant="contained" color="primary"   >
+                                                            <a href={`http://localhost:5000/PDF/${data.proof}`} style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noopener noreferrer">View</a>
+
+                                                        </Button>
+                                                    </TableCell>
+                                                    <TableCell >
+                                                        <IconButton aria-label="correct" color='success' onClick={() => { confirm(data._id) }}  >
                                                             <CheckCircleOutlineTwoTone />
                                                         </IconButton>
-                                                        <IconButton aria-label="reject" color='error' onClick={() => { reject(data._id) }}>
+                                                        <IconButton aria-label="reject" color='error' onClick={() => { reject(data._id) }} >
                                                             <CancelTwoTone />
                                                         </IconButton>
                                                     </TableCell>
@@ -111,4 +122,4 @@ const RequestedEmployee = () => {
     )
 }
 
-export default RequestedEmployee
+export default GetCastCer

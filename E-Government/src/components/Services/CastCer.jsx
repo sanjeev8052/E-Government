@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'
-import InputLabel from '@mui/material/InputLabel';
-import { tokens } from '../../Global'
 import { Box, Button, FormControl, MenuItem, Select, Typography, useTheme } from '@material-ui/core';
 import { Send } from '@mui/icons-material';
 import { Link, Navigate } from 'react-router-dom';
 import Footer from '../Layout/Footer/Footer';
 import { useFormik } from 'formik'
-import { complaintSchema, meterSchema } from '../../ValidateSchema/Services';
-import { useDispatch, useSelector } from 'react-redux';
-import { CompReq } from '../../Action/Services/Services';
+import { castValidation } from '../../ValidateSchema/Services';;
 
-import avatar from '../../Images/Avatar.jpg'
 import axios from 'axios';
+import { margin } from '@mui/system';
 
 const useStyles = makeStyles({
     Complaint: {
@@ -23,6 +19,7 @@ const useStyles = makeStyles({
         background: "linear-gradient(to top right ,rgb(48, 94, 234),rgb(214, 245, 214))",
         backgroundSize: "cover",
 
+
     },
     box: {
         width: "80%",
@@ -30,11 +27,13 @@ const useStyles = makeStyles({
         backgroundColor: "white",
         boxShadow: "3px 3px 6px ",
         borderRadius: "10px",
-        border: " solid 1px black"
+        border: " solid 1px black",
+        alignItems:"center"
 
     },
     compField: {
-        padding: '2rem'
+        padding: '2rem',
+       
     },
     userField: {
         padding: '2rem',
@@ -44,7 +43,7 @@ const useStyles = makeStyles({
 
     fullInput: {
         width: "71%",
-        marginBottom: "10px"
+        margin: "0px auto 10px auto"
 
     },
 
@@ -64,8 +63,7 @@ const useStyles = makeStyles({
         marginTop: "15px"
     }
 });
-
-const MeterApply = () => {
+const CastCer = () => {
 
     const [file, setFile] = useState();
     const [image, setImage] = useState();
@@ -90,7 +88,7 @@ const MeterApply = () => {
     const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
 
         initialValues: initialvalues,
-        //validationSchema: meterSchema,
+        validationSchema: castValidation,
 
         onSubmit: (values) => {
             try {
@@ -98,10 +96,11 @@ const MeterApply = () => {
                     const formData = new FormData()
                     formData.append("file", file)
                     formData.append('data', JSON.stringify(values));
-
-                    axios.post('/api/meterreq', formData, {
+                    // console.log(values)
+                    // console.log(file)
+                    axios.post('/api/castreq', formData, {
                         headers: {
-                          'Content-Type': 'multipart/form-data'
+                            'Content-Type': 'multipart/form-data'
                         }
                     })
 
@@ -119,17 +118,15 @@ const MeterApply = () => {
 
     const classes = useStyles();
     return (
-
-
         <div className={classes.Complaint}>
-            <form onSubmit={handleSubmit} className={classes.box}  encType="multipart/form-data">
+            <form onSubmit={handleSubmit} className={classes.box} encType="multipart/form-data">
 
                 <div className={classes.compField}>
-                    <Typography variant="h4" sx={{ marginBottom: "20px" }} color="initial">Apply Meter</Typography>
+                    <Typography variant="h4" sx={{ marginBottom: "20px" }} color="initial">Apply Cast Certificate</Typography>
                     <Typography variant="h6" color="initial">Name</Typography>
                     <TextField className={classes.fullInput}
                         id=""
-                        placeholder='Enter First Name '
+                        placeholder='Enter Your Name '
                         variant='outlined'
                         size='small'
                         name='name'
@@ -144,7 +141,7 @@ const MeterApply = () => {
                     <Typography variant="h6" color="initial">Email</Typography>
                     <TextField className={classes.fullInput}
                         id=""
-                        placeholder='Enter Enter Your Email '
+                        placeholder='Enter Your Email '
                         variant='outlined'
                         size='small'
                         name='email'
@@ -159,7 +156,7 @@ const MeterApply = () => {
                     <Typography variant="h6" color="initial">Mobile No.</Typography>
                     <TextField className={classes.fullInput}
                         id=""
-                        placeholder='Enter Enter Your phone no '
+                        placeholder='Enter Your phone no '
                         variant='outlined'
                         size='small'
                         name='phone'
@@ -171,115 +168,78 @@ const MeterApply = () => {
                     {errors.phone && touched.phone ? (
                         <Typography className={classes.error}   >{errors.phone}</Typography>
                     ) : null}
-                    <Typography variant="h6" color="initial">Meter Type</Typography>
-                    <FormControl className={classes.fullInput}>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={values.meterType}
-                            onChange={handleChange}
-                            name="meterType"
-                        >
-                            <MenuItem value={"WaterMeter"}>Water Meter</MenuItem>
-                            <MenuItem value={"GasMeter"}>Gas Meter</MenuItem>
-                            <MenuItem value={"ElectricityMeter"}>Electricity Meter</MenuItem>
-                        </Select>
-                    </FormControl>
-
-
-                    {errors.complaintType && touched.complaintType ? (
-                        <Typography className={classes.error}   >{errors.complaintType}</Typography>
-                    ) : null}
-                    <Typography variant="h6" color="initial">Tenament No</Typography>
-                    <TextField className={classes.fullInput}
-                        id=""
-                        placeholder='tenament_No'
-                        variant='outlined'
-                        size='small'
-                        name='tenamentNo'
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.tenament_No}
-                    />
-                    {errors.tenament_No && touched.tenament_No ? (
-                        <Typography className={classes.error} >{errors.tenament_No}</Typography>
-                    ) : null}
-
                     <Typography variant="h6" color="initial">Address</Typography>
                     <TextField className={classes.fullInput}
                         id=""
-                        placeholder='City'
+                        placeholder='Enter Your Address'
                         variant='outlined'
                         size='small'
-                        name='city'
+                        name='address'
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.city}
+                        value={values.address}
                     />
-                    {errors.city && touched.city ? (
-                        <Typography className={classes.error} >{errors.city}</Typography>
+                    {errors.address && touched.address ? (
+                        <Typography className={classes.error} >{errors.address}</Typography>
                     ) : null}
 
-
+                    <Typography variant="h6" color="initial">Father Name</Typography>
                     <TextField className={classes.fullInput}
                         id=""
-                        placeholder='Street Address '
+                        placeholder='Enter Your Father Name'
                         variant='outlined'
                         size='small'
-                        name='streetAddress'
+                        name='fatherName'
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.streetAddress}
+                        value={values.fatherName}
 
 
                     />
-                    {errors.streetAddress && touched.streetAddress ? (
-                        <Typography className={classes.error} >{errors.streetAddress}</Typography>
+                    {errors.fatherName && touched.fatherName ? (
+                        <Typography className={classes.error} >{errors.fatherName}</Typography>
                     ) : null}
-
+                    <Typography variant="h6" color="initial">Mother Name</Typography>
                     <TextField className={classes.fullInput}
                         id=""
-                        placeholder='Area Name '
+                        placeholder='Enter Your Mother Name'
                         variant='outlined'
                         size='small'
-                        name='area'
+                        name='motherName'
                         onChange={handleChange}
-                        value={values.area}
+                        value={values.motherName}
                         onBlur={handleBlur}
                     />
-                    {errors.area && touched.area ? (
-                        <Typography className={classes.error} >{errors.area}</Typography>
+                    {errors.motherName && touched.motherName ? (
+                        <Typography className={classes.error} >{errors.motherName}</Typography>
                     ) : null}
+                    <Typography variant="h6" color="initial">Cast</Typography>
                     <TextField className={classes.fullInput}
                         id=""
-                        placeholder='pincode No. '
+                        placeholder='Enter Your Income'
                         variant='outlined'
                         size='small'
-                        name='pincodeNo'
+                        name='cast'
                         onChange={handleChange}
-                        value={values.pincode}
+                        value={values.cast}
                         onBlur={handleBlur}
                     />
-                    {errors.pincodeNo && touched.pincodeNo ? (
-                        <Typography className={classes.error} >{errors.pincodeNo}</Typography>
+                    {errors.cast && touched.cast ? (
+                        <Typography className={classes.error} >{errors.cast}</Typography>
                     ) : null}
 
-                    <Typography variant="h6" color="initial">Upload Document</Typography>
+                    <Typography variant="h6" color="initial">Uplaod Your Adhar Card</Typography>
                     <div className="row">
                         <div className="col-sm-6 mt-2 mb-2">
                             <input type="file" className='input-upload' onChange={hnadleFile} name="" id="" />
                         </div>
                         <div className="col-sm-6 mt-1 mb-2" >
                             <img style={{ width: "10rem" }} src={image} alt="" />
-
                         </div>
-
-
-
                     </div>
 
                     <Button type='submit' color='primary' className={classes.button} variant="contained" endIcon={<Send />}>
-                       Apply
+                        Apply
                     </Button>
                 </div>
 
@@ -290,4 +250,4 @@ const MeterApply = () => {
     )
 }
 
-export default MeterApply
+export default CastCer

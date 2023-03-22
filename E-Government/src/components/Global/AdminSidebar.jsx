@@ -96,7 +96,7 @@ const AdminSidebar = () => {
             />
 
             <Menu iconShape="square" style={{ color: colors.grey[900], backgroundColor: colors.primary[400] }} >
-              {/* <MenuItem>Employee</MenuItem> */}
+              
               <SubMenu title="Employee" icon={<CoPresentTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
                 <Item
                   title="Empployee"
@@ -121,7 +121,7 @@ const AdminSidebar = () => {
             />
 
             <Menu iconShape="square" style={{ color: colors.grey[900], backgroundColor: colors.primary[400] }} >
-              {/* <MenuItem>Employee</MenuItem> */}
+             
               <SubMenu title="Complaint" icon={<SpeakerNotesTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
                 <Item
                   title="Complaint"
@@ -182,7 +182,45 @@ const AdminSidebar = () => {
             </Menu>
             <Menu iconShape="square" style={{ color: colors.grey[900], backgroundColor: colors.primary[400] }} >
               {/* <MenuItem>Employee</MenuItem> */}
-              <SubMenu title="Meter Request" icon={<ReceiptTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
+              <SubMenu title="Manage Income Certificate" icon={<ReceiptTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
+                <Item
+                  title="Income Certificate Request"
+                  to="/getincomecerreq"
+
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Accepted Income Certificate"
+                  to="/getaccincomecerreq"
+
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+               
+              </SubMenu>
+            </Menu>
+            <Menu iconShape="square" style={{ color: colors.grey[900], backgroundColor: colors.primary[400] }} >
+              {/* <MenuItem>Employee</MenuItem> */}
+              <SubMenu title="Manage Cast Certificate" icon={<ReceiptTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
+                <Item
+                  title="Cast Certificate Request"
+                  to="/getcastcerreq"
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Accepted  Cast Certificate"
+                  to="/getacccastcerreq"
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+               
+              </SubMenu>
+            </Menu>
+            <Menu iconShape="square" style={{ color: colors.grey[900], backgroundColor: colors.primary[400] }} >
+              {/* <MenuItem>Employee</MenuItem> */}
+              <SubMenu title="Manage Meter Apply" icon={<ReceiptTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
                 <Item
                   title="Meter Request"
                   to="/getmeterreq"
@@ -190,20 +228,14 @@ const AdminSidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-                {/* <Item
-                  title="Pending Bills"
-                  to="/pbills"
+                <Item
+                  title="Accepted Meter Request"
+                  to="/getaccmeterreq"
 
                   selected={selected}
                   setSelected={setSelected}
                 />
-                <Item
-                  title="Paid Bills"
-                  to="/pabills"
-
-                  selected={selected}
-                  setSelected={setSelected}
-                /> */}
+               
               </SubMenu>
             </Menu>
             <Item

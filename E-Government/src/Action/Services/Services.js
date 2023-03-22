@@ -153,29 +153,3 @@ export const rejCompReq = (id) => async (dispatch) => {
     }
 }
 
-// For Meter Apply Req
-export const getMeterApplyReq = () => async (dispatch) => {
-    try {
-        dispatch({
-            type: "getMeterReqRequset",
-        })
-
-        const { data } = await axios.get("api/getmeterreq", {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-
-        dispatch({
-            type: "getMeterReqSuccess",
-            payload: data
-        })
-
-    } catch (error) {
-        dispatch({
-            type: "getMeterReqFailuer",
-            payload: error
-        })
-    }
-}
-

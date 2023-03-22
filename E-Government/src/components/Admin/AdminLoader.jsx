@@ -1,7 +1,6 @@
 import React from 'react'
-
+import {CircularProgress  } from '@material-ui/core'
 import Box from '@mui/material/Box';
-import spiner2 from '../Images/running-man.gif'
 import { makeStyles, } from '@material-ui/core';
 
 const useStyle = makeStyles({
@@ -24,7 +23,7 @@ const AdminLoader = () => {
     const styles = useStyle();
     return (
         <Box className={styles.box}>
-            <img className='styles.img' src={spiner2} alt="" />
+            <CircularProgress className={styles.box} />
         </Box>
     )
 }
