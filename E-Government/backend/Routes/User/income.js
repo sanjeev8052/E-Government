@@ -3,6 +3,7 @@ const multer = require('multer');
 const router = express.Router();
 const { isAuthenticate } = require('../../middlewares/Adminmiddle');
 const Income = require('../../models/Services/IncomeCer');
+const { sendEmail } = require('../../middlewares/sendEmail')
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -16,23 +17,23 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 // For Add Income Request
-router.post('/incomereq',  upload.single('file'), async (req, res) => {
+router.post('/incomereq', upload.single('file'), async (req, res) => {
 
     try {
         const proof = (req.file) ? req.file.filename : null
-         const data = req.body.data
-         const object = JSON.parse(data)
+        const data = req.body.data
+        const object = JSON.parse(data)
         const randomNum = Math.floor(Math.random() * 1000000) + 1;
 
         const { name, email, phone, address, fatherName, motherName, income } = object
-    //    console.log(object)
-         const status = "Requested"
-         const cer = new Income({ name, email, phone, address, fatherName, motherName, income, proof, status: status , uniqueId: randomNum })
-         await cer.save();
-         res.status(200).json({
-             message: "Successfully Added",
-            cer :cer
-         })
+        //    console.log(object)
+        const status = "Requested"
+        const cer = new Income({ name, email, phone, address, fatherName, motherName, income, proof, status: status, uniqueId: randomNum })
+        await cer.save();
+        res.status(200).json({
+            message: "Successfully Added",
+            cer: cer
+        })
     } catch (error) {
         res.status(500).json({
             error: error.message
@@ -71,6 +72,12 @@ router.post("/accincomecerreq/:_id", isAuthenticate, async (req, res) => {
                     success: true,
                     message: "successfully Accepted Income Certificate Request",
                 })
+            const message = `Your Income Certificate Request is Accepted and Here is the ID is ${request.uniqueId} For Download Certificate`
+            await sendEmail({
+                email: request.email,
+                subject: "Income Certificate Accepted...",
+                message
+            });
         }
     } catch (error) {
         res.status(500).json({ error: error.message })
@@ -91,6 +98,12 @@ router.delete("/rejincomecerreq/:_id", isAuthenticate, async (req, res) => {
             message: "Successfully Rejected Income Certificate Request"
 
         })
+        const message = `Your Income Certificate Request is Rejected Because of Proof is not Valid`
+        await sendEmail({
+            email: request.email,
+            subject: "Income Certificate Rejected...",
+            message
+        });
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

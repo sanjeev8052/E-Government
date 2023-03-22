@@ -35,6 +35,8 @@ import GetmeterReq from './components/Admin/GetmeterReq'
 import AccMeterReq from './components/Admin/AccMeterReq'
 import GetIncomeCer from './components/Admin/GetIncomeCer'
 import GetAccIncome from './components/Admin/GetAccIncome'
+import GetCastCer from './components/Admin/GetCastCer'
+import GetAccCast from './components/Admin/GetAccCast'
 import Tester from './components/Admin/Tester'
 import UserHeader from './components/User/UserHeader/UserHeader'
 
@@ -54,6 +56,7 @@ import Loader from './components/Layout/Loader'
 // Services
 import MeterApply from './components/Services/MeterApply'
 import IncomeCer from './components/Services/IncomeCer'
+import CastCer from './components/Services/CastCer'
 import BillPay from './components/Services/BillPayment/BillPay'
 import Complaint from './components/Services/Complaint'
 import Temp from './components/Temp'
@@ -97,6 +100,7 @@ const App = () => {
             <Route path='/billpay' element={<BillPay />} />
             <Route path='/meterApply/' element={<MeterApply />} />
             <Route path='/incomeCer' element={<IncomeCer />} />
+            <Route path='/castCer' element={<CastCer />} />
             <Route path='/Temp/' element={<Temp />} />
             <Route path='/view' element={<ViewPdf />} />
 
@@ -125,6 +129,8 @@ const App = () => {
             <Route path="/getaccmeterreq" element={<AccMeterReq />} />
             <Route path="/getincomecerreq" element={<GetIncomeCer />} />
             <Route path="/getaccincomecerreq" element={<GetAccIncome />} />
+            <Route path="/getcastcerreq" element={<GetCastCer />} />
+            <Route path="/getacccastcerreq" element={<GetAccCast />} />
           
 
 

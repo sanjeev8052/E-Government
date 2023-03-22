@@ -3,6 +3,7 @@ const MeterApply = require('../../models/Services/MeterApply');
 const router = express.Router();
 const multer = require('multer');
 const { isAuthenticate } = require('../../middlewares/Adminmiddle');
+const { sendEmail } = require('../../middlewares/sendEmail')
 
 
 // For Multer Storage
@@ -71,6 +72,12 @@ router.post("/accmeterreq/:_id", isAuthenticate, async (req, res) => {
                     success: true,
                     message: "successfully Accepted Meter Request",
                 })
+                const message = `Your ${request.meterType} Meter Approval Request is Accepted `
+                await sendEmail({
+                    email: request.email,
+                    subject: `${request.meterType} Meter Application...`,
+                    message
+                });
         }
     } catch (error) {
         res.status(500).json({ error: error.message })
@@ -91,6 +98,12 @@ router.delete("/rejmeterreq/:_id", isAuthenticate, async (req, res) => {
             message: "Successfully Rejected Meter Request"
 
         })
+        const message = `Your ${request.meterType} Meter Approval Request is Rejected Due To Some Reason`
+        await sendEmail({
+            email: request.email,
+            subject: `${request.meterType} Meter Application...`,
+            message
+        });
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

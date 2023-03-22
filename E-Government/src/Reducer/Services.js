@@ -477,6 +477,63 @@ export const userServicesReducer = createReducer(initialState, {
         state.error = action.payload;
 
     },
+     // for get Cast Certificate Req
+     getCastCerReqRequset: (state) => {
+        state.loading = true;
+    },
+    getCastCerReqSuccess: (state, action) => {
+        state.loading = false;
+        state.getCastCerReq = action.payload;
+
+    },
+    getCastCerReqFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+     // for Accept Cast Cer Req
+     acceptCastCerReqRequset: (state) => {
+        state.loading = true;
+    },
+    acceptCastCerReqSuccess: (state, action) => {
+        state.loading = false;
+        state.accCastCerReqMs = action.payload;
+
+    },
+    acceptCastCerReqFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+
+     // for Reject  Cast Cer Req
+     rejectCastCerReqRequset: (state) => {
+        state.loading = true;
+    },
+    rejectCastCerReqSuccess: (state, action) => {
+        state.loading = false;
+        state.rejectCastCerReqMs = action.payload;
+
+    },
+    rejectCastCerReqFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+     // for Get Accepted  Cast Cer Req
+     getAccCastCerReqRequset: (state) => {
+        state.loading = true;
+    },
+    getAccCastCerReqSuccess: (state, action) => {
+        state.loading = false;
+        state.getAccCastCerReq = action.payload;
+
+    },
+    getAccCastCerReqFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
 
 
     

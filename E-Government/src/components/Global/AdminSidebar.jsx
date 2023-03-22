@@ -202,6 +202,24 @@ const AdminSidebar = () => {
             </Menu>
             <Menu iconShape="square" style={{ color: colors.grey[900], backgroundColor: colors.primary[400] }} >
               {/* <MenuItem>Employee</MenuItem> */}
+              <SubMenu title="Manage Cast Certificate" icon={<ReceiptTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
+                <Item
+                  title="Cast Certificate Request"
+                  to="/getcastcerreq"
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Accepted  Cast Certificate"
+                  to="/getacccastcerreq"
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+               
+              </SubMenu>
+            </Menu>
+            <Menu iconShape="square" style={{ color: colors.grey[900], backgroundColor: colors.primary[400] }} >
+              {/* <MenuItem>Employee</MenuItem> */}
               <SubMenu title="Manage Meter Apply" icon={<ReceiptTwoTone />} style={{ backgroundColor: colors.primary[400] }} >
                 <Item
                   title="Meter Request"

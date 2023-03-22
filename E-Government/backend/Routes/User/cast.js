@@ -3,8 +3,7 @@ const multer = require('multer');
 const router = express.Router();
 const { isAuthenticate } = require('../../middlewares/Adminmiddle');
 const Cast = require('../../models/Services/CastCer');
-const Income = require('../../models/Services/IncomeCer');
-
+const { sendEmail } = require('../../middlewares/sendEmail')
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'PDF')
@@ -16,24 +15,24 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-// For Add Income Request
-router.post('/castreq',  upload.single('file'), async (req, res) => {
+// For Add Cast Request
+router.post('/castreq', upload.single('file'), async (req, res) => {
 
     try {
         const proof = (req.file) ? req.file.filename : null
-        // const data = req.body.data
-        // const object = JSON.parse(data)
+        const data = req.body.data
+        const object = JSON.parse(data)
         const randomNum = Math.floor(Math.random() * 1000000) + 1;
 
-        const { name, email, phone, address, fatherName, motherName, cast } = req.body
-    //    console.log(object)
-         const status = "Requested"
-         const castcer = new Cast({ name, email, phone, address, fatherName, motherName, cast, proof, status: status , uniqueId: randomNum })
-         await castcer.save();
-         res.status(200).json({
-             message: "Successfully Added",
-            castcer:castcer
-         })
+        const { name, email, phone, address, fatherName, motherName, cast } = object
+        //    console.log(object)
+        const status = "Requested"
+        const castcer = new Cast({ name, email, phone, address, fatherName, motherName, cast, proof, status: status, uniqueId: randomNum })
+        await castcer.save();
+        res.status(200).json({
+            message: "Successfully Added",
+            castcer: castcer
+        })
     } catch (error) {
         res.status(500).json({
             error: error.message
@@ -42,7 +41,7 @@ router.post('/castreq',  upload.single('file'), async (req, res) => {
 
 })
 
-// For Get Income cer Request
+// For Get Cast cer Request
 router.get('/getcastreq', isAuthenticate, async (req, res) => {
     try {
         const request = await Cast.find({ status: "Requested" })
@@ -72,6 +71,12 @@ router.post("/acccastcerreq/:_id", isAuthenticate, async (req, res) => {
                     success: true,
                     message: "successfully Accepted Cast Certificae Request",
                 })
+            const message = `Your Cast Certificate Request is Accepted and Here is the ID is ${request.uniqueId} For Download Certificate`
+            await sendEmail({
+                email: request.email,
+                subject: "Cast Certificate Accepted...",
+                message
+            });
         }
     } catch (error) {
         res.status(500).json({ error: error.message })
@@ -92,6 +97,12 @@ router.delete("/rejcastcerreq/:_id", isAuthenticate, async (req, res) => {
             message: "Successfully Rejected Cast Certificate Request"
 
         })
+        const message = `Your Cast Certificate Request is Rejected Because of Proof is not Valid`
+        await sendEmail({
+            email: request.email,
+            subject: "Cast Certificate Rejected...",
+            message
+        });
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

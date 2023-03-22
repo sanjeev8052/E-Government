@@ -9,31 +9,29 @@ import { tokens } from '../../Global'
 import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
 import { CancelTwoTone, CheckCircleOutlineTwoTone, Height } from '@mui/icons-material'
-import { getIncomeCer, rejIncomeCerReq, accIncomeCerReq } from '../../Action/Services/Income'
-
-const GetIncomeCer = () => {
+import { getCastCer, accCastCerReq, rejCastCerReq } from '../../Action/Services/Cast'
+const GetCastCer = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    const { loading, getIncomeCerReq, accIncomeCerReqMs, rejectIncomeCerReqMs } = useSelector((state) => (state.services))
+    const { loading, getCastCerReq,accCastCerReqMs , rejectCastCerReqMs } = useSelector((state) => (state.services))
     const alert = useAlert();
     const dispatch = useDispatch()
     const navigate = useNavigate();
     useEffect(() => {
-        dispatch(getIncomeCer())
+        dispatch(getCastCer())
     }, [dispatch])
 
     useEffect(() => {
-        accIncomeCerReqMs ? alert.success(accIncomeCerReqMs.message) : null
-        rejectIncomeCerReqMs ? alert.success(rejectIncomeCerReqMs.message) : null
-    }, [accIncomeCerReqMs, rejectIncomeCerReqMs, alert])
+        accCastCerReqMs ? alert.success(accCastCerReqMs.message) : null
+        rejectCastCerReqMs ? alert.success(rejectCastCerReqMs.message) : null
+    }, [accCastCerReqMs, rejectCastCerReqMs, alert])
 
     const confirm = (id) => {
-        dispatch(accIncomeCerReq(id));
+        dispatch(accCastCerReq(id));
     }
     const reject = (id) => {
-        dispatch(rejIncomeCerReq(id));
+        dispatch(rejCastCerReq(id));
     }
-
     return (
         <div className='app'>
             <AdminSidebar />
@@ -42,7 +40,7 @@ const GetIncomeCer = () => {
 
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <Header title="Income Certificate Request" subtitle="Welcome Your Income Certificate Request Details Page" />
+                        <Header title="Cast Certificate Request" subtitle="Welcome Your Cast Certificate Request Details Page" />
 
 
                     </Box>
@@ -73,20 +71,20 @@ const GetIncomeCer = () => {
                                             <TableCell>Address</TableCell>
                                             <TableCell>Father Name</TableCell>
                                             <TableCell>Mother Name</TableCell>
-                                            <TableCell>Income</TableCell>
+                                            <TableCell>Cast</TableCell>
                                             <TableCell>Proof</TableCell>
                                             <TableCell>Actions</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody sx={{ backgroundColor: colors.primary[600] }}>
 
-                                        {getIncomeCerReq <= 0 ? <TableRow>
+                                        {getCastCerReq <= 0 ? <TableRow>
                                             <TableCell colSpan={9}>
-                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h1" color="primary">No INcome Cerficate Request</Typography>
+                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h1" color="primary">No Cast Cerficate Request</Typography>
                                             </TableCell>
                                         </TableRow>
                                             :
-                                            getIncomeCerReq?.map((data) => (
+                                            getCastCerReq?.map((data) => (
                                                 <TableRow key={data._id}>
                                                     <TableCell >{data.name}</TableCell>
                                                     <TableCell >{data.email}</TableCell>
@@ -94,7 +92,7 @@ const GetIncomeCer = () => {
                                                     <TableCell >{data.address}</TableCell>
                                                     <TableCell >{data.fatherName}</TableCell>
                                                     <TableCell >{data.motherName}</TableCell>
-                                                    <TableCell >{data.income}</TableCell>
+                                                    <TableCell >{data.cast}</TableCell>
                                                     <TableCell >
                                                         <Button variant="contained" color="primary"   >
                                                             <a href={`http://localhost:5000/PDF/${data.proof}`} style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noopener noreferrer">View</a>
@@ -124,4 +122,4 @@ const GetIncomeCer = () => {
     )
 }
 
-export default GetIncomeCer
+export default GetCastCer

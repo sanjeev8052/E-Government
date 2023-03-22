@@ -50,7 +50,7 @@ const Card = () => {
     const css = useStyle();
 
     return (
-        
+
         <div className={css.cardBox}>
             <div className={css.card}>
                 <img className={css.img} src={complaintImage} alt="Card" />
@@ -97,29 +97,7 @@ const Card = () => {
                     </Button>
                 </div>
             </div>
-            {/* <div className={css.card}>
-                <img className={css.img} src={certificateImage} alt="Card" />
-                <div className="card-body">
-                    <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">register your complaint and track the complaint status. </Typography>
-                    <Button className={css.button} variant="text" color="default">
-                        <PopupState variant="popover" popupId="demo-popup-menu">
-                            {(popupState) => (
-                                <React.Fragment>
-                                    <Button className={css.button} variant="contained" color='primary' {...bindTrigger(popupState)}>
-                                       Certificate
-                                    </Button>
-                                    <Menu  {...bindMenu(popupState)}>
-                                        <MenuItem onClick={popupState.close}>Profile</MenuItem>
-                                        <MenuItem onClick={popupState.close}>My account</MenuItem>
-                                        <MenuItem onClick={popupState.close}>Logout</MenuItem>
-                                    </Menu>
-                                </React.Fragment>
-                            )}
-                        </PopupState>
 
-                    </Button>
-                </div>
-            </div> */}
             <div className={css.card}>
                 <img className={css.img} src={meterImage} alt="Card" />
                 <div className="card-body">
@@ -129,7 +107,7 @@ const Card = () => {
                             {(popupState) => (
                                 <React.Fragment>
                                     <Button className={css.button} variant="contained" color='primary' {...bindTrigger(popupState)}>
-                                      Apply Meter   
+                                        Apply Meter
                                     </Button>
                                     <Menu  {...bindMenu(popupState)}>
                                         <MenuItem component={Link} to='meterApply'>Apply Meter</MenuItem>
@@ -152,10 +130,32 @@ const Card = () => {
                             {(popupState) => (
                                 <React.Fragment>
                                     <Button className={css.button} variant="contained" color='primary' {...bindTrigger(popupState)}>
-                                      Apply Meter   
+                                        Apply Income Certificate
                                     </Button>
                                     <Menu  {...bindMenu(popupState)}>
                                         <MenuItem component={Link} to='incomeCer'>Apply For  Income Certificate</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Download Certificate</MenuItem>
+                                    </Menu>
+                                </React.Fragment>
+                            )}
+                        </PopupState>
+
+                    </Button>
+                </div>
+            </div>
+            <div className={css.card}>
+                <img className={css.img} src={meterImage} alt="Card" />
+                <div className="card-body">
+                    <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">Apply For Cast Certificae and Download Cast Certificate. </Typography>
+                    <Button className={css.button} variant="text" color="default">
+                        <PopupState variant="popover" popupId="demo-popup-menu">
+                            {(popupState) => (
+                                <React.Fragment>
+                                    <Button className={css.button} variant="contained" color='primary' {...bindTrigger(popupState)}>
+                                        Apply Cast Certificate
+                                    </Button>
+                                    <Menu  {...bindMenu(popupState)}>
+                                        <MenuItem component={Link} to='castCer'>Apply For  Cast Certificate</MenuItem>
                                         <MenuItem onClick={popupState.close}>Download Certificate</MenuItem>
                                     </Menu>
                                 </React.Fragment>
