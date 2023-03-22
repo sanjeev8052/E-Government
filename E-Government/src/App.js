@@ -11,7 +11,7 @@ import UserDashboard from './components/User/Dashboard'
 // package
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ColorModeContext, useMode } from "./Global";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { LoadAdmin, getAdmnProfileImage } from './Action/Admin/Login'
@@ -55,12 +55,18 @@ import Complaint from './components/Services/Complaint'
 import Temp from './components/Temp'
 import { getEmpDetails, getEmpProfileImage } from './Action/Employee/register'
 import ViewPdf from './components/Global/ViewPdf'
-
+import cookies from 'js-cookie'
 const App = () => {
+
+  const { loginData } = useSelector(state => state.user)
+
+  useEffect(() => {
+  { loginData && cookies.set('Token', loginData.token, { expires: 1 })}
+  }, [loginData]);
+  const userCookie = cookies.get('Token');
+
   const [theme, colorMode] = useMode()
-
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(LoadUser())
     dispatch(LoadAdmin())
@@ -79,18 +85,18 @@ const App = () => {
 
           <Routes>
             {/* User */}
-            <Route path='/login' element={<Login />} />
-            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login userCookie={userCookie}/>} />
+            <Route path='/' element={<Home  userCookie={userCookie}/>} />
             <Route path='forgotpassword' element={<UserForgotPassword />} />
             <Route path='reset/password/:token' element={< ResetPassword />} />
-            <Route path='/userHeader' element={<UserHeader />} />
+            <Route path='/userHeader' element={<UserHeader  />} />
             <Route path='/Profile' element={<Profile />} />
             <Route path='/UserDashboard' element={<UserDashboard />} />
 
 
             {/* Services */}
             <Route path='/complaint' element={<Complaint />} />
-            <Route path='/billpay' element={<BillPay />} />
+            <Route path='/billpay' element={<BillPay userCookie={userCookie} />} />
             <Route path='/meterApply/' element={<MeterApply />} />
             <Route path='/Temp/' element={<Temp />} />
             <Route path='/view' element={<ViewPdf />} />
@@ -117,7 +123,7 @@ const App = () => {
             <Route path="/pbills" element={<PendingBills />} />
             <Route path="/pabills" element={<PaidBills />} />
             <Route path="/getmeterreq" element={<GetmeterReq />} />
-          
+
 
 
 

@@ -3,7 +3,7 @@ import { Close, GasMeter, Home, Payment } from '@mui/icons-material'
 import GasBillImage from '../../../Images/gas.png'
 import electrBilliImage from '../../../Images/electricity.png'
 import waterBillImage from '../../../Images/download.png'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './BillPayment.css'
 import { useFormik, validateYupSchema } from 'formik'
 import { billPaySchema } from '../../../ValidateSchema/Services'
@@ -11,9 +11,20 @@ import axios from 'axios'
 import Footer from '../../Layout/Footer/Footer'
 import { useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
-const BillPay = () => {
+import { useNavigate } from 'react-router-dom'
+import cookies from 'js-cookie'
+
+const BillPay = ({userCookie}) => {
+  const  navigate = useNavigate()
+
+  useEffect(()=>{
+    !userCookie ? console.log(true)  : navigate('../login')
+  },[])
+
+   
 
 
+ 
   const { userData } = useSelector(state => state.user)
   const alert = useAlert()
   const [billType, setStatus] = useState("Gas")

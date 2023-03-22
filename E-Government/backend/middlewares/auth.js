@@ -3,14 +3,14 @@ const jwt = require('jsonwebtoken');
 const Employee = require('../models/Emp/Employee');
 exports.isAuthenticatedUser = async (req, res, next)=>{
     try {
-        const {token} = req.cookies;
+        const {Token} = req.cookies;
     
-    if(!token){
+    if(!Token){
                 return res
                 .status(401)
                 .json({message:" Please login first"})
             }
-         const decoded = jwt.verify(token,process.env.SECRET_KEY)
+         const decoded = jwt.verify(Token,process.env.SECRET_KEY)
          req.user = await User.findById(decoded._id)
           next();
     } catch (error) {

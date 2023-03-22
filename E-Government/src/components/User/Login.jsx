@@ -15,7 +15,7 @@ import Footer from '../Layout/Footer/Footer'
 import { signInSchema } from '../../ValidateSchema/User'
 
 
-const Login = () => {
+const Login = ({userCookie}) => {
     const styles = {
         mainBox: {
             width: "100vw",
@@ -76,7 +76,7 @@ const Login = () => {
     const alert = useAlert();
 
 
-    const { isAuthenticated, loading } = useSelector((state) => state.user)
+    const { loading } = useSelector((state) => state.user)
     const { message, LoginError } = useSelector((state) => state.user)
 
     useEffect(() => {
@@ -92,7 +92,7 @@ const Login = () => {
         }
     }, [message, LoginError, alert, dispatch])
 
-    isAuthenticated && navigate('/')
+    userCookie && navigate('/')
 
     const [type, setType] = useState('password')
 

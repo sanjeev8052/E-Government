@@ -13,7 +13,7 @@ export const userReducer = createReducer(initialState, {
     },
     LoginSuccess: (state, action) => {
         state.loading = false;
-        state.message = action.payload;
+        state.loginData = action.payload;
         state.isAuthenticated = true
     },
     LoginFailuer: (state, action) => {

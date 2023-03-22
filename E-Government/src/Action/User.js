@@ -14,7 +14,7 @@ export const userLogin = (user) => async (dispatch) => {
 
         dispatch({
             type: "LoginSuccess",
-            payload: data.message
+            payload: data
         })
 
     } catch (error) {

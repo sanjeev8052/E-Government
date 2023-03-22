@@ -156,7 +156,7 @@ router.post("/user/login", async (req, res) => {
             httpOnly: true
         }
         const token = await user.generateToken()
-        res.status(200).cookie("token", token, option).json({ success: true, message: "Login Success", token })
+        res.status(200).json({ success: true, message: "Login Success", token : token })
 
 
 
