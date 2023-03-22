@@ -8,10 +8,12 @@ const router = express.Router();
 router.post("/addbills", async (req, res) => {
     try {
         const { billType, ownerName, tenamentNo, streetAddress, area, amount } = req.body;
-        const findBill = await Bills.find({ tenamentNo: tenamentNo, billType, status: "Pending" }).sort({ _id: -1 })
+        const findBill = await Bills.find({ tenamentNo: tenamentNo, billType, status: "Pending" })
 
-        if (findBill) {
+        if (findBill[0]) {
 
+            findBill[0].status = "UnPaid"
+            findBill[0].save();
             const create = {
                 billType, ownerName, tenamentNo, streetAddress, area, amount,
                 status: "Pending",
@@ -20,21 +22,19 @@ router.post("/addbills", async (req, res) => {
 
             }
             const bill = await Bills.create(create)
-            res.send(false)
-            console.log(bill)
+            console.log(true)
             return
         }
 
-        // const create = {
-        //     billType, ownerName, tenamentNo, streetAddress, area, amount,
-        //     status: "pending",
-        //     pastDueAmt: 00,
-        //     totelAmt: amount,
+        const create = {
+            billType, ownerName, tenamentNo, streetAddress, area, amount,
+            status: "Pending",
+            pastDueAmt: 00,
+            totelAmt: amount,
+        }
+        const bill = await Bills.create(create)
 
-        // }
-        // const bill = await Bills.create(create)
-
-        res.send(true)
+        console.log(false)
     } catch (error) {
         res
             .status(500)
@@ -48,8 +48,8 @@ router.get("/getpendingbill", async (req, res) => {
         const bill = await Bills.find({ status: "Pending" })
 
         res.status(200).json(bill)
-        
-                console.log(bill)
+
+        console.log(bill)
     } catch (error) {
         res
             .status(500)
