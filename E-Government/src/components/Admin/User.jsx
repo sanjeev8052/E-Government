@@ -10,7 +10,7 @@ import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
 import BlockUser from '../Global/BlockUser'
 import Header from '../Global/Header'
-import Loader from '../Layout/Loader'
+import Loader from './AdminLoader'
 
 const User = () => {
     const themes = useTheme()

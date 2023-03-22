@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'
-import InputLabel from '@mui/material/InputLabel';
-import { tokens } from '../../Global'
 import { Box, Button, FormControl, MenuItem, Select, Typography, useTheme } from '@material-ui/core';
 import { Send } from '@mui/icons-material';
 import { Link, Navigate } from 'react-router-dom';
 import Footer from '../Layout/Footer/Footer';
 import { useFormik } from 'formik'
-import { complaintSchema, meterSchema } from '../../ValidateSchema/Services';
-import { useDispatch, useSelector } from 'react-redux';
-import { CompReq } from '../../Action/Services/Services';
+import { incomeValidation} from '../../ValidateSchema/Services';;
 
-import avatar from '../../Images/Avatar.jpg'
 import axios from 'axios';
 
 const useStyles = makeStyles({
@@ -89,7 +84,7 @@ const IncomeCer = () => {
   const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
 
     initialValues: initialvalues,
-    //validationSchema: meterSchema,
+    validationSchema: incomeValidation,
 
     onSubmit: (values) => {
       try {
@@ -97,8 +92,9 @@ const IncomeCer = () => {
           const formData = new FormData()
           formData.append("file", file)
           formData.append('data', JSON.stringify(values));
-
-          axios.post('/api/meterreq', formData, {
+          // console.log(values)
+          // console.log(file)
+          axios.post('/api/incomereq', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -121,7 +117,7 @@ const IncomeCer = () => {
   return (
 
     <div className={classes.Complaint}>
-      <form onSubmit={handleSubmit} className={classes.box} enctype="multipart/form-data">
+      <form onSubmit={handleSubmit} className={classes.box} encType="multipart/form-data">
 
         <div className={classes.compField}>
           <Typography variant="h4" sx={{ marginBottom: "20px" }} color="initial">Apply Income Certificate</Typography>
@@ -230,22 +226,18 @@ const IncomeCer = () => {
             <Typography className={classes.error} >{errors.income}</Typography>
           ) : null}
 
-          <Typography variant="h6" color="initial">Compplaint Description </Typography>
+          <Typography variant="h6" color="initial">Uplaod Your Adhar Card</Typography>
           <div className="row">
-            <div className="col-sm-6 mt-5 mb-5">
+            <div className="col-sm-6 mt-2 mb-2">
               <input type="file" className='input-upload' onChange={hnadleFile} name="" id="" />
             </div>
             <div className="col-sm-6 mt-1 mb-2" >
               <img style={{ width: "10rem" }} src={image} alt="" />
-
             </div>
-
-
-
           </div>
 
           <Button type='submit' color='primary' className={classes.button} variant="contained" endIcon={<Send />}>
-            Complaint Request
+           Apply
           </Button>
         </div>
 

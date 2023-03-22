@@ -6,7 +6,7 @@ import AdminTopbar from '../Global/AdminTopbar'
 
 
 import { useDispatch, useSelector } from 'react-redux'
-import Loader from '../Layout/Loader'
+import Loader from './AdminLoader'
 import { tokens } from '../../Global'
 import { DangerousTwoTone, TaskTwoTone } from '@mui/icons-material'
 import { useNavigate } from 'react-router'

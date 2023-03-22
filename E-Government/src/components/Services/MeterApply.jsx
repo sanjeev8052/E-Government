@@ -122,7 +122,7 @@ const MeterApply = () => {
 
 
         <div className={classes.Complaint}>
-            <form onSubmit={handleSubmit} className={classes.box}  enctype="multipart/form-data">
+            <form onSubmit={handleSubmit} className={classes.box}  encType="multipart/form-data">
 
                 <div className={classes.compField}>
                     <Typography variant="h4" sx={{ marginBottom: "20px" }} color="initial">Apply Meter</Typography>
@@ -264,9 +264,9 @@ const MeterApply = () => {
                         <Typography className={classes.error} >{errors.pincodeNo}</Typography>
                     ) : null}
 
-                    <Typography variant="h6" color="initial">Compplaint Description </Typography>
+                    <Typography variant="h6" color="initial">Upload Document</Typography>
                     <div className="row">
-                        <div className="col-sm-6 mt-5 mb-5">
+                        <div className="col-sm-6 mt-2 mb-2">
                             <input type="file" className='input-upload' onChange={hnadleFile} name="" id="" />
                         </div>
                         <div className="col-sm-6 mt-1 mb-2" >
@@ -279,7 +279,7 @@ const MeterApply = () => {
                     </div>
 
                     <Button type='submit' color='primary' className={classes.button} variant="contained" endIcon={<Send />}>
-                        Complaint Request
+                       Apply
                     </Button>
                 </div>
 

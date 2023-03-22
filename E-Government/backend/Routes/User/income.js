@@ -20,11 +20,11 @@ router.post('/incomereq',  upload.single('file'), async (req, res) => {
 
     try {
         const proof = (req.file) ? req.file.filename : null
-        // const data = req.body.data
-        // const object = JSON.parse(data)
+         const data = req.body.data
+         const object = JSON.parse(data)
         const randomNum = Math.floor(Math.random() * 1000000) + 1;
 
-        const { name, email, phone, address, fatherName, motherName, income } = req.body
+        const { name, email, phone, address, fatherName, motherName, income } = object
     //    console.log(object)
          const status = "Requested"
          const cer = new Income({ name, email, phone, address, fatherName, motherName, income, proof, status: status , uniqueId: randomNum })
@@ -69,7 +69,7 @@ router.post("/accincomecerreq/:_id", isAuthenticate, async (req, res) => {
             res.status(200).
                 json({
                     success: true,
-                    message: "successfully Accepted Income Certificae Request",
+                    message: "successfully Accepted Income Certificate Request",
                 })
         }
     } catch (error) {

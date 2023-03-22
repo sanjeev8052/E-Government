@@ -143,7 +143,28 @@ const Card = () => {
                     </Button>
                 </div>
             </div>
+            <div className={css.card}>
+                <img className={css.img} src={meterImage} alt="Card" />
+                <div className="card-body">
+                    <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">Apply For Income Certificae and Download Income Certificate. </Typography>
+                    <Button className={css.button} variant="text" color="default">
+                        <PopupState variant="popover" popupId="demo-popup-menu">
+                            {(popupState) => (
+                                <React.Fragment>
+                                    <Button className={css.button} variant="contained" color='primary' {...bindTrigger(popupState)}>
+                                      Apply Meter   
+                                    </Button>
+                                    <Menu  {...bindMenu(popupState)}>
+                                        <MenuItem component={Link} to='incomeCer'>Apply For  Income Certificate</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Download Certificate</MenuItem>
+                                    </Menu>
+                                </React.Fragment>
+                            )}
+                        </PopupState>
 
+                    </Button>
+                </div>
+            </div>
         </div>
 
     )

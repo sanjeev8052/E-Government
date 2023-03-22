@@ -6,7 +6,7 @@ import Pdf from '../Global/Pdf'
 
 import Header from '../Global/Header'
 import { useDispatch, useSelector } from 'react-redux'
-import Loader from '../Layout/Loader'
+import Loader from './AdminLoader'
 import { tokens } from '../../Global'
 import { getTempEmp, conTempEmp, rejTempEmp } from '../../Action/Admin/Employee'
 import { useNavigate } from 'react-router-dom'

@@ -21,6 +21,16 @@ export const meterSchema = yup.object({
 
 })
 
+export const incomeValidation = yup.object({
+    name: yup.string().min(3).required("Please Enter your name."),
+    email: yup.string().email().matches(/^(?!.*@[^,]*,)/).required("Please Enter Your Email.."),
+    phone: yup.number().min(1000000000, ['phone no must have 10 digit']).max(9999999999, ['phone no must have 10 digit']).required(),
+    address: yup.string().required("Please Enter Address....... "),
+    fatherName: yup.string().required("Please Enter Your Father Name....... "),
+    motherName: yup.string().required("Please Enter Your Mother Name....... "),
+    income:yup.number().required("Please Enter Income....... "),
+})
+
 export const billPaySchema = yup.object({
     tenament_No: yup.number().min(100000000000, ['Tenament no must have 12 digit']).max(999999999999, ['Tenament no must have 12 digit']).required(),
 })

@@ -420,6 +420,64 @@ export const userServicesReducer = createReducer(initialState, {
 
     },
 
+     // for get Incmome Certificate Req
+     getIncomeCerReqRequset: (state) => {
+        state.loading = true;
+    },
+    getIncomeCerReqSuccess: (state, action) => {
+        state.loading = false;
+        state.getIncomeCerReq = action.payload;
+
+    },
+    getIncomeCerReqFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+     // for AcceptIncome Cer Req
+     acceptIncomeCerReqRequset: (state) => {
+        state.loading = true;
+    },
+    acceptIncomeCerReqSuccess: (state, action) => {
+        state.loading = false;
+        state.accIncomeCerReqMs = action.payload;
+
+    },
+    acceptIncomeCerReqFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+
+     // for Reject  Income Cer Req
+     rejectIncomeCerReqRequset: (state) => {
+        state.loading = true;
+    },
+    rejectIncomeCerReqSuccess: (state, action) => {
+        state.loading = false;
+        state.rejectIncomeCerReqMs = action.payload;
+
+    },
+    rejectIncomeCerReqFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+     // for Get Accepted  Income Cer Req
+     getAccIncomeCerReqRequset: (state) => {
+        state.loading = true;
+    },
+    getAccIncomeCerReqSuccess: (state, action) => {
+        state.loading = false;
+        state.getAccIncomeCerReq = action.payload;
+
+    },
+    getAccIncomeCerReqFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+
 
     
 

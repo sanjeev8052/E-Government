@@ -4,27 +4,22 @@ import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
 import Header from '../Global/Header'
 import { useDispatch, useSelector } from 'react-redux'
-import Loader from '../Layout/Loader'
+import Loader from './AdminLoader'
 import { tokens } from '../../Global'
-import { useAlert } from 'react-alert'
-import { useNavigate } from 'react-router-dom'
-import { CancelTwoTone, CheckCircleOutlineTwoTone, Height } from '@mui/icons-material'
-import {  getAcceptMeterReq} from '../../Action/Services/Services'
+import { getAcceptMeterReq } from '../../Action/Services/Meter'
 
 const AccMeterReq = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    const { loading,getAccMeterReq } = useSelector((state) => (state.services))
-    const alert = useAlert();
+    const { loading, getAccMeterReq } = useSelector((state) => (state.services))
     const dispatch = useDispatch()
-    const navigate = useNavigate();
     useEffect(() => {
         dispatch(getAcceptMeterReq())
     }, [dispatch])
 
-  
 
-  
+
+
 
     return (
         <div className='app'>
@@ -67,7 +62,7 @@ const AccMeterReq = () => {
                                             <TableCell>City</TableCell>
                                             <TableCell>Area</TableCell>
                                             <TableCell>Proof</TableCell>
-                                           
+
                                         </TableRow>
                                     </TableHead>
                                     <TableBody sx={{ backgroundColor: colors.primary[600] }}>
