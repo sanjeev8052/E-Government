@@ -9,31 +9,22 @@ import { tokens } from '../../Global'
 import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
 import { CancelTwoTone, CheckCircleOutlineTwoTone, Height } from '@mui/icons-material'
-import { getMeterApplyReq, rejMeterReq, accMeterReq } from '../../Action/Services/Services'
+import {  getAcceptMeterReq} from '../../Action/Services/Services'
 
-const GetmeterReq = () => {
+const AccMeterReq = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    const { loading, getMeterReq, accMeterReqMs, error, rejectMeterReqMs } = useSelector((state) => (state.services))
+    const { loading,getAccMeterReq } = useSelector((state) => (state.services))
     const alert = useAlert();
     const dispatch = useDispatch()
     const navigate = useNavigate();
     useEffect(() => {
-        dispatch(getMeterApplyReq())
+        dispatch(getAcceptMeterReq())
     }, [dispatch])
 
-    useEffect(() => {
-        accMeterReqMs ? alert.success(accMeterReqMs.message) : null
-        rejectMeterReqMs ? alert.success(rejectMeterReqMs.message) : null
-    }, [accMeterReqMs, rejectMeterReqMs, alert])
+  
 
-
-    const confirm = (id) => {
-        dispatch(accMeterReq(id));
-    }
-    const reject = (id) => {
-        dispatch(rejMeterReq(id));
-    }
+  
 
     return (
         <div className='app'>
@@ -43,7 +34,7 @@ const GetmeterReq = () => {
 
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <Header title="Meter Request" subtitle="Welcome Your Meter Request Details Page" />
+                        <Header title=" Accepted Meter Request" subtitle="Welcome to Accepted Meter Request Details Page" />
 
 
                     </Box>
@@ -76,18 +67,18 @@ const GetmeterReq = () => {
                                             <TableCell>City</TableCell>
                                             <TableCell>Area</TableCell>
                                             <TableCell>Proof</TableCell>
-                                            <TableCell>Actions</TableCell>
+                                           
                                         </TableRow>
                                     </TableHead>
                                     <TableBody sx={{ backgroundColor: colors.primary[600] }}>
 
-                                        {getMeterReq <= 0 ? <TableRow>
+                                        {getAccMeterReq <= 0 ? <TableRow>
                                             <TableCell colSpan={9}>
-                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h1" color="primary">No Meter Apply Request</Typography>
+                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h1" color="primary">No  Accepted Meter Request</Typography>
                                             </TableCell>
                                         </TableRow>
                                             :
-                                            getMeterReq?.map((data) => (
+                                            getAccMeterReq?.map((data) => (
                                                 <TableRow key={data._id}>
                                                     <TableCell >{data.name}</TableCell>
                                                     <TableCell >{data.email}</TableCell>
@@ -101,14 +92,6 @@ const GetmeterReq = () => {
                                                             <a href={`http://localhost:5000/PDF/${data.proof}`} style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noopener noreferrer">View</a>
 
                                                         </Button>
-                                                    </TableCell>
-                                                    <TableCell >
-                                                        <IconButton aria-label="correct" color='success' onClick={() => { confirm(data._id) }}  >
-                                                            <CheckCircleOutlineTwoTone />
-                                                        </IconButton>
-                                                        <IconButton aria-label="reject" color='error' onClick={() => { reject(data._id) }} >
-                                                            <CancelTwoTone />
-                                                        </IconButton>
                                                     </TableCell>
                                                 </TableRow>
                                             ))
@@ -125,4 +108,4 @@ const GetmeterReq = () => {
     )
 }
 
-export default GetmeterReq
+export default AccMeterReq

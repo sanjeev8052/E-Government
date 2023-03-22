@@ -376,6 +376,49 @@ export const userServicesReducer = createReducer(initialState, {
         state.error = action.payload;
 
     },
+     // for Accept Meter Req
+     acceptMeterReqRequset: (state) => {
+        state.loading = true;
+    },
+    acceptMeterReqSuccess: (state, action) => {
+        state.loading = false;
+        state.accMeterReqMs = action.payload;
+
+    },
+    acceptMeterReqFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+
+     // for Reject  Meter Req
+     rejectMeterReqRequset: (state) => {
+        state.loading = true;
+    },
+    rejectMeterReqSuccess: (state, action) => {
+        state.loading = false;
+        state.rejectMeterReqMs = action.payload;
+
+    },
+    rejectMeterReqFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
+     // for Get Accepted  Meter Req
+     getAccMeterReqRequset: (state) => {
+        state.loading = true;
+    },
+    getAccMeterReqSuccess: (state, action) => {
+        state.loading = false;
+        state.getAccMeterReq = action.payload;
+
+    },
+    getAccMeterReqFailuer: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+
+    },
 
 
     

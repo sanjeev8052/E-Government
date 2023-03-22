@@ -42,6 +42,7 @@ app.use("/api/employee", require("./Routes/Emp/Emplogin"))
 app.use("/api/", require('./Routes/User/userRoutes'))
 app.use('/api', require('./Routes/User/complaint'))
 app.use('/api', require('./Routes/User/meter'))
+app.use('/api', require('./Routes/User/income'))
 app.use('/api', require('./Routes/User/feedback'))
 
 module.exports = app

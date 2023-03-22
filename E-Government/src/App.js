@@ -32,6 +32,7 @@ import Bills from './components/Admin/Bills'
 import PendingBills from './components/Admin/PendingBills'
 import PaidBills from './components/Admin/PaidBills'
 import GetmeterReq from './components/Admin/GetmeterReq'
+import AccMeterReq from './components/Admin/AccMeterReq'
 import Tester from './components/Admin/Tester'
 import UserHeader from './components/User/UserHeader/UserHeader'
 
@@ -117,6 +118,7 @@ const App = () => {
             <Route path="/pbills" element={<PendingBills />} />
             <Route path="/pabills" element={<PaidBills />} />
             <Route path="/getmeterreq" element={<GetmeterReq />} />
+            <Route path="/getaccmeterreq" element={<AccMeterReq />} />
           
 
 
