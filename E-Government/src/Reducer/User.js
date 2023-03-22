@@ -7,6 +7,13 @@ const initialState = {
 
 export const userReducer = createReducer(initialState, {
 
+    Authenticated :(state) =>{
+        state.isAuthenticated = true
+    },
+    notAuthenticated :(state) =>{
+        state.isAuthenticated = false
+    },
+
     // Login Reducers........
     LoginRequest: (state) => {
         state.loading = true;
@@ -35,12 +42,10 @@ export const userReducer = createReducer(initialState, {
     RagisterSuccess: (state, action) => {
         state.loading = false;
         state.message = action.payload;
- 
     },
     RagisterFailuer: (state, action) => {
         state.loading = false;
         state.regisetrError = action.payload;
-
     },
     ClearRegisterMessage: (state) => {
         state.message = null;
@@ -57,12 +62,11 @@ export const userReducer = createReducer(initialState, {
     UserLoadSuccess: (state, action) => {
         state.userLoading = false;
         state.userData = action.payload;
-        state.isAuthenticated = true
     },
     UserLoadFailuer: (state, action) => {
         state.userLoading = false;
         state.error = action.payload;
-        state.isAuthenticated = false
+       
     },
 
 

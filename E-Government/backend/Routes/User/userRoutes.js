@@ -10,29 +10,33 @@ const { isAuthenticatedUser } = require("../../middlewares/auth");
 
 
 
-router.post("/upload", isAuthenticatedUser, async (req, res) => {
+router.post("/upload",  async (req, res) => {
     try {
 
-        const file = req.files.image
-        const user = req.user
-        if (!file) {
-            return res
-                .status(400)
-                .json({ sucsess: false, message: "Somthing Went Wroung..." })
-        }
-        const { public_id, url } = await cloudinary.uploader.upload(file.tempFilePath, {
-            folder: "User_Profile"
-        })
-        const avatar = {
-            public_id,
-            url
-        }
-        user.avatar = avatar
-        await user.save();
-        res.status(200).json({
-            success: true,
-            message: " Profile Added"
-        })
+         const file = req.files.image
+
+         console.log(file)
+        
+
+        res.send(true)
+        // if (!file) {
+        //     return res
+        //         .status(400)
+        //         .json({ sucsess: false, message: "Somthing Went Wroung..." })
+        // }
+        // const { public_id, url } = await cloudinary.uploader.upload(file.tempFilePath, {
+        //     folder: "User_Profile"
+        // })
+        // const avatar = {
+        //     public_id,
+        //     url
+        // }
+        // user.avatar = avatar
+        // await user.save();
+        // res.status(200).json({
+        //     success: true,
+        //     message: " Profile Added"
+        // })
 
     } catch (error) {
 
@@ -182,7 +186,7 @@ router.get("/logout", async (req, res) => {
     try {
         res
             .status(200)
-            .cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
+            .cookie("Token", null, { expires: new Date(Date.now()), httpOnly: true })
             .json({ success: true, message: "Logout" })
     } catch (error) {
         res

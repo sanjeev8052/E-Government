@@ -58,15 +58,26 @@ import ViewPdf from './components/Global/ViewPdf'
 import cookies from 'js-cookie'
 const App = () => {
 
+  const dispatch = useDispatch();
   const { loginData } = useSelector(state => state.user)
 
   useEffect(() => {
-  { loginData && cookies.set('Token', loginData.token, { expires: 1 })}
+    { loginData && cookies.set('Token', loginData.token, { expires: 1 }) }
   }, [loginData]);
+
+  useEffect(() => {
+    const userCookie = cookies.get('Token')
+    userCookie ? dispatch({
+      type: 'Authenticated'
+    }) : dispatch({
+      type: 'notAuthenticated'
+    })
+  }, [])
+
+
   const userCookie = cookies.get('Token');
 
   const [theme, colorMode] = useMode()
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(LoadUser())
     dispatch(LoadAdmin())
@@ -85,11 +96,12 @@ const App = () => {
 
           <Routes>
             {/* User */}
-            <Route path='/login' element={<Login userCookie={userCookie}/>} />
-            <Route path='/' element={<Home  userCookie={userCookie}/>} />
+            <Route path='/login' element={<Login userCookie={userCookie} />} />
+            <Route path='/billpay/login' element={<Login userCookie={userCookie} />} />
+            <Route path='/' element={<Home userCookie={userCookie} />} />
             <Route path='forgotpassword' element={<UserForgotPassword />} />
             <Route path='reset/password/:token' element={< ResetPassword />} />
-            <Route path='/userHeader' element={<UserHeader  />} />
+            <Route path='/userHeader' element={<UserHeader />} />
             <Route path='/Profile' element={<Profile />} />
             <Route path='/UserDashboard' element={<UserDashboard />} />
 

@@ -12,13 +12,14 @@ import Footer from '../../Layout/Footer/Footer'
 import { useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
-import cookies from 'js-cookie'
 
-const BillPay = ({userCookie}) => {
+
+const BillPay = () => {
   const  navigate = useNavigate()
+  const {isAuthenticated } = useSelector(state=>state.user)
 
   useEffect(()=>{
-    !userCookie ? console.log(true)  : navigate('../login')
+    isAuthenticated ? console.log(true)  : navigate('../login')
   },[])
 
    

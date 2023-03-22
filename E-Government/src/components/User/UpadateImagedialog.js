@@ -30,9 +30,9 @@ const useStyle = makeStyles({
 
 const UpadateImagedialog = () => {
     const [selectedFile, setSelectedFile] = React.useState()
-    const {  profileImage } = useSelector(state => state.user)
+    const { profileImage } = useSelector(state => state.user)
     const [image, setImage] = React.useState(profileImage);
-    const [loading , setLoading] =React.useState(false)
+    const [loading, setLoading] = React.useState(false)
 
     const handleClose = () => {
         setOpen(false);
@@ -76,18 +76,24 @@ const UpadateImagedialog = () => {
         }
     }
     const handleUploadImage = async () => {
-        if (selectedFile) {
-            setLoading(true)
-            const formData = new FormData();
-            formData.append("image", selectedFile);
-            const { data } = await axios.post('api/upload', formData)
-            data ? setLoading(false) : null
-            data ? dispatch(getProfileImage()) : null
-            data ? handleClose() : null
-        } else {
+
+        try {
+            if (selectedFile) {
+                setLoading(true)
+                const formData = new FormData();
+                formData.append("image", selectedFile);
+                const { data } = await axios.post('api/upload', formData)
+                data ? setLoading(false) : null
+                data ? dispatch(getProfileImage()) : null
+                data ? handleClose() : null
+            } else {
+                error ? setLoading(false) : null
+                alert("Pleas First Select Image...")
+            }
+        } catch (error) {
             error ? setLoading(false) : null
-            alert("Pleas First Select Image...")
         }
+
     }
     const handleDeleteImage = async () => {
 
@@ -135,7 +141,7 @@ const UpadateImagedialog = () => {
                                 </Button>
                             </>
                             : <Button variant="contained" onClick={handleUploadImage} color="primary">
-                            {loading ? <CircularProgress/> : <Add />}
+                                {loading ? <CircularProgress /> : <Add />}
                             </Button>
                     }
 

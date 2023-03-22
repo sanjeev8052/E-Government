@@ -1,34 +1,44 @@
-import React ,{useEffect} from 'react'
-import Typography from '@mui/material/Typography'
-import ViwePdf from './Global/ViwePdf'
-import axios from 'axios'
-
+import React from 'react'
+import { Box, Typography } from '@material-ui/core'
+import './Download.css'
+import { AssuredWorkloadOutlined } from '@mui/icons-material'
+import Footer from '../components/Layout/Footer/Footer'
 const Temp = () => {
-  const value1 = "hello"
-  const value2 = "sanjeev"
-  const formData = new FormData();
-  formData.append('field1', value1);
-  formData.append('field2', value2);
-
-  const objectData = {
-    field3: "value3",
-    field4: "value4",
-  };
-useEffect(() => {
-  formData.append('objectData', JSON.stringify(objectData)); 
-  axios.post('/api/endpoint', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  })
-   
-}, []);
-
   return (
-    <div>
-      <Typography variant="h1"> temp </Typography>
 
-    </div>
+    <Box className='download'>
+      <Box className='mainBox'>
+        <Box className="row rowHeader">
+          <Box className="col-sm-4">
+            <AssuredWorkloadOutlined sx={{ color: "black", fontSize: "3rem" }} />
+          </Box>
+          <Box className="col-sm-8">
+            <Typography variant='h3' color="initial">E-Governance</Typography>
+          </Box>
+        </Box>
+        <div className=" text-center mt-5">
+          <h2>Cast Certificate</h2>
+        </div>
+        <div className="row">
+          <div className="col-sm-4">
+              
+          </div>
+          <div className="col-sm-4">
+
+          </div>
+          <div className="col-sm-4">
+
+          </div>
+        </div>
+        <Box className="rowFooter">
+
+          <Box className="col-sm-12">
+            <Typography variant='h6' color="initial">Printing  Date</Typography>
+          </Box>
+        </Box>
+      </Box>
+      <Footer />
+    </Box>
   )
 }
 

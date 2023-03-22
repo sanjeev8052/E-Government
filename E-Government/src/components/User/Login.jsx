@@ -16,6 +16,12 @@ import { signInSchema } from '../../ValidateSchema/User'
 
 
 const Login = ({userCookie}) => {
+    const navigate = useNavigate();
+    const {isAuthenticated } = useSelector(state=>state.user)
+
+   useEffect(()=>{
+    isAuthenticated && navigate('../')
+   })
     const styles = {
         mainBox: {
             width: "100vw",
@@ -71,7 +77,6 @@ const Login = ({userCookie}) => {
         }
 
     }
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const alert = useAlert();
 
@@ -92,7 +97,6 @@ const Login = ({userCookie}) => {
         }
     }, [message, LoginError, alert, dispatch])
 
-    userCookie && navigate('/')
 
     const [type, setType] = useState('password')
 
