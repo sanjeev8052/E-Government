@@ -42,7 +42,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     AcceptCompReqSuccess: (state, action) => {
         state.loading = false;
-        state.accComReq = action.payload;
+        state.accComReqMs = action.payload;
 
     },
     AcceptCompReqFailuer: (state, action) => {
@@ -56,7 +56,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     RejectCompReqSuccess: (state, action) => {
         state.loading = false;
-        state.rejComReq = action.payload;
+        state.rejComReqMs = action.payload;
 
     },
     RejectCompReqFailuer: (state, action) => {
@@ -103,7 +103,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     addcomcatSuccess: (state, action) => {
         state.loading = false;
-        state.comcat = action.payload;
+        state.comcatMs = action.payload;
 
     },
     addcomcatFailuer: (state, action) => {
@@ -133,7 +133,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     delcomcatSuccess: (state, action) => {
         state.loading = false;
-        state.delcomcat = action.payload;
+        state.delcomcatMs = action.payload;
 
     },
     delcomcatFailuer: (state, action) => {

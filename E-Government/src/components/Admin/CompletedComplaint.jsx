@@ -67,7 +67,7 @@ const CompletedComplaint = () => {
                                         </TableHead>
                                         <TableBody>
 
-                                            {
+                                            {/* {
                                                 getComReq <= 0 ? <TableRow>
                                                     <TableCell colSpan={6}>
                                                         <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Complaint Data</Typography>
@@ -86,7 +86,7 @@ const CompletedComplaint = () => {
 
                                                     </TableRow>
                                                 ))
-                                            }
+                                            } */}
                                         </TableBody>
                                     </Table>
                                 </TableContainer>

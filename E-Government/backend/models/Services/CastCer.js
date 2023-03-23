@@ -17,9 +17,26 @@ const CastSchema = mongoose.Schema({
         type: Number,
         require: true
     },
-    address: {
+    village: {
         type: String,
         require: true
+    },
+    tehsil: {
+        type: String,
+        require: true
+    },
+    district: {
+        type: String,
+        require: true
+    },
+    state: {
+        type: String,
+        require: true
+    },
+    gender: {
+        type: String,
+        require: true
+
     },
     fatherName: {
         type: String,
@@ -33,7 +50,15 @@ const CastSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    image: {
+        type: String,
+        require: true
+    },
     cast: {
+        type: String,
+        require: true
+    },
+    date: {
         type: String,
         require: true
     },

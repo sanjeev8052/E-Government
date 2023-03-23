@@ -6,7 +6,13 @@ const Cast = require('../../models/Services/CastCer');
 const { sendEmail } = require('../../middlewares/sendEmail')
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'PDF')
+        if (file.fieldname === 'file') {
+            cb(null, 'PDF');
+        } else if (file.fieldname === 'file2') {
+            cb(null, 'PDF');
+        } else {
+            cb(new Error('Invalid fieldname'), null);
+        }
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + '_' + file.originalname)
@@ -16,18 +22,22 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 // For Add Cast Request
-router.post('/castreq', upload.single('file'), async (req, res) => {
+router.post('/castreq', upload.fields([
+    { name: 'file', maxCount: 1 },
+    { name: 'file2', maxCount: 1 }
+]), async (req, res) => {
 
     try {
-        const proof = (req.file) ? req.file.filename : null
+        const proof = req.files['file2'][0].filename 
+        const image = req.files['file'][0].filename 
         const data = req.body.data
         const object = JSON.parse(data)
         const randomNum = Math.floor(Math.random() * 1000000) + 1;
 
-        const { name, email, phone, address, fatherName, motherName, cast } = object
+        const { name, email, phone, village, state, tehsil, district, gender, fatherName, motherName, cast } = object
         //    console.log(object)
         const status = "Requested"
-        const castcer = new Cast({ name, email, phone, address, fatherName, motherName, cast, proof, status: status, uniqueId: randomNum })
+        const castcer = new Cast({ name, email, phone, village, state, tehsil, district, gender, fatherName, motherName, cast, proof,image, status: status, uniqueId: randomNum })
         await castcer.save();
         res.status(200).json({
             message: "Successfully Added",

@@ -6,11 +6,11 @@ import { Button } from '@material-ui/core'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
 
+import { useAlert } from 'react-alert'
 import Header from '../Global/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from './AdminLoader'
 import { tokens } from '../../Global'
-
 import { DangerousTwoTone, TaskTwoTone } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
 import { accCompReq, getCompReq, rejCompReq } from '../../Action/Services/Services'
@@ -19,15 +19,20 @@ import { accCompReq, getCompReq, rejCompReq } from '../../Action/Services/Servic
 const AdminComplaint = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    const { loading, getComReq } = useSelector((state) => (state.services))
+    const { loading, getComReq,accComReqMs,rejComReqMs} = useSelector((state) => (state.services))
     const { isAuthenticated } = useSelector((state) => (state.admin))
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
+    const alert = useAlert();
     useEffect(() => {
         isAuthenticated ? navigate('/acomplaint') : navigate('/adlogin')
         dispatch(getCompReq())
     }, [isAuthenticated, dispatch, navigate])
+
+    useEffect(() => {
+        accComReqMs ? alert.success(accComReqMs.message) : null
+        rejComReqMs ? alert.success(rejComReqMs.message) : null
+    }, [accComReqMs, rejComReqMs, alert])
 
     const accept = (id) => {
         dispatch(accCompReq(id))
@@ -121,8 +126,7 @@ const AdminComplaint = () => {
                                                         <IconButton aria-label="block" color='error' onClick={() => { reject(data._id) }}>
                                                             <DangerousTwoTone color='error' />
                                                         </IconButton>
-                                                        {/* <Button variant="contained" color="primary" size='small' sx={{ borderRadius: "100px" }} onClick={() => { block(data._id) }}><BlockTwoTone /> Block
-                                                        </Button> */}
+                                                       
                                                     </TableCell>
                                                 </TableRow>
                                             ))

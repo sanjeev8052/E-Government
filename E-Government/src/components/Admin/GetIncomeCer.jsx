@@ -70,7 +70,10 @@ const GetIncomeCer = () => {
                                             <TableCell>Name</TableCell>
                                             <TableCell>Email</TableCell>
                                             <TableCell>Phone NO.</TableCell>
-                                            <TableCell>Address</TableCell>
+                                            <TableCell>Village</TableCell>
+                                            <TableCell>Tehsil</TableCell>
+                                            <TableCell>District</TableCell>
+                                            <TableCell>State</TableCell>
                                             <TableCell>Father Name</TableCell>
                                             <TableCell>Mother Name</TableCell>
                                             <TableCell>Income</TableCell>
@@ -81,7 +84,7 @@ const GetIncomeCer = () => {
                                     <TableBody sx={{ backgroundColor: colors.primary[600] }}>
 
                                         {getIncomeCerReq <= 0 ? <TableRow>
-                                            <TableCell colSpan={9}>
+                                            <TableCell colSpan={13}>
                                                 <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h1" color="primary">No INcome Cerficate Request</Typography>
                                             </TableCell>
                                         </TableRow>
@@ -91,7 +94,10 @@ const GetIncomeCer = () => {
                                                     <TableCell >{data.name}</TableCell>
                                                     <TableCell >{data.email}</TableCell>
                                                     <TableCell >{data.phone}</TableCell>
-                                                    <TableCell >{data.address}</TableCell>
+                                                    <TableCell >{data.village}</TableCell>
+                                                    <TableCell >{data.tehsil}</TableCell>
+                                                    <TableCell >{data.district}</TableCell>
+                                                    <TableCell >{data.state}</TableCell>
                                                     <TableCell >{data.fatherName}</TableCell>
                                                     <TableCell >{data.motherName}</TableCell>
                                                     <TableCell >{data.income}</TableCell>
