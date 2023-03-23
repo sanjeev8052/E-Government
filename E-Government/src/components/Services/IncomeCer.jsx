@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'
-import { Box, Button, FormControl, MenuItem, Select, Typography, useTheme } from '@material-ui/core';
+import { Box, Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, Typography, useTheme } from '@material-ui/core'
 import { Send } from '@mui/icons-material';
 import { Link, Navigate } from 'react-router-dom';
 import Footer from '../Layout/Footer/Footer';
 import { useFormik } from 'formik'
-import { incomeValidation} from '../../ValidateSchema/Services';;
+import { incomeValidation } from '../../ValidateSchema/Services';;
 
 import axios from 'axios';
 
@@ -63,8 +63,10 @@ const useStyles = makeStyles({
 const IncomeCer = () => {
   const [file, setFile] = useState();
   const [image, setImage] = useState();
+  const [file2, setFile2] = useState();
+  const [image2, setImage2] = useState();
 
-  const hnadleFile = (e) => {
+  const handleFile = (e) => {
     const file = e.target.files[0]
     setFile(file)
 
@@ -76,7 +78,18 @@ const IncomeCer = () => {
     }
     reader.readAsDataURL(file)
   }
-
+  const handleFile2 = (e) => {
+    const file2 = e.target.files[0]
+    setFile2(file2)
+    console.log("file 2", file2)
+    const reader = new FileReader()
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImage2(reader.result)
+      }
+    }
+    reader.readAsDataURL(file2)
+  }
 
 
   const initialvalues = {
@@ -91,6 +104,7 @@ const IncomeCer = () => {
         if (file) {
           const formData = new FormData()
           formData.append("file", file)
+          formData.append("file2", file2)
           formData.append('data', JSON.stringify(values));
           // console.log(values)
           // console.log(file)
@@ -151,6 +165,26 @@ const IncomeCer = () => {
           {errors.email && touched.email ? (
             <Typography className={classes.error}   >{errors.email}</Typography>
           ) : null}
+
+          <FormControl>
+            <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+            <RadioGroup
+              row
+              aria-labelledby="demo-radio-buttons-group-label"
+              onChange={handleChange}
+              name="gender"
+              defaultValue="male"
+              onBlur={handleBlur}
+              value={values.gender}
+            >
+              <FormControlLabel value="female" control={<Radio />} label="Female" />
+              <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel value="other" control={<Radio />} label="Other" />
+            </RadioGroup>
+          </FormControl>
+          {errors.gender && touched.gender ? (
+            <Typography className={classes.error}   >{errors.gender}</Typography>
+          ) : null}
           <Typography variant="h6" color="initial">Mobile No.</Typography>
           <TextField className={classes.fullInput}
             id=""
@@ -166,21 +200,62 @@ const IncomeCer = () => {
           {errors.phone && touched.phone ? (
             <Typography className={classes.error}   >{errors.phone}</Typography>
           ) : null}
-          <Typography variant="h6" color="initial">Address</Typography>
+          <Typography variant="h6" color="initial">Village</Typography>
           <TextField className={classes.fullInput}
             id=""
-            placeholder='Enter Your Address'
+            placeholder='Enter Your Village'
             variant='outlined'
             size='small'
-            name='address'
+            name='village'
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.address}
+            value={values.village}
           />
-          {errors.address && touched.address ? (
-            <Typography className={classes.error} >{errors.address}</Typography>
+          {errors.village && touched.village ? (
+            <Typography className={classes.error} >{errors.village}</Typography>
           ) : null}
-
+          <Typography variant="h6" color="initial">Tehsil</Typography>
+          <TextField className={classes.fullInput}
+            id=""
+            placeholder='Enter Your Tehsil'
+            variant='outlined'
+            size='small'
+            name='tehsil'
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.tehsil}
+          />
+          {errors.tehsil && touched.tehsil ? (
+            <Typography className={classes.error} >{errors.tehsil}</Typography>
+          ) : null}
+          <Typography variant="h6" color="initial">District</Typography>
+          <TextField className={classes.fullInput}
+            id=""
+            placeholder='Enter Your District'
+            variant='outlined'
+            size='small'
+            name='district'
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.district}
+          />
+          {errors.district && touched.district ? (
+            <Typography className={classes.error} >{errors.district}</Typography>
+          ) : null}
+          <Typography variant="h6" color="initial">State</Typography>
+          <TextField className={classes.fullInput}
+            id=""
+            placeholder='Enter Your State'
+            variant='outlined'
+            size='small'
+            name='state'
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.state}
+          />
+          {errors.state && touched.state ? (
+            <Typography className={classes.error} >{errors.state}</Typography>
+          ) : null}
           <Typography variant="h6" color="initial">Father Name</Typography>
           <TextField className={classes.fullInput}
             id=""
@@ -211,7 +286,7 @@ const IncomeCer = () => {
           {errors.motherName && touched.motherName ? (
             <Typography className={classes.error} >{errors.motherName}</Typography>
           ) : null}
-             <Typography variant="h6" color="initial">Income</Typography>
+          <Typography variant="h6" color="initial">Income</Typography>
           <TextField className={classes.fullInput}
             id=""
             placeholder='Enter Your Income'
@@ -225,19 +300,27 @@ const IncomeCer = () => {
           {errors.income && touched.income ? (
             <Typography className={classes.error} >{errors.income}</Typography>
           ) : null}
-
-          <Typography variant="h6" color="initial">Uplaod Your Adhar Card</Typography>
+          <Typography variant="h6" color="initial">Uplaod Your Photo</Typography>
           <div className="row">
             <div className="col-sm-6 mt-2 mb-2">
-              <input type="file" className='input-upload' onChange={hnadleFile} name="" id="" />
+              <input type="file" className='input-upload' onChange={handleFile} name="" id="" />
             </div>
             <div className="col-sm-6 mt-1 mb-2" >
               <img style={{ width: "10rem" }} src={image} alt="" />
             </div>
           </div>
+          <Typography variant="h6" color="initial">Uplaod Your Adhar Card</Typography>
+          <div className="row">
+            <div className="col-sm-6 mt-2 mb-2">
+              <input type="file" className='input-upload' onChange={handleFile2} name="" id="" />
+            </div>
+            <div className="col-sm-6 mt-1 mb-2" >
+              <img style={{ width: "10rem" }} src={image2} alt="" />
+            </div>
+          </div>
 
           <Button type='submit' color='primary' className={classes.button} variant="contained" endIcon={<Send />}>
-           Apply
+            Apply
           </Button>
         </div>
 

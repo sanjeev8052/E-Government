@@ -10,94 +10,100 @@ import { getAcceptCastCerReq } from '../../Action/Services/Cast'
 
 
 const GetAccCast = () => {
-  const themes = useTheme()
-  const colors = tokens(themes.palette.mode)
-  const { loading, getAccCastCerReq } = useSelector((state) => (state.services))
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(getAcceptCastCerReq())
-  }, [dispatch])
+    const themes = useTheme()
+    const colors = tokens(themes.palette.mode)
+    const { loading, getAccCastCerReq } = useSelector((state) => (state.services))
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getAcceptCastCerReq())
+    }, [dispatch])
 
-  return (
-    <div className='app'>
-    <AdminSidebar />
-    <main className='content'>
-        <AdminTopbar />
+    return (
+        <div className='app'>
+            <AdminSidebar />
+            <main className='content'>
+                <AdminTopbar />
 
-        <Box m="15px">
-            <Box display="flex" justifyContent="space-between" alignItems="center">
-                <Header title=" Accepted Cast Certificate Request" subtitle="Welcome to Accepted Cast Certificate Request Details Page" />
+                <Box m="15px">
+                    <Box display="flex" justifyContent="space-between" alignItems="center">
+                        <Header title=" Accepted Cast Certificate Request" subtitle="Welcome to Accepted Cast Certificate Request Details Page" />
 
 
-            </Box>
-            {loading ? <Loader /> :
-                <Box alignItems="center" justifyContent="center" m="15px" sx={{
-                    "& .MuiTable-root": {
-                        border: "none"
-                    },
-                    "& .MuiTableCell-root": {
-                        borderBottom: "none"
-                    },
-                    "& .name-column--cell": {
-                        color: colors.greenAccent[300]
-                    },
-                    "& .MuiTableHead-root": {
-                        backgroundColor: colors.blueAccent[400],
-                        borderBottom: "none"
-                    }
-                }} >
+                    </Box>
+                    {loading ? <Loader /> :
+                        <Box alignItems="center" justifyContent="center" m="15px" sx={{
+                            "& .MuiTable-root": {
+                                border: "none"
+                            },
+                            "& .MuiTableCell-root": {
+                                borderBottom: "none"
+                            },
+                            "& .name-column--cell": {
+                                color: colors.greenAccent[300]
+                            },
+                            "& .MuiTableHead-root": {
+                                backgroundColor: colors.blueAccent[400],
+                                borderBottom: "none"
+                            }
+                        }} >
 
-                    <TableContainer sx={{ mt: "10px", height: "400px", overflow: "auto", backgroundColor: colors.primary[600] }} component={Paper} >
-                        <Table size='small' sx={{ backgroundColor: colors.blueAccent[400] }}>
-                            <TableHead  >
-                                <TableRow >
-                                    <TableCell>Name</TableCell>
-                                    <TableCell>Email</TableCell>
-                                    <TableCell>Phone NO.</TableCell>
-                                    <TableCell>Address</TableCell>
-                                    <TableCell>Father Name</TableCell>
-                                    <TableCell>Mother Name</TableCell>
-                                    <TableCell>Cast</TableCell>
-                                    <TableCell>Proof</TableCell>
-                                   
-                                </TableRow>
-                            </TableHead>
-                            <TableBody sx={{ backgroundColor: colors.primary[600] }}>
+                            <TableContainer sx={{ mt: "10px", height: "400px", overflow: "auto", backgroundColor: colors.primary[600] }} component={Paper} >
+                                <Table size='small' sx={{ backgroundColor: colors.blueAccent[400] }}>
+                                    <TableHead  >
+                                        <TableRow >
+                                            <TableCell>Name</TableCell>
+                                            <TableCell>Email</TableCell>
+                                            <TableCell>Phone NO.</TableCell>
+                                            <TableCell>Village</TableCell>
+                                            <TableCell>Tehsil</TableCell>
+                                            <TableCell>District</TableCell>
+                                            <TableCell>State</TableCell>
+                                            <TableCell>Father Name</TableCell>
+                                            <TableCell>Mother Name</TableCell>
+                                            <TableCell>Cast</TableCell>
+                                            <TableCell>Proof</TableCell>
 
-                                {getAccCastCerReq <= 0 ? <TableRow>
-                                    <TableCell colSpan={9}>
-                                        <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h1" color="primary">No  Accepted Cast  Certificate</Typography>
-                                    </TableCell>
-                                </TableRow>
-                                    :
-                                    getAccCastCerReq?.map((data) => (
-                                        <TableRow key={data._id}>
-                                            <TableCell >{data.name}</TableCell>
-                                            <TableCell >{data.email}</TableCell>
-                                            <TableCell >{data.phone}</TableCell>
-                                            <TableCell >{data.address}</TableCell>
-                                            <TableCell >{data.fatherName}</TableCell>
-                                            <TableCell >{data.motherName}</TableCell>
-                                            <TableCell >{data.cast}</TableCell>
-                                            <TableCell >
-                                                <Button variant="contained" color="primary"   >
-                                                    <a href={`http://localhost:5000/PDF/${data.proof}`} style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noopener noreferrer">View</a>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody sx={{ backgroundColor: colors.primary[600] }}>
 
-                                                </Button>
+                                        {getAccCastCerReq <= 0 ? <TableRow>
+                                            <TableCell colSpan={12}>
+                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h1" color="primary">No  Accepted Cast  Certificate</Typography>
                                             </TableCell>
                                         </TableRow>
-                                    ))
-                                }
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Box>
-            }
+                                            :
+                                            getAccCastCerReq?.map((data) => (
+                                                <TableRow key={data._id}>
+                                                    <TableCell >{data.name}</TableCell>
+                                                    <TableCell >{data.email}</TableCell>
+                                                    <TableCell >{data.phone}</TableCell>
+                                                    <TableCell >{data.village}</TableCell>
+                                                    <TableCell >{data.tehsil}</TableCell>
+                                                    <TableCell >{data.district}</TableCell>
+                                                    <TableCell >{data.state}</TableCell>
+                                                    <TableCell >{data.fatherName}</TableCell>
+                                                    <TableCell >{data.motherName}</TableCell>
+                                                    <TableCell >{data.cast}</TableCell>
+                                                    <TableCell >
+                                                        <Button variant="contained" color="primary"   >
+                                                            <a href={`http://localhost:5000/PDF/${data.proof}`} style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noopener noreferrer">View</a>
 
-        </Box>
-    </main>
-</div>
-  )
+                                                        </Button>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))
+                                        }
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Box>
+                    }
+
+                </Box>
+            </main>
+        </div>
+    )
 }
 
 export default GetAccCast

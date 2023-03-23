@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
 const IncomeSchema = mongoose.Schema({
-    uniqueId:{
-        type:Number,
-        require:true
+    uniqueId: {
+        type: Number,
+        require: true
     },
     name: {
         type: String,
@@ -17,9 +17,26 @@ const IncomeSchema = mongoose.Schema({
         type: Number,
         require: true
     },
-    address: {
+    village: {
         type: String,
         require: true
+    },
+    tehsil: {
+        type: String,
+        require: true
+    },
+    district: {
+        type: String,
+        require: true
+    },
+    state: {
+        type: String,
+        require: true
+    },
+    gender:{
+        type:String,
+        require:true
+
     },
     fatherName: {
         type: String,
@@ -29,16 +46,25 @@ const IncomeSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    image: {
+        type: String,
+        require: true
+    },
     proof: {
         type: String,
         require: true
     },
-    income:{
-        type:Number,
-        require:true
+    income: {
+        type: Number,
+        require: true
     },
-    status:String
+    date: {
+        type: String,
+        require: true
+    },
+
+    status: String
 })
 
-const Income = mongoose.model("income" , IncomeSchema)
+const Income = mongoose.model("income", IncomeSchema)
 module.exports = Income
