@@ -15,7 +15,7 @@ import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 const Dashboard = () => {
 
-
+  const {loading} = useSelector(state=>state.admin)
   
   return (
     <Fragment>{loading ? <Loader /> :
