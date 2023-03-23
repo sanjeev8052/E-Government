@@ -12,7 +12,7 @@ export const AdminReducer = createReducer(initialState,
     },
     LoginSuccess: (state, action) => {
         state.loading = false;
-        state.token = action.payload
+        state.AdminLog= action.payload
         state.isAuthenticated = true;
     },
     LoginFailure: (state, action) => {

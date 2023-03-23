@@ -7,23 +7,16 @@ const initialState = {
 
 export const userReducer = createReducer(initialState, {
 
-    Authenticated :(state) =>{
-        state.isAuthenticated = true
-    },
-    notAuthenticated :(state) =>{
-        state.isAuthenticated = false
-    },
-
     // Login Reducers........
-    LoginRequest: (state) => {
+    UserLoginRequest: (state) => {
         state.loading = true;
     },
-    LoginSuccess: (state, action) => {
+    UserLoginSuccess: (state, action) => {
         state.loading = false;
         state.loginData = action.payload;
         state.isAuthenticated = true
     },
-    LoginFailuer: (state, action) => {
+    UserLoginFailuer: (state, action) => {
         state.loading = false;
         state.LoginError = action.payload;
         state.isAuthenticated = false
@@ -31,7 +24,7 @@ export const userReducer = createReducer(initialState, {
     ClearLoginMessage: (state) => {
         state.message = null;
         state.LoginError = null;
-        
+
     },
 
 
@@ -50,10 +43,10 @@ export const userReducer = createReducer(initialState, {
     ClearRegisterMessage: (state) => {
         state.message = null;
         state.regisetrError = null;
-      
+
     },
 
-    
+
 
     // UserLoad Reducers........
     UserLoadRequest: (state) => {
@@ -62,11 +55,13 @@ export const userReducer = createReducer(initialState, {
     UserLoadSuccess: (state, action) => {
         state.userLoading = false;
         state.userData = action.payload;
+        state.isAuthenticated = true
     },
     UserLoadFailuer: (state, action) => {
         state.userLoading = false;
         state.error = action.payload;
-       
+        state.isAuthenticated = false
+
     },
 
 
@@ -83,7 +78,7 @@ export const userReducer = createReducer(initialState, {
         state.loading = false;
         state.error = action.payload;
     },
-//  Fro forget Password
+    //  Fro forget Password
     ForgotPassRequest: (state) => {
         state.loading = true;
     },
@@ -123,7 +118,7 @@ export const userReducer = createReducer(initialState, {
     LoadProfileImageFailuer: (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        
+
     },
     UpdateImageRequest: (state) => {
         state.loading = true;
@@ -149,5 +144,5 @@ export const userReducer = createReducer(initialState, {
         state.loading = false;
         state.error = action.payload;
     },
-   
+
 })

@@ -191,7 +191,7 @@ router.post("/elogin", [
                     expires: new Date(Date.now() + 86400 * 1000)
                 }
 
-                res.status(201).cookie("emptoken", emptoken, option).json({
+                res.status(201).json({
                     success: true,
                     message: "Welcome Back",
                     Emptoken: emptoken
@@ -218,7 +218,7 @@ router.get("/logoutemp", async (req, res) => {
 
 })
 
-router.get("/get/eProfile", isAuthenticatedEmp, async (req, res) => {
+router.get("/get/eProfile", async (req, res) => {
     try {
 
         const emp = await Employee.findById(req.emp).populate("complaints")

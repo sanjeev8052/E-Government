@@ -43,3 +43,6 @@ export const castValidation = yup.object({
 export const billPaySchema = yup.object({
     tenament_No: yup.number().min(100000000000, ['Tenament no must have 12 digit']).max(999999999999, ['Tenament no must have 12 digit']).required(),
 })
+export const downloadSchema = yup.object({
+    certificateNo: yup.number().min(100000, ['Tenament no must have 6 digit']).max(999999, ['Tenament no must have 6 digit']).required(),
+})

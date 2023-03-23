@@ -10,11 +10,12 @@
     margin: auto;
     padding: 2rem;
     position: relative;
-    height: 150vh;
+    height: 170vh;
 }
 
 .rowHeader {
     display: flex;
+    
     align-items: center;
     border-bottom: 1px solid black;
 }
@@ -25,4 +26,9 @@
     position: absolute;
     bottom: 0px;
     padding: 2rem;
+}
+.image{
+    border: 1px solid black;
+    width: 10rem;
+    height: 12rem;
 }

@@ -83,10 +83,10 @@ router.post("/alogin", [
                     expires: new Date(Date.now() + 86400*1000)
                 }
 
-                res.status(201).cookie("admintoken", token, option).json({
+                res.status(201).json({
                     success: true,
                     message: "Welcome Back",
-                    token: token
+                    Admintoken: token
                 })
 
             }

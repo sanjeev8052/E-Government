@@ -9,28 +9,18 @@ import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
 import Header from '../Global/Header'
 import Loader from '../Layout/Loader'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 
 
 const Dashboard = () => {
 
-  const { isAuthenticated, admin, loading } = useSelector((state) => (state.admin))
-  const navigate = useNavigate()
 
-  useEffect(() => {
-    isAuthenticated ? navigate('/dashboard') : navigate('/adlogin')
-  }, [loading])
-
- 
-  // useEffect(() => {
-  //   isAuthenticated ? navigate('/dashboard') : navigate('/adlogin')
-  // }, [isAuthenticated, navigate] 
-
-  //  isAuthenticated ? navigate("/dashboard") : navigate('/adlogin')
+  
   return (
     <Fragment>{loading ? <Loader /> :
       <div className='app'>
-        <AdminSidebar admin={admin && admin.name} />
+        <AdminSidebar />
         <main className='content'>
           <AdminTopbar />
           <Box m="15px">
@@ -47,4 +37,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default AdminAuth(Dashboard)

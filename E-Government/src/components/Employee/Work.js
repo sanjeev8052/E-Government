@@ -7,6 +7,7 @@ import EmployeeTopbar from '../Global/EmployeeTopbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getEmpDetails } from '../../Action/Employee/register'
 import { DeleteForeverTwoTone } from '@mui/icons-material'
+import EmpAuth from '../ProtectedRoute/EmpAuth'
 
 const Work = () => {
 
@@ -89,4 +90,4 @@ const Work = () => {
   )
 }
 
-export default Work
+export default EmpAuth(Work)

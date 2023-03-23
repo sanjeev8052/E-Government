@@ -18,10 +18,11 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Login } from '../../Action/Employee/register';
 import { useNavigate } from 'react-router-dom';
-
+import cookies from 'js-cookie'
 const theme = createTheme();
 const Emplogin = () => {
 
+    
     const initialevalues = {
         email: "",
         password: ""
@@ -40,7 +41,7 @@ const Emplogin = () => {
 
         onSubmit: (values) => {
                 dispatch(Login(values))
-                navigate('/work')
+                // navigate('/work')
     
         }
     })

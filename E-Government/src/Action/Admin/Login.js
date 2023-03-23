@@ -14,7 +14,7 @@ export const adminLogin = (admin) => async (dispatch) => {
 
         dispatch({
             type: "LoginSuccess",
-            payload: data.token
+            payload: data
         })
 
     } catch (error) {

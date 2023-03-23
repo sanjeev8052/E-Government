@@ -48,6 +48,10 @@ const compCompleteSchema = mongoose.Schema({
     empEmail: {
         email: String,
         require: true
+    },
+    completeDate:{
+        type:Date,
+        default: Date.now()
     }
 })
 

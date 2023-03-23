@@ -12,15 +12,16 @@ import Footer from '../../Layout/Footer/Footer'
 import { useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
+import UserAuth from '../../ProtectedRoute/UserAuth'
 
 
 const BillPay = () => {
-  const  navigate = useNavigate()
-  const {isAuthenticated } = useSelector(state=>state.user)
+  // const  navigate = useNavigate()
+  // const {isAuthenticated } = useSelector(state=>state.user)
 
-  useEffect(()=>{
-    isAuthenticated ? console.log(true)  : navigate('../login')
-  },[])
+  // useEffect(()=>{
+  //   isAuthenticated ? console.log(true)  : navigate('../login')
+  // },[])
 
    
 
@@ -182,4 +183,4 @@ const BillPay = () => {
   )
 }
 
-export default BillPay
+export default UserAuth(BillPay)

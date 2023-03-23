@@ -19,12 +19,7 @@ const AdminLogin = () => {
         password: "",
     }
     const dispatch = useDispatch()
-    const { isAuthenticated } = useSelector((state) => (state.admin))
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        isAuthenticated ? navigate('/dashboard') : navigate('/adlogin')
-    }, [isAuthenticated,navigate])
+    
 
     const [type, setType] = useState("password")
     const [visible, setVisible] = useState(false)
@@ -87,7 +82,6 @@ const AdminLogin = () => {
         dispatch(adminLogin(values))
 
     }
-    isAuthenticated && navigate('/dashboard')
     const validationSchema = Yup.object().shape({
         email: Yup.string().email("Please Enter Valid Email").required("Please Enter Email"),
         password: Yup.string().required("Please Enter Your Password")

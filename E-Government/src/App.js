@@ -8,6 +8,8 @@ import UserForgotPassword from './components/User/ForgotPassword'
 import Profile from './components/User/Profile'
 import ResetPassword from './components/User/ResetPassword'
 import UserDashboard from './components/User/Dashboard'
+import Download from './components/User/Download/Download'
+
 // package
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useEffect } from 'react'
@@ -67,22 +69,14 @@ const App = () => {
 
   const dispatch = useDispatch();
   const { loginData } = useSelector(state => state.user)
+  const { log } = useSelector(state => state.employee)
+  const { AdminLog } = useSelector(state => state.admin)
 
   useEffect(() => {
-    { loginData && cookies.set('Token', loginData.token, { expires: 1 }) }
-  }, [loginData]);
-
-  useEffect(() => {
-    const userCookie = cookies.get('Token')
-    userCookie ? dispatch({
-      type: 'Authenticated'
-    }) : dispatch({
-      type: 'notAuthenticated'
-    })
-  }, [])
-
-
-  const userCookie = cookies.get('Token');
+    { loginData && cookies.set('Token', loginData.token, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000) }) }
+    { log && cookies.set('empToken', log.Emptoken, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000) }) }
+    { AdminLog && cookies.set('adminToken', AdminLog.Admintoken, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000) }) }
+  }, [loginData, log, AdminLog]);
 
   const [theme, colorMode] = useMode()
   useEffect(() => {
@@ -103,19 +97,19 @@ const App = () => {
 
           <Routes>
             {/* User */}
-            <Route path='/login' element={<Login userCookie={userCookie} />} />
-            <Route path='/billpay/login' element={<Login userCookie={userCookie} />} />
-            <Route path='/' element={<Home userCookie={userCookie} />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/' element={<Home />} />
             <Route path='forgotpassword' element={<UserForgotPassword />} />
             <Route path='reset/password/:token' element={< ResetPassword />} />
             <Route path='/userHeader' element={<UserHeader />} />
             <Route path='/Profile' element={<Profile />} />
             <Route path='/UserDashboard' element={<UserDashboard />} />
+            <Route path='/dowoload' element={<Download />} />
 
 
             {/* Services */}
             <Route path='/complaint' element={<Complaint />} />
-            <Route path='/billpay' element={<BillPay userCookie={userCookie} />} />
+            <Route path='/billpay' element={<BillPay />} />
             <Route path='/meterApply/' element={<MeterApply />} />
             <Route path='/incomeCer' element={<IncomeCer />} />
             <Route path='/castCer' element={<CastCer />} />
@@ -149,7 +143,7 @@ const App = () => {
             <Route path="/getaccincomecerreq" element={<GetAccIncome />} />
             <Route path="/getcastcerreq" element={<GetCastCer />} />
             <Route path="/getacccastcerreq" element={<GetAccCast />} />
-          
+
 
 
 

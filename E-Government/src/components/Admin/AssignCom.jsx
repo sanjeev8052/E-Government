@@ -76,6 +76,7 @@ const AssignCom = () => {
                                                 <TableCell>StreetAddress</TableCell>
                                                 <TableCell>Area</TableCell>
                                                 <TableCell>Pincode</TableCell>
+                                                <TableCell>Complaint Type</TableCell>
                                                 <TableCell>Complaint Description</TableCell>
                                                 <TableCell>Actions</TableCell>
                                             </TableRow>
@@ -91,6 +92,7 @@ const AssignCom = () => {
                                                     <TableCell >{data.city}</TableCell>
                                                     <TableCell >{data.streetAddress}</TableCell>
                                                     <TableCell >{data.area}</TableCell>
+                                                    <TableCell >{data.complaintType}</TableCell>
                                                     <TableCell >{data.pincode}</TableCell>
                                                     <TableCell component='th' scope='row'>{data.complaintDesc}</TableCell>
                                                     <TableCell >
