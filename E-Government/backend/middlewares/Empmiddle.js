@@ -5,15 +5,15 @@ const Employee = require("../models/Emp/Employee")
 exports.isAuthenticateemp = async (req, res, next) => {
 
     try {
-        const { emptoken } = req.cookies
+        const { empToken } = req.cookies
         // console.log()
-        if (!emptoken) {
+        if (!empToken) {
             return res.status(401).json({ message: "Please Login First" })
         }
-        const decoded = jwt.verify(emptoken, process.env.EMP_SECRET_KEY)
-        req.admin = await Employee.findById(decoded._id)
+        const decoded = jwt.verify(empToken, process.env.SECRET_KEY)
+        req.emp = await Employee.findById(decoded._id)
         
-         next();
+        next();
     } catch (error) {
         res.status(500).json(error.message)
     }

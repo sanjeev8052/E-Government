@@ -38,7 +38,7 @@ const useStyle = makeStyles({
 
 })
 
-const EmpreserPassword = () => {
+const AdminResetPassword = () => {
     const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const { token } = useParams()
@@ -54,10 +54,10 @@ const EmpreserPassword = () => {
     onSubmit: async (values) => {
       try {
         setLoading(true)
-        const { data } = await axios.put(`/api/employee/empreset/password/${token}`, values)
+        const { data } = await axios.put(`/api/admin/adminreset/password/${token}`, values)
         data ? alert.success(data.message) : null
         data ? setLoading(false) : null
-         navigate('/emplogin')
+         navigate('/adlogin')
       } catch (error) {
         error ? setLoading(false) : null
         alert.error(error.response.data.message)
@@ -99,4 +99,4 @@ const EmpreserPassword = () => {
   )
 }
 
-export default EmpreserPassword
+export default AdminResetPassword

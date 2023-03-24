@@ -1,15 +1,11 @@
 const mongoose = require('mongoose')
 
 const compCompleteSchema = mongoose.Schema({
+    complaintId:{
+        type:String,
+        require:true
+    },
     name: {
-        type: String,
-        require: true
-    },
-    email: {
-        type: String,
-        require: true
-    },
-    phone: {
         type: String,
         require: true
     },
@@ -42,11 +38,11 @@ const compCompleteSchema = mongoose.Schema({
         default: Date.now
     },
     empName: {
-        name: String,
+        type: String,
         require: true
     },
     empEmail: {
-        email: String,
+        type: String,
         require: true
     },
     completeDate:{

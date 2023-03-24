@@ -4,12 +4,13 @@ const Employee = require("../../models/Emp/Employee")
 const { body, validationResult, } = require('express-validator');
 const bcrypt = require("bcrypt")
 const cloudinary = require('cloudinary').v2
-
+const { sendEmail } = require('../../middlewares/sendEmail')
 const jwt = require('jsonwebtoken');
-const { isAuthenticatedEmp } = require("../../middlewares/auth");
 const UserComplaint = require("../../models/User/UserComplaint");
 
-const crypto = require('crypto')
+const crypto = require('crypto');
+const { isAuthenticateemp } = require("../../middlewares/Empmiddle");
+const compComplete = require("../../models/Admin/compComplete");
 
 cloudinary.config({
     cloud_name: process.env.cloud_name,
@@ -18,7 +19,7 @@ cloudinary.config({
     secure: true
 });
 
-router.post("/upload", isAuthenticatedEmp, async (req, res) => {
+router.post("/upload", isAuthenticateemp, async (req, res) => {
     try {
 
         const file = req.files.image
@@ -48,7 +49,7 @@ router.post("/upload", isAuthenticatedEmp, async (req, res) => {
 
 })
 
-router.put("/upload/update", isAuthenticatedEmp, async (req, res) => {
+router.put("/upload/update", isAuthenticateemp, async (req, res) => {
     try {
 
 
@@ -79,7 +80,7 @@ router.put("/upload/update", isAuthenticatedEmp, async (req, res) => {
         res.status(500).json({ sucsess: false, message: error.message })
     }
 })
-router.delete("/upload/delete", isAuthenticatedEmp, async (req, res) => {
+router.delete("/upload/delete", isAuthenticateemp, async (req, res) => {
     try {
 
         const emp = req.emp
@@ -98,7 +99,7 @@ router.delete("/upload/delete", isAuthenticatedEmp, async (req, res) => {
         res.status(500).json({ sucsess: false, message: error.message })
     }
 })
-router.get("/profile/image", isAuthenticatedEmp, async (req, res) => {
+router.get("/profile/image", isAuthenticateemp, async (req, res) => {
     try {
 
         const avatar = req.emp.avatar.url
@@ -218,10 +219,12 @@ router.get("/logoutemp", async (req, res) => {
 
 })
 
-router.get("/get/eProfile", async (req, res) => {
+router.get("/get/eProfile", isAuthenticateemp, async (req, res) => {
     try {
 
-        const emp = await Employee.findById(req.emp).populate("complaints")
+
+
+        const emp = await Employee.findById(req.emp._id).populate("complaints")
         res.status(200).send(emp)
 
     } catch (error) {
@@ -231,7 +234,7 @@ router.get("/get/eProfile", async (req, res) => {
     }
 })
 
-router.post("/comp/copmlete", isAuthenticatedEmp, async (req, res) => {
+router.post("/comp/copmlete", isAuthenticateemp, async (req, res) => {
     try {
 
         const emp = await Employee.findById(req.emp).populate("complaints")
@@ -248,23 +251,36 @@ router.post("/comp/copmlete", isAuthenticatedEmp, async (req, res) => {
 
 
 
-router.get("/comp/complete/:_id", isAuthenticatedEmp, async (req, res) => {
+router.post("/compComplete/:id", isAuthenticateemp, async (req, res) => {
 
-    const complaint = await UserComplaint.findById(req.params.id)
     try {
 
-        const complaint = await UserComplaint.findById(req.params._id)
-        if (!complaint) {
-            return res
-                .status(404)
-                .json({ success: false, message: "complaint not found..." })
-        }
+        const complaint = await UserComplaint.findById(req.params.id)
+        const emp = await Employee.findById(req.emp)
         complaint.status = "complete"
         await complaint.save()
+        const create = {
+            complaintId: complaint._id,
+            name: complaint.name,
+            complaintType: complaint.complaintType,
+            city: complaint.complaint,
+            streetAddress: complaint.streetAddress,
+            area: complaint.area,
+            pincode: complaint.pincode,
+            complaintDesc: complaint.complaintDesc,
+            status: 'complete',
+            empName: emp.name,
+            empEmail: emp.email
+        }
+        const compComleted = await compComplete.create(create)
+        res.status(200).json({
+            message: "Complain Completed.."
+        })
+        console.log(compComleted)
     } catch (error) {
         res
             .status(500)
-            .json({ success: false, Error: error.message })
+            .json({ success: false, Error: "sumthing went wrong.." })
     }
 
 })
@@ -277,12 +293,13 @@ router.post("/forgot/password", async (req, res) => {
                 .status(400)
                 .json({ success: false, message: "Email does not exists.." })
         }
-
-        const resetPasswordToken = await emp.getResetPasswordEmpToken();
-
+        
+        const resetPasswordToken = await emp.getResetPasswordToken();
         await emp.save();
 
-        const resetUrl = `${req.protocol}://localhost:3000/ereset/password/${resetPasswordToken}`;
+        console.log(emp)
+
+        const resetUrl = `${req.protocol}://localhost:3000/empreset/password/${resetPasswordToken}`;
         const message = `reset your password by clicking on the link below: \n\n${resetUrl}`
         try {
             await sendEmail({
@@ -298,22 +315,21 @@ router.post("/forgot/password", async (req, res) => {
         } catch (error) {
             emp.resetPasswordToken = undefined;
             emp.resetpasswordExpire = undefined;
-            await emp.save();
-
+            await emp.save()
 
         }
     } catch (error) {
-        res.status(500).json({ sucsess: false, message:"sumthig wrong" })
+        res.status(500).json({ sucsess: false, message:error.message })
     }
 })
-router.put("/reset/password/:token", async (req, res) => {
+router.put("/empreset/password/:token", async (req, res) => {
 
     try {
 
         console.log(req.body.password)
         const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex")
 
-        const emp = await User.findOne({
+        const emp = await Employee.findOne({
             resetPasswordToken,
             resetPasswordExpire :{$gt: Date.now()}
         })
@@ -330,9 +346,7 @@ router.put("/reset/password/:token", async (req, res) => {
         emp.resetPasswordToken = undefined;
         emp.resetPasswordExpire = undefined;
         await emp.save()
-        console.log(emp)
         res.status(200).json({ success: true, message: "Password Updadet..", password: emp.password })
-
 
 
     } catch (error) {
@@ -341,6 +355,7 @@ router.put("/reset/password/:token", async (req, res) => {
     }
 
 })
+
 
 
 

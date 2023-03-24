@@ -281,6 +281,8 @@ router.put("/reset/password/:token", async (req, res) => {
     }
 
 })
+
+
 router.post("/update/profile/:id", async (req, res) => {
 
     try {

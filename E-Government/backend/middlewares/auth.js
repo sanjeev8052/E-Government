@@ -22,23 +22,3 @@ exports.isAuthenticatedUser = async (req, res, next)=>{
 }
 
 
-exports.isAuthenticatedEmp = async (req, res, next)=>{
-    try {
-        const {emptoken} = req.cookies;
-       
-    
-    if(!emptoken){
-                return res
-                .status(401)
-                .json({message:" Please login first"})
-            }
-         const decoded = jwt.verify(emptoken,process.env.SECRET_KEY)
-         req.emp = await Employee.findById(decoded._id)
-          next();
-    } catch (error) {
-        res.status(500).json({
-                        success: false,
-                        message: error.message,
-                    })
-    }
-}

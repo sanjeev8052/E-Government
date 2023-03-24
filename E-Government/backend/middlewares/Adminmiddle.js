@@ -5,12 +5,12 @@ const jwt = require("jsonwebtoken")
 exports.isAuthenticate = async (req, res, next) => {
 
     try {
-        const { admintoken } = req.cookies
+        const { adminToken } = req.cookies
         // console.log()
-        if (!admintoken) {
+        if (!adminToken) {
             return res.status(401).json({ message: "Please Login First" })
         }
-        const decoded = jwt.verify(admintoken, process.env.SECRET_KEY)
+        const decoded = jwt.verify(adminToken, process.env.SECRET_KEY)
         req.admin = await AdRegister.findById(decoded._id)
         
          next();

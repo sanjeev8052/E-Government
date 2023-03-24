@@ -19,12 +19,12 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { LoadAdmin, getAdmnProfileImage } from './Action/Admin/Login'
 
 // admin
+import AforgotPassword from './components/Admin/Aforgetpassword'
 import AssignCom from './components/Admin/AssignCom'
 import Dashboard from './components/Admin/Dashboard'
 import AdminLogin from './components/Admin/AdminLogin'
 import Employee from './components/Admin/Employee'
 import RequestedEmployee from './components/Admin/RequestedEmployee'
-import Aforgetpassword from './components/Admin/Aforgetpassword'
 import AdminComplaint from './components/Admin/AdminComplaint'
 import User from './components/Admin/User'
 import Categories from './components/Admin/Categories'
@@ -65,6 +65,7 @@ import Temp from './components/Temp'
 import { getEmpDetails, getEmpProfileImage } from './Action/Employee/register'
 import ViewPdf from './components/Global/ViewPdf'
 import cookies from 'js-cookie'
+import AdminResetPassword from './components/Admin/AdminResetPassword'
 const App = () => {
 
   const dispatch = useDispatch();
@@ -104,7 +105,7 @@ const App = () => {
             <Route path='/userHeader' element={<UserHeader />} />
             <Route path='/Profile' element={<Profile />} />
             <Route path='/UserDashboard' element={<UserDashboard />} />
-            <Route path='/dowoload' element={<Download />} />
+            <Route path='/Download' element={<Download />} />
 
 
             {/* Services */}
@@ -120,7 +121,8 @@ const App = () => {
 
 
             <Route path='/adlogin' element={<AdminLogin />} />
-            <Route path='/aforgot' element={<Aforgetpassword />} />
+            <Route path='/AforgotPassword' element={<AforgotPassword/>} />
+            <Route path='adminreset/password/:token' element={< AdminResetPassword/>} />
             <Route path='/emplogin' element={<Emplogin />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/aemployee" element={<Employee />} />
@@ -153,7 +155,7 @@ const App = () => {
             <Route path='/empregister' element={<Empregister />} />
             <Route path='/work' element={<Work />} />
             <Route path='eforgotpassword' element={<EmpforgetPasswrod />} />
-            <Route path='ereset/password/:token' element={< EmpreserPassword />} />
+            <Route path='empreset/password/:token' element={< EmpreserPassword />} />
             {/* <Route path="/emp/register" element={<Empregister/>} /> */}
             <Route path="/emplogin" element={<Emplogin />} />
             <Route path='/empregister' element={<Empregister />} />

@@ -4,22 +4,30 @@ import { Button } from '@material-ui/core'
 
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
-
+import axios from 'axios'
 import Header from '../Global/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from './AdminLoader'
 import { tokens } from '../../Global'
 import { useNavigate } from 'react-router'
 import { accCompReq, getCompReq, rejCompReq } from '../../Action/Services/Services'
+import { useState } from 'react'
 
 
 const CompletedComplaint = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    // const { loading, getComReq } = useSelector((state) => (state.services))
-    // const { isAuthenticated } = useSelector((state) => (state.admin))
-    // const navigate = useNavigate()
-    // const dispatch = useDispatch()
+    const [data, setData] = useState();
+    useEffect(() => {
+        getCompleteComplaint();
+    },[])
+
+    const getCompleteComplaint = async () => {
+
+        const { data } = await axios.get("api/admin/compComplete")
+        setData(data.complaint)
+
+    }
 
     return (
         <div className='app'>
@@ -42,41 +50,37 @@ const CompletedComplaint = () => {
                         placeholder='Search by Name And Complaint Type'
 
                     />
-                    <Button variant="text" color="default">
+                    <Button variant="text" onClick={getCompleteComplaint} color="default">
                         Reload
                     </Button>
                     {
                         // loading ? <Loader /> :
-                            <Box alignItems="center" justifyContent="center" m="15px" >
-                                <Typography variant="h3" color={colors.redAccent[600]}>Complaint Details</Typography>
-                                <TableContainer sx={{ mt: "10px", minWidth: 200 }} component={Paper}>
-                                    <Table size='small' >
-                                        <TableHead  >
-                                            <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
-                                                <TableCell>Name</TableCell>
-                                                <TableCell>Email</TableCell>
-                                                <TableCell>Phone NO.</TableCell>
-                                                <TableCell>Complaint Type</TableCell>
-                                                <TableCell>City</TableCell>
-                                                <TableCell>StreetAddress</TableCell>
-                                                <TableCell>Area</TableCell>
-                                                <TableCell>Pincode</TableCell>
-                                                <TableCell>Complaint Description</TableCell>
+                        <Box alignItems="center" justifyContent="center" m="15px" >
+                            <Typography variant="h3" color={colors.redAccent[600]}>Complaint Details</Typography>
+                            <TableContainer sx={{ mt: "10px", minWidth: 200 }} component={Paper}>
+                                <Table size='small' >
+                                    <TableHead  >
+                                        <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
+                                            <TableCell>Name</TableCell>
+                                            <TableCell>Complaint Type</TableCell>
+                                            <TableCell>City</TableCell>
+                                            <TableCell>StreetAddress</TableCell>
+                                            <TableCell>Area</TableCell>
+                                            <TableCell>Pincode</TableCell>
+                                            <TableCell>Complaint Description</TableCell>
 
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
 
-                                            {/* {
-                                                getComReq <= 0 ? <TableRow>
+                                        {
+                                              data &&  data <= 0 ? <TableRow>
                                                     <TableCell colSpan={6}>
                                                         <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Complaint Data</Typography>
                                                     </TableCell>
-                                                </TableRow> : getComReq?.map((data) => (
+                                                </TableRow> : data?.map((data) => (
                                                     <TableRow key={data._id}>
                                                         <TableCell >{data.name}</TableCell>
-                                                        <TableCell >{data.email}</TableCell>
-                                                        <TableCell >{data.phone}</TableCell>
                                                         <TableCell >{data.complaintType}</TableCell>
                                                         <TableCell >{data.city}</TableCell>
                                                         <TableCell >{data.streetAddress}</TableCell>
@@ -86,11 +90,11 @@ const CompletedComplaint = () => {
 
                                                     </TableRow>
                                                 ))
-                                            } */}
-                                        </TableBody>
-                                    </Table>
-                                </TableContainer>
-                            </Box>
+                                            }
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Box>
                     }
                 </Box>
 

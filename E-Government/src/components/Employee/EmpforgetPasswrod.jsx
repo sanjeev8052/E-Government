@@ -1,12 +1,14 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import { makeStyles, Button, Typography } from '@material-ui/core';
+import { makeStyles, Button, Typography , CircularProgress} from '@material-ui/core';
 import { Send } from '@mui/icons-material';
 import { useFormik } from 'formik';
 import { forgotSchema } from '../../ValidateSchema/User';
 import { useDispatch, useSelector } from 'react-redux';
 import { forgotPass } from '../../Action/User';
 import { useAlert } from 'react-alert';
+import axios from 'axios'
+import { useState } from 'react';
 const useStyle = makeStyles({
     conatiner: {
         width: "100vw",
@@ -38,21 +40,10 @@ const useStyle = makeStyles({
 })
 const EmpforgetPasswrod = () => {
     const alert = useAlert()
-    const { data, Forgoterror, loading } = useSelector(state => state.user)
     const [message, setMessage] = React.useState()
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
-    React.useEffect(() => {
-        if (data) {
-            setMessage(data.message)
-        }
-        if (Forgoterror) {
-            alert.error(Forgoterror.response.data.message)
-            dispatch({
-                type: "ForgotErrorMessage"
-            })
-        }
-    }, [data, Forgoterror]);
 
     const initialvalues = {
         email: ""
@@ -62,8 +53,16 @@ const EmpforgetPasswrod = () => {
         initialValues: initialvalues,
         validationSchema: forgotSchema,
 
-        onSubmit: (values) => {
-            dispatch(forgotPass(values))
+        onSubmit: async(values) => {
+            try {
+                setLoading(true)
+                const { data } = await axios.post("api/employee/forgot/password", values)
+                setLoading(false)
+                setMessage(data.message)
+            } catch (error) {
+                setLoading(false)
+                alert.success(error.response.data.message)
+            }
         }
 
     })
@@ -86,7 +85,7 @@ const EmpforgetPasswrod = () => {
                 />
                 <Typography className={style.error} >{errors.email}</Typography>
                 <Button type='submit' disabled={loading} variant="contained" className={style.button} color="primary">
-                    Send <Send />
+                   {loading ?   <CircularProgress/> : "Send" }
                 </Button>
             </form>
             <Typography className='text-success text-center m-2' variant="h5" >{message}</Typography>

@@ -3,8 +3,7 @@ const { isAuthenticatedUser } = require('../../middlewares/auth');
 const UserComplaint = require('../../models/User/UserComplaint');
 const express = require("express");
 const { sendEmail } = require('../../middlewares/sendEmail')
-
-
+const compComplete = require('../../models/Admin/compComplete')
 const AssignComplaint = require('../../models/Admin/AssignComplaint');
 const Employee = require('../../models/Emp/Employee');
 const router = express.Router();
@@ -117,6 +116,7 @@ router.get("/compdata/:_id", async (req, res) => {
     }
 })
 
+
 router.post("/assigncom", async (req, res) => {
     try {
        
@@ -160,6 +160,21 @@ router.post("/completecom/:_id", async (req, res) => {
             success: true,
             message: "Accepted Complaint",
             completecomp
+        })
+
+    } catch (error) {
+
+    }
+})
+router.get("/compComplete", async (req, res) => {
+    try {
+       
+         const complaint = await compComplete.find({})
+         if (!complaint) {
+            res.status(401).json({ message: "Complaint Not Found" })
+        }
+        res.status(200).json({
+            complaint
         })
 
     } catch (error) {
