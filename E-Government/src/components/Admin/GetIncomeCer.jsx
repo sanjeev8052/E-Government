@@ -10,6 +10,7 @@ import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
 import { CancelTwoTone, CheckCircleOutlineTwoTone, Height } from '@mui/icons-material'
 import { getIncomeCer, rejIncomeCerReq, accIncomeCerReq } from '../../Action/Services/Income'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 const GetIncomeCer = () => {
     const themes = useTheme()
@@ -130,4 +131,4 @@ const GetIncomeCer = () => {
     )
 }
 
-export default GetIncomeCer
+export default AdminAuth(GetIncomeCer)

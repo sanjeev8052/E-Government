@@ -15,8 +15,13 @@ import AdbIcon from '@mui/icons-material/Adb';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+<<<<<<< HEAD
 import { getEmpDetails } from '../../Action/Admin/Employee';
 import { useDispatch } from 'react-redux'
+=======
+import { color } from '@mui/system';
+
+>>>>>>> 76bcec0930a8b3c6dc4ad0737dfe63b17b9d3f1d
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const EmployeeTopbar = () => {
@@ -103,6 +108,7 @@ const EmployeeTopbar = () => {
                 <Typography textAlign="center">Feedback</Typography>
               </MenuItem>
             
+<<<<<<< HEAD
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -120,6 +126,53 @@ const EmployeeTopbar = () => {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+=======
+          </Menu>
+        </Box>
+        <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+        <Typography
+          variant="h5"
+          noWrap
+          component="a"
+          href=""
+          sx={{
+            mr: 2,
+            display: { xs: 'flex', md: 'none' },
+            flexGrow: 1,
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            letterSpacing: '.3rem',
+            color: 'inherit',
+            textDecoration: 'none',
+          }}
+        >
+          LOGO
+        </Typography>
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+         
+            <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                Work
+            </Button>
+            <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+               Feedback
+            </Button>
+        
+        </Box>
+
+        <Box sx={{ flexGrow: 0 }}>
+          <Tooltip title="Open settings">
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar alt="Remy Sharp" src={empProfileImage ? `http://localhost:5000/Profile/${empProfileImage}` : null} />
+            </IconButton>
+          </Tooltip>
+          <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+>>>>>>> 76bcec0930a8b3c6dc4ad0737dfe63b17b9d3f1d
             }}
           >
             LOGO
@@ -163,7 +216,7 @@ const EmployeeTopbar = () => {
               onClose={handleCloseUserMenu}
             >
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography component={Link} to="/eprofile" textAlign="center">Profile</Typography>
+                <Typography component={Link} to="/eprofile" textAlign="center" sx={{textDecoration:"none" ,color:"black"}}>Profile</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
                 <Typography textAlign="center">Logout</Typography>

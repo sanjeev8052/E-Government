@@ -41,7 +41,7 @@ const Emplogin = () => {
 
         onSubmit: (values) => {
                 dispatch(Login(values))
-                // navigate('/work')
+                 navigate('/work')
     
         }
     })

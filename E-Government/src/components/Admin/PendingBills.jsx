@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Header from '../Global/Header'
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton, TextField } from '@mui/material'
 import { GetPendingBill } from '../../Action/Admin/Bills'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 const PendingBills = () => {
     const themes = useTheme()
@@ -101,4 +102,4 @@ const PendingBills = () => {
     )
 }
 
-export default PendingBills
+export default AdminAuth(PendingBills)

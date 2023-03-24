@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from './AdminLoader'
 import { tokens } from '../../Global'
 import { getAcceptIncomeCerReq } from '../../Action/Services/Income'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 
 const GetAccIncome = () => {
@@ -106,4 +107,4 @@ const GetAccIncome = () => {
     )
 }
 
-export default GetAccIncome
+export default  AdminAuth(GetAccIncome)

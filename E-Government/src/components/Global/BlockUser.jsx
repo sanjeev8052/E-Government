@@ -100,4 +100,4 @@ const BlockUser = () => {
   )
 }
 
-export default BlockUser
+export default AdminAuth(BlockUser)

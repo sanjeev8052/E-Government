@@ -68,7 +68,7 @@ const Register = () => {
     const alert = useAlert()
     const [checked, setChecked] = useState(false);
     const dispatch = useDispatch();
-    const { message , regisetrError, loading } = useSelector(state => state.user)
+    const { message , regisetrError, loading ,data , error } = useSelector(state => state.user)
     console.log(regisetrError)
     useEffect(() => {
         if (data) {
@@ -83,7 +83,7 @@ const Register = () => {
                 type: "ClearRegisterMessage"
             })
         }
-    }, [data, regisetrError]);
+    }, [data, regisetrError ,]);
 
     const initialvalues = {
         name: "",

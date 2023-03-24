@@ -77,7 +77,7 @@ const AdminSidebar = () => {
             !isCollapsed && (
               <Box mb="25px">
                 <Box display="flex" justifyContent="center" alignItems="center">
-                  <Avatar alt="admin" src={adminProfileImage} style={{ cursor: "pointer", borderRadius: "50%", height: "100px", width: "100px" }} />
+                  <Avatar alt="admin" src={adminProfileImage ? `http://localhost:5000/Profile/${adminProfileImage}` : null    } style={{ cursor: "pointer", borderRadius: "50%", height: "100px", width: "100px" }} />
                 </Box>
                 <Box textAlign="center">
                   <Typography variant='h3' color={colors.grey[900]} fontWeight="bold" xs={{ m: "10px 0 0 0" }} >Hello {names}  </Typography>

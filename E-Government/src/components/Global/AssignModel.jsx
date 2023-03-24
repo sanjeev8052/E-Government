@@ -12,6 +12,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Getdept } from '../../Action/Admin/Categories';
+import AdminAuth from '../ProtectedRoute/AdminAuth';
 const useStyle = makeStyles({
   input: {
     width: "100%",
@@ -212,4 +213,4 @@ const AssignModel = () => {
   )
 }
 
-export default AssignModel
+export default AdminAuth(AssignModel)

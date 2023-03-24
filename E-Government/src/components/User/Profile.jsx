@@ -79,7 +79,7 @@ const Profile = () => {
 
                                 <div className="row">
                                     <div className="col-lg-12">
-                                        {loading ?  <Skeleton sx={{ width: "12rem", height: "12rem" }} /> :  <img className='img' src={profileImage ? profileImage : AvatarImage} alt="" />}
+                                        {loading ? <Skeleton sx={{ width: "12rem", height: "12rem" }} /> : <img className='img' src={profileImage ?`http://localhost:5000/Profile/${profileImage}` : AvatarImage} alt="" />}
                                     </div>
                                     <div className="col-lg-12" style={{ margin: "2rem  0 0 3.2rem" }}>
                                         <UpadateImagedialog />

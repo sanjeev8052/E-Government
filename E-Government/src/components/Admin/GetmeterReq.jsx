@@ -10,6 +10,7 @@ import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
 import { CancelTwoTone, CheckCircleOutlineTwoTone, Height } from '@mui/icons-material'
 import { getMeterApplyReq, rejMeterReq, accMeterReq } from '../../Action/Services/Meter'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 const GetmeterReq = () => {
     const themes = useTheme()
@@ -125,4 +126,4 @@ const GetmeterReq = () => {
     )
 }
 
-export default GetmeterReq
+export default  AdminAuth(GetmeterReq)

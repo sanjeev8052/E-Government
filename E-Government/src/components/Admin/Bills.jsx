@@ -13,6 +13,7 @@ import { Getbillcat } from '../../Action/Admin/Categories'
 import * as Yup from 'yup'
 import { AddBill } from '../../Action/Admin/Bills'
 import { useNavigate } from 'react-router-dom'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 const Bills = () => {
     const navigate = useNavigate()
@@ -269,4 +270,4 @@ const Bills = () => {
     )
 }
 
-export default Bills
+export default  AdminAuth(Bills)

@@ -5,8 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const EmpSchema = new mongoose.Schema({
     avatar: {
-        public_id: String,
-        url: String
+       type:String
     },
     name: {
         type: String,

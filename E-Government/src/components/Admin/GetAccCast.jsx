@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from './AdminLoader'
 import { tokens } from '../../Global'
 import { getAcceptCastCerReq } from '../../Action/Services/Cast'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 
 const GetAccCast = () => {
@@ -106,4 +107,4 @@ const GetAccCast = () => {
     )
 }
 
-export default GetAccCast
+export default AdminAuth(GetAccCast)

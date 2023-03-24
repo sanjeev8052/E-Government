@@ -3,18 +3,22 @@ const bcrypt = require("bcrypt")
 const crypto = require('crypto')
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-const { sendEmail } = require('../../middlewares/sendEmail')
-const cloudinary = require('cloudinary').v2
 const AdRegister = require("../../models/Admin/AdRegister")
 const { body, validationResult, } = require('express-validator');
 const { isAuthenticate } = require("../../middlewares/Adminmiddle");
+const multer = require('multer');
 
-cloudinary.config({
-    cloud_name: process.env.cloud_name,
-    api_key: process.env.api_key,
-    api_secret: process.env.api_secret,
-    secure: true
-});
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'Profile')
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '_' + file.originalname)
+    }
+})
+
+const upload = multer({ storage: storage })
 
 // For Admin Register
 router.post("/aregister", [
@@ -82,7 +86,7 @@ router.post("/alogin", [
                 // console.log({ token: token })
                 const option = {
                     httpOnly: true,
-                    expires: new Date(Date.now() + 86400*1000)
+                    expires: new Date(Date.now() + 86400 * 1000)
                 }
 
                 res.status(201).json({
@@ -92,7 +96,7 @@ router.post("/alogin", [
                 })
 
             }
-            
+
 
         }
 
@@ -116,11 +120,11 @@ router.get("/profile", isAuthenticate, async (req, res) => {
 )
 
 // For Logout
-router.get("/logout",async (req, res) => {
+router.get("/logout", async (req, res) => {
     try {
         res
             .status(200)
-            .cookie("admintoken", null, { expires: new Date(Date.now()), httpOnly: true })
+            .cookie("adminToken", null, { expires: new Date(Date.now()), httpOnly: true })
             .json({ success: true, message: "Logout" })
     } catch (error) {
         res
@@ -134,35 +138,27 @@ router.get("/logout",async (req, res) => {
 router.get("/profile/image", isAuthenticate, async (req, res) => {
     try {
 
-        const avatar = req.admin.avatar.url
+        const avatar = req.admin.avatar
         res.status(200).send(avatar)
     } catch (error) {
         res.status(500).json({ sucsess: false, message: error.message })
     }
 })
 
-router.put("/upload/update", isAuthenticate, async (req, res) => {
+router.put("/upload/update", isAuthenticate, upload.single("image"), async (req, res) => {
     try {
 
 
-        const file = req.files.image
-        const user = req.admin
-        const p_id = req.admin.avatar.public_id
+        const file = (req.file) ? req.file.filename : null
+        const admin = req.admin
+        
         if (!file) {
             return res
                 .status(400)
                 .json({ sucsess: false, message: "Somthing Went Wroung..." })
         }
-        const { public_id, url } = await cloudinary.uploader.upload(file.tadminFilePath, {
-            public_id: p_id,
-            overwrite: true
-        })
-        const avatar = {
-            public_id,
-            url
-        }
-        user.avatar = avatar
-        await user.save();
+        admin.avatar = file
+        await admin.save();
         res.status(200).json({
             success: true,
             message: " Profile Updated"
@@ -173,24 +169,21 @@ router.put("/upload/update", isAuthenticate, async (req, res) => {
     }
 })
 
-router.post("/upload", isAuthenticate, async (req, res) => {
+router.post("/upload", isAuthenticate,upload.single("image"), async (req, res) => {
     try {
 
-        const file = req.files.image
-        const admin = req.admin
+        const file =(req.file) ? req.file.filename : null
+        const { _id } = req.admin
         if (!file) {
             return res
                 .status(400)
                 .json({ sucsess: false, message: "Somthing Went Wroung..." })
         }
-        const { public_id, url } = await cloudinary.uploader.upload(file.tadminFilePath, {
-            folder: "User_Profile"
-        })
-        const avatar = {
-            public_id,
-            url
+        const admin = await AdRegister.findById(_id)
+        if (!admin) {
+            return res.status(400).json({ message: "Admin Not Found" })
         }
-        admin.avatar = avatar
+        admin.avatar = file
         await admin.save();
         res.status(200).json({
             success: true,
@@ -206,10 +199,7 @@ router.delete("/upload/delete", isAuthenticate, async (req, res) => {
     try {
 
         const user = req.admin
-        const avatar = {
-            public_id: undefined,
-            url: undefined
-        }
+        const avatar = undefined
         user.avatar = avatar
         await user.save();
         res.status(200).json({

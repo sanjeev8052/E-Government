@@ -8,6 +8,7 @@ import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
 
 import Header from '../Global/Header'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 const Feedback = () => {
     const { getfeedback } = useSelector((state) => (state.user))
     const themes = useTheme()
@@ -50,4 +51,4 @@ const Feedback = () => {
     )
 }
 
-export default Feedback
+export default  AdminAuth(Feedback)

@@ -5,8 +5,7 @@ const crypto = require('crypto')
 const { Schema } = mongoose;
 const Adschema = new Schema({
     avatar: {
-        public_id: String,
-        url: String
+        type:String
     },
     name: {
         type: String,

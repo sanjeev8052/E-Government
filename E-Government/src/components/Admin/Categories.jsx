@@ -10,6 +10,7 @@ import { AddCircleOutlineTwoTone, DeleteForeverTwoTone, SpeakerNotesTwoTone } fr
 import { useDispatch, useSelector } from 'react-redux'
 import { Addbillcat, Addcercat, Addcomcat, Addmetercat, Delbillcat, Delcercat, Delcomcat, Delmetercat, Getbillcat, Getcercat, Getcomcat, Getmetercat, Adddept, Deldept, Getdept } from '../../Action/Admin/Categories'
 import { useEffect } from 'react'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 const Categories = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
@@ -572,4 +573,4 @@ const Categories = () => {
     )
 }
 
-export default Categories
+export default  AdminAuth(Categories)

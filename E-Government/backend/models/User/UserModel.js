@@ -5,8 +5,7 @@ const crypto = require('crypto')
 
 const userSchema = mongoose.Schema({
     avatar: {
-        public_id: String,
-        url: String
+        type: String,
     },
     name: {
         type: String,
@@ -27,10 +26,10 @@ const userSchema = mongoose.Schema({
         required: true,
 
     },
-    paidBills:[
+    paidBills: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref:"bills"
+            ref: "bills"
         }
     ],
 
@@ -42,7 +41,7 @@ const userSchema = mongoose.Schema({
     city: String,
     state: String,
     pincode: Number,
-    status:String,
+    status: String,
     resetPasswordToken: String,
     resetPasswordExpire: Date
 

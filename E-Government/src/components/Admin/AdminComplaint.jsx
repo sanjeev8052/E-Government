@@ -14,6 +14,7 @@ import { tokens } from '../../Global'
 import { DangerousTwoTone, TaskTwoTone } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
 import { accCompReq, getCompReq, rejCompReq } from '../../Action/Services/Services'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 
 const AdminComplaint = () => {
@@ -143,4 +144,4 @@ const AdminComplaint = () => {
     )
 }
 
-export default AdminComplaint
+export default  AdminAuth(AdminComplaint)

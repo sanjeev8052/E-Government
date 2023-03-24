@@ -10,6 +10,7 @@ import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
 import BlockUser from '../Global/BlockUser'
 import Header from '../Global/Header'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 import Loader from './AdminLoader'
 
 const User = () => {
@@ -99,4 +100,4 @@ const User = () => {
     )
 }
 
-export default User
+export default  AdminAuth(User)

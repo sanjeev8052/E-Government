@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { Avatar } from '@mui/material/';
+import { Avatar } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -43,7 +43,7 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar  src={profileImage} sx={{ width: 45, height: 45 }}></Avatar>
+            <Avatar  src={profileImage ?`http://localhost:5000/Profile/${profileImage}` : Avatar} sx={{ width: 45, height: 45 }}></Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -61,7 +61,7 @@ export default function AccountMenu() {
 
         <MenuItem >
         
-          <img style={{ width: '10rem', height: '10rem', margin:"auto" , borderRadius:"20%" , border:"solid 2px black" }} src={profileImage} alt='Avetar' />
+          <img style={{ width: '10rem', height: '10rem', margin:"auto" , borderRadius:"20%" , border:"solid 2px black" }} src={profileImage ?`http://localhost:5000/Profile/${profileImage}` : Avatar} alt='Avetar' />
         </MenuItem>   <MenuItem >
           <ListItemIcon >
             <Person />

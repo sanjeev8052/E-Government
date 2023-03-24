@@ -16,6 +16,7 @@ import { getAccCom, loadCom, } from '../../Action/Services/Services'
 import Header from '../Global/Header'
 import { Link } from 'react-router-dom'
 import { Button } from '@material-ui/core'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 const AssignCom = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
@@ -117,4 +118,4 @@ const AssignCom = () => {
     )
 }
 
-export default AssignCom
+export default  AdminAuth(AssignCom)
