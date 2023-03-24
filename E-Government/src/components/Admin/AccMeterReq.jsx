@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from './AdminLoader'
 import { tokens } from '../../Global'
 import { getAcceptMeterReq } from '../../Action/Services/Meter'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 const AccMeterReq = () => {
     const themes = useTheme()
@@ -103,4 +104,4 @@ const AccMeterReq = () => {
     )
 }
 
-export default AccMeterReq
+export default  AdminAuth(AccMeterReq)

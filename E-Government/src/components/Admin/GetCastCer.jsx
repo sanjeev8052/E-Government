@@ -10,6 +10,7 @@ import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
 import { CancelTwoTone, CheckCircleOutlineTwoTone, Height } from '@mui/icons-material'
 import { getCastCer, accCastCerReq, rejCastCerReq } from '../../Action/Services/Cast'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 const GetCastCer = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
@@ -130,4 +131,4 @@ const GetCastCer = () => {
     )
 }
 
-export default GetCastCer
+export default AdminAuth(GetCastCer)

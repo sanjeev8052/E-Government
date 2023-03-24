@@ -3,39 +3,39 @@ const router = express.Router()
 const Employee = require("../../models/Emp/Employee")
 const { body, validationResult, } = require('express-validator');
 const bcrypt = require("bcrypt")
-const cloudinary = require('cloudinary').v2
-
+const multer = require('multer');
 const jwt = require('jsonwebtoken');
 const { isAuthenticatedEmp } = require("../../middlewares/auth");
 const UserComplaint = require("../../models/User/UserComplaint");
 
 const crypto = require('crypto')
 
-cloudinary.config({
-    cloud_name: process.env.cloud_name,
-    api_key: process.env.api_key,
-    api_secret: process.env.api_secret,
-    secure: true
-});
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'Profile')
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '_' + file.originalname)
+    }
+})
 
-router.post("/upload", isAuthenticatedEmp, async (req, res) => {
+const upload = multer({ storage: storage })
+
+router.post("/upload", isAuthenticatedEmp, upload.single("image"), async (req, res) => {
     try {
 
-        const file = req.files.image
-        const emp = req.emp
+        const { _id } = req.emp
+        const file = (req.file) ? req.file.filename : null
         if (!file) {
             return res
                 .status(400)
                 .json({ sucsess: false, message: "Somthing Went Wroung..." })
         }
-        const { public_id, url } = await cloudinary.uploader.upload(file.tempFilePath, {
-            folder: "User_Profile"
-        })
-        const avatar = {
-            public_id,
-            url
+        const emp = await Employee.findById(_id)
+        if (!emp) {
+            return res.status(400).json({ message: "Employee  Not Found" })
         }
-        emp.avatar = avatar
+        emp.avatar = file
         await emp.save();
         res.status(200).json({
             success: true,
@@ -48,27 +48,19 @@ router.post("/upload", isAuthenticatedEmp, async (req, res) => {
 
 })
 
-router.put("/upload/update", isAuthenticatedEmp, async (req, res) => {
+router.put("/upload/update", isAuthenticatedEmp, upload.single("image"), async (req, res) => {
     try {
 
 
-        const file = req.files.image
+        const file = (req.file) ? req.file.filename : null
         const emp = req.emp
-        const p_id = req.emp.avatar.public_id
         if (!file) {
             return res
                 .status(400)
                 .json({ sucsess: false, message: "Somthing Went Wroung..." })
         }
-        const { public_id, url } = await cloudinary.uploader.upload(file.tempFilePath, {
-            public_id: p_id,
-            overwrite: true
-        })
-        const avatar = {
-            public_id,
-            url
-        }
-        emp.avatar = avatar
+       
+        emp.avatar = file
         await emp.save();
         res.status(200).json({
             success: true,
@@ -83,10 +75,7 @@ router.delete("/upload/delete", isAuthenticatedEmp, async (req, res) => {
     try {
 
         const emp = req.emp
-        const avatar = {
-            public_id: undefined,
-            url: undefined
-        }
+        const avatar = undefined
         emp.avatar = avatar
         await emp.save();
         res.status(200).json({
@@ -101,7 +90,7 @@ router.delete("/upload/delete", isAuthenticatedEmp, async (req, res) => {
 router.get("/profile/image", isAuthenticatedEmp, async (req, res) => {
     try {
 
-        const avatar = req.emp.avatar.url
+        const avatar = req.emp.avatar
         res.status(200).send(avatar)
     } catch (error) {
         res.status(500).json({ sucsess: false, message: error.message })
@@ -208,7 +197,7 @@ router.get("/logoutemp", async (req, res) => {
     try {
         res
             .status(200)
-            .cookie("emptoken", null, { expires: new Date(Date.now()), httpOnly: true })
+            .cookie("empToken", null, { expires: new Date(Date.now()), httpOnly: true })
             .json({ success: true, message: "Logout" })
     } catch (error) {
         res
@@ -218,10 +207,10 @@ router.get("/logoutemp", async (req, res) => {
 
 })
 
-router.get("/get/eProfile", async (req, res) => {
+router.get("/get/eProfile", isAuthenticatedEmp, async (req, res) => {
     try {
 
-        const emp = await Employee.findById(req.emp).populate("complaints")
+        const emp = await Employee.findById(req.emp._id)
         res.status(200).send(emp)
 
     } catch (error) {

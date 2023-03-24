@@ -11,6 +11,7 @@ import { blockEmp, getEmp } from '../../Action/Admin/Employee'
 import { Block } from '@mui/icons-material'
 import { useNavigate } from 'react-router'
 import BlockEmployee from '../Global/BlockEmployee'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 const Employee = () => {
     const themes = useTheme()
@@ -94,7 +95,7 @@ const Employee = () => {
 
                                                 {emp?.map((data) => (
                                                     <TableRow key={data._id}>
-                                                        <TableCell className='name-column--cell'>{data.name}</TableCell>
+                                                        <TableCell >{data.name}</TableCell>
                                                         <TableCell >{data.email}</TableCell>
                                                         <TableCell >{data.gender}</TableCell>
                                                         <TableCell >{data.phone}</TableCell>
@@ -121,4 +122,4 @@ const Employee = () => {
     )
 }
 
-export default Employee
+export default AdminAuth(Employee)

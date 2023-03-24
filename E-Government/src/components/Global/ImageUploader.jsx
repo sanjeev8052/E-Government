@@ -139,4 +139,4 @@ const ImageUploader = () => {
     )
 }
 
-export default ImageUploader
+export default  ImageUploader

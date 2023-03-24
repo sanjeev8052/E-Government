@@ -24,15 +24,15 @@ exports.isAuthenticatedUser = async (req, res, next)=>{
 
 exports.isAuthenticatedEmp = async (req, res, next)=>{
     try {
-        const {emptoken} = req.cookies;
+        const {empToken} = req.cookies;
        
     
-    if(!emptoken){
+    if(!empToken){
                 return res
                 .status(401)
                 .json({message:" Please login first"})
             }
-         const decoded = jwt.verify(emptoken,process.env.SECRET_KEY)
+         const decoded = jwt.verify(empToken,process.env.SECRET_KEY)
          req.emp = await Employee.findById(decoded._id)
           next();
     } catch (error) {

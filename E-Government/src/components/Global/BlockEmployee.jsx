@@ -6,6 +6,7 @@ import { tokens } from '../../Global'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getblkEmp, unblockEmp } from '../../Action/Admin/Employee'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 
 const BlockEmployee = () => {
@@ -103,4 +104,4 @@ const BlockEmployee = () => {
   )
 }
 
-export default BlockEmployee
+export default  AdminAuth(BlockEmployee)

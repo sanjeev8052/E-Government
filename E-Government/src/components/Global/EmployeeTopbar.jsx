@@ -18,6 +18,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { color } from '@mui/system';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -139,7 +140,7 @@ const EmployeeTopbar = () => {
         <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src={empProfileImage} />
+              <Avatar alt="Remy Sharp" src={empProfileImage ? `http://localhost:5000/Profile/${empProfileImage}` : null} />
             </IconButton>
           </Tooltip>
           <Menu
@@ -159,7 +160,7 @@ const EmployeeTopbar = () => {
             onClose={handleCloseUserMenu}
           >
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography component={Link} to="/eprofile" textAlign="center">Profile</Typography>
+                <Typography component={Link} to="/eprofile" textAlign="center" sx={{textDecoration:"none" ,color:"black"}}>Profile</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
                 <Typography textAlign="center">Logout</Typography>

@@ -19,7 +19,7 @@ const AdminLogin = () => {
         password: "",
     }
     const dispatch = useDispatch()
-    
+    const navigate = useNavigate()
 
     const [type, setType] = useState("password")
     const [visible, setVisible] = useState(false)
@@ -80,6 +80,8 @@ const AdminLogin = () => {
     const onSubmit = (values, props) => {
         console.log(props)
         dispatch(adminLogin(values))
+        navigate('/dashboard')
+        
 
     }
     const validationSchema = Yup.object().shape({

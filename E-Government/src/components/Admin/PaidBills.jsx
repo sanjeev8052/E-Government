@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Header from '../Global/Header'
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton, TextField } from '@mui/material'
 import {  GetPaidBill} from '../../Action/Admin/Bills'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 const PaidBills = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
@@ -95,4 +96,4 @@ const PaidBills = () => {
   )
 }
 
-export default PaidBills
+export default AdminAuth(PaidBills)

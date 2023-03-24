@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({
   }))
 
 app.use('/PDF', express.static('PDF'))
+app.use('/Profile', express.static('Profile'))
 app.use(cors())
 app.use(express.json())
 app.use(cookieParser());
@@ -33,6 +34,7 @@ app.use("/api/admin", require("./Routes/Admin/User"))
 app.use("/api/admin", require("./Routes/Admin/complaint"))
 app.use("/api/admin", require("./Routes/Admin/Categories"))
 app.use("/api/admin", require("./Routes/Admin/Bills"))
+app.use("/api/admin", require("./Routes/Admin/Dashboard"))
 
 
 // Employee

@@ -11,6 +11,7 @@ import { tokens } from '../../Global'
 import { getTempEmp, conTempEmp, rejTempEmp } from '../../Action/Admin/Employee'
 import { useNavigate } from 'react-router-dom'
 import { CancelTwoTone, CheckCircleOutlineTwoTone, Height, PictureAsPdfRounded } from '@mui/icons-material'
+import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 const RequestedEmployee = () => {
     const themes = useTheme()
@@ -111,4 +112,4 @@ const RequestedEmployee = () => {
     )
 }
 
-export default RequestedEmployee
+export default   AdminAuth(RequestedEmployee)
