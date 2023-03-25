@@ -4,8 +4,12 @@ import { tokens } from '../../Global'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getblkUser, unBlockUser } from '../../Action/Admin/User'
+<<<<<<< HEAD
 import AdminAuth from '../ProtectedRoute/AdminAuth'
 
+=======
+import AdminAuth from '../../components/ProtectedRoute/AdminAuth'
+>>>>>>> ca7581a8c62b22ce5e9358b240ea6a5a103924a0
 
 const BlockUser = () => {
 

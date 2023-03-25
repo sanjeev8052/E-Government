@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt")
+const crypto = require('crypto')
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const AdRegister = require("../../models/Admin/AdRegister")
@@ -28,7 +29,7 @@ router.post("/aregister", [
 
     // if there are error then send bad request
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
+    if (!errors.isadminty()) {
         return res.status(404).json({ errors: errors.array() });
     }
 
@@ -62,10 +63,10 @@ router.post("/alogin", [
 ], async (req, res) => {
 
     // if there are error then send bad request
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(404).json({ errors: errors.array() });
-    }
+    // const errors = validationResult(req);
+    // if (!errors.isadminty()) {
+    //     return res.status(404).json({ errors: errors.array() });
+    // }
 
     const { email, password } = req.body;
     try {
@@ -210,4 +211,79 @@ router.delete("/upload/delete", isAuthenticate, async (req, res) => {
         res.status(500).json({ sucsess: false, message: error.message })
     }
 })
+
+router.post("/forgot/password", async (req, res) => {
+    try {
+        const admin = await AdRegister.findOne({ email: req.body.email });
+        if (!admin) {
+            return res
+                .status(400)
+                .json({ success: false, message: "Email does not exists.." })
+        }
+        
+        const resetPasswordToken = await admin.getResetPasswordToken();
+        await admin.save();
+
+        console.log(admin)
+
+        const resetUrl = `${req.protocol}://localhost:3000/adminreset/password/${resetPasswordToken}`;
+        const message = `reset your password by clicking on the link below: \n\n${resetUrl}`
+        try {
+            await sendEmail({
+                email: admin.email,
+                subject: "reset Password",
+                message
+            });
+
+            res.status(200).json({
+                success: true,
+                message: `Forgot password link sent to ${admin.email}........`,
+            })
+        } catch (error) {
+            admin.resetPasswordToken = undefined;
+            admin.resetpasswordExpire = undefined;
+            await admin.save()
+
+        }
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message:error.message })
+    }
+})
+router.put("/adminreset/password/:token", async (req, res) => {
+
+    try {
+
+       
+        const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex")
+
+        const admin = await AdRegister.findOne({
+            resetPasswordToken,
+            resetPasswordExpire :{$gt: Date.now()}
+        })
+
+
+        if (!admin) {
+            return res
+                .status(401)
+                .json({ success: false, message: "Token is invalid or has expired.." })
+        }
+
+        admin.password = req.body.password;
+
+        admin.resetPasswordToken = undefined;
+        admin.resetPasswordExpire = undefined;
+        await admin.save()
+       
+        res.status(200).json({ success: true, message: "Password Updadet..", password: admin.password })
+
+
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message:error.message })
+
+    }
+
+})
+
+
+
 module.exports = router

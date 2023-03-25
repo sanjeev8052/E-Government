@@ -164,7 +164,7 @@ const Card = () => {
                                             </Button>
                                             <Menu  {...bindMenu(popupState)}>
                                                 <MenuItem component={Link} to='castCer'>Apply For  Cast Certificate</MenuItem>
-                                                <MenuItem onClick={popupState.close}>Download Certificate</MenuItem>
+                                                <MenuItem component={Link} to='Download' >Download Certificate</MenuItem>
                                             </Menu>
                                         </React.Fragment>
                                     )}

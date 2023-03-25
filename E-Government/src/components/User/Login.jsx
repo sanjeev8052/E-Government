@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'
 import { TextField, InputAdornment, Typography, Button, FormControlLabel, Checkbox, IconButton, Grid } from '@mui/material'
 import { Person, Login as LoginIcon, Lock, AppRegistration, Visibility, VisibilityOff } from '@mui/icons-material'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogin } from '../../Action/User'
@@ -20,7 +20,7 @@ const Login = ({userCookie}) => {
     const {isAuthenticated } = useSelector(state=>state.user)
 
    useEffect(()=>{
-    isAuthenticated && navigate('../')
+    isAuthenticated && navigate('/')
    })
     const styles = {
         mainBox: {

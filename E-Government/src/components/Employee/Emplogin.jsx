@@ -17,7 +17,7 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Login } from '../../Action/Employee/register';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import cookies from 'js-cookie'
 const theme = createTheme();
 const Emplogin = () => {
@@ -130,9 +130,9 @@ const Emplogin = () => {
                                 </form>
                                 <Grid container>
                                     <Grid item xs>
-                                        <Link href="#" variant="body2">
+                                        <NavLink to='/eforgotpassword' variant="body2">
                                             Forgot password?
-                                        </Link>
+                                        </NavLink>
                                     </Grid>
                                     <Grid item>
                                         <Link href="#" variant="body2">

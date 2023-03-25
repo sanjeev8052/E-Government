@@ -123,18 +123,18 @@ export const getblkEmp = () => async (dispatch) =>{
 export const getEmpDetails = () => async (dispatch) =>{
     try {
         dispatch({
-            type: "GetEMppRequest"
+            type: "GetEmpRequest"
         })
-        const response = await axios.post(`/api/employee//get/profile/${id}`)
+        const {data} = await axios.get(`/api/employee/get/eprofile`)
 
         dispatch({
-            type: "GetEMppSuccess",
-            payload: response
+            type: "GetEmpSuccess",
+            payload: data
         })
-        dispatch(getblkEmp())
+       
     } catch (error) {
         dispatch({
-            type: "GetEMppFailuer",
+            type: "GetEmpFailuer",
             payload: error
         })
     }

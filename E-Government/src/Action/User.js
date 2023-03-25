@@ -16,7 +16,7 @@ export const userLogin = (user) => async (dispatch) => {
             type: "UserLoginSuccess",
             payload: data
         })
-
+        dispatch(LoadUser())
     } catch (error) {
         dispatch({
             type: "UserLoginFailuer",

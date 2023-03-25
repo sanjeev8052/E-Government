@@ -77,17 +77,18 @@ router.post("/acccastcerreq/:_id", isAuthenticate, async (req, res) => {
             request.status = "Accepted"
             await request.save();
             res.status(200).
-                json({
-                    success: true,
-                    message: "successfully Accepted Cast Certificae Request",
-                })
-            const message = `Your Cast Certificate Request is Accepted and Here is the ID is ${request.uniqueId} For Download Certificate`
-            await sendEmail({
-                email: request.email,
-                subject: "Cast Certificate Accepted...",
-                message
-            });
-        }
+            json({
+                success: true,
+                message: "successfully Accepted Cast Certificae Request",
+            })
+            console.log(request)
+            //    const message = `Your Cast Certificate Request is Accepted and Here is the ID is ${request.uniqueId} For Download Certificate`
+            //     await sendEmail({
+            //     email: request.email,
+            //     subject: "Cast Certificate Accepted...",
+            //     message
+            // });
+         }
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
@@ -131,6 +132,20 @@ router.get('/getacccastcerreq', isAuthenticate, async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 })
-
+router.post('/searchReciept',  async (req, res) => {
+    try {
+        const uniqueId  = req.body.uniqueId
+        console.log(uniqueId)
+        const certificate = await Cast.find({uniqueId,status:"Accepted"})
+        if(!certificate[0]){
+            return res
+            .status(400)
+            .json({ message: "Cast Cretificate  Not Found" })
+        }
+        res.status(200).send(certificate)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
 
 module.exports = router

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken');
-
+const crypto = require('crypto')
 const { Schema } = mongoose;
 const Adschema = new Schema({
     avatar: {
@@ -18,10 +18,12 @@ const Adschema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    resetPasswordToken: String,
+    resetPasswordExpire: Date
     
 })
-
+ 
 // hashing password
 Adschema.pre('save', async function (next) {
     console.log("hi from bcrypt")
@@ -40,6 +42,14 @@ Adschema.methods.generateAuthToken = async function () {
     } catch (error) {
         console.log(error)
     }
+}
+
+Adschema.methods.getResetPasswordToken = async function () {
+
+    const resetToken = crypto.randomBytes(20).toString('hex')
+    this.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest('hex')
+    this.resetPasswordExpire = Date.now() + 5 * 60 * 1000;
+    return resetToken
 }
 
 
