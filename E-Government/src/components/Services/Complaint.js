@@ -102,8 +102,6 @@ const Complaint = () => {
     area: "",
     pincode: "",
     complaintDesc: "",
-
-
   }
   const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
 

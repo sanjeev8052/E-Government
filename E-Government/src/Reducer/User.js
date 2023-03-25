@@ -51,7 +51,7 @@ export const userReducer = createReducer(initialState, {
     // UserLoad Reducers........
     UserLoadRequest: (state) => {
         state.userLoading = true;
-    },
+    }, 
     UserLoadSuccess: (state, action) => {
         state.userLoading = false;
         state.userData = action.payload;
