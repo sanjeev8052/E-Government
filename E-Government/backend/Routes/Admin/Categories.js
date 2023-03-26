@@ -295,7 +295,7 @@ router.post('/adddept', [
     }
 })
 
-router.get('/getdept', isAuthenticate, async (req, res) => {
+router.get('/getdept', async (req, res) => {
     try {
         const dept = await  Dept.find({})
         res.status(200).send(dept)

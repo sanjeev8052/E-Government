@@ -166,7 +166,7 @@ const IncomeCer = () => {
             <Typography className={classes.error}   >{errors.email}</Typography>
           ) : null}
 
-          <FormControl>
+          <FormControl fullWidth>
             <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
             <RadioGroup
               row
@@ -269,22 +269,21 @@ const IncomeCer = () => {
 
 
           />
-          {errors.fatherName && touched.fatherName ? (
-            <Typography className={classes.error} >{errors.fatherName}</Typography>
-          ) : null}
-          <Typography variant="h6" color="initial">Mother Name</Typography>
+
+
+          <Typography variant="h6" color="initial">Income</Typography>
           <TextField className={classes.fullInput}
             id=""
-            placeholder='Enter Your Mother Name'
+            placeholder='Enter Your Income'
             variant='outlined'
             size='small'
-            name='motherName'
+            name='income'
             onChange={handleChange}
-            value={values.motherName}
+            value={values.income}
             onBlur={handleBlur}
           />
-          {errors.motherName && touched.motherName ? (
-            <Typography className={classes.error} >{errors.motherName}</Typography>
+          {errors.income && touched.income ? (
+            <Typography className={classes.error} >{errors.income}</Typography>
           ) : null}
           <Typography variant="h6" color="initial">Income</Typography>
           <TextField className={classes.fullInput}
@@ -300,24 +299,7 @@ const IncomeCer = () => {
           {errors.income && touched.income ? (
             <Typography className={classes.error} >{errors.income}</Typography>
           ) : null}
-          <Typography variant="h6" color="initial">Uplaod Your Photo</Typography>
-          <div className="row">
-            <div className="col-sm-6 mt-2 mb-2">
-              <input type="file" className='input-upload' onChange={handleFile} name="" id="" />
-            </div>
-            <div className="col-sm-6 mt-1 mb-2" >
-              <img style={{ width: "10rem" }} src={image} alt="" />
-            </div>
-          </div>
-          <Typography variant="h6" color="initial">Uplaod Your Adhar Card</Typography>
-          <div className="row">
-            <div className="col-sm-6 mt-2 mb-2">
-              <input type="file" className='input-upload' onChange={handleFile2} name="" id="" />
-            </div>
-            <div className="col-sm-6 mt-1 mb-2" >
-              <img style={{ width: "10rem" }} src={image2} alt="" />
-            </div>
-          </div>
+
 
           <Button type='submit' color='primary' className={classes.button} variant="contained" endIcon={<Send />}>
             Apply

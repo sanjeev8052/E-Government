@@ -4,6 +4,7 @@ const Employee = require("../../models/Emp/Employee")
 const { body, validationResult, } = require('express-validator');
 const bcrypt = require("bcrypt")
 const multer = require('multer');
+const { sendEmail } = require('../../middlewares/sendEmail')
 const jwt = require('jsonwebtoken');
 const UserComplaint = require("../../models/User/UserComplaint");
 
@@ -265,7 +266,7 @@ router.post("/compComplete/:id", isAuthenticateemp, async (req, res) => {
         res.status(200).json({
             message: "Complain Completed.."
         })
-        console.log(compComleted)
+      
     } catch (error) {
         res
             .status(500)
@@ -275,6 +276,7 @@ router.post("/compComplete/:id", isAuthenticateemp, async (req, res) => {
 })
 
 router.post("/forgot/password", async (req, res) => {
+  
     try {
         const emp = await Employee.findOne({ email: req.body.email });
         if (!emp) {
@@ -286,7 +288,7 @@ router.post("/forgot/password", async (req, res) => {
         const resetPasswordToken = await emp.getResetPasswordToken();
         await emp.save();
 
-        console.log(emp)
+      
 
         const resetUrl = `${req.protocol}://localhost:3000/empreset/password/${resetPasswordToken}`;
         const message = `reset your password by clicking on the link below: \n\n${resetUrl}`
@@ -315,7 +317,7 @@ router.put("/empreset/password/:token", async (req, res) => {
 
     try {
 
-        console.log(req.body.password)
+      
         const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex")
 
         const emp = await Employee.findOne({

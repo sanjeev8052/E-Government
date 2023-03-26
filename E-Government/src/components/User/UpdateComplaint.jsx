@@ -173,7 +173,7 @@ const UpdateComplaint = ({ id }) => {
 
                         <div className={classes.compField}>
                             <Typography variant="h2" sx={{ marginBottom: "20px" }} color="initial">Your Complaint</Typography>
-                            <Typography variant="h3" className=' mb-3' color="initial">Compalint Type :- {values.complaintType}</Typography>
+                            <Typography variant="h3" className=' mb-3' color="initial">Compalint Type </Typography>
                             <FormControl fullWidth className=' mb-4'>
                                 <Select
                                     labelId="demo-simple-select-label"

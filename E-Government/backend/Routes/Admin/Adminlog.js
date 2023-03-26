@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt")
 const crypto = require('crypto')
 const jwt = require('jsonwebtoken');
 const router = express.Router();
+const { sendEmail } = require('../../middlewares/sendEmail')
 const AdRegister = require("../../models/Admin/AdRegister")
 const { body, validationResult, } = require('express-validator');
 const { isAuthenticate } = require("../../middlewares/Adminmiddle");

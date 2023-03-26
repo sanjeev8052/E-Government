@@ -38,7 +38,7 @@ router.post('/incomereq',  upload.fields([
         const randomNum = Math.floor(Math.random() * 1000000) + 1;
 
         const { name, email, phone, village, state, tehsil, district, gender, fatherName, motherName,income } = object
-        //    console.log(object)
+     
         const status = "Requested"
         const cer = new Income({name, email, phone, village, state, tehsil, district, gender, fatherName, motherName,  income, proof, status: status, image, uniqueId: randomNum })
         await cer.save();

@@ -26,7 +26,7 @@ router.post('/meterreq', upload.single('file'), async (req, res) => {
         const data = req.body.data
         const object = JSON.parse(data)
         const { name, email, phone, meterType, tenamentNo, city, streetAddress, area } = object
-    //    console.log(object)
+    
          const status = "Requested"
          const meter = new MeterApply({ name, email, phone, meterType, tenamentNo, city, streetAddress, area, proof, status: status })
          await meter.save();

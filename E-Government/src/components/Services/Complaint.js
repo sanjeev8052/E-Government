@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import { tokens } from '../../Global'
 import { Box, Button, FormControl, MenuItem, Select, Typography, useTheme } from '@material-ui/core';
 import { Send } from '@mui/icons-material';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Footer from '../Layout/Footer/Footer';
 import bgImage from '../../Images/bgImage3.jpg'
 import { useFormik } from 'formik'
@@ -17,6 +17,7 @@ import { CompReq } from '../../Action/Services/Services';
 import axios from 'axios';
 import { getUser } from '../../Action/Admin/User';
 import { Getdept } from '../../Action/Admin/Categories';
+import { useAlert } from 'react-alert';
 
 
 const useStyles = makeStyles({
@@ -70,18 +71,27 @@ const useStyles = makeStyles({
 });
 
 const Complaint = () => {
-  const { userData, userLoading, isAuthenticated } = useSelector(state => state.user)
-  const { getdept } = useSelector((state) => (state.services))
+  const navigate = useNavigate()
+  const { userData, userLoading, isAuthenticated, } = useSelector(state => state.user)
+  const { getdept, data, error } = useSelector((state) => (state.services))
   const themes = useTheme()
   const colors = tokens(themes.palette.mode)
-
+  const alert = useAlert();
   const [user, setUser] = useState({
     email: "",
     name: "",
     phone: ""
   })
+  useEffect(() => {
+    data ? alert.success(data.message) : null
+    data ? navigate('/') : null
+    dispatch({
+      type: "CompReqClear"
+    })
+  }, [error, data]);
 
 
+  console.log(data)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -110,7 +120,7 @@ const Complaint = () => {
 
     onSubmit: (values) => {
 
-      console.log(values)
+
       dispatch(CompReq(user, values))
     }
 
@@ -142,11 +152,11 @@ const Complaint = () => {
                   <MenuItem value={data.deptType}>{data.deptType}</MenuItem>
                 ))
               }
-             
+
             </Select>
           </FormControl>
 
-            
+
           {errors.complaintType && touched.complaintType ? (
             <Typography className={classes.error}   >{errors.complaintType}</Typography>
           ) : null}

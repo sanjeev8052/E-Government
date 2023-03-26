@@ -10,7 +10,7 @@
     margin: auto;
     padding: 2rem;
     position: relative;
-    height: 170vh;
+    height: 180vh;
 }
 
 .rowHeader {
@@ -31,4 +31,7 @@
     border: 1px solid black;
     width: 10rem;
     height: 12rem;
+}
+.icmtab{
+    border: 1px solid black;
 }
