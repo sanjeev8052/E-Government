@@ -128,7 +128,9 @@ const Bills = () => {
         dispatch(Getbillcat())
     }, [])
 
-
+const reload = () => { 
+    dispatch(Getbillcat())
+ }
 
     return (
         <div className='app'>
@@ -138,6 +140,9 @@ const Bills = () => {
                 <Box m="15px" >
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Add Bills" subtitle="Welcome To Add Bills Page" />
+                        <Button variant="contained" color="success" onClick={reload}>
+                            Reload
+                        </Button>
                     </Box>
                     <Box justifyContent="center" alignItems="center" display="flex">
                         <Box sx={styles.Box} >

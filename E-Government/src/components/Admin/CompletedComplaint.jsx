@@ -29,6 +29,9 @@ const CompletedComplaint = () => {
 
     }
 
+    const reload = () => { 
+        getCompleteComplaint();
+     }
     return (
         <div className='app'>
             <AdminSidebar />
@@ -37,41 +40,47 @@ const CompletedComplaint = () => {
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Completed Complaints" subtitle="Welcome Your Completed Complaints Details Page" />
-                        {/* <EmpModel /> */}
+                        <Button variant="contained" color="success" onClick={reload}>
+                            Reload
+                        </Button>
 
                     </Box>
-                    <Box display="felx" justifyContent="space-between" alignItems="center">
-
-                    </Box>
-                    <TextField sx={{ width: "80%" }}
-                        id=""
-                        label=""
-                        variant='standard'
-                        placeholder='Search by Name And Complaint Type'
-
-                    />
-                    <Button variant="text" onClick={getCompleteComplaint} color="default">
-                        Reload
-                    </Button>
+                    
                     {
                         // loading ? <Loader /> :
-                        <Box alignItems="center" justifyContent="center" m="15px" >
+                        <Box alignItems="center" justifyContent="center" m="15px"
+                        sx={{
+                            "& .MuiTable-root": {
+                                border: "none"
+                            },
+                            "& .MuiTableCell-root": {
+                                borderBottom: "none"
+                            },
+                            "& .name-column--cell": {
+                                color: colors.greenAccent[300]
+                            },
+                            "& .MuiTableHead-root": {
+                                backgroundColor: colors.blueAccent[400],
+                                borderBottom: "none"
+                            }
+                        }}
+                        >
                             <Typography variant="h3" color={colors.redAccent[600]}>Complaint Details</Typography>
-                            <TableContainer sx={{ mt: "10px", minWidth: 200 }} component={Paper}>
+                            <TableContainer sx={{ mt: "10px", minWidth: 200 , height:"400px", overflow:"auto",  backgroundColor: colors.primary[600]}} component={Paper}>
                                 <Table size='small' >
                                     <TableHead  >
-                                        <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
-                                            <TableCell>Name</TableCell>
-                                            <TableCell>Complaint Type</TableCell>
-                                            <TableCell>City</TableCell>
-                                            <TableCell>StreetAddress</TableCell>
-                                            <TableCell>Area</TableCell>
-                                            <TableCell>Pincode</TableCell>
-                                            <TableCell>Complaint Description</TableCell>
+                                        <TableRow>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Name</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Complaint Type</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>City</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>StreetAddress</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Area</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Pincode</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Complaint Description</TableCell>
 
                                         </TableRow>
                                     </TableHead>
-                                    <TableBody>
+                                    <TableBody sx={{ backgroundColor: colors.primary[600]}}>
 
                                         {
                                               data &&  data <= 0 ? <TableRow>
@@ -80,13 +89,13 @@ const CompletedComplaint = () => {
                                                     </TableCell>
                                                 </TableRow> : data?.map((data) => (
                                                     <TableRow key={data._id}>
-                                                        <TableCell >{data.name}</TableCell>
-                                                        <TableCell >{data.complaintType}</TableCell>
-                                                        <TableCell >{data.city}</TableCell>
-                                                        <TableCell >{data.streetAddress}</TableCell>
-                                                        <TableCell >{data.area}</TableCell>
-                                                        <TableCell >{data.pincode}</TableCell>
-                                                        <TableCell component='th' scope='row'>{data.complaintDesc}</TableCell>
+                                                         <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.name}</TableCell>
+                                                         <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.complaintType}</TableCell>
+                                                         <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.city}</TableCell>
+                                                         <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.streetAddress}</TableCell>
+                                                         <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.area}</TableCell>
+                                                         <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.pincode}</TableCell>
+                                                         <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.complaintDesc}</TableCell>
 
                                                     </TableRow>
                                                 ))

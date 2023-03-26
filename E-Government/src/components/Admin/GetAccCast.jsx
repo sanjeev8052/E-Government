@@ -19,6 +19,11 @@ const GetAccCast = () => {
         dispatch(getAcceptCastCerReq())
     }, [dispatch])
 
+    const reload = () => { 
+        dispatch(getAcceptCastCerReq())
+     }
+    
+
     return (
         <div className='app'>
             <AdminSidebar />
@@ -28,7 +33,9 @@ const GetAccCast = () => {
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title=" Accepted Cast Certificate Request" subtitle="Welcome to Accepted Cast Certificate Request Details Page" />
-
+                        <Button variant="contained" color="success" onClick={reload}>
+                            Reload
+                        </Button>
 
                     </Box>
                     {loading ? <Loader /> :
@@ -52,17 +59,17 @@ const GetAccCast = () => {
                                 <Table size='small' sx={{ backgroundColor: colors.blueAccent[400] }}>
                                     <TableHead  >
                                         <TableRow >
-                                            <TableCell>Name</TableCell>
-                                            <TableCell>Email</TableCell>
-                                            <TableCell>Phone NO.</TableCell>
-                                            <TableCell>Village</TableCell>
-                                            <TableCell>Tehsil</TableCell>
-                                            <TableCell>District</TableCell>
-                                            <TableCell>State</TableCell>
-                                            <TableCell>Father Name</TableCell>
-                                            <TableCell>Mother Name</TableCell>
-                                            <TableCell>Cast</TableCell>
-                                            <TableCell>Proof</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Name</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Email</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Phone NO.</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Village</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Tehsil</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>District</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>State</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Father Name</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Mother Name</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Cast</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Proof</TableCell>
 
                                         </TableRow>
                                     </TableHead>
@@ -76,16 +83,16 @@ const GetAccCast = () => {
                                             :
                                             getAccCastCerReq?.map((data) => (
                                                 <TableRow key={data._id}>
-                                                    <TableCell >{data.name}</TableCell>
-                                                    <TableCell >{data.email}</TableCell>
-                                                    <TableCell >{data.phone}</TableCell>
-                                                    <TableCell >{data.village}</TableCell>
-                                                    <TableCell >{data.tehsil}</TableCell>
-                                                    <TableCell >{data.district}</TableCell>
-                                                    <TableCell >{data.state}</TableCell>
-                                                    <TableCell >{data.fatherName}</TableCell>
-                                                    <TableCell >{data.motherName}</TableCell>
-                                                    <TableCell >{data.cast}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.name}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.email}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.phone}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.village}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.tehsil}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.district}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.state}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.fatherName}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.motherName}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.cast}</TableCell>
                                                     <TableCell >
                                                         <Button variant="contained" color="primary"   >
                                                             <a href={`http://localhost:5000/PDF/${data.proof}`} style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noopener noreferrer">View</a>

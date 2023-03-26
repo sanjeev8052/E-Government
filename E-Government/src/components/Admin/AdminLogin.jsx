@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { Grid, TextField, InputAdornment, Button, Typography, IconButton, } from '@mui/material'
 import { Email, LoginRounded, PasswordOutlined, Visibility, VisibilityOff } from '@mui/icons-material'
-import Logo from '../Images/Icons/login.png';
+import Logo from '../Images/Icons/password.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -39,7 +39,6 @@ const AdminLogin = () => {
     const styles = {
         Box: {
 
-            backgroundColor: "white",
             color: "black",
             width: "35%",
             margin: " 9rem auto",
@@ -60,7 +59,9 @@ const AdminLogin = () => {
             display: " block",
             marginLeft: "auto",
             marginRight: "auto",
-            marginTop: "2px"
+            marginTop: "2px",
+            height: "120px",
+            width: "120px"
         },
         btn: {
             width: "100%",
@@ -81,7 +82,7 @@ const AdminLogin = () => {
         console.log(props)
         dispatch(adminLogin(values))
         navigate('/dashboard')
-        
+
 
     }
     const validationSchema = Yup.object().shape({
@@ -92,65 +93,71 @@ const AdminLogin = () => {
     return (
 
         <>
+            <div className='app' style={{
+                backgroundImage: "linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%)",
+                backgroundRepeat: "no-repeat"
+            }}>
+                <main className='content'>
+                    <Grid sx={styles.Box}>
 
-            <Grid sx={styles.Box}>
-                <img src={Logo} style={styles.icon} alt="" />
-                <Formik initialValues={detail} onSubmit={onSubmit} validationSchema={validationSchema}>
-                    {
-                        (props) => (
+                        <img src={Logo} style={styles.icon} alt="" />
+                        <Formik initialValues={detail} onSubmit={onSubmit} validationSchema={validationSchema}>
+                            {
+                                (props) => (
 
-                            <Form>
+                                    <Form>
 
-                                <Field as={TextField}
-                                    sx={styles.textfield}
-                                    label='Email'
-                                    variant='standard'
-                                    placeholder='Enter Email..'
-                                    type="email"
-                                    color="secondary"
-                                    InputLabelProps={{ style: { fontSize: 20 } }}
-                                    InputProps={{
-                                        startAdornment: (<InputAdornment position="start"> <Email color='secondary' /></InputAdornment>)
-                                    }}
-                                    name="email"
+                                        <Field as={TextField}
+                                            sx={styles.textfield}
+                                            label='Email'
+                                            variant='standard'
+                                            placeholder='Enter Email..'
+                                            type="email"
+                                            color="secondary"
+                                            InputLabelProps={{ style: { fontSize: 20 } }}
+                                            InputProps={{
+                                                startAdornment: (<InputAdornment position="start"> <Email color='secondary' /></InputAdornment>)
+                                            }}
+                                            name="email"
 
-                                />
+                                        />
 
-                                <Typography variant="subtitle1" color="crimson">{<ErrorMessage name='email' />}</Typography>
-                                <Field as={TextField}
-                                    sx={styles.textfield}
-                                    label='Password'
-                                    variant='standard'
-                                    placeholder='Enter Password'
-                                    type={type}
-                                    color="secondary"
-                                    InputLabelProps={{ style: { fontSize: 20 } }}
-                                    InputProps={{
-                                        startAdornment: (<InputAdornment position="start"> < PasswordOutlined color='secondary' /></InputAdornment>)
-                                        ,
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <IconButton aria-label="icon" color="secondary" onClick={showclick}>
-                                                    {icon}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        )
-                                    }}
-                                    name="password"
+                                        <Typography variant="subtitle1" color="crimson">{<ErrorMessage name='email' />}</Typography>
+                                        <Field as={TextField}
+                                            sx={styles.textfield}
+                                            label='Password'
+                                            variant='standard'
+                                            placeholder='Enter Password'
+                                            type={type}
+                                            color="secondary"
+                                            InputLabelProps={{ style: { fontSize: 20 } }}
+                                            InputProps={{
+                                                startAdornment: (<InputAdornment position="start"> < PasswordOutlined color='secondary' /></InputAdornment>)
+                                                ,
+                                                endAdornment: (
+                                                    <InputAdornment position="end">
+                                                        <IconButton aria-label="icon" color="secondary" onClick={showclick}>
+                                                            {icon}
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                )
+                                            }}
+                                            name="password"
 
 
-                                />
-                                <Typography variant="subtitle1" color="crimson">{<ErrorMessage name='password' />}</Typography>
-                                <Typography variant="subtitle2" sx={styles.link} component={Link} color="initial" to="/aforgot" >Forgot Password?</Typography>
-                                <Button type="submit" variant="contained" color="secondary" endIcon={<LoginRounded />} sx={styles.btn} >
-                                    Login
-                                </Button>
-                            </Form>
-                        )
-                    }
-                </Formik>
-            </Grid>
-
+                                        />
+                                        <Typography variant="subtitle1" color="crimson">{<ErrorMessage name='password' />}</Typography>
+                                        <Typography variant="subtitle2" sx={styles.link} component={Link} color="initial" to="/aforgot" >Forgot Password?</Typography>
+                                        <Button type="submit" variant="contained" color="secondary" endIcon={<LoginRounded />} sx={styles.btn} >
+                                            Login
+                                        </Button>
+                                    </Form>
+                                )
+                            }
+                        </Formik>
+                    </Grid>
+                </main>
+            </div>
         </>
 
     )

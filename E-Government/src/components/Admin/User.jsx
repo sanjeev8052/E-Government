@@ -26,6 +26,10 @@ const User = () => {
         dispatch(BLockUser(id))
        
      }
+
+     const reload = () => { 
+        dispatch(getUser())
+     }
    
     return (
         <div className='app'>
@@ -35,7 +39,13 @@ const User = () => {
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Users" subtitle="Welcome Your Users Details Page" />
+                      <Box display="flex">
                         <BlockUser/>
+                        <Button variant="contained" color="success" onClick={reload}  sx={{ml:"10px", borderRadius:"20px"}}>
+                          Reload
+                        </Button>
+                      </Box>
+                      
                     </Box>
                     {
                             loading ? <Loader/> : 
@@ -63,10 +73,10 @@ const User = () => {
                                     <Table size='small' >
                                         <TableHead  >
                                             <TableRow >
-                                                <TableCell>Name</TableCell>
-                                                <TableCell>Mobile No.</TableCell>
-                                                <TableCell>Email</TableCell>
-                                                <TableCell>Action</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Name</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Mobile No.</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Email</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Action</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody sx={{ backgroundColor: colors.primary[600]}}>
@@ -74,9 +84,9 @@ const User = () => {
                                             {
                                         GetUser?.map((data) => (
                                             <TableRow key={data._id}>
-                                                <TableCell >{data.name}</TableCell>
-                                                <TableCell >{data.phone}</TableCell>
-                                                <TableCell >{data.email}</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.name}</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.phone}</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.email}</TableCell>
                                          
                                                 <TableCell >
                                                     <IconButton aria-label="block" color='error' onClick={() => { Block(data._id) }}>
