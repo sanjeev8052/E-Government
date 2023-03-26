@@ -21,14 +21,13 @@ const AdminComplaint = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
     const { loading, getComReq,accComReqMs,rejComReqMs} = useSelector((state) => (state.services))
-    const { isAuthenticated } = useSelector((state) => (state.admin))
+   
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const alert = useAlert();
     useEffect(() => {
-        isAuthenticated ? navigate('/acomplaint') : navigate('/adlogin')
         dispatch(getCompReq())
-    }, [isAuthenticated, dispatch, navigate])
+    }, [ dispatch, navigate])
 
     useEffect(() => {
         accComReqMs ? alert.success(accComReqMs.message) : null
@@ -41,8 +40,10 @@ const AdminComplaint = () => {
     }
     const reject = (id) => {
         dispatch(rejCompReq(id))
-    
     }
+    const reload = () => { 
+        dispatch(getCompReq())
+     }
     return (
         <div className='app'>
             <AdminSidebar />
@@ -52,21 +53,12 @@ const AdminComplaint = () => {
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Complaints" subtitle="Welcome Your Complaints Details Page" />
                         {/* <EmpModel /> */}
-
+                        <Button variant="contained" color="success" onClick={reload}>
+                            Reload
+                        </Button>
                     </Box>
-                    <Box display="felx" justifyContent="space-between" alignItems="center">
-
-                    </Box>
-                    <TextField sx={{ width: "80%" }}
-                        id=""
-                        label=""
-                        variant='standard'
-                        placeholder='Search by Name And Conplaint Type'
-
-                    />
-                    <Button variant="text" color="default">
-                        Reload
-                    </Button>
+                  
+                   
                     {
                         loading ? <Loader /> :
                             <Box alignItems="center" justifyContent="center" m="15px"
@@ -91,16 +83,16 @@ const AdminComplaint = () => {
                                     <Table size='small' >
                                         <TableHead  >
                                             <TableRow >
-                                                <TableCell>Name</TableCell>
-                                                <TableCell>Email</TableCell>
-                                                <TableCell>Phone NO.</TableCell>
-                                                <TableCell>Complaint Type</TableCell>
-                                                <TableCell>City</TableCell>
-                                                <TableCell>StreetAddress</TableCell>
-                                                <TableCell>Area</TableCell>
-                                                <TableCell>Pincode</TableCell>
-                                                <TableCell>Complaint Description</TableCell>
-                                                <TableCell>Actions</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Name</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Email</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Phone NO.</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Complaint Type</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>City</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>StreetAddress</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Area</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Pincode</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Complaint Description</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Actions</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody sx={{ backgroundColor: colors.primary[600]}}>
@@ -111,15 +103,15 @@ const AdminComplaint = () => {
                                                 </TableCell>
                                             </TableRow> : getComReq?.map((data) => (
                                                 <TableRow key={data._id}>
-                                                    <TableCell >{data.name}</TableCell>
-                                                    <TableCell >{data.email}</TableCell>
-                                                    <TableCell >{data.phone}</TableCell>
-                                                    <TableCell >{data.complaintType}</TableCell>
-                                                    <TableCell >{data.city}</TableCell>
-                                                    <TableCell >{data.streetAddress}</TableCell>
-                                                    <TableCell >{data.area}</TableCell>
-                                                    <TableCell >{data.pincode}</TableCell>
-                                                    <TableCell component='th' scope='row'>{data.complaintDesc}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.name}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.email}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.phone}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.complaintType}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.city}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.streetAddress}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.area}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.pincode}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.complaintDesc}</TableCell>
                                                     <TableCell >
                                                         <IconButton aria-label="block" color='success' onClick={() => { accept(data._id) }}>
                                                             <TaskTwoTone  color='success'/>

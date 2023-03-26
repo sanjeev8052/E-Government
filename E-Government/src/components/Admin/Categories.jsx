@@ -128,6 +128,13 @@ const Categories = () => {
         dispatch(Getdept())
     }, [dispatch])
 
+    const reload = () => { 
+        dispatch(Getcomcat())
+        dispatch(Getbillcat())
+        dispatch(Getcercat())
+        dispatch(Getmetercat())
+        dispatch(Getdept())
+     }
     return (
         <div className='app'>
             <AdminSidebar />
@@ -136,6 +143,9 @@ const Categories = () => {
                 <Box m="15px">
                     <Box justifyContent="space-between" alignItems="center" display='flex'>
                         <Header title="Categories" subtitle="Welcome Your Categories Details Page" />
+                        <Button variant="contained" color="success" onClick={reload}>
+                            Reload
+                        </Button>
                     </Box>
                     <Box justifyContent="center" alignItems="center" display="flex" mt="5px">
                         <FormControl>

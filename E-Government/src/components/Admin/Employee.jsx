@@ -1,5 +1,5 @@
 
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton } from '@mui/material'
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton, Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
@@ -16,31 +16,27 @@ import AdminAuth from '../ProtectedRoute/AdminAuth'
 const Employee = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    const { isAuthenticated, loading, emp, blockData } = useSelector((state) => (state.admin))
+    const {  loading, emp, blockData } = useSelector((state) => (state.admin))
 
     console.log(emp)
     console.log(blockData)
 
 
-    const navigate = useNavigate()
+   
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getEmp())
-
-
-    }, [])
-
-
+    }, [ dispatch])
 
     const block = (id) => {
         dispatch(blockEmp(id));
-
-
     }
 
 
-
+const reload = () => { 
+    dispatch(getEmp())
+ }
 
     return (
         <div className='app'>
@@ -51,8 +47,13 @@ const Employee = () => {
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Employee" subtitle="Welcome Your Employee Details Page" />
-                        {/* <EmpModel /> */}
+                        <Box display="flex" >
+
                         <BlockEmployee />
+                        <Button variant="contained" color="success" onClick={reload}  sx={{ml:"10px", borderRadius:"20px"}}>
+                          Reload
+                        </Button>
+                        </Box>
 
                     </Box>
                     {
@@ -82,12 +83,12 @@ const Employee = () => {
                                         <Table size='small'  >
                                             <TableHead  >
                                                 <TableRow >
-                                                    <TableCell>Name</TableCell>
-                                                    <TableCell>Email</TableCell>
-                                                    <TableCell>Gender</TableCell>
-                                                    <TableCell>Phone NO.</TableCell>
-                                                    <TableCell>Department</TableCell>
-                                                    <TableCell>Actions</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Name</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Email</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Gender</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Phone NO.</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Department</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Actions</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody  sx={{ backgroundColor: colors.primary[600]}}>
@@ -95,12 +96,12 @@ const Employee = () => {
 
                                                 {emp?.map((data) => (
                                                     <TableRow key={data._id}>
-                                                        <TableCell >{data.name}</TableCell>
-                                                        <TableCell >{data.email}</TableCell>
-                                                        <TableCell >{data.gender}</TableCell>
-                                                        <TableCell >{data.phone}</TableCell>
-                                                        <TableCell >{data.dept}</TableCell>
-                                                        <TableCell >
+                                                         <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.name}</TableCell>
+                                                         <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.email}</TableCell>
+                                                         <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.gender}</TableCell>
+                                                         <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.phone}</TableCell>
+                                                         <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.dept}</TableCell>
+                                                         <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>
                                                             <IconButton aria-label="block" color='error' onClick={() => { block(data._id) }}>
                                                                 <Block />
 

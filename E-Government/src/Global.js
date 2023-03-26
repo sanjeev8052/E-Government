@@ -145,9 +145,9 @@ export const themeSettings = (mode) => {
                     },
                     background: {
                         default: colors.primary[500],
-                        
+
                     },
-                    
+
 
                 } : {
                     primary: {
@@ -165,14 +165,13 @@ export const themeSettings = (mode) => {
                     },
                     background: {
                         default: "#fcfcfc",
-                        
+
                     }
                 }),
         },
         typography: {
             fontFamily: ["Yrsa", "serif"].join(","),
-            fontSize:14,
-
+            fontSize: 14,
             h1: {
                 fontFamily: ["Yrsa", "serif"].join(","),
                 fontSize: 40,
@@ -198,6 +197,7 @@ export const themeSettings = (mode) => {
                 fontSize: 14,
             },
         },
+       
     }
 
 }

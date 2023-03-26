@@ -19,7 +19,11 @@ const PendingBills = () => {
         // dispatch(Getbillcat())
         dispatch(GetPendingBill())
     }, [])
-    console.log(getpenbill)
+    // console.log(getpenbill)
+
+    const reload = () => { 
+        dispatch(GetPendingBill())
+     }
     return (
         <div className='app'>
             <AdminSidebar />
@@ -28,10 +32,11 @@ const PendingBills = () => {
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Pending Bills" subtitle="Welcome To Pending Bills Details Page" />
+                        <Button variant="contained" color="success" onClick={reload}>
+                            Reload
+                        </Button>
                     </Box>
-                    <Box display="felx" justifyContent="space-between" alignItems="center">
-
-                    </Box>
+                   
                     {
                          loading ? <Loader /> :
                         <Box alignItems="center" justifyContent="center" m="15px"
@@ -56,16 +61,16 @@ const PendingBills = () => {
                                 <Table size='small' >
                                     <TableHead  >
                                         <TableRow>
-                                            <TableCell>Bill Type</TableCell>
-                                            <TableCell>Owner Name</TableCell>
-                                            <TableCell>Tenament No.</TableCell>
-                                            <TableCell>Street Address</TableCell>
-                                            <TableCell>Area</TableCell>
-                                            <TableCell>Past Due Amount </TableCell>
-                                            <TableCell>Amount</TableCell>
-                                            <TableCell>Totel</TableCell>
-                                            <TableCell>Bill Date</TableCell>
-                                            <TableCell>Last Due Date</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Bill Type</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Owner Name</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Tenament No.</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Street Address</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Area</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Past Due Amount </TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Amount</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Totel</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Bill Date</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Last Due Date</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody sx={{ backgroundColor: colors.primary[600]}}>
@@ -77,16 +82,16 @@ const PendingBills = () => {
                                                 </TableCell>
                                             </TableRow> : getpenbill?.map((data) => (
                                                 <TableRow key={data._id}>
-                                                    <TableCell >{data.billType}</TableCell>
-                                                    <TableCell >{data.ownerName}</TableCell>
-                                                    <TableCell >{data.tenamentNo}</TableCell>
-                                                    <TableCell >{data.streetAddress}</TableCell>
-                                                    <TableCell >{data.area}</TableCell>
-                                                    <TableCell >{data.pastDueAmt}</TableCell>
-                                                    <TableCell >{data.amount}</TableCell>
-                                                    <TableCell >{data.totelAmt}</TableCell>
-                                                    <TableCell >{data.addDate}</TableCell>
-                                                    <TableCell >{data.lastDueDate}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.billType}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.ownerName}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.tenamentNo}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.streetAddress}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.area}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.pastDueAmt}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.amount}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.totelAmt}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.addDate}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.lastDueDate}</TableCell>
                                                 </TableRow>
                                             ))
                                         }

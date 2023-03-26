@@ -36,6 +36,10 @@ const GetmeterReq = () => {
         dispatch(rejMeterReq(id));
     }
 
+    const reload = () => { 
+        dispatch(getMeterApplyReq())
+     }
+
     return (
         <div className='app'>
             <AdminSidebar />
@@ -45,7 +49,9 @@ const GetmeterReq = () => {
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Meter Request" subtitle="Welcome Your Meter Request Details Page" />
-
+                        <Button variant="contained" color="success" onClick={reload}>
+                            Reload
+                        </Button>
 
                     </Box>
                     {loading ? <Loader /> :
@@ -69,15 +75,15 @@ const GetmeterReq = () => {
                                 <Table size='small' sx={{ backgroundColor: colors.blueAccent[400] }}>
                                     <TableHead  >
                                         <TableRow >
-                                            <TableCell>Name</TableCell>
-                                            <TableCell>Email</TableCell>
-                                            <TableCell>Phone NO.</TableCell>
-                                            <TableCell>MeterType</TableCell>
-                                            <TableCell>Tenament NO.</TableCell>
-                                            <TableCell>City</TableCell>
-                                            <TableCell>Area</TableCell>
-                                            <TableCell>Proof</TableCell>
-                                            <TableCell>Actions</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Name</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Email</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Phone NO.</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>MeterType</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Tenament NO.</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>City</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Area</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Proof</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Actions</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody sx={{ backgroundColor: colors.primary[600] }}>
@@ -90,14 +96,14 @@ const GetmeterReq = () => {
                                             :
                                             getMeterReq?.map((data) => (
                                                 <TableRow key={data._id}>
-                                                    <TableCell >{data.name}</TableCell>
-                                                    <TableCell >{data.email}</TableCell>
-                                                    <TableCell >{data.phone}</TableCell>
-                                                    <TableCell >{data.meterType}</TableCell>
-                                                    <TableCell >{data.tenamentNo}</TableCell>
-                                                    <TableCell >{data.city}</TableCell>
-                                                    <TableCell >{data.area}</TableCell>
-                                                    <TableCell >
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.name}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.email}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.phone}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.meterType}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.tenamentNo}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.city}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.area}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>
                                                         <Button variant="contained" color="primary"   >
                                                             <a href={`http://localhost:5000/PDF/${data.proof}`} style={{ textDecoration: "none", color: "white" }} target="_blank" rel="noopener noreferrer">View</a>
 

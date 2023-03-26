@@ -15,10 +15,13 @@ const PaidBills = () => {
     const { getpaidbill , loading } = useSelector((state) => (state.services))
     const dispatch = useDispatch()
     useEffect(() => {
-        // dispatch(Getbillcat())
         dispatch(GetPaidBill())
     }, [])
 
+    const reload = () => { 
+        dispatch(GetPaidBill())
+     }
+    
   return (
     <div className='app'>
     <AdminSidebar />
@@ -27,9 +30,9 @@ const PaidBills = () => {
         <Box m="15px">
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Header title="Paid Bills" subtitle="Welcome To Paid Bills Details Page" />
-            </Box>
-            <Box display="felx" justifyContent="space-between" alignItems="center">
-
+                <Button variant="contained" color="success" onClick={reload}>
+                            Reload
+                        </Button>
             </Box>
             {
                  loading ? <Loader /> :
@@ -56,12 +59,12 @@ const PaidBills = () => {
                         <Table size='small' >
                             <TableHead  >
                                 <TableRow >
-                                    <TableCell>Bill Type</TableCell>
-                                    <TableCell>Owner Name</TableCell>
-                                    <TableCell>Tenament No.</TableCell>
-                                    <TableCell>Street Address</TableCell>
-                                    <TableCell>Area</TableCell>
-                                    <TableCell>Amount</TableCell>
+                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Bill Type</TableCell>
+                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Owner Name</TableCell>
+                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Tenament No.</TableCell>
+                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Street Address</TableCell>
+                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Area</TableCell>
+                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Amount</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody sx={{ backgroundColor: colors.primary[600]}}>
@@ -73,13 +76,13 @@ const PaidBills = () => {
                                         </TableCell>
                                     </TableRow> : getpaidbill?.map((data) => (
                                         <TableRow key={data._id}>
-                                            <TableCell >{data.billType}</TableCell>
-                                            <TableCell >{data.ownerName}</TableCell>
-                                            <TableCell >{data.tenamentNo}</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.billType}</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.ownerName}</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.tenamentNo}</TableCell>
                                             
-                                            <TableCell >{data.streetAddress}</TableCell>
-                                            <TableCell >{data.area}</TableCell>
-                                            <TableCell >{data.amount}</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.streetAddress}</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.area}</TableCell>
+                                             <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.amount}</TableCell>
 
                                         </TableRow>
                                     ))

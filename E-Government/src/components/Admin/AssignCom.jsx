@@ -21,19 +21,16 @@ const AssignCom = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
     const { loading, getAccReq } = useSelector((state) => (state.services))
-    const { isAuthenticated } = useSelector((state) => (state.admin))
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     useEffect(() => {
-        isAuthenticated ? navigate('/assign') : navigate('/adlogin')
         dispatch(getAccCom())
-    }, [isAuthenticated, dispatch, navigate])
+    }, [ dispatch])
 
-    const asign = (id) => {
-        dispatch(loadCom(id))
-        navigate('/assigncom')
-    }
+    const reload = () => { 
+        dispatch(getAccCom()) 
+     }
 
     return (
         <div className='app'>
@@ -44,6 +41,9 @@ const AssignCom = () => {
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Header title="Assign Complaint" subtitle="Welcome Your Assign Complaint Page" />
+                        <Button variant="contained" color="success" onClick={reload}>
+                            Reload
+                        </Button>
                     </Box>
                     {
                         loading ? <Loader /> :
@@ -67,22 +67,21 @@ const AssignCom = () => {
                             >
                                 <Typography variant="h3" color={colors.redAccent[600]}>Complaint Details</Typography>
                                 <TableContainer sx={{
-                                    mt: "10px",
-                                    height: "400px", overflow: "auto", backgroundColor: colors.primary[600]
+                                     mt: "10px", minWidth: 200 , height:"400px", overflow:"auto",  backgroundColor: colors.primary[600]
                                 }} component={Paper}>
                                     <Table size='small' >
                                         <TableHead  >
-                                            <TableRow sx={{ backgroundColor: colors.greenAccent[800] }}>
-                                                <TableCell>City</TableCell>
-                                                <TableCell>StreetAddress</TableCell>
-                                                <TableCell>Area</TableCell>
-                                                <TableCell>Pincode</TableCell>
-                                                <TableCell>Complaint Type</TableCell>
-                                                <TableCell>Complaint Description</TableCell>
-                                                <TableCell>Actions</TableCell>
+                                            <TableRow >
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>City</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>StreetAddress</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Area</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Pincode</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Complaint Type</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Complaint Description</TableCell>
+                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Actions</TableCell>
                                             </TableRow>
                                         </TableHead>
-                                        <TableBody sx={{ backgroundColor: colors.primary[600]}}>
+                                        <TableBody  sx={{ backgroundColor: colors.primary[600]}}>
 
                                             {getAccReq <= 0 ? <TableRow>
                                                 <TableCell colSpan={6}>
@@ -90,16 +89,14 @@ const AssignCom = () => {
                                                 </TableCell>
                                             </TableRow> : getAccReq?.map((data) => (
                                                 <TableRow key={data._id}>
-                                                    <TableCell >{data.city}</TableCell>
-                                                    <TableCell >{data.streetAddress}</TableCell>
-                                                    <TableCell >{data.area}</TableCell>
-                                                    <TableCell >{data.complaintType}</TableCell>
-                                                    <TableCell >{data.pincode}</TableCell>
-                                                    <TableCell component='th' scope='row'>{data.complaintDesc}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.city}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.streetAddress}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.area}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.complaintType}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.pincode}</TableCell>
+                                                     <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>{data.complaintDesc}</TableCell>
                                                     <TableCell >
-                                                        {/* <Button variant="text" color="default" onClick={() => { asign(data._id) }} >
-                                                          send
-                                                        </Button> */}
+                                                      
                                                         <Link to={`/assigncom/${data._id}`}>
                                                             <Button variant="contained" color="primary" size='small' sx={{ borderRadius: "100px" }} >Assign</Button>
                                                         </Link>
