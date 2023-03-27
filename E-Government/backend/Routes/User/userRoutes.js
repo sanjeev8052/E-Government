@@ -160,7 +160,7 @@ router.post("/user/login", async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: error.message,
+            message: "Somthing went wrong..",
         })
     }
 
@@ -168,7 +168,7 @@ router.post("/user/login", async (req, res) => {
 });
 router.get("/me", isAuthenticatedUser, async (req, res) => {
     try {
-        const user = await User.findById(req.user._id)
+        const user = await User.findById(req.user._id).populate("paidBills")
         res.send(user)
     } catch (error) {
         res.status(500).json({ sucsess: false, message: error.message })
@@ -243,7 +243,7 @@ router.put("/reset/password/:token", async (req, res) => {
 
     try {
 
-        console.log(req.body.password)
+        
         const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex")
 
         const user = await User.findOne({
@@ -263,7 +263,7 @@ router.put("/reset/password/:token", async (req, res) => {
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined;
         await user.save()
-        console.log(user)
+      
         res.status(200).json({ success: true, message: "Password Updadet..", password: user.password })
 
 

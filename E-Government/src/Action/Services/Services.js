@@ -19,6 +19,7 @@ export const CompReq = (user,values) => async (dispatch) => {
             payload: data
         })
 
+        
     } catch (error) {
         dispatch({
             type: "CompReqFailuer",

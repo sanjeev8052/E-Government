@@ -14,6 +14,7 @@ import { CompReq } from '../../Action/Services/Services';
 import axios from 'axios';
 import { getUser } from '../../Action/Admin/User';
 import { Getdept } from '../../Action/Admin/Categories';
+import { useAlert } from 'react-alert';
 
 import { useAlert } from 'react-alert'
 
@@ -78,6 +79,13 @@ const Complaint = () => {
     name: "",
     phone: ""
   })
+  useEffect(() => {
+    data ? alert.success(data.message) : null
+    data ? navigate('/') : null
+    dispatch({
+      type: "CompReqClear"
+    })
+  }, [error, data]);
 
 
   useEffect(() => {
@@ -119,7 +127,7 @@ const Complaint = () => {
 
     onSubmit: (values) => {
 
-      console.log(values)
+
       dispatch(CompReq(user, values))
     }
 

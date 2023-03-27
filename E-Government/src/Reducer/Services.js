@@ -27,7 +27,12 @@ export const userServicesReducer = createReducer(initialState, {
         state.loading = false;
         state.error = action.payload;
        
+        state.LoginError = action.payload;
     },
+    CompReqClear : (state)=>{
+        state.data = null
+    },
+
     // get complaint request
     getCompReqRequset: (state) => {
         state.loading = true;

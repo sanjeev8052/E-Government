@@ -1,5 +1,6 @@
 const express = require('express');
 const { isAuthenticatedUser } = require('../../middlewares/auth');
+const compComplete = require('../../models/Admin/compComplete');
 const UserComplaint = require('../../models/User/UserComplaint');
 
 const router = express.Router();
@@ -65,7 +66,23 @@ router.get('/searchCompByEmail/', isAuthenticatedUser, async (req, res) => {
     try {
 
         const complaint = await UserComplaint.find({ email: req.user.email, status: "Requested" })
-        console.log(complaint)
+       
+        res.status(200).send(complaint)
+
+    } catch (error) {
+        res
+            .status(500)
+            .json({ success: false, Error: error.message })
+    }
+})
+
+// get  Completed Complaint of each User
+router.get('/searchCompCompletebyUser', async (req, res) => {
+
+    try {
+
+        const complaint = await compComplete.find({email:"sanjeevgaund12@gmail.com"})
+       
         res.status(200).send(complaint)
 
     } catch (error) {
@@ -90,7 +107,6 @@ router.put('/updateComp/:id', async (req, res) => {
         complaint = await UserComplaint.findByIdAndUpdate(req.params.id, req.body, { new: true })
 
 
-        console.log(complaint)
         res.status(200).json({
             message: "Complaint Updated"
         })

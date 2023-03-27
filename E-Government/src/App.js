@@ -66,6 +66,7 @@ import { getEmpDetails, getEmpProfileImage } from './Action/Employee/register'
 import ViewPdf from './components/Global/ViewPdf'
 import cookies from 'js-cookie'
 import AdminResetPassword from './components/Admin/AdminResetPassword'
+import IncomeReciept from './components/User/Download/IncomeReciept'
 const App = () => {
 
   const dispatch = useDispatch();
@@ -107,6 +108,7 @@ const App = () => {
             <Route path='/Profile' element={<Profile />} />
             <Route path='/UserDashboard' element={<UserDashboard />} />
             <Route path='/Download' element={<Download />} />
+            <Route path='/IncomeReciept' element={<IncomeReciept />} />
 
 
             {/* Services */}

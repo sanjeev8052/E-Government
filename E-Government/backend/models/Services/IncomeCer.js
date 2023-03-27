@@ -42,23 +42,16 @@ const IncomeSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    motherName: {
-        type: String,
-        require: true
-    },
-    image: {
-        type: String,
-        require: true
-    },
-    proof: {
-        type: String,
-        require: true
-    },
+
     income: {
         type: Number,
         require: true
     },
     date: {
+        type: String,
+        require: true
+    },
+    purpose:{
         type: String,
         require: true
     },

@@ -35,7 +35,7 @@ router.post('/castreq', upload.fields([
         const randomNum = Math.floor(Math.random() * 1000000) + 1;
 
         const { name, email, phone, village, state, tehsil, district, gender, fatherName, motherName, cast } = object
-        //    console.log(object)
+       
         const status = "Requested"
         const castcer = new Cast({ name, email, phone, village, state, tehsil, district, gender, fatherName, motherName, cast, proof,image, status: status, uniqueId: randomNum })
         await castcer.save();
@@ -81,7 +81,7 @@ router.post("/acccastcerreq/:_id", isAuthenticate, async (req, res) => {
                 success: true,
                 message: "successfully Accepted Cast Certificae Request",
             })
-            console.log(request)
+         
             //    const message = `Your Cast Certificate Request is Accepted and Here is the ID is ${request.uniqueId} For Download Certificate`
             //     await sendEmail({
             //     email: request.email,
@@ -135,7 +135,7 @@ router.get('/getacccastcerreq', isAuthenticate, async (req, res) => {
 router.post('/searchReciept',  async (req, res) => {
     try {
         const uniqueId  = req.body.uniqueId
-        console.log(uniqueId)
+    
         const certificate = await Cast.find({uniqueId,status:"Accepted"})
         if(!certificate[0]){
             return res
