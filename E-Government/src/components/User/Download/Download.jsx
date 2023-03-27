@@ -4,6 +4,7 @@ import './Download.css'
 import axios from 'axios'
 import { AssuredWorkloadOutlined, PictureAsPdf, Cancel } from '@mui/icons-material'
 import Footer from '../../Layout/Footer/Footer'
+import Pdf from '../../Global/Pdf'
 import { useFormik } from 'formik'
 import { downloadSchema } from '../../../ValidateSchema/Services'
 import sujeet from '../../../Images/s.jpg'
@@ -60,15 +61,15 @@ const Download = () => {
         </div>
       </form>}
       {data &&
-        <div className='text-center '>
+        <div className='text-center '    >
           <Button className='m-3' onClick={() => setData(null)} variant="contained" color="secondary">
             <Cancel /> Cancel
           </Button>
-          <Button variant="contained" color="Primary">
-            <PictureAsPdf /> Download
-          </Button>
+         
+            <Pdf contentId="mainbox" downloadFileName="CastCertificate"/>
+         
         </div>}
-      {data && <Box className='mainBox'>
+      {data && <Box className='mainBox' id="mainbox">
         <Box className="row rowHeader">
           <Box className="col-sm-4">
             <AssuredWorkloadOutlined sx={{ color: "black", fontSize: "3rem" }} />
@@ -98,7 +99,7 @@ const Download = () => {
 
           </div>
           <div className="col-sm-4">
-            <img className='image mt-3' src={sujeet} alt="" />
+            <img className='image mt-3' src={`http://localhost:5000/PDF/${data.image}`} alt="" />
           </div>
           <div className="col-lg-12 mt-5">
             <h5>This is to certify that <u>{data.name}</u> son of  <u>{data.fatherName}</u> Of village  <u>{data.village}</u> , teshil  <u>{data.tehsil}</u>,
