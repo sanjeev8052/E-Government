@@ -9,6 +9,10 @@ const IncomeSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    age: {
+        type: String,
+        require: true
+    },
     email: {
         type: String,
         require: true
@@ -48,13 +52,14 @@ const IncomeSchema = mongoose.Schema({
         require: true
     },
     date: {
-        type: String,
-        require: true
+        type: Date,
+        default: Date.now
     },
     purpose:{
         type: String,
         require: true
     },
+    proof:String,
 
     status: String
 })
