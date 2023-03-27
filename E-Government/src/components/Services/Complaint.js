@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'
-import InputLabel from '@mui/material/InputLabel';
 import { tokens } from '../../Global'
 import { Box, Button, FormControl, MenuItem, Select, Typography, useTheme } from '@material-ui/core';
 import { Send } from '@mui/icons-material';
-import { Link, Navigate } from 'react-router-dom';
 import Footer from '../Layout/Footer/Footer';
-import bgImage from '../../Images/bgImage3.jpg'
 import { useFormik } from 'formik'
 import { complaintSchema } from '../../ValidateSchema/Services';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +15,7 @@ import axios from 'axios';
 import { getUser } from '../../Action/Admin/User';
 import { Getdept } from '../../Action/Admin/Categories';
 
+import { useAlert } from 'react-alert'
 
 const useStyles = makeStyles({
   Complaint: {
@@ -71,16 +69,27 @@ const useStyles = makeStyles({
 
 const Complaint = () => {
   const { userData, userLoading, isAuthenticated } = useSelector(state => state.user)
-  const { getdept } = useSelector((state) => (state.services))
+  const { getdept, data, error } = useSelector((state) => (state.services))
   const themes = useTheme()
   const colors = tokens(themes.palette.mode)
-
+  const alert = useAlert();
   const [user, setUser] = useState({
     email: "",
     name: "",
     phone: ""
   })
 
+
+  useEffect(() => {
+    if (data) {
+      alert.success(data.message)
+      // dispatch({ type: "ClearLoginMessage" })
+  }
+  if (error) {
+      alert.error(error.message)
+      // dispatch({ type: "ClearLoginMessage" })
+  }
+  }, [data,error])
 
   const dispatch = useDispatch()
 
@@ -142,11 +151,11 @@ const Complaint = () => {
                   <MenuItem value={data.deptType}>{data.deptType}</MenuItem>
                 ))
               }
-             
+
             </Select>
           </FormControl>
 
-            
+
           {errors.complaintType && touched.complaintType ? (
             <Typography className={classes.error}   >{errors.complaintType}</Typography>
           ) : null}

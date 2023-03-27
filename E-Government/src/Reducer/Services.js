@@ -7,6 +7,13 @@ const initialState = {
 
 export const userServicesReducer = createReducer(initialState, {
 
+
+    // for clear message
+    // clearMessage: (state) => {
+    //     state.message = null;
+    //     state.error = null;
+
+    // },
     //Compreq Reducers........
     CompReqRequset: (state) => {
         state.loading = true;
@@ -18,7 +25,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     CompReqFailuer: (state, action) => {
         state.loading = false;
-        state.LoginError = action.payload;
+        state.error = action.payload;
        
     },
     // get complaint request
@@ -147,7 +154,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     addbillcatSuccess: (state, action) => {
         state.loading = false;
-        state.billcat = action.payload;
+        state.billcatMs = action.payload;
 
     },
     addbillcatFailuer: (state, action) => {
@@ -177,7 +184,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     delbillcatSuccess: (state, action) => {
         state.loading = false;
-        state.delbillcat = action.payload;
+        state.delbillcatMs = action.payload;
 
     },
     delbillcatFailuer: (state, action) => {
@@ -191,7 +198,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     addemetercatSuccess: (state, action) => {
         state.loading = false;
-        state.metercat = action.payload;
+        state.metercatMs = action.payload;
 
     },
     addmetercatFailuer: (state, action) => {
@@ -221,7 +228,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     delmetercatSuccess: (state, action) => {
         state.loading = false;
-        state.delmetercat = action.payload;
+        state.delmetercatMs = action.payload;
 
     },
     delmetercatFailuer: (state, action) => {
@@ -235,7 +242,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     addcercatSuccess: (state, action) => {
         state.loading = false;
-        state.cercat = action.payload;
+        state.cercatMs = action.payload;
 
     },
     addcercatFailuer: (state, action) => {
@@ -265,7 +272,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     delcercatSuccess: (state, action) => {
         state.loading = false;
-        state.delcercat = action.payload;
+        state.delcercatMs = action.payload;
 
     },
     delcercatFailuer: (state, action) => {
@@ -274,13 +281,13 @@ export const userServicesReducer = createReducer(initialState, {
 
     },
 
-      // for dept
+      // for add  dept
     addDeptRequset: (state) => {
         state.loading = true;
     },
     addDeptSuccess: (state, action) => {
         state.loading = false;
-        state.dept = action.payload;
+        state.deptMs = action.payload;
 
     },
    addDeptFailuer: (state, action) => {
@@ -310,7 +317,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     delDeptSuccess: (state, action) => {
         state.loading = false;
-        state.deldept= action.payload;
+        state.deldeptMs = action.payload;
 
     },
     delDeptFailuer: (state, action) => {
@@ -325,7 +332,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     addBillSuccess: (state, action) => {
         state.loading = false;
-        state.addbill = action.payload;
+        state.addbillMs = action.payload;
 
     },
    addBillFailuer: (state, action) => {

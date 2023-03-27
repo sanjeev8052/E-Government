@@ -11,7 +11,7 @@ export const Register = (details) => async (dispatch) => {
             type: "employeeRegSuccess",
             payload: data
         })
-        dispatch(Getcomcat())
+       
 
     } catch (error) {
         dispatch({
@@ -32,7 +32,7 @@ export const Login = (details) => async (dispatch) => {
             type: "employeeLoginSuccess",
             payload: data
         })
-        dispatch(Getcomcat())
+        dispatch(getEmpDetails())
 
     } catch (error) {
         dispatch({
