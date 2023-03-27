@@ -10,7 +10,7 @@ const Pdf = ({ contentId , downloadFileName}) => {
          const imgData = canvas.toDataURL('image/png')
          const pdf = new jsPDF();
          pdf.setFontSize(40)
-         pdf.addImage(imgData,'JPEG', 15,20,180, 80 )
+         pdf.addImage(imgData,'JPEG', 15,20,180, 240 )
          pdf.save(`${downloadFileName}.pdf`)
         })
      };
