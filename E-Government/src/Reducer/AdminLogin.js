@@ -32,7 +32,7 @@ export const AdminReducer = createReducer(initialState,
         state.loading = false;
         state.error = action.payload;
     },
-
+ 
 
     // Loading
     LoadRequest: (state, action) => {

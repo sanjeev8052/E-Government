@@ -13,13 +13,18 @@ import { adminLogin } from '../../Action/Admin/Login';
 
 const AdminLogin = () => {
 
+    const { isAuthenticated , loading} = useSelector(state => state.admin)
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        isAuthenticated ? navigate('/dashboard') : console.log(false)
+    },[isAuthenticated])
 
     const detail = {
         email: "",
         password: "",
     }
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     const [type, setType] = useState("password")
     const [visible, setVisible] = useState(false)
@@ -147,8 +152,8 @@ const AdminLogin = () => {
 
                                         />
                                         <Typography variant="subtitle1" color="crimson">{<ErrorMessage name='password' />}</Typography>
-                                        <Typography variant="subtitle2" sx={styles.link} component={Link} color="initial" to="/aforgot" >Forgot Password?</Typography>
-                                        <Button type="submit" variant="contained" color="secondary" endIcon={<LoginRounded />} sx={styles.btn} >
+                                        <Typography variant="subtitle2" sx={styles.link} component={Link} color="initial" to="/AforgotPassword" >Forgot Password?</Typography>
+                                        <Button disabled={loading} type="submit" variant="contained" color="secondary" endIcon={<LoginRounded />} sx={styles.btn} >
                                             Login
                                         </Button>
                                     </Form>

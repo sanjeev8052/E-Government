@@ -106,7 +106,7 @@ const Profile = () => {
                                         <hr />
                                     </div>
                                 </div>
-                                <Button variant="text" component={Link} to="/" color="default">
+                                <Button variant="text"  component={Link} to="/" color="default">
                                     Back Home<KeyboardReturn />
                                 </Button>
                             </div>

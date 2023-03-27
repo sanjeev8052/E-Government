@@ -3,7 +3,8 @@ const multer = require('multer');
 const router = express.Router();
 const { isAuthenticate } = require('../../middlewares/Adminmiddle');
 const Income = require('../../models/Services/IncomeCer');
-const { sendEmail } = require('../../middlewares/sendEmail')
+const { sendEmail } = require('../../middlewares/sendEmail');
+const { isAuthenticatedUser } = require('../../middlewares/auth');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -31,16 +32,16 @@ router.post('/incomereq',  upload.fields([
     try {
         // const proof = (req.file) ? req.file.filename : null
         const proof = req.files['file2'][0].filename
-        const image = req.files['file'][0].filename 
+      
         
         const data = req.body.data
         const object = JSON.parse(data)
-        const randomNum = Math.floor(Math.random() * 1000000) + 1;
+        const randomNum = Math.floor(Math.random() * 999999) + 1;
 
-        const { name, email, phone, village, state, tehsil, district, gender, fatherName, motherName,income } = object
+        const { name, email, phone, village, state, tehsil, district, gender, fatherName, purpose ,income } = object
      
         const status = "Requested"
-        const cer = new Income({name, email, phone, village, state, tehsil, district, gender, fatherName, motherName,  income, proof, status: status, image, uniqueId: randomNum })
+        const cer = new Income({name, email, phone, village, state, tehsil, district, gender, fatherName,purpose,    income, proof, status: status,  uniqueId: randomNum })
         await cer.save();
         res.status(200).json({
             message: "Successfully Added",
@@ -134,6 +135,23 @@ router.get('/getaccincomecerreq', isAuthenticate, async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 })
+router.post('/searchIncomCer',  async (req, res) => {
+    try {
+        const {uniqueId} = req.body
+        console.log(uniqueId)
+        const certificate = await Income.find({ status: "Accepted" ,uniqueId})
+        if (!certificate[0]) {
+            return res.status(404).json({ message: "Income Certificate  Not Found" })
+        }
+        else {
+            res.status(200).json(certificate)
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
+
+
 
 
 module.exports = router

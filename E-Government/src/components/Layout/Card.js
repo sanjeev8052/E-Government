@@ -140,7 +140,7 @@ const Card = () => {
                                             </Button>
                                             <Menu  {...bindMenu(popupState)}>
                                                 <MenuItem component={Link} to='incomeCer'>Apply For  Income Certificate</MenuItem>
-                                                <MenuItem onClick={popupState.close}>Download Certificate</MenuItem>
+                                                <MenuItem component={Link} to='IncomeReciept'>Download Certificate</MenuItem>
                                             </Menu>
                                         </React.Fragment>
                                     )}

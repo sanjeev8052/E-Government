@@ -84,9 +84,9 @@ const Dashboard = () => {
                                                 <option disabled >Compaint Data  : {data.date} </option>
                                                 <option disabled >Complaint Complete Data: {data.completeDate} </option>         
                                             </select>
-                                            <Button className='text-danger'>
+                                            {/* <Button className='text-danger'>
                                                 <Delete />
-                                            </Button>
+                                            </Button> */}
                                         </>
 
                                     ))
@@ -115,9 +115,9 @@ const Dashboard = () => {
                                                 <option disabled >Paid Amount : {data.totelAmt} </option>
                                                 <option disabled >Date : {data.addDate} </option>
                                             </select>
-                                            <Button className='text-danger'>
+                                            {/* <Button className='text-danger'>
                                                 <Delete />
-                                            </Button>
+                                            </Button> */}
                                         </>
 
                                     ))
@@ -186,7 +186,7 @@ const Dashboard = () => {
                             >
                                 <MenuItem value="1">Complaints</MenuItem>
                                 <MenuItem value="2">Taransaction</MenuItem>
-                                <MenuItem value="3">Certificate</MenuItem>
+                               
 
                             </Select>
                         </FormControl>

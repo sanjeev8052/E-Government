@@ -3,11 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'
 import { Box, Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, Typography, useTheme } from '@material-ui/core'
 import { Send } from '@mui/icons-material';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Footer from '../Layout/Footer/Footer';
 import { useFormik } from 'formik'
 import { incomeValidation } from '../../ValidateSchema/Services';;
-
+import { useAlert } from 'react-alert'
 import axios from 'axios';
 
 const useStyles = makeStyles({
@@ -65,8 +65,10 @@ const IncomeCer = () => {
   const [image, setImage] = useState();
   const [file2, setFile2] = useState();
   const [image2, setImage2] = useState();
-
+  const navigate = useNavigate()
+  const alert = useAlert()
   const handleFile = (e) => {
+
     const file = e.target.files[0]
     setFile(file)
 
@@ -99,21 +101,22 @@ const IncomeCer = () => {
     initialValues: initialvalues,
     validationSchema: incomeValidation,
 
-    onSubmit: (values) => {
+    onSubmit: async(values) => {
       try {
-        if (file) {
+        if (file2) {
           const formData = new FormData()
           formData.append("file", file)
           formData.append("file2", file2)
           formData.append('data', JSON.stringify(values));
           // console.log(values)
           // console.log(file)
-          axios.post('/api/incomereq', formData, {
+          const { data } = await axios.post('/api/incomereq', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
           })
-
+          alert.success(data.message)
+          navigate('/')
           return
         }
         alert("please select file")
@@ -161,9 +164,21 @@ const IncomeCer = () => {
             onChange={handleChange}
             onBlur={handleBlur}
 
+          />         <Typography variant="h6" color="initial">Age</Typography>
+          <TextField className={classes.fullInput}
+            id=""
+            placeholder='Enter Your Age '
+            variant='outlined'
+            size='small'
+            type="number"
+            name='age'
+            value={values.age}
+            onChange={handleChange}
+            onBlur={handleBlur}
+
           />
-          {errors.email && touched.email ? (
-            <Typography className={classes.error}   >{errors.email}</Typography>
+          {errors.age && touched.age ? (
+            <Typography className={classes.age}   >{errors.age}</Typography>
           ) : null}
 
           <FormControl fullWidth>
@@ -173,7 +188,6 @@ const IncomeCer = () => {
               aria-labelledby="demo-radio-buttons-group-label"
               onChange={handleChange}
               name="gender"
-              defaultValue="male"
               onBlur={handleBlur}
               value={values.gender}
             >
@@ -285,22 +299,32 @@ const IncomeCer = () => {
           {errors.income && touched.income ? (
             <Typography className={classes.error} >{errors.income}</Typography>
           ) : null}
-          <Typography variant="h6" color="initial">Income</Typography>
+          <Typography variant="h6" color="initial">purpose</Typography>
           <TextField className={classes.fullInput}
             id=""
-            placeholder='Enter Your Income'
+            placeholder='Enter Your Purpose for issue certificate'
             variant='outlined'
             size='small'
-            name='income'
+            name='purpose'
             onChange={handleChange}
-            value={values.income}
+            value={values.purpose}
             onBlur={handleBlur}
           />
-          {errors.income && touched.income ? (
-            <Typography className={classes.error} >{errors.income}</Typography>
+          {errors.purpose && touched.purpose ? (
+            <Typography className={classes.error} >{errors.purpose}</Typography>
           ) : null}
 
+          <Typography variant="h6" color="initial">Uplaod Your Adhar Card</Typography>
+          <div className="row">
+            <div className="col-sm-6 mt-2 mb-2">
+              <input type="file" className='input-upload' onChange={handleFile2} name="" id="" />
+            </div>
+            <div className="col-sm-6 mt-1 mb-2" >
+              <img style={{ width: "10rem" }} src={image2} alt="" />
+            </div>
+          </div>
 
+          {console.log(errors)}
           <Button type='submit' color='primary' className={classes.button} variant="contained" endIcon={<Send />}>
             Apply
           </Button>

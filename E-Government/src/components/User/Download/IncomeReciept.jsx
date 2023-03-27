@@ -5,25 +5,25 @@ import axios from 'axios'
 import { AssuredWorkloadOutlined, PictureAsPdf, Cancel } from '@mui/icons-material'
 import Footer from '../../Layout/Footer/Footer'
 import { useFormik } from 'formik'
-import { downloadSchema } from '../../../ValidateSchema/Services'
+import { downloadSchema, downloadSchema2 } from '../../../ValidateSchema/Services'
 import sujeet from '../../../Images/s.jpg'
 import logo from '../../../Images/logo.jpg'
 const IncomeReciept = () => {
 
 
-    const [data, setData] = useState(true);
+    const [data, setData] = useState();
     const currentDate = new Date().toLocaleDateString();
     const [loading, setLoading] = useState(false);
     const initialValues = {
     }
     const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
         initialValues: initialValues,
-        validationSchema: downloadSchema,
+        validationSchema: downloadSchema2,
         onSubmit: async (values) => {
 
             try {
                 setLoading(true)
-                const { data } = await axios.post('api/searchReciept', values)
+                const { data } = await axios.post('api/searchIncomCer', values)
                 setData(data[0])
                 setLoading(false)
 
@@ -39,7 +39,7 @@ const IncomeReciept = () => {
                 <div className="form">
                     <h1>Download Certificate</h1>
                     <Typography variant="h4" className='mt-5' color="initial">
-                        Enter Certificate No.
+                        Enter Form No.
                     </Typography>
                     <TextField className='mb-5 mt-1' fullWidth
                         id=""
@@ -49,7 +49,7 @@ const IncomeReciept = () => {
                         name='uniqueId'
                         onChange={handleChange}
                         type='number'
-                        placeholder=' Enter Certificate No.'
+                        placeholder=' Enter Form No.'
                     />
                     {errors.uniqueId && (
                         <Typography className='text-danger'>{errors.uniqueId}</Typography>
@@ -64,9 +64,7 @@ const IncomeReciept = () => {
                     <Button className='m-3' onClick={() => setData(null)} variant="contained" color="secondary">
                         <Cancel /> Cancel
                     </Button>
-                    <Button variant="contained" color="Primary">
-                        <PictureAsPdf /> Download
-                    </Button>
+                 
                 </div>}
             {data && <Box className='mainBox'>
                 <Box className="row rowHeader">
@@ -115,11 +113,16 @@ const IncomeReciept = () => {
                     </div>
                     <div className="col-sm-7 icmtab">
                         <Typography variant="h6" className='mt-2' color="initial">{data.name}</Typography>
-                        <Typography variant="h6" className='mt-2' color="initial">{data.fatherName}</Typography>
-                        <Typography variant="h6" className='mt-2' color="initial">{data.motherName}</Typography>
                         <Typography variant="h6" className='mt-2' color="initial">{data.gender}</Typography>
-                        <Typography variant="h6" className='mt-2' color="initial">{data.cast}</Typography>
-
+                        <Typography variant="h6" className='mt-2' color="initial">{"data.age"}</Typography>
+                        <Typography variant="h6" className='mt-2' color="initial">{data.fatherName}</Typography>
+                        <Typography variant="h6" className='mt-2' color="initial">{data.village}</Typography>
+                        <Typography variant="h6" className='mt-2' color="initial">{data.tehsil}</Typography>
+                        <Typography variant="h6" className='mt-2' color="initial">{data.district}</Typography>
+                        <Typography variant="h6" className='mt-2' color="initial">{data.state}</Typography>
+                        <Typography variant="h6" className='mt-2' color="initial">{data.date}</Typography>
+                        <Typography variant="h6" className='mt-2' color="initial">{data.purpose}</Typography>
+                  
                     </div>
 
                     <div className="col-lg-12 mt-5">

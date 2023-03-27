@@ -14,7 +14,6 @@ import { CompReq } from '../../Action/Services/Services';
 import axios from 'axios';
 import { getUser } from '../../Action/Admin/User';
 import { Getdept } from '../../Action/Admin/Categories';
-import { useAlert } from 'react-alert';
 
 import { useAlert } from 'react-alert'
 

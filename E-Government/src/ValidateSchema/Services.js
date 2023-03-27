@@ -31,7 +31,7 @@ export const incomeValidation = yup.object({
     district: yup.string().required("Please Enter District....... "),
     state: yup.string().required("Please Enter State....... "),
     fatherName: yup.string().required("Please Enter Your Father Name....... "),
-    motherName: yup.string().required("Please Enter Your Mother Name....... "),
+    purpose: yup.string().required("Please Enter Your purpose....... "),
     income:yup.number().required("Please Enter Income....... "),
 })
 export const castValidation = yup.object({
@@ -52,5 +52,8 @@ export const billPaySchema = yup.object({
     tenament_No: yup.number().min(100000000000, ['Tenament no must have 12 digit']).max(999999999999, ['Tenament no must have 12 digit']).required(),
 })
 export const downloadSchema = yup.object({
-    uniqueId: yup.number().min(100000, ['Tenament no must have 6 digit']).max(999999, ['Tenament no must have 6 digit']).required(),
+    uniqueId: yup.number().min(100000, ['Certificate no must have 6 digit']).max(999999, ['Certificate no must have 6 digit']).required(),
+})
+export const downloadSchema2 = yup.object({
+    uniqueId: yup.number().min(100000, ['Form no must have 6 digit']).max(999999, ['Form no must have 6 digit']).required(),
 })

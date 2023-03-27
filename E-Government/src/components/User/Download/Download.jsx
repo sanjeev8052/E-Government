@@ -65,7 +65,7 @@ const Download = () => {
             <Cancel /> Cancel
           </Button>
           <Button variant="contained" color="Primary">
-            <PictureAsPdf /> Download
+            
           </Button>
         </div>}
       {data && <Box className='mainBox'>
