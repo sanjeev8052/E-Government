@@ -82,12 +82,12 @@ router.post("/acccastcerreq/:_id", isAuthenticate, async (req, res) => {
                 message: "successfully Accepted Cast Certificae Request",
             })
          
-            //    const message = `Your Cast Certificate Request is Accepted and Here is the ID is ${request.uniqueId} For Download Certificate`
-            //     await sendEmail({
-            //     email: request.email,
-            //     subject: "Cast Certificate Accepted...",
-            //     message
-            // });
+               const message = `Your Cast Certificate Request is Accepted and Here is the ID is ${request.uniqueId} For Download Certificate`
+                await sendEmail({
+                email: request.email,
+                subject: "Cast Certificate Accepted...",
+                message
+            });
          }
     } catch (error) {
         res.status(500).json({ error: error.message })

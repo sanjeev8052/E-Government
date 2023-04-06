@@ -4,7 +4,6 @@ const UserComplaint = require('../../models/User/UserComplaint');
 const express = require("express");
 const { sendEmail } = require('../../middlewares/sendEmail')
 const compComplete = require('../../models/Admin/compComplete')
-const AssignComplaint = require('../../models/Admin/AssignComplaint');
 const Employee = require('../../models/Emp/Employee');
 const router = express.Router();
 
@@ -137,35 +136,9 @@ router.post("/assigncom", async (req, res) => {
 
 
 
-router.get("/getassigncom", async (req, res) => {
-    try {
-        const complaint = await AssignComplaint.find({})
-        res.status(200).send(complaint)
-    } catch (error) {
-        res
-            .status(500)
-            .json({ success: false, Error: error.message })
-    }
-})
 
-router.post("/completecom/:_id", async (req, res) => {
-    try {
-        const complaint = await AssignComplaint.findById(req.params._id)
-        if (!complaint) {
-            res.status(401).json({ message: "Complaint Not Found" })
-        }
-        const completecomp = await CompleteComplaint.create(complaint.toJSON())
-        const deletecomp = await AssignComplaint.deleteOne({ _id: req.params._id })
-        res.status(200).json({
-            success: true,
-            message: "Accepted Complaint",
-            completecomp
-        })
 
-    } catch (error) {
 
-    }
-})
 router.get("/compComplete", async (req, res) => {
     try {
        

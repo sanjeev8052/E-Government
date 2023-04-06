@@ -29,6 +29,7 @@ import AdminComplaint from './components/Admin/AdminComplaint'
 import User from './components/Admin/User'
 import Categories from './components/Admin/Categories'
 import Feedback from './components/Admin/Feedback'
+import Feedback1 from './components/User/feedback'
 import CompletedComplaint from './components/Admin/CompletedComplaint'
 import Bills from './components/Admin/Bills'
 import PendingBills from './components/Admin/PendingBills'
@@ -109,6 +110,7 @@ const App = () => {
             <Route path='/UserDashboard' element={<UserDashboard />} />
             <Route path='/Download' element={<Download />} />
             <Route path='/IncomeReciept' element={<IncomeReciept />} />
+            <Route path='/ufeedback' element={<Feedback1 />} />
 
 
             {/* Services */}

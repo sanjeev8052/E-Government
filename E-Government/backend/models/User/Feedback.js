@@ -7,7 +7,8 @@ const FeedbackSchema = mongoose.Schema({
     feedback: {
         type: String,
         required: [true, 'Feedback is required'],
-    }
+    },
+    date:Date
 })
 
 const Feedback = mongoose.model("feedback", FeedbackSchema)
