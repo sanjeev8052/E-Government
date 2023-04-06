@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from './AdminLoader'
 import { tokens } from '../../Global'
 import { getAcceptMeterReq } from '../../Action/Services/Meter'
-import AdminAuth from '../ProtectedRoute/AdminAuth'
+import AdminAuth from '../ProtectedRoute/AdminAuth' 
 import { fontWeight } from '@mui/system'
 
 const AccMeterReq = () => {

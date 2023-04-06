@@ -38,10 +38,10 @@ router.post('/incomereq',  upload.fields([
         const object = JSON.parse(data)
         const randomNum = Math.floor(Math.random() * 999999) + 1;
 
-        const { name, email, phone, village, state, tehsil, district, gender, fatherName, purpose ,income } = object
+        const { name, email, phone, village, state, tehsil, age,  district, gender, fatherName, purpose ,income } = object
      
         const status = "Requested"
-        const cer = new Income({name, email, phone, village, state, tehsil, district, gender, fatherName,purpose,    income, proof, status: status,  uniqueId: randomNum })
+        const cer = new Income({name, email, phone, village, state, age,  tehsil, district, gender, fatherName,purpose,    income, proof, status: status,  uniqueId: randomNum })
         await cer.save();
         res.status(200).json({
             message: "Successfully Added",

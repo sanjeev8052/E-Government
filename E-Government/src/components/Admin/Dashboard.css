@@ -1,0 +1,41 @@
+.dashboard {
+    padding: 1rem;
+   justify-content: center;
+   align-items: center;
+   font-family: sans-serif;
+}
+
+.dsItem1 {
+    margin: 0 1rem;
+    background-color: rgb(16, 62, 148);
+    border-radius: 40%;
+    width: 12rem;
+    padding: 2rem;
+    height: 12rem;
+    text-align: center;
+    color: white;
+    box-shadow: 3px 3px 6px  rgb(12, 43, 101);
+}
+
+.pieChart{
+    width: 15rem;
+
+}
+
+.pieChartBox{
+    padding: 2rem;
+    margin: 2rem;
+
+}
+
+#c1{
+    background-color: blue;
+    width: 4rem;
+    height: 1rem;
+    margin: 0 1rem;
+}
+
+.chart{
+    display: flex;
+    align-items: center;
+}

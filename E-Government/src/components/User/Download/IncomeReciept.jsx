@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { Box, Typography, TextField, Button, CircularProgress } from '@material-ui/core'
 import './Download.css'
 import axios from 'axios'
-import { AssuredWorkloadOutlined, PictureAsPdf, Cancel } from '@mui/icons-material'
+import { AssuredWorkloadOutlined, PictureAsPdf, Cancel, CurrencyRupee } from '@mui/icons-material'
 import Footer from '../../Layout/Footer/Footer'
 import { useFormik } from 'formik'
 import { downloadSchema, downloadSchema2 } from '../../../ValidateSchema/Services'
 import sujeet from '../../../Images/s.jpg'
+import Pdf from '../../Global/Pdf'
 import logo from '../../../Images/logo.jpg'
 const IncomeReciept = () => {
 
@@ -60,13 +61,13 @@ const IncomeReciept = () => {
                 </div>
             </form>}
             {data &&
-                <div className='text-center '>
+                <div className='text-center ' style={{display:"flex" , justifyContent:"center", alignItems:"center"}}>
                     <Button className='m-3' onClick={() => setData(null)} variant="contained" color="secondary">
                         <Cancel /> Cancel
                     </Button>
-                 
+                    <Pdf contentId="mainbox" downloadFileName="IncomeCertificate"/>
                 </div>}
-            {data && <Box className='mainBox'>
+            {data && <Box className='mainBox' id="mainbox">
                 <Box className="row rowHeader">
                     <Box className="col-sm-4">
                         <AssuredWorkloadOutlined sx={{ color: "black", fontSize: "3rem" }} />
@@ -80,11 +81,11 @@ const IncomeReciept = () => {
                     <h2>Government Of India</h2>
                     <h2>Income Certificate</h2>
                     <h5 className='mt-2  text-start'>
-                        Certified that tha annual family income  of the person with the details mentioned belwo from all source is
+                        Certified that tha annual family income  of the person with the details mentioned belwo from all source is <CurrencyRupee/> {data.income}
                     </h5>
                     <div className='row'>
-                        <h5 className='text-start col-6 mt-4 mb-2'>From No:</h5>
-                        <h5 className='text-end col-6 mt-4 mb-2'>Date:</h5>
+                        <h5 className='text-start col-6 mt-4 mb-2'>From No:{data.uniqueId}</h5>
+                        <h5 className='text-end col-6 mt-4 mb-2'>Date:{data.date}</h5>
                     </div>
 
                 </div>
@@ -114,7 +115,7 @@ const IncomeReciept = () => {
                     <div className="col-sm-7 icmtab">
                         <Typography variant="h6" className='mt-2' color="initial">{data.name}</Typography>
                         <Typography variant="h6" className='mt-2' color="initial">{data.gender}</Typography>
-                        <Typography variant="h6" className='mt-2' color="initial">{"data.age"}</Typography>
+                        <Typography variant="h6" className='mt-2' color="initial">20</Typography>
                         <Typography variant="h6" className='mt-2' color="initial">{data.fatherName}</Typography>
                         <Typography variant="h6" className='mt-2' color="initial">{data.village}</Typography>
                         <Typography variant="h6" className='mt-2' color="initial">{data.tehsil}</Typography>
@@ -135,7 +136,7 @@ const IncomeReciept = () => {
 
                     </div>
                     <div className="col-sm-4 mt-5">
-                        <h5>Date </h5>
+                       
                         <h5>Signature</h5>
                     </div>
                 </div>

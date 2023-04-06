@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router'
 import BlockEmployee from '../Global/BlockEmployee'
 import AdminAuth from '../ProtectedRoute/AdminAuth'
 
+
 const Employee = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)

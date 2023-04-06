@@ -61,12 +61,12 @@ const Download = () => {
         </div>
       </form>}
       {data &&
-        <div className='text-center '    >
-          <Button className='m-3' onClick={() => setData(null)} variant="contained" color="secondary">
-            <Cancel /> Cancel
-          </Button>
-         
-            <Pdf contentId="mainbox" downloadFileName="CastCertificate"/>
+         <div className='text-center ' style={{display:"flex" , justifyContent:"center", alignItems:"center"}}>
+         <Button className='m-3' onClick={() => setData(null)} variant="contained" color="secondary">
+             <Cancel /> Cancel
+         </Button>
+         <Pdf contentId="mainbox" downloadFileName="CastCertificate"/>
+     
          
         </div>}
       {data && <Box className='mainBox' id="mainbox">
