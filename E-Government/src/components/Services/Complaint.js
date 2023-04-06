@@ -15,7 +15,6 @@ import axios from 'axios';
 import { getUser } from '../../Action/Admin/User';
 import { Getdept } from '../../Action/Admin/Categories';
 
-import { useAlert } from 'react-alert'
 
 const useStyles = makeStyles({
   Complaint: {

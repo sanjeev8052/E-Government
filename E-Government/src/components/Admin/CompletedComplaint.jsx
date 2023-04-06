@@ -7,10 +7,7 @@ import AdminTopbar from '../Global/AdminTopbar'
 import axios from 'axios'
 import Header from '../Global/Header'
 import { useDispatch, useSelector } from 'react-redux'
-import Loader from './AdminLoader'
 import { tokens } from '../../Global'
-import { useNavigate } from 'react-router'
-import { accCompReq, getCompReq, rejCompReq } from '../../Action/Services/Services'
 import { useState } from 'react'
 
 

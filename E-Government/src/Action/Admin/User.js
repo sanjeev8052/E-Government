@@ -10,7 +10,7 @@ export const getUser = () => async (dispatch) =>{
             type: "GetUserSuccess",
             payload: data
         })
-       
+      
         
     } catch (error) {
         dispatch({
@@ -30,7 +30,7 @@ export const BLockUser = (id) => async (dispatch) =>{
             type: "BlockUserSuccess",
             payload: data
         })
-       
+        dispatch(getUser())
         
     } catch (error) {
         dispatch({

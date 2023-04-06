@@ -9,11 +9,21 @@ export const userServicesReducer = createReducer(initialState, {
 
 
     // for clear message
-    // clearMessage: (state) => {
-    //     state.message = null;
-    //     state.error = null;
+    clearMessage: (state) => {
+        state.accComReqMs = null;
+        state.error = null;
+        state.rejComReqMs = null;
+        state.delcomcatMs = null;
+        state.billcatMs = null;
+        state.delbillcatMs = null;
+        state.metercatMs = null;
+        state.delmetercatMs = null;
+        state.cercatMs = null;
+        state.delcercatMs = null;
+        state.deptMs = null;
+        state.delcercatMs = null;
 
-    // },
+    },
     //Compreq Reducers........
     CompReqRequset: (state) => {
         state.loading = true;

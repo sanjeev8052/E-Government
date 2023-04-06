@@ -4,7 +4,7 @@ import React, { Fragment } from 'react'
 // import "./../../index1.css"
 import './Dashboard.css'
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
@@ -17,6 +17,13 @@ import { PieChart } from 'react-minimal-pie-chart';
 
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const { cuser } = useSelector((state) => (state.dashboard))
+  useEffect(() => {
+    dispatch(CountUser())
+  }, [])
+
+  const { loading } = useSelector(state => state.admin)
 
 
   const { loading } = useSelector(state => state.admin)
