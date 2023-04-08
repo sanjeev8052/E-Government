@@ -24,11 +24,10 @@ export const userLogin = (user) => async (dispatch) => {
         })
     }
 }
-
-export const userRegister = (user) => async (dispatch) => {
+export const userRegisetr = (user) => async (dispatch) => {
     try {
         dispatch({
-            type: " RagisterRequest",
+            type: "UserRagisterRequest",
         })
 
         const { data } = await axios.post("api/user/new", user, {
@@ -38,13 +37,38 @@ export const userRegister = (user) => async (dispatch) => {
         })
 
         dispatch({
-            type: " RagisterSuccess",
+            type: "UserRagisterSuccess",
+            payload: data
+        })
+        dispatch(LoadUser())
+    } catch (error) {
+        dispatch({
+            type: "UserRagisterFailuer",
+            payload: error
+        })
+    }
+}
+
+export const agsfg = (user) => async (dispatch) => {
+    try {
+        dispatch({
+            type: " UserRagisterRequest",
+        })
+
+        const { data } = await axios.post("api/user/new", user, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+        dispatch({
+            type: " UserLoginSuccess",
             payload: data
         })
 
     } catch (error) {
         dispatch({
-            type: " RagisterFailuer",
+            type: " UserRagisterFailuer",
             payload: error
         })
     }

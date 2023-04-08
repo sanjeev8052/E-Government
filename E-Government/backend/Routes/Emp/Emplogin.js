@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt")
 const multer = require('multer');
 const { sendEmail } = require('../../middlewares/sendEmail')
 const jwt = require('jsonwebtoken');
-const UserComplaint = require("../../models/User/UserComplaint");
+const UserComplaint = require("../../models/User/UserComplaint"); 
 
 const crypto = require('crypto');
 const { isAuthenticateemp } = require("../../middlewares/Empmiddle");

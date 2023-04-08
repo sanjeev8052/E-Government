@@ -20,7 +20,7 @@ const Categories = () => {
         setStatus(status)
     }
 
-    const { getcomcat, getbillcat, getmetercat, getcercat, getdept, loading } = useSelector((state) => (state.services))
+    const { getcomcat, getbillcat, getmetercat,  getdept, loading } = useSelector((state) => (state.services))
     const styles = {
         textfield: {
             width: "100%",
@@ -40,9 +40,7 @@ const Categories = () => {
     const bills = {
         billsType: ""
     }
-    const cer = {
-        certificateType: ""
-    }
+    
     const meter = {
         meterType: ""
     }
@@ -59,12 +57,7 @@ const Categories = () => {
 
 
     })
-    const validationcertificate = Yup.object().shape({
-
-        certificateType: Yup.string().required("!! Please Fill This Field.."),
-
-
-    })
+   
     const validationmeter = Yup.object().shape({
 
         meterType: Yup.string().required("!! Please Fill This Field.."),
@@ -101,13 +94,7 @@ const Categories = () => {
 
     }
     // for certificate
-    const subcer = (values, props) => {
-        dispatch(Addcercat(values))
-    }
-    const delcer = (id) => {
-        dispatch(Delcercat(id))
-
-    }
+    
     // for dept
     const subdept = (values, props) => {
 
@@ -123,7 +110,7 @@ const Categories = () => {
     useEffect(() => {
         dispatch(Getcomcat())
         dispatch(Getbillcat())
-        dispatch(Getcercat())
+        
         dispatch(Getmetercat())
         dispatch(Getdept())
     }, [dispatch])
@@ -131,7 +118,7 @@ const Categories = () => {
     const reload = () => { 
         dispatch(Getcomcat())
         dispatch(Getbillcat())
-        dispatch(Getcercat())
+       
         dispatch(Getmetercat())
         dispatch(Getdept())
      }
@@ -157,7 +144,7 @@ const Categories = () => {
 
                                 <FormControlLabel value='meterype' label={<Typography variant="h4" color={colors.greenAccent[600]}> Meter Type</Typography>} control={<Radio onClick={(e) => handler(3)} />}></FormControlLabel>
 
-                                <FormControlLabel value='certificatetype' label={<Typography variant="h4" color={colors.greenAccent[600]}> Certificate Type</Typography>} control={<Radio onClick={(e) => handler(4)} />}></FormControlLabel>
+                                {/* <FormControlLabel value='certificatetype' label={<Typography variant="h4" color={colors.greenAccent[600]}> Certificate Type</Typography>} control={<Radio onClick={(e) => handler(4)} />}></FormControlLabel> */}
 
                                 <FormControlLabel value='department' label={<Typography variant="h4" color={colors.greenAccent[600]}> Department</Typography>} control={<Radio onClick={(e) => handler(5)} />}></FormControlLabel>
 
@@ -416,85 +403,85 @@ const Categories = () => {
                         </Box>
                     }
                     {
-                        status === 4 &&
-                        <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
-                            <Formik initialValues={cer} validationSchema={validationcertificate} onSubmit={subcer}>
-                                {(props) => (
-                                    <Form>
-                                        <Typography variant="h2" mt="5px" color="initial">Add Certificate Type </Typography>
-                                        <Field as={TextField}
+                        // status === 4 &&
+                        // <Box justifyContent='center' alignItems='center' display='flex' m="40px auto" sx={{ backgroundColor: colors.primary[400], width: "50%", borderRadius: "23px" }}>
+                        //     <Formik initialValues={cer} validationSchema={validationcertificate} onSubmit={subcer}>
+                        //         {(props) => (
+                        //             <Form>
+                        //                 <Typography variant="h2" mt="5px" color="initial">Add Certificate Type </Typography>
+                        //                 <Field as={TextField}
 
-                                            sx={styles.textfield}
-                                            name="certificateType"
-                                            label="Add Certificate Type"
-                                            variant='standard'
-                                            type="text"
-                                            color='secondary'
-                                            placeholder='Enter Complaint Type..'
-                                            InputLabelProps={{ style: { fontSize: 20 } }}
-                                            InputProps={{
-                                                startAdornment: (<InputAdornment position="start"> <SpeakerNotesTwoTone color='secondary' /></InputAdornment>)
-                                            }}
+                        //                     sx={styles.textfield}
+                        //                     name="certificateType"
+                        //                     label="Add Certificate Type"
+                        //                     variant='standard'
+                        //                     type="text"
+                        //                     color='secondary'
+                        //                     placeholder='Enter Complaint Type..'
+                        //                     InputLabelProps={{ style: { fontSize: 20 } }}
+                        //                     InputProps={{
+                        //                         startAdornment: (<InputAdornment position="start"> <SpeakerNotesTwoTone color='secondary' /></InputAdornment>)
+                        //                     }}
 
-                                        />
-                                        <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='certificateType' />}</Typography>
-                                        <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
-                                        <Box mt="10px" mb="20px" 
-                                         sx={{
-                                            "& .MuiTable-root": {
-                                                border: "none"
-                                            },
-                                            "& .MuiTableCell-root": {
-                                                borderBottom: "none"
-                                            },
-                                            "& .name-column--cell": {
-                                                color: colors.greenAccent[300]
-                                            },
-                                            "& .MuiTableHead-root": {
-                                                backgroundColor: colors.blueAccent[400],
-                                                borderBottom: "none"
-                                            }
-                                        }}
-                                        >
-                                            <TableContainer  sx={{
-                                                height: 200 ,overflow:"auto",  backgroundColor: colors.primary[600]
-                                            }}>
-                                                <Table size="medium" sx={{height:"max-content"}} >
-                                                    <TableHead>
-                                                        <TableRow>
-                                                            <TableCell>Name</TableCell>
-                                                            <TableCell>Delete</TableCell>
-                                                        </TableRow>
-                                                    </TableHead>
-                                                    <TableBody sx={{  backgroundColor: colors.primary[600] }}>
+                        //                 />
+                        //                 <Typography variant="subtitle2" color="crimson">{<ErrorMessage name='certificateType' />}</Typography>
+                        //                 <Button type="submit" sx={styles.btn} variant="contained" color="secondary" startIcon={<AddCircleOutlineTwoTone />} >Add</Button>
+                        //                 <Box mt="10px" mb="20px" 
+                        //                  sx={{
+                        //                     "& .MuiTable-root": {
+                        //                         border: "none"
+                        //                     },
+                        //                     "& .MuiTableCell-root": {
+                        //                         borderBottom: "none"
+                        //                     },
+                        //                     "& .name-column--cell": {
+                        //                         color: colors.greenAccent[300]
+                        //                     },
+                        //                     "& .MuiTableHead-root": {
+                        //                         backgroundColor: colors.blueAccent[400],
+                        //                         borderBottom: "none"
+                        //                     }
+                        //                 }}
+                        //                 >
+                        //                     <TableContainer  sx={{
+                        //                         height: 200 ,overflow:"auto",  backgroundColor: colors.primary[600]
+                        //                     }}>
+                        //                         <Table size="medium" sx={{height:"max-content"}} >
+                        //                             <TableHead>
+                        //                                 <TableRow>
+                        //                                     <TableCell>Name</TableCell>
+                        //                                     <TableCell>Delete</TableCell>
+                        //                                 </TableRow>
+                        //                             </TableHead>
+                        //                             <TableBody sx={{  backgroundColor: colors.primary[600] }}>
 
-                                                        {getcercat <= 0 ? <TableRow>
-                                                            <TableCell colSpan={2}>
-                                                                <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h3" color="primary">No Certificate Type Added</Typography>
-                                                            </TableCell>
-                                                        </TableRow>
-                                                            :
-                                                            getcercat?.map((data) => (
-                                                                <TableRow key={data._id}>
-                                                                    <TableCell >{data.certificateType}</TableCell>
+                        //                                 {getcercat <= 0 ? <TableRow>
+                        //                                     <TableCell colSpan={2}>
+                        //                                         <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h3" color="primary">No Certificate Type Added</Typography>
+                        //                                     </TableCell>
+                        //                                 </TableRow>
+                        //                                     :
+                        //                                     getcercat?.map((data) => (
+                        //                                         <TableRow key={data._id}>
+                        //                                             <TableCell >{data.certificateType}</TableCell>
 
-                                                                    <TableCell >
-                                                                        <IconButton aria-label="correct" color="error" onClick={() => { delcer(data._id) }} >
-                                                                            <DeleteForeverTwoTone />
-                                                                        </IconButton>
+                        //                                             <TableCell >
+                        //                                                 <IconButton aria-label="correct" color="error" onClick={() => { delcer(data._id) }} >
+                        //                                                     <DeleteForeverTwoTone />
+                        //                                                 </IconButton>
 
-                                                                    </TableCell>
-                                                                </TableRow>
-                                                            ))
-                                                        }
-                                                    </TableBody>
-                                                </Table>
-                                            </TableContainer>
-                                        </Box>
-                                    </Form>
-                                )}
-                            </Formik>
-                        </Box>
+                        //                                             </TableCell>
+                        //                                         </TableRow>
+                        //                                     ))
+                        //                                 }
+                        //                             </TableBody>
+                        //                         </Table>
+                        //                     </TableContainer>
+                        //                 </Box>
+                        //             </Form>
+                        //         )}
+                        //     </Formik>
+                        // </Box>
                     }
                     {
                         status === 5 &&

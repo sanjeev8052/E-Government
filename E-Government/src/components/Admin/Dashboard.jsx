@@ -1,11 +1,11 @@
-import { makeStyles } from '@material-ui/core'
+import { Button, makeStyles } from '@material-ui/core'
 import { Box, Typography } from '@mui/material'
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 // import "./../../index1.css"
 import './Dashboard.css'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
 import Header from '../Global/Header'
@@ -13,20 +13,45 @@ import Loader from '../Layout/Loader'
 import AdminAuth from '../ProtectedRoute/AdminAuth'
 import { Person } from '@mui/icons-material'
 import { PieChart } from 'react-minimal-pie-chart';
+import { getUser } from '../../Action/Admin/User'
+import { getEmp, getEmpDetails } from '../../Action/Admin/Employee'
+import { getCompReq } from '../../Action/Services/Services'
+import axios from 'axios'
 
 
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
-  const { cuser } = useSelector((state) => (state.dashboard))
+
+  const { loading, GetUser, emp } = useSelector((state) => (state.admin))
+  const { getComReq } = useSelector((state) => (state.services))
+  const [empCompDet, setEmpCompDet] = useState([]);
+
+  const { getEmpData } = useSelector(state => state.employee)
+
   useEffect(() => {
-    // dispatch(CountUser())
+    getAssignComp();
   }, [])
 
-  // const { loading } = useSelector(state => state.admin)
+  console.log(empCompDet)
+  const getAssignComp = async () => {
+    try {
+      const { data } = await axios.get('api/admin/getAssignComp')
+      setEmpCompDet(data)
+    } catch (error) {
 
+    }
+  }
+  const getCompleteComplaint = async () => {
+    const { data } = await axios.get("api/admin/compComplete")
+    setData(data.complaint)
+  }
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser())
+    dispatch(getEmp())
+    dispatch(getCompReq())
+  }, []);
 
-  const { loading } = useSelector(state => state.admin)
   const label = "Complaints"
 
   return (
@@ -40,36 +65,28 @@ const Dashboard = () => {
               <Header title="DASHBOARD" subtitle="Welcome to Yuor Dashboard" />
             </Box>
             <div className="row dashboard ">
-              <div className="col-2 dsItem1">
+              <Link to='/auser' className="col-2 dsItem1">
+                <Person sx={{ fontSize: "4rem" }} />
+                <Typography components={Link} to='/auser' variant="h2" color="lightblue">User</Typography>
+                <Typography variant="h1" color="lightblue">{GetUser && GetUser.length}</Typography>
 
-                <Typography variant="h2" color="lightblue">User</Typography>
-                <Typography variant="h1" color="lightblue">12</Typography>
-
-              </div>
-              <div className="col-2 dsItem1">
-
+              </Link>
+              <Link to='/aemployee' className="col-2 dsItem1">
+                <Person sx={{ fontSize: "4rem" }} />
                 <Typography variant="h2" color="lightblue">Employee</Typography>
-                <Typography variant="h1" color="lightblue">12</Typography>
+                <Typography variant="h1" color="lightblue">{emp && emp.length}</Typography>
 
-              </div>
-              <div className="col-2 dsItem1">
-                <Typography variant="h2" color="lightblue">Complaints</Typography>
-                <Typography variant="h1" color="lightblue">12</Typography>
+              </Link>
+              <Link to='/aemployee' className="col-2 dsItem1">
+                <Person sx={{ fontSize: "4rem" }} />
+                <Typography variant="h2" color="lightblue">Req Emp</Typography>
+                <Typography variant="h1" color="lightblue">{emp && emp.length}</Typography>
 
-              </div>
-              <div className="col-2 dsItem1">
-                <Typography variant="h2" color="lightblue">Meter Req</Typography>
-                <Typography variant="h1" color="lightblue">12 </Typography>
+              </Link>
 
-              </div>
-              <div className="col-2 dsItem1">
-                <Typography variant="h2" color="lightblue">certificates</Typography>
-                <Typography variant="h1" color="lightblue">12</Typography>
-
-              </div>
               <div className='row pieChartBox'>
 
-              <div className="col-sm-4  ">
+                <div className="col-sm-4  ">
                   <Typography variant="h1" color="initial">Complaints</Typography>
                   <div className='chart'>
                     <Typography variant="h3" color="initial">Request  </Typography><div className='bg-secondary' id='c1'></div><br />
@@ -84,9 +101,9 @@ const Dashboard = () => {
                   <PieChart className='pieChart'
 
                     data={[
-                      { title: 'Two', value: 10, color: 'orange' },
-                      { title: 'One', value: 15, color: 'gray', label: "Request" },
-                      { title: 'Three', value: 10, color: 'green' },
+                      { title: 'Request', value: getComReq && getComReq.length, color: 'gray' },
+                      { title: 'Process', value: empCompDet && empCompDet.length, color: 'orange', },
+                      { title: 'Complete', value: 2, color: 'green' },
                     ]}
                   />;
                 </div>
@@ -105,7 +122,7 @@ const Dashboard = () => {
                   <PieChart className='pieChart'
 
                     data={[
-                      { title: 'Two', value: 10, color: 'orange' },
+                      { title: 'Two', value: 30, color: 'orange' },
                       { title: 'One', value: 15, color: 'gray', label: "Request" },
                       { title: 'Three', value: 10, color: 'green' },
                     ]}
@@ -127,8 +144,8 @@ const Dashboard = () => {
 
                     data={[
                       { title: 'Two', value: 1, color: 'orange' },
-                      { title: 'One', value: 15, color: 'gray', label: "Request" },
-                      { title: 'Three', value: 10, color: 'green' },
+                      { title: 'One', value: 15, color: 'gray', },
+                      { title: 'Three', value: 30, color: 'green' },
                     ]}
                   />;
                 </div>

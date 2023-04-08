@@ -72,7 +72,7 @@ const Dashboard = () => {
 
                             <div className="col-lg-12">
                                 <Typography variant="h4" className='text-center' color="initial">Complete Complaints</Typography>
-                                {compCopleteData && compCopleteData <= 1 ?
+                                {compCopleteData && compCopleteData <= 0 ?
                                  <Typography variant="h3" className='text-success text-center' >{compCopleteData.length}</Typography>
                                     : compCopleteData?.map((data) => (
                                         <>

@@ -81,10 +81,10 @@ const IncomeReciept = () => {
                     <h2>Government Of India</h2>
                     <h2>Income Certificate</h2>
                     <h5 className='mt-2  text-start'>
-                        Certified that tha annual family income  of the person with the details mentioned belwo from all source is <CurrencyRupee/> {data.income}
+                        Certified that the annual family income  of the person with the details mentioned below from all source is. <CurrencyRupee/> {data.income}
                     </h5>
                     <div className='row'>
-                        <h5 className='text-start col-6 mt-4 mb-2'>From No:{data.uniqueId}</h5>
+                        <h5 className='text-start col-6 mt-4 mb-2'>Form No:{data.uniqueId}</h5>
                         <h5 className='text-end col-6 mt-4 mb-2'>Date:{data.date}</h5>
                     </div>
 

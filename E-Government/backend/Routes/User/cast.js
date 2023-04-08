@@ -52,9 +52,9 @@ router.post('/castreq', upload.fields([
 })
 
 // For Get Cast cer Request
-router.get('/getcastreq', isAuthenticate, async (req, res) => {
+router.get('/getcastreq',  async (req, res) => {
     try {
-        const request = await Cast.find({ status: "Requested" })
+        const request = await Cast.find({})
         if (!request) {
             return res.status(404).json({ message: "Cast Certificate Request Not Found" })
         }

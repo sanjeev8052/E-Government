@@ -3,13 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'
 import { Box, Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, Typography, useTheme } from '@material-ui/core';
 import { Send } from '@mui/icons-material';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Footer from '../Layout/Footer/Footer';
 import { useFormik } from 'formik'
 import { castValidation } from '../../ValidateSchema/Services';;
 
 import axios from 'axios';
 import { margin } from '@mui/system';
+import { useAlert } from 'react-alert';
 
 const useStyles = makeStyles({
     Complaint: {
@@ -65,6 +66,8 @@ const useStyles = makeStyles({
 });
 const CastCer = () => {
 
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const [file, setFile] = useState();
     const [image, setImage] = useState();
     const [file2, setFile2] = useState();
@@ -72,9 +75,9 @@ const CastCer = () => {
 
     const handleFile = (e) => {
         const file = e.target.files[0]
-      
+
         setFile(file)
-        console.log("file 1",file)
+        console.log("file 1", file)
         const reader = new FileReader()
         reader.onload = () => {
             if (reader.readyState === 2) {
@@ -86,7 +89,7 @@ const CastCer = () => {
     const handleFile2 = (e) => {
         const file2 = e.target.files[0]
         setFile2(file2)
-        console.log("file 2",file2)
+        console.log("file 2", file2)
         const reader = new FileReader()
         reader.onload = () => {
             if (reader.readyState === 2) {
@@ -100,25 +103,30 @@ const CastCer = () => {
 
     const initialvalues = {
     }
+
+     const ualert = useAlert()
     const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
 
         initialValues: initialvalues,
         validationSchema: castValidation,
 
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             try {
                 if (file) {
                     const formData = new FormData()
                     formData.append("file", file)
                     formData.append("file2", file2)
                     formData.append('data', JSON.stringify(values));
-                    // console.log(values)
-                    // console.log(file)
-                    axios.post('/api/castreq', formData, {
+                    setLoading(true)
+                    const { data } = await axios.post('/api/castreq', formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }
                     })
+                    setLoading(false)
+                    ualert.success(" Form Submited..")
+                    navigate('/')
+
 
                     return
                 }
@@ -152,7 +160,7 @@ const CastCer = () => {
 
                     />
                     {errors.name && touched.name ? (
-                        <Typography className={classes.error}   >{errors.name}</Typography>
+                        <Typography className={classes.error} >{errors.name}</Typography>
                     ) : null}
                     <Typography variant="h6" color="initial">Email</Typography>
                     <TextField className={classes.fullInput}
@@ -166,9 +174,9 @@ const CastCer = () => {
                         onBlur={handleBlur}
 
                     />
-                     {errors.email && touched.email ? (
+                    {errors.email && touched.email ? (
                         <Typography className={classes.error}   >{errors.email}</Typography>
-                    ) : null}
+                    ) : null} <br />
                     <FormControl>
                         <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
                         <RadioGroup
@@ -176,7 +184,6 @@ const CastCer = () => {
                             aria-labelledby="demo-radio-buttons-group-label"
                             onChange={handleChange}
                             name="gender"
-                            defaultValue="male"
                             onBlur={handleBlur}
                             value={values.gender}
                         >
@@ -188,7 +195,7 @@ const CastCer = () => {
                     {errors.gender && touched.gender ? (
                         <Typography className={classes.error}   >{errors.gender}</Typography>
                     ) : null}
-                   
+
                     <Typography variant="h6" color="initial">Mobile No.</Typography>
                     <TextField className={classes.fullInput}
                         id=""
@@ -325,7 +332,7 @@ const CastCer = () => {
                         </div>
                     </div>
 
-                    <Button type='submit' color='primary' className={classes.button} variant="contained" endIcon={<Send />}>
+                    <Button disabled={loading} type='submit' color='primary' className={classes.button} variant="contained" endIcon={<Send />}>
                         Apply
                     </Button>
                 </div>

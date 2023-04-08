@@ -8,6 +8,7 @@ const crypto = require('crypto')
 const { errorHandler } = require("../../middlewares/Errorhandler");
 const { isAuthenticatedUser } = require("../../middlewares/auth");
 const multer = require('multer');
+const ContactUs = require("../../models/User/ContactUs");
 
 
 const storage = multer.diskStorage({
@@ -108,7 +109,7 @@ router.post("/user/new/", async (req, res) => {
         if (user) {
             return res
                 .status(400)
-                .json({ sucsess: false, message: "user already exists....." })
+                .json({ sucsess: false, Regmessage: "user already exists....." })
         }
         const message = "WELCOME TO PROFILE BASED E-GOVERNANCE ONLINE SERVICE PORTAL"
         user = await User.create({ name, email, phone, password })
@@ -120,10 +121,10 @@ router.post("/user/new/", async (req, res) => {
         });
         res.status(201).json({
             sucsess: true,
-            message: "Register Success."
+            Regmessage: "Register Success."
         })
     } catch (error) {
-        res.status(500).json({ sucsess: false, message: error.message })
+        res.status(500).json({ sucsess: false, Regmessage:error.message })
     }
 });
 router.post("/user/login", async (req, res) => {
@@ -287,6 +288,20 @@ router.post("/update/profile/:id", async (req, res) => {
             type: "success"
 
         })
+    } catch (error) {
+        res.status(500).json({ sucsess: false, message: error.message })
+
+    }
+
+})
+router.post("/contactUs", async (req, res) => {
+
+    try {
+        const contactInfo = await ContactUs.create(req.body)
+        res.status(200).json({
+            message:"Message send Successfully.."
+        })
+
     } catch (error) {
         res.status(500).json({ sucsess: false, message: error.message })
 

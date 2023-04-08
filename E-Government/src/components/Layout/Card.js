@@ -70,8 +70,7 @@ const Card = () => {
                                             </Button>
                                             <Menu  {...bindMenu(popupState)}>
                                                 <MenuItem component={Link} to='/complaint'>Add New Complaint</MenuItem>
-                                                <MenuItem >My account</MenuItem>
-                                                <MenuItem >Logout</MenuItem>
+                                               
                                             </Menu>
                                         </React.Fragment>
                                     )}
@@ -119,8 +118,7 @@ const Card = () => {
                                             </Button>
                                             <Menu  {...bindMenu(popupState)}>
                                                 <MenuItem component={Link} to='meterApply'>Apply Meter</MenuItem>
-                                                <MenuItem onClick={popupState.close}>My account</MenuItem>
-                                                <MenuItem onClick={popupState.close}>Logout</MenuItem>
+                                               
                                             </Menu>
                                         </React.Fragment>
                                     )}
@@ -177,7 +175,8 @@ const Card = () => {
                             </Button>
                         </div>
                     </div>
-                </div>   <div className="col-sm-4">
+                </div> 
+                  {/* <div className="col-sm-4">
                     <div style={css.card}>
                         <img style={css.img} src={registerImage} alt="Card" />
                         <div className="card-body">
@@ -200,7 +199,7 @@ const Card = () => {
                             </Button>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
 

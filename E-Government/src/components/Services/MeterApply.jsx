@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import { tokens } from '../../Global'
 import { Box, Button, FormControl, MenuItem, Select, Typography, useTheme } from '@material-ui/core';
 import { Send } from '@mui/icons-material';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../Layout/Footer/Footer';
 import { useFormik } from 'formik'
 import { complaintSchema, meterSchema } from '../../ValidateSchema/Services';
@@ -67,6 +67,7 @@ const useStyles = makeStyles({
 
 const MeterApply = () => {
 
+    const navigate = useNavigate();
     const [file, setFile] = useState();
     const [image, setImage] = useState();
 
@@ -104,6 +105,7 @@ const MeterApply = () => {
                           'Content-Type': 'multipart/form-data'
                         }
                     })
+                        navigate('/')
 
                     return
                 }

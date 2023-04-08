@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { TextField, InputAdornment, Typography, Button, FormControlLabel, Checkbox, Grid } from '@mui/material'
 import { Person, Login, Email, Password, Phone, CloudDone } from '@mui/icons-material'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import signUpImage from '../../Images/bgImage4.jpg'
 import Footer from '../Layout/Footer/Footer'
 import { useFormik } from 'formik'
 import { signUpSchema } from '../../ValidateSchema/User'
-import { userRegister } from '../../Action/User'
+import { userRegisetr } from '../../Action/User'
 import { useAlert } from 'react-alert'
+
 const Register = () => {
     const styles = {
         mainBox: {
@@ -65,25 +66,27 @@ const Register = () => {
         }
     }
 
-    const alert = useAlert()
+    const navigate = useNavigate()
+    const ualert = useAlert()
     const [checked, setChecked] = useState(false);
     const dispatch = useDispatch();
-    const { message , regisetrError, loading ,data , error } = useSelector(state => state.user)
-    console.log(regisetrError)
+    const { message , loading  , rerror } = useSelector(state => state.user)
+    
     useEffect(() => {
-        if (data) {
-            alert.success(data.message)
+        if (message) {
+            ualert.success(message.Regmessage)
+            navigate('/login')
             dispatch({
                 type: "ClearRegisterMessage"
             })
         }
-        if (error) {
-            alert.error(regisetrError.response.data.message)
+        if (rerror) {
+            ualert.error(rerror.response.data.Regmessage)
             dispatch({
                 type: "ClearRegisterMessage"
             })
         }
-    }, [data, regisetrError ,]);
+    }, [message, rerror ,]);
 
     const initialvalues = {
         name: "",
@@ -96,7 +99,7 @@ const Register = () => {
         initialValues: initialvalues,
         validationSchema: signUpSchema,
         onSubmit: (values) => {
-            checked ? dispatch(userRegister(values)) : alert(" Pleas Check Terms and Condition")
+            checked ? dispatch(userRegisetr(values)) : alert(" Pleas Check Terms and Condition")
         }
     })
 
@@ -188,7 +191,7 @@ const Register = () => {
                     />
 
 
-                    <Button sx={{ width: "100%" }} type='submit' variant="contained" color="primary">
+                    <Button sx={{ width: "100%" }} disabled={loading}  type='submit' variant="contained" color="primary">
                         Register
                     </Button>
 

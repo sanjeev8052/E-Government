@@ -1,6 +1,8 @@
 const express = require("express");
 const { isAuthenticate } = require("../../middlewares/Adminmiddle");
 const UserModel = require("../../models/User/UserModel");
+const ContactUs = require("../../models/User/ContactUs");
+
 const router = express.Router();
 
 // For Block User
@@ -71,6 +73,14 @@ router.post("/unblockuser/:id", isAuthenticate, async (req, res) => {
         }
         // const unblockuser = await UserModel.create(blkuser.toJSON())
         //  const deleteblkuser = await BlockUser.deleteOne({ _id: req.params._id })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
+router.get("/contactUsInfo", async (req, res) => {
+    try {
+        const contactUsInfo = await ContactUs.find({})
+        res.send(contactUsInfo)
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

@@ -99,7 +99,6 @@ const Download = () => {
 
           </div>
           <div className="col-sm-4">
-            <img className='image mt-3' src={`http://localhost:5000/PDF/${data.image}`} alt="" />
           </div>
           <div className="col-lg-12 mt-5">
             <h5>This is to certify that <u>{data.name}</u> son of  <u>{data.fatherName}</u> Of village  <u>{data.village}</u> , teshil  <u>{data.tehsil}</u>,

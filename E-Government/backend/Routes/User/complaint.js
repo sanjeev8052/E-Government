@@ -77,11 +77,11 @@ router.get('/searchCompByEmail/', isAuthenticatedUser, async (req, res) => {
 })
 
 // get  Completed Complaint of each User
-router.get('/searchCompCompletebyUser', async (req, res) => {
+router.get('/searchCompCompletebyUser',isAuthenticatedUser,  async (req, res) => {
 
     try {
 
-        const complaint = await compComplete.find({email:"sanjeevgaund12@gmail.com"})
+        const complaint = await compComplete.find({email:req.user.email})
        
         res.status(200).send(complaint)
 

@@ -9,10 +9,12 @@ import signup from '../Images/Icons/signup1.jpg'
 import { useDispatch, useSelector } from 'react-redux'
 import { Register } from '../../Action/Employee/register'
 import { Getdept } from '../../Action/Admin/Categories'
+import { useNavigate } from 'react-router-dom'
 
 
 
 const Empregister = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { getdept, loading } = useSelector((state) => (state.services))
   const details = {
@@ -131,6 +133,7 @@ const Empregister = () => {
   })
   const onSubmit = (values, props) => {
     dispatch(Register(values))
+    navigate('/emplogin')
   }
   return (
     <>
