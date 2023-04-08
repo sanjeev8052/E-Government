@@ -20,10 +20,10 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const { cuser } = useSelector((state) => (state.dashboard))
   useEffect(() => {
-    dispatch(CountUser())
+    // dispatch(CountUser())
   }, [])
 
-  const { loading } = useSelector(state => state.admin)
+  // const { loading } = useSelector(state => state.admin)
 
 
   const { loading } = useSelector(state => state.admin)
