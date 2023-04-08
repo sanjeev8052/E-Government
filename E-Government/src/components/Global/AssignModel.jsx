@@ -79,7 +79,7 @@ const AssignModel = () => {
     onSubmit: (values) => {
 
       axios.post("/api/admin/assigncom", { empId: values.empId, compId: details._id })
-      // navigate('/assign')
+      navigate('/assign')
       //dispatch(CompReq(user, values))
     }
 

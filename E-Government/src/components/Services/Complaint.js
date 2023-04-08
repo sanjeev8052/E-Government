@@ -12,9 +12,10 @@ import { LoadUser } from '../../Action/User';
 import Loader from '../Layout/Loader'
 import { CompReq } from '../../Action/Services/Services';
 import axios from 'axios';
+import { useAlert } from 'react-alert'
 import { getUser } from '../../Action/Admin/User';
 import { Getdept } from '../../Action/Admin/Categories';
-
+import {useNavigate  } from 'react-router-dom'
 
 const useStyles = makeStyles({
   Complaint: {
@@ -67,6 +68,8 @@ const useStyles = makeStyles({
 });
 
 const Complaint = () => {
+
+  const navigate = useNavigate()
   const { userData, userLoading, isAuthenticated } = useSelector(state => state.user)
   const { getdept, data, error } = useSelector((state) => (state.services))
   const themes = useTheme()

@@ -120,6 +120,7 @@ router.get("/profile", isAuthenticate, async (req, res) => {
 }
 )
 
+
 // For Logout
 router.get("/logout", async (req, res) => {
     try {

@@ -85,9 +85,9 @@ const Work = () => {
                         <IconButton aria-label="block" color='success'  >
                           {data.status === "asign" ? <Done disabled={btnloading} onClick={() => handleConfirmation(data._id)} /> : <DoneAll />}
                         </IconButton>
-                        <IconButton aria-label="block" color='error' >
+                        {/* <IconButton aria-label="block" color='error' >
                         {data.status === "asign" ? undefined : <Delete />}
-                        </IconButton>
+                        </IconButton> */}
                         {/* <Button variant="contained" color="primary" size='small' sx={{ borderRadius: "100px" }} onClick={() => { block(data._id) }}><BlockTwoTone /> Block
                         </Button> */}
                       </TableCell>

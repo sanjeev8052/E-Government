@@ -68,6 +68,7 @@ import ViewPdf from './components/Global/ViewPdf'
 import cookies from 'js-cookie'
 import AdminResetPassword from './components/Admin/AdminResetPassword'
 import IncomeReciept from './components/User/Download/IncomeReciept'
+import ContactUs from './components/User/ContactUs/ContactUs'
 const App = () => {
 
   const dispatch = useDispatch();
@@ -111,6 +112,8 @@ const App = () => {
             <Route path='/Download' element={<Download />} />
             <Route path='/IncomeReciept' element={<IncomeReciept />} />
             <Route path='/ufeedback' element={<Feedback1 />} />
+            <Route path='/ContactUs' element={<ContactUs />} />
+
 
 
             {/* Services */}

@@ -134,7 +134,15 @@ router.post("/assigncom", async (req, res) => {
 })
 
 
-
+router.get("/getAssignComp",  async (req, res) => {
+    try {
+        const  assignComp = await UserComplaint.find({status:"asign"})
+        res.send(assignComp)
+    } catch (error) {
+        res.status(400).json(error.message)
+    }
+}
+)
 
 
 

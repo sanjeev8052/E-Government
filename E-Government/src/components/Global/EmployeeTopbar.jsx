@@ -143,7 +143,7 @@ const EmployeeTopbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src={empProfileImage} />
+                <Avatar alt="Remy Sharp" src={empProfileImage ? `http://localhost:5000/Profile/${empProfileImage}` : null } />
               </IconButton>
             </Tooltip>
             <Menu
@@ -166,7 +166,7 @@ const EmployeeTopbar = () => {
                 <Typography component={Link} to="/eprofile" textAlign="center" sx={{textDecoration:"none" ,color:"black"}}>Profile</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Logout</Typography>
+                <Typography  textAlign="center">Logout</Typography>
               </MenuItem>
             </Menu>
           </Box>

@@ -3,6 +3,8 @@ const router = express.Router();
 const { isAuthenticate } = require("../../middlewares/Adminmiddle");
 const Employee = require("../../models/Emp/Employee");
 
+const { sendEmail } = require('../../middlewares/sendEmail')
+
 // For Get Register Employee Request
 router.get("/gettempemp", isAuthenticate, async (req, res) => {
     try {
@@ -36,6 +38,12 @@ router.post("/employee/:_id", isAuthenticate, async (req, res) => {
         }
     } catch (error) {
         res.status(500).json({ error: error.message })
+        const message = `Your Request for register is accepted noe you can login`
+                await sendEmail({
+                email: emp.email,
+                subject: "Request for registraiton  Accepted...",
+                message
+            });
     }
 })
 

@@ -115,10 +115,7 @@ const Emplogin = () => {
                                     {errors.password && touched.password ? (
                                         <Typography color="crimson">{errors.password}</Typography>
                                     ) : null}
-                                    <FormControlLabel
-                                        control={<Checkbox value="remember" color="primary" />}
-                                        label="Remember me"
-                                    />
+                                   
                                     <Button
                                         type="submit"
                                         fullWidth
@@ -135,9 +132,9 @@ const Emplogin = () => {
                                         </NavLink>
                                     </Grid>
                                     <Grid item>
-                                        <Link href="#" variant="body2">
+                                        <NavLink to='/empregister' variant="body2">
                                             {"Don't have an account? Sign Up"}
-                                        </Link>
+                                        </NavLink>
                                     </Grid>
                                 </Grid>
 

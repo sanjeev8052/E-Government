@@ -8,6 +8,27 @@ const initialState = {
 export const userReducer = createReducer(initialState, {
 
     // Login Reducers........
+    UserRagisterRequest: (state) => {
+        state.loading = true;
+    },
+    UserRagisterSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+        state.isAuthenticated = true
+    },
+    UserRagisterFailuer: (state, action) => {
+        state.loading = false;
+        state.rerror = action.payload;
+        state.isAuthenticated = false
+    },
+    ClearRegisterMessage: (state) => {
+        state.message = null;
+        state.rerror = null;
+
+    },
+
+
+    // Ragister Reducers........
     UserLoginRequest: (state) => {
         state.loading = true;
     },
@@ -18,31 +39,12 @@ export const userReducer = createReducer(initialState, {
     },
     UserLoginFailuer: (state, action) => {
         state.loading = false;
-        state.LoginError = action.payload;
+        state.LoginError = action.payload; 
         state.isAuthenticated = false
     },
     ClearLoginMessage: (state) => {
         state.message = null;
         state.LoginError = null;
-
-    },
-
-
-    // Ragister Reducers........
-    RagisterRequest: (state) => {
-        state.loading = true;
-    },
-    RagisterSuccess: (state, action) => {
-        state.loading = false;
-        state.message = action.payload;
-    },
-    RagisterFailuer: (state, action) => {
-        state.loading = false;
-        state.regisetrError = action.payload;
-    },
-    ClearRegisterMessage: (state) => {
-        state.message = null;
-        state.regisetrError = null;
 
     },
 

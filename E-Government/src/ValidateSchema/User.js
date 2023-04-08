@@ -28,6 +28,13 @@ export const forgotSchema = yup.object({
 
 export const ProfileSchema = yup.object({
     email: yup.string().email().matches(/^(?!.*@[^,]*,)/).required("Please Enter Your Email.."),
-    name: yup.string().min().required("Please Enter Your Email.."),
-    phone: yup.string().min(10).max(10).required("Please Enter Your Email.."),
+    name: yup.string().min(3).required("Please Enter Your Email.."),
+    phone: yup.number().min(1000000000,['Phone no is not valid']).max(9999999999,['Phone no is not valid']).required(),
+})
+export const ContactSchema = yup.object({
+    fName: yup.string().min(3).required("Please Enter Your First Name.."),
+    lName: yup.string().min(3).required("Please Enter Your Last Name.."),
+    email: yup.string().email().matches(/^(?!.*@[^,]*,)/).required("Please Enter Your Email.."),
+    phone: yup.number().min(1000000000,['Phone no is not valid']).max(9999999999,['Phone no is not valid']).required(),
+    message: yup.string().min(10).required(),
 })

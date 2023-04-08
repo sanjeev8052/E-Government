@@ -6,6 +6,7 @@
 }
 
 .dsItem1 {
+    text-decoration: none;
     margin: 0 1rem;
     background-color: rgb(16, 62, 148);
     border-radius: 40%;
