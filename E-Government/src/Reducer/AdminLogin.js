@@ -4,7 +4,16 @@ const initialState = {}
 
 export const AdminReducer = createReducer(initialState, 
     {
-
+        clearMessage: (state) => {
+            state.cempMs = null;
+            state.remp = null;
+            state.blockDataMs = null;
+            state.unblkemp = null;
+            state.BlkUser = null;
+            state.unblkuser = null;
+            state.AdminLog = null;
+            state.error = null;
+        },
     // Admin Login
     LoginRequest: (state, action) => {
         state.loading = true;
@@ -75,7 +84,7 @@ export const AdminReducer = createReducer(initialState,
     },
     CEmployeeSuccess: (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.cempMs = action.payload;
 
     },
     CEmployeeFailure: (state, action) => {
@@ -128,7 +137,7 @@ export const AdminReducer = createReducer(initialState,
     },
     BlockSuccess: (state, action) => {
         state.loading = false;
-        state.blockData = action.payload;
+        state.blockDataMs = action.payload;
 
     },
     BlockFailure: (state, action) => {

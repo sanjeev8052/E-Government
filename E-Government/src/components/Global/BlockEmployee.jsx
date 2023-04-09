@@ -2,10 +2,10 @@
 import { Box, useTheme, Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, } from '@mui/material'
 
 import { tokens } from '../../Global'
-
-import React from 'react'
+import { useAlert } from 'react-alert'
+import React,{useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getblkEmp, unblockEmp } from '../../Action/Admin/Employee'
+import { getblkEmp, unblockEmp, } from '../../Action/Admin/Employee'
 import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 
@@ -15,9 +15,16 @@ const BlockEmployee = () => {
   const colors = tokens(themes.palette.mode)
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch()
-  const { loading, blkemp } = useSelector((state) => (state.admin))
+  const { loading, unblkemp,blkemp } = useSelector((state) => (state.admin))
+  const alert = useAlert();
 
-
+  useEffect(() => {
+    if (unblkemp) {
+      alert.success(unblkemp.message)
+      dispatch({ type: "clearMessage" })
+    }
+  }, [unblkemp])
+  
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -25,14 +32,13 @@ const BlockEmployee = () => {
     
   };
   
-  console.log(blkemp)
+ 
   const handleClose = () => {
     setOpen(false);
   };
 
   const unblock = (id) => { 
     dispatch(unblockEmp(id))
-    window.location.reload()
    }
 
   return (

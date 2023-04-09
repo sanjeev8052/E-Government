@@ -1,5 +1,6 @@
 
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper, IconButton, Button } from '@mui/material'
+import { useAlert } from 'react-alert'
 import React, { useEffect, useState } from 'react'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
@@ -15,16 +16,19 @@ import AdminAuth from '../ProtectedRoute/AdminAuth'
 
 
 const Employee = () => {
+    const alert = useAlert();
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    const {  loading, emp, blockData } = useSelector((state) => (state.admin))
-
-    console.log(emp)
-    console.log(blockData)
-
-
-   
+    const {  loading, emp, blockDataMs} = useSelector((state) => (state.admin))
+    // console.log(emp)
+    // console.log(blockData)
     const dispatch = useDispatch()
+useEffect(() => {
+    if (blockDataMs) {
+        alert.success(blockDataMs.message)
+        dispatch({ type: "clearMessage" })
+      }
+}, [blockDataMs])
 
     useEffect(() => {
         dispatch(getEmp())

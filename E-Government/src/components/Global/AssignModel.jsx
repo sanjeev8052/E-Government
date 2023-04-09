@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles';
-
+import { useAlert } from 'react-alert';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import { Button } from '@material-ui/core'
@@ -27,7 +27,7 @@ const useStyle = makeStyles({
 
 const AssignModel = () => {
 
-
+  const alert = useAlert();
   const dispatch = useDispatch()
   const { getdept, loading } = useSelector((state) => (state.services))
 
@@ -39,12 +39,15 @@ const AssignModel = () => {
   const { _id } = useParams();
   const [details, setDetails] = useState({})
   
+
   const navigate = useNavigate()
   useEffect(() => {
     dispatch(Getdept())
     loaddetails()
   }, [])
-  console.log(dept)
+  
+
+  
   const loaddetails = async () => {
     const response = await axios.get(`/api/admin/compdata/${_id}`)
     setDetails(response.data)

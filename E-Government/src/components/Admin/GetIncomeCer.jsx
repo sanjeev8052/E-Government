@@ -24,9 +24,17 @@ const GetIncomeCer = () => {
     }, [dispatch])
 
     useEffect(() => {
-        accIncomeCerReqMs ? alert.success(accIncomeCerReqMs.message) : null
-        rejectIncomeCerReqMs ? alert.success(rejectIncomeCerReqMs.message) : null
-    }, [accIncomeCerReqMs, rejectIncomeCerReqMs, alert])
+        if (accIncomeCerReqMs) {
+            alert.success(accIncomeCerReqMs.message)
+            dispatch({ type: "clearMessage" })
+           
+        }
+        if (rejectIncomeCerReqMs) {
+            alert.success(rejectIncomeCerReqMs.message)
+            dispatch({ type: "clearMessage" })
+           
+        }
+    }, [accIncomeCerReqMs, rejectIncomeCerReqMs, alert,dispatch])
 
     const confirm = (id) => {
         dispatch(accIncomeCerReq(id));

@@ -1,6 +1,6 @@
 import { BlockTwoTone } from '@mui/icons-material'
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme, Paper,Button,  IconButton } from '@mui/material'
-
+import { useAlert } from 'react-alert'
 import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,13 +15,22 @@ import Loader from './AdminLoader'
 
 const User = () => {
     const themes = useTheme()
+    const alert = useAlert();
     const colors = tokens(themes.palette.mode)
-    const {  loading, GetUser} = useSelector((state) => (state.admin))
+    const {  loading, GetUser,BlkUser} = useSelector((state) => (state.admin))
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getUser())
     }, [dispatch])
    
+    useEffect(() => {
+        if (BlkUser) {
+            alert.success(BlkUser.message)
+            dispatch({ type: "clearMessage" })
+           
+        }
+    }, [BlkUser])
+    
     const Block = (id) => { 
         dispatch(BLockUser(id))
        

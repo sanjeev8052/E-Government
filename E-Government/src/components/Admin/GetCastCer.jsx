@@ -23,9 +23,17 @@ const GetCastCer = () => {
     }, [dispatch])
 
     useEffect(() => {
-        accCastCerReqMs ? alert.success(accCastCerReqMs.message) : null
-        rejectCastCerReqMs ? alert.success(rejectCastCerReqMs.message) : null
-    }, [accCastCerReqMs, rejectCastCerReqMs, alert])
+        if (accCastCerReqMs) {
+            alert.success(accCastCerReqMs.message)
+            dispatch({ type: "clearMessage" })
+           
+        }
+        if (rejectCastCerReqMs) {
+            alert.success(rejectCastCerReqMs.message)
+            dispatch({ type: "clearMessage" })
+           
+        }
+    }, [accCastCerReqMs, rejectCastCerReqMs, alert,dispatch])
 
     const confirm = (id) => {
         dispatch(accCastCerReq(id));
@@ -45,7 +53,7 @@ const GetCastCer = () => {
 
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <Header title="Cast Certificate Request" subtitle="Welcome Your Cast Certificate Request Details Page" />
+                        <Header title="Caste Certificate Request" subtitle="Welcome Your Cast Certificate Request Details Page" />
                         <Button variant="contained" color="success" onClick={reload}>
                             Reload
                         </Button>

@@ -55,110 +55,113 @@ const Dashboard = () => {
   const label = "Complaints"
 
   return (
-    <Fragment>{loading ? <Loader /> :
-      <div className='app'>
-        <AdminSidebar />
-        <main className='content'>
-          <AdminTopbar />
-          <Box m="15px">
-            <Box display="flex" justifyContent="space-between" alignItems="center">
-              <Header title="DASHBOARD" subtitle="Welcome to Yuor Dashboard" />
-            </Box>
-            <div className="row dashboard ">
-              <Link to='/auser' className="col-2 dsItem1">
-                <Person sx={{ fontSize: "4rem" }} />
-                <Typography components={Link} to='/auser' variant="h2" color="lightblue">User</Typography>
-                <Typography variant="h1" color="lightblue">{GetUser && GetUser.length}</Typography>
+    
 
-              </Link>
-              <Link to='/aemployee' className="col-2 dsItem1">
-                <Person sx={{ fontSize: "4rem" }} />
-                <Typography variant="h2" color="lightblue">Employee</Typography>
-                <Typography variant="h1" color="lightblue">{emp && emp.length}</Typography>
-
-              </Link>
-              <Link to='/aemployee' className="col-2 dsItem1">
-                <Person sx={{ fontSize: "4rem" }} />
-                <Typography variant="h2" color="lightblue">Req Emp</Typography>
-                <Typography variant="h1" color="lightblue">{emp && emp.length}</Typography>
-
-              </Link>
-
-              <div className='row pieChartBox'>
-
-                <div className="col-sm-4  ">
-                  <Typography variant="h1" color="initial">Complaints</Typography>
-                  <div className='chart'>
-                    <Typography variant="h3" color="initial">Request  </Typography><div className='bg-secondary' id='c1'></div><br />
+      <Fragment>{loading ? <Loader /> :
+        <div className='app'>
+          <AdminSidebar />
+          <main className='content'>
+            <AdminTopbar />
+            <Box m="15px" >
+              <Box display="flex" justifyContent="space-between" alignItems="center">
+                <Header title="DASHBOARD" subtitle="Welcome to Yuor Dashboard" />
+              </Box>
+              <div className="row dashboard ">
+                <Link to='/auser' className="col-2 dsItem1">
+                  <Person sx={{ fontSize: "4rem" }} />
+                  <Typography components={Link} to='/auser' variant="h2" color="lightblue">User</Typography>
+                  <Typography variant="h1" color="lightblue">{GetUser && GetUser.length}</Typography>
+  
+                </Link>
+                <Link to='/aemployee' className="col-2 dsItem1">
+                  <Person sx={{ fontSize: "4rem" }} />
+                  <Typography variant="h2" color="lightblue">Employee</Typography>
+                  <Typography variant="h1" color="lightblue">{emp && emp.length}</Typography>
+  
+                </Link>
+                <Link to='/aemployee' className="col-2 dsItem1">
+                  <Person sx={{ fontSize: "4rem" }} />
+                  <Typography variant="h2" color="lightblue">Req Emp</Typography>
+                  <Typography variant="h1" color="lightblue">{emp && emp.length}</Typography>
+  
+                </Link>
+  
+                <div className='row pieChartBox'>
+  
+                  <div className="col-sm-4  ">
+                    <Typography variant="h1" color="initial">Complaints</Typography>
+                    <div className='chart'>
+                      <Typography variant="h3" color="initial">Request  </Typography><div className='bg-secondary' id='c1'></div><br />
+                    </div>
+                    <div className='chart'>
+                      <Typography variant="h3" color="initial">Process  </Typography><div className='bg-warning' id='c1'></div><br />
+                    </div>
+                    <div className='chart'>
+                      <Typography variant="h3" color="initial">Complete  </Typography><div className='bg-success' id='c1'></div><br />
+                    </div>
+  
+                    <PieChart className='pieChart'
+  
+                      data={[
+                        { title: 'Request', value: getComReq && getComReq.length, color: 'gray' },
+                        { title: 'Process', value: empCompDet && empCompDet.length, color: 'orange', },
+                        { title: 'Complete', value: 2, color: 'green' },
+                      ]}
+                    />;
                   </div>
-                  <div className='chart'>
-                    <Typography variant="h3" color="initial">Process  </Typography><div className='bg-warning' id='c1'></div><br />
+                  <div className="col-sm-4  ">
+                    <Typography variant="h1" color="initial">Meter</Typography>
+                    <div className='chart'>
+                      <Typography variant="h3" color="initial">Request  </Typography><div className='bg-secondary' id='c1'></div><br />
+                    </div>
+                    <div className='chart'>
+                      <Typography variant="h3" color="initial">Process  </Typography><div className='bg-warning' id='c1'></div><br />
+                    </div>
+                    <div className='chart'>
+                      <Typography variant="h3" color="initial">Complete  </Typography><div className='bg-success' id='c1'></div><br />
+                    </div>
+  
+                    <PieChart className='pieChart'
+  
+                      data={[
+                        { title: 'Two', value: 30, color: 'orange' },
+                        { title: 'One', value: 15, color: 'gray', label: "Request" },
+                        { title: 'Three', value: 10, color: 'green' },
+                      ]}
+                    />;
                   </div>
-                  <div className='chart'>
-                    <Typography variant="h3" color="initial">Complete  </Typography><div className='bg-success' id='c1'></div><br />
+                  <div className="col-sm-4  ">
+                    <Typography variant="h1" color="initial">Certificate</Typography>
+                    <div className='chart'>
+                      <Typography variant="h3" color="initial">Request  </Typography><div className='bg-secondary' id='c1'></div><br />
+                    </div>
+                    <div className='chart'>
+                      <Typography variant="h3" color="initial">Process  </Typography><div className='bg-warning' id='c1'></div><br />
+                    </div>
+                    <div className='chart'>
+                      <Typography variant="h3" color="initial">Complete  </Typography><div className='bg-success' id='c1'></div><br />
+                    </div>
+  
+                    <PieChart className='pieChart'
+  
+                      data={[
+                        { title: 'Two', value: 1, color: 'orange' },
+                        { title: 'One', value: 15, color: 'gray', },
+                        { title: 'Three', value: 30, color: 'green' },
+                      ]}
+                    />;
                   </div>
-
-                  <PieChart className='pieChart'
-
-                    data={[
-                      { title: 'Request', value: getComReq && getComReq.length, color: 'gray' },
-                      { title: 'Process', value: empCompDet && empCompDet.length, color: 'orange', },
-                      { title: 'Complete', value: 2, color: 'green' },
-                    ]}
-                  />;
+  
+  
+  
+  
                 </div>
-                <div className="col-sm-4  ">
-                  <Typography variant="h1" color="initial">Meter</Typography>
-                  <div className='chart'>
-                    <Typography variant="h3" color="initial">Request  </Typography><div className='bg-secondary' id='c1'></div><br />
-                  </div>
-                  <div className='chart'>
-                    <Typography variant="h3" color="initial">Process  </Typography><div className='bg-warning' id='c1'></div><br />
-                  </div>
-                  <div className='chart'>
-                    <Typography variant="h3" color="initial">Complete  </Typography><div className='bg-success' id='c1'></div><br />
-                  </div>
-
-                  <PieChart className='pieChart'
-
-                    data={[
-                      { title: 'Two', value: 30, color: 'orange' },
-                      { title: 'One', value: 15, color: 'gray', label: "Request" },
-                      { title: 'Three', value: 10, color: 'green' },
-                    ]}
-                  />;
-                </div>
-                <div className="col-sm-4  ">
-                  <Typography variant="h1" color="initial">Certificate</Typography>
-                  <div className='chart'>
-                    <Typography variant="h3" color="initial">Request  </Typography><div className='bg-secondary' id='c1'></div><br />
-                  </div>
-                  <div className='chart'>
-                    <Typography variant="h3" color="initial">Process  </Typography><div className='bg-warning' id='c1'></div><br />
-                  </div>
-                  <div className='chart'>
-                    <Typography variant="h3" color="initial">Complete  </Typography><div className='bg-success' id='c1'></div><br />
-                  </div>
-
-                  <PieChart className='pieChart'
-
-                    data={[
-                      { title: 'Two', value: 1, color: 'orange' },
-                      { title: 'One', value: 15, color: 'gray', },
-                      { title: 'Three', value: 30, color: 'green' },
-                    ]}
-                  />;
-                </div>
-
-
-
-
               </div>
-            </div>
-          </Box>
-        </main>
-      </div>
-    }</Fragment>
+            </Box>
+          </main>
+        </div>
+      }</Fragment>
+    
   )
 }
 

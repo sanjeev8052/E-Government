@@ -5,26 +5,40 @@ import { Email, LoginRounded, PasswordOutlined, Visibility, VisibilityOff } from
 import Logo from '../Images/Icons/password.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useAlert } from 'react-alert';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup'
 import { adminLogin } from '../../Action/Admin/Login';
 
 
 const AdminLogin = () => {
-
-    const { isAuthenticated , loading} = useSelector(state => state.admin)
+const alert = useAlert()
+    const { isAuthenticated , loading,AdminLog,error} = useSelector(state => state.admin)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
-    useEffect(()=>{
-        isAuthenticated ? navigate('/dashboard') : console.log(false)
-    },[isAuthenticated])
+    useEffect(() => {
+        if (AdminLog) {
+            alert.success(AdminLog)
+            dispatch({ type: "clearMessage" })
+        }
+
+        if (error) {
+            alert.error(error.response.data.message)
+
+            dispatch({ type: "clearMessage" })
+        }
+    }, [dispatch,alert,error,AdminLog])
+    
+    useEffect(() => {
+        isAuthenticated ? navigate('/dashboard'): navigate('/adlogin')
+    }, [isAuthenticated,navigate])
+    
 
     const detail = {
         email: "",
         password: "",
     }
-    const dispatch = useDispatch()
 
     const [type, setType] = useState("password")
     const [visible, setVisible] = useState(false)
@@ -84,10 +98,9 @@ const AdminLogin = () => {
 
 
     const onSubmit = (values, props) => {
-        console.log(props)
+        // console.log(props)
         dispatch(adminLogin(values))
         navigate('/dashboard')
-
 
     }
     const validationSchema = Yup.object().shape({

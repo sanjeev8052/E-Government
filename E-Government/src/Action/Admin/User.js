@@ -72,7 +72,7 @@ export const unBlockUser = (id) => async (dispatch) =>{
             type: "unBlockUserSuccess",
             payload: data
         })
-       
+       dispatch(getblkUser())
         
     } catch (error) {
         dispatch({

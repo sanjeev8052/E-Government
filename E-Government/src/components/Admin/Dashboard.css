@@ -3,6 +3,11 @@
    justify-content: center;
    align-items: center;
    font-family: sans-serif;
+  
+}
+
+.dashboard1 {
+overflow-x:auto;
 }
 
 .dsItem1 {

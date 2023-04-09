@@ -25,11 +25,11 @@ export const conTempEmp = (id) => async (dispatch) =>{
         dispatch({
             type: "CEmployeeRequest"
         })
-        const response = await axios.post(`/api/admin/employee/${id}`)
+        const {data} = await axios.post(`/api/admin/employee/${id}`)
 
         dispatch({
             type: "CEmployeeSuccess",
-            payload: response
+            payload: data
         })        
         dispatch(getTempEmp())
         
@@ -45,11 +45,11 @@ export const rejTempEmp = (id) => async (dispatch) =>{
         dispatch({
             type: "REmployeeRequest"
         })
-        const response = await axios.delete(`/api/admin/rejectemp/${id}`)
+        const {data} = await axios.delete(`/api/admin/rejectemp/${id}`)
 
         dispatch({
             type: "REmployeeSuccess",
-            payload: response
+            payload: data
         })        
         dispatch(getTempEmp())
         
