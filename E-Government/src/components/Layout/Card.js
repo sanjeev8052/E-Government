@@ -19,14 +19,14 @@ const css = {
         padding: "2rem",
         margin: "2rem",
         border: " solid 1px",
-        borderRadius: "10px",
+        borderRadius: "4px",
         backgroundSize: "cover"
 
 
     },
     card: {
         margin: "2rem",
-        borderRadius: "10px",
+        borderRadius: "4px",
         boxShadow: "3px 3px 6px ",
         backgroundColor: "white",
         border: " solid 1px",

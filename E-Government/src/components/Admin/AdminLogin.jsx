@@ -9,31 +9,15 @@ import { useAlert } from 'react-alert';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup'
 import { adminLogin } from '../../Action/Admin/Login';
+// import { useAlert } from 'react-alert';
+import axios from 'axios';
 
 
 const AdminLogin = () => {
-const alert = useAlert()
-    const { isAuthenticated , loading,AdminLog,error} = useSelector(state => state.admin)
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const { isAuthenticated, loading } = useSelector(state => state.admin)
 
-    useEffect(() => {
-        if (AdminLog) {
-            alert.success(AdminLog)
-            dispatch({ type: "clearMessage" })
-        }
 
-        if (error) {
-            alert.error(error.response.data.message)
-
-            dispatch({ type: "clearMessage" })
-        }
-    }, [dispatch,alert,error,AdminLog])
-    
-    useEffect(() => {
-        isAuthenticated ? navigate('/dashboard'): navigate('/adlogin')
-    }, [isAuthenticated,navigate])
-    
 
     const detail = {
         email: "",
@@ -95,13 +79,17 @@ const alert = useAlert()
         }
 
     }
+    const alert = useAlert();
 
-
-    const onSubmit = (values, props) => {
-        // console.log(props)
-        dispatch(adminLogin(values))
-        navigate('/dashboard')
-
+    const onSubmit = async (values, props) => {
+        try {
+            dispatch(adminLogin(values))
+            const { data } = await axios.post(`/api/admin/alogin`, values)
+            alert.success("login success...")
+            navigate('/dashboard')
+        } catch (error) {
+            alert.error("sumthing went wrong..")
+        }
     }
     const validationSchema = Yup.object().shape({
         email: Yup.string().email("Please Enter Valid Email").required("Please Enter Email"),

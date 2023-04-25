@@ -13,14 +13,17 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 import { useSelector } from 'react-redux';
 import { getEmpDetails } from '../../Action/Admin/Employee';
 import { useDispatch } from 'react-redux'
+import axios from 'axios';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const EmployeeTopbar = () => {
 
+const EmployeeTopbar = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch()
   const { empProfileImage } = useSelector(state => state.employee)
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -40,8 +43,15 @@ const EmployeeTopbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-
+ 
+  const handleLogout=async()=>{
+    try {
+     await axios.get('api/employee/logoutemp')
+      navigate('/emplogin')
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <AppBar position="static" color='secondary'>
 
@@ -132,9 +142,7 @@ const EmployeeTopbar = () => {
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
               Feedback
             </Button>
-            <Button onClick={() => dispatch(getEmpDetails())} sx={{ my: 2, color: 'white', display: 'block' }}>
-              <RefreshIcon /> Refresh
-            </Button>
+          
 
 
 
@@ -165,7 +173,7 @@ const EmployeeTopbar = () => {
               <MenuItem onClick={handleCloseUserMenu}>
                 <Typography component={Link} to="/eprofile" textAlign="center" sx={{ textDecoration: "none", color: "black" }}>Profile</Typography>
               </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
+              <MenuItem  onClick={handleLogout}>
                 <Typography textAlign="center">Logout</Typography>
               </MenuItem>
             </Menu>

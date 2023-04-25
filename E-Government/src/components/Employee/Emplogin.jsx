@@ -3,31 +3,32 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-
+import Cookies from 'js-cookie'
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Login } from '../../Action/Employee/register';
-import { NavLink, useNavigate } from 'react-router-dom';
-import cookies from 'js-cookie'
+import { Navigate, NavLink, useNavigate } from 'react-router-dom';
+
+import { useState } from 'react';
 const theme = createTheme();
 const Emplogin = () => {
 
+    const [data, setData] = useState();
     
     const initialevalues = {
         email: "",
         password: ""
 
     }
+
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const validationcomplaint = Yup.object().shape({
@@ -39,15 +40,19 @@ const Emplogin = () => {
         initialValues: initialevalues,
         validationSchema: validationcomplaint,
 
-        onSubmit: (values) => {
-                dispatch(Login(values))
-                 navigate('/work')
-    
+        onSubmit: async(values) => {
+          const data =   await  dispatch(Login(values))
+             data && navigate('/work')
+            
         }
     })
 
-
-
+    React.useEffect(() => {
+      const myCookie =   Cookies.get('empToken')
+      myCookie &&  navigate('/work') 
+    }, []);
+   
+   
 
     return (
         <>

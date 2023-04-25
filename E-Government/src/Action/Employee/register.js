@@ -5,7 +5,7 @@ export const Register = (details) => async (dispatch) => {
         dispatch({
             type: "employeeRegRequest"
         })
-        const { data } = await axios.post(`/api/employee/tempemployee`, details)
+         const { data } = await axios.post(`/api/employee/tempemployee`, details)
 
         dispatch({
             type: "employeeRegSuccess",
@@ -19,6 +19,7 @@ export const Register = (details) => async (dispatch) => {
             payload: error
         })
     }
+  
 }
 
 export const Login = (details) => async (dispatch) => {
@@ -33,6 +34,8 @@ export const Login = (details) => async (dispatch) => {
             payload: data
         })
         dispatch(getEmpDetails())
+
+        return data
 
     } catch (error) {
         dispatch({

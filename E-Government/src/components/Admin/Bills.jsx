@@ -165,9 +165,8 @@ const reload = () => {
                                                 <MenuItem value={data.billsType}>{data.billsType}</MenuItem>
                                             ))
                                         }
-                                        {/* <MenuItem value="road">Road</MenuItem>
-                    <MenuItem value="Water">Water</MenuItem>
-                    <MenuItem value="Drain">Drain</MenuItem> */}
+                                      
+                                      
                                     </Select>
                                 </FormControl>
                                 {errors.billType && touched.billType ? (
