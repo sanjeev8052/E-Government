@@ -156,16 +156,16 @@ const Card = () => {
                     <div style={css.card}>
                         <img style={css.img} src={certificateImage} alt="Card" />
                         <div className="card-body">
-                            <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">Apply For Cast Certificae and Download Cast Certificate. </Typography>
+                            <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">Apply For Caste Certificae and Download Caste Certificate. </Typography>
                             <Button style={css.button} variant="text" color="default">
                                 <PopupState variant="popover" popupId="demo-popup-menu">
                                     {(popupState) => (
                                         <React.Fragment>
                                             <Button style={css.button} variant="contained" color='primary' {...bindTrigger(popupState)}>
-                                                Apply Cast Certificate
+                                                Apply Caste Certificate
                                             </Button>
                                             <Menu  {...bindMenu(popupState)}>
-                                                <MenuItem component={Link} to='castCer'>Apply For  Cast Certificate</MenuItem>
+                                                <MenuItem component={Link} to='castCer'>Apply For  Caste Certificate</MenuItem>
                                                 <MenuItem component={Link} to='Download' >Download Certificate</MenuItem>
                                             </Menu>
                                         </React.Fragment>
