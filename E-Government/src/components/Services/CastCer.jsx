@@ -146,7 +146,7 @@ const CastCer = () => {
             <form onSubmit={handleSubmit} className={classes.box} encType="multipart/form-data">
 
                 <div className={classes.compField}>
-                    <Typography variant="h4" sx={{ marginBottom: "20px" }} color="initial">Apply Cast Certificate</Typography>
+                    <Typography variant="h4" sx={{ marginBottom: "20px" }} color="initial">Apply Caste Certificate</Typography>
                     <Typography variant="h6" color="initial">Name</Typography>
                     <TextField className={classes.fullInput}
                         id=""
@@ -298,10 +298,10 @@ const CastCer = () => {
                     {errors.motherName && touched.motherName ? (
                         <Typography className={classes.error} >{errors.motherName}</Typography>
                     ) : null}
-                    <Typography variant="h6" color="initial">Cast</Typography>
+                    <Typography variant="h6" color="initial">Caste</Typography>
                     <TextField className={classes.fullInput}
                         id=""
-                        placeholder='Enter Your Income'
+                        placeholder='Enter Your Caste'
                         variant='outlined'
                         size='small'
                         name='cast'
