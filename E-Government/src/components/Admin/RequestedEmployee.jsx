@@ -21,7 +21,7 @@ const RequestedEmployee = () => {
 
     const dispatch = useDispatch()
     useEffect(() => {
-        if (cempMs) {
+        if (cempMs) { 
             alert.success(cempMs.message)
             dispatch({ type: "clearMessage" })
            

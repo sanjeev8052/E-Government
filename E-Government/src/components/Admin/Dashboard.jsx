@@ -14,25 +14,35 @@ import AdminAuth from '../ProtectedRoute/AdminAuth'
 import { Person } from '@mui/icons-material'
 import { PieChart } from 'react-minimal-pie-chart';
 import { getUser } from '../../Action/Admin/User'
-import { getEmp, getEmpDetails } from '../../Action/Admin/Employee'
+import { getEmp, getEmpDetails, getTempEmp } from '../../Action/Admin/Employee'
 import { getCompReq } from '../../Action/Services/Services'
 import axios from 'axios'
+import { getAcceptMeterReq, getMeterApplyReq } from '../../Action/Services/Meter'
 
 
 
 const Dashboard = () => {
 
-  const { loading, GetUser, emp } = useSelector((state) => (state.admin))
-  const { getComReq } = useSelector((state) => (state.services))
+  const { loading, GetUser, emp, empReq } = useSelector((state) => (state.admin))
+  const { getComReq, getMeterReq, getAccMeterReq } = useSelector((state) => (state.services))
   const [empCompDet, setEmpCompDet] = useState([]);
 
   const { getEmpData } = useSelector(state => state.employee)
+  const [compCompldata, setCompCompldata] = useState();
+  useEffect(() => {
+    getCompleteComplaint();
+  }, [])
+
+  const getCompleteComplaint = async () => {
+    const { data } = await axios.get("api/admin/compComplete")
+    setCompCompldata(data.complaint)
+  }
 
   useEffect(() => {
     getAssignComp();
   }, [])
 
-  console.log(empCompDet)
+  console.log(empReq)
   const getAssignComp = async () => {
     try {
       const { data } = await axios.get('api/admin/getAssignComp')
@@ -41,15 +51,15 @@ const Dashboard = () => {
 
     }
   }
-  const getCompleteComplaint = async () => {
-    const { data } = await axios.get("api/admin/compComplete")
-    setData(data.complaint)
-  }
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUser())
     dispatch(getEmp())
     dispatch(getCompReq())
+    dispatch(getMeterApplyReq())
+    dispatch(getAcceptMeterReq())
+    dispatch(getTempEmp())
   }, []);
 
   const label = "Complaints"
@@ -77,72 +87,78 @@ const Dashboard = () => {
                 <Typography variant="h1" color="lightblue">{emp && emp.length}</Typography>
 
               </Link>
-              <Link to='/aemployee' className="col-2 dsItem1">
+              <Link to='/aremployee' className="col-2 dsItem1">
                 <Person sx={{ fontSize: "4rem" }} />
                 <Typography variant="h2" color="lightblue">Req Emp</Typography>
-                <Typography variant="h1" color="lightblue">{emp && emp.length}</Typography>
+                <Typography variant="h1" color="lightblue">{empReq && empReq.length}</Typography>
 
               </Link>
             </div>
-            <div className='row pieChartBox'>
+            <hr />
+            <div className='row '>
 
-              <div className="col-sm-4  ">
-                <Typography variant="h1" color="initial">Complaints</Typography>
-                <div className='chart'>
-                  <div className='bg-secondary' id='c1'></div> <Typography variant="h3" color="initial">Request  </Typography><br />
-                </div>
-                <div className='chart'>
-                  <div className='bg-warning' id='c1'></div> <Typography variant="h3" color="initial">Process  </Typography><br />
-                </div>
-                <div className='chart'>
-                  <div className='bg-success' id='c1'></div> <Typography variant="h3" color="initial">Complete  </Typography><br />
+
+              <div className="col-sm-6  ">
+                <div className="row">
+                  <div className="col-5 d-flex align-items-center">
+                    <div>
+                      <Typography variant="h1" color="initial">Meter</Typography>
+                      <div className='chart'>
+                        <div className='bg-secondary' id='c1'></div> <Typography variant="h3" color="initial">Request  </Typography><br />
+                      </div>
+                      <div className='chart'>
+                        <div className='bg-success' id='c1'></div> <Typography variant="h3" color="initial">Complete  </Typography><br />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-5">
+                    <PieChart className='pieChart'
+
+                      data={[
+                        { title: 'Request', value: getMeterReq && getMeterReq.length, color: 'gray' },
+                        { title: 'Complete', value: getAccMeterReq && getAccMeterReq.length, color: 'green', },
+                      ]}
+                    />;
+                  </div>
                 </div>
 
 
 
 
               </div>
-              <div className="col-sm-4  ">
-                <Typography variant="h1" color="initial">Meter</Typography>
-                <div className='chart'>
-                  <div className='bg-secondary' id='c1'></div> <Typography variant="h3" color="initial">Request  </Typography><br />
-                </div>
-                <div className='chart'>
-                  <div className='bg-warning' id='c1'></div> <Typography variant="h3" color="initial">Process  </Typography><br />
-                </div>
-                <div className='chart'>
-                  <div className='bg-success' id='c1'></div> <Typography variant="h3" color="initial">Complete  </Typography><br />
-                </div>
+              <div className="col-sm-6  ">
+                <div className="row">
+                  <div className="col-5 d-flex align-items-center">
+                    <div>
+                      <Typography variant="h1" color="initial">Compaints</Typography>
+                      <div className='chart'>
+                        <div className='bg-secondary' id='c1'></div> <Typography variant="h3" color="initial">Request  </Typography><br />
+                      </div>
+                      <div className='chart'>
+                        <div className='bg-warning' id='c1'></div> <Typography variant="h3" color="initial">Process  </Typography><br />
+                      </div>
+                      <div className='chart'>
+                        <div className='bg-success' id='c1'></div> <Typography variant="h3" color="initial">Complete  </Typography><br />
+                      </div>
+                    </div>
 
-                <PieChart className='pieChart'
+                  </div>
+                  <div className="col-5">
+                    <PieChart className='pieChart'
 
-                  data={[
-                    { title: 'Request', value: getComReq && getComReq.length, color: 'gray' },
-                    { title: 'Process', value: empCompDet && empCompDet.length, color: 'orange', },
-                    { title: 'Complete', value: 2, color: 'green' },
-                  ]}
-                />;
+                      data={[
+                        { title: 'Request', value: getComReq && getComReq.length, color: 'gray' },
+                        { title: 'Process', value: getAccMeterReq && getAccMeterReq.length, color: 'orange', },
+                        { title: 'Complete', value: getAccMeterReq && getAccMeterReq.length, color: 'green', },
+                      ]}
+                    />;
+                  </div>
+                </div>
               </div>
-              <div className="col-sm-4  ">
-                <Typography variant="h1" color="initial">Complaints</Typography>
-                <div className='chart'>
-                  <div className='bg-secondary' id='c1'></div> <Typography variant="h3" color="initial">Request  </Typography><br />
-                </div>
-                <div className='chart'>
-                  <div className='bg-warning' id='c1'></div> <Typography variant="h3" color="initial">Process  </Typography><br />
-                </div>
-                <div className='chart'>
-                  <div className='bg-success' id='c1'></div> <Typography variant="h3" color="initial">Complete  </Typography><br />
-                </div>
+              <div className="col-sm-6  ">
 
-                <PieChart className='pieChart'
 
-                  data={[
-                    { title: 'Request', value: getComReq && getComReq.length, color: 'gray' },
-                    { title: 'Process', value: empCompDet && empCompDet.length, color: 'orange', },
-                    { title: 'Complete', value: 2, color: 'green' },
-                  ]}
-                />;
+
               </div>
 
 

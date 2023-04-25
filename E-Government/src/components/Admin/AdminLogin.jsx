@@ -15,8 +15,9 @@ import axios from 'axios';
 
 const AdminLogin = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     const { isAuthenticated, loading } = useSelector(state => state.admin)
-
+    isAuthenticated && navigate('/dashboard')
 
 
     const detail = {
@@ -81,15 +82,8 @@ const AdminLogin = () => {
     }
     const alert = useAlert();
 
-    const onSubmit = async (values, props) => {
-        try {
-            dispatch(adminLogin(values))
-            const { data } = await axios.post(`/api/admin/alogin`, values)
-            alert.success("login success...")
-            navigate('/dashboard')
-        } catch (error) {
-            alert.error("sumthing went wrong..")
-        }
+    const onSubmit = (values) => {
+       dispatch(adminLogin(values))
     }
     const validationSchema = Yup.object().shape({
         email: Yup.string().email("Please Enter Valid Email").required("Please Enter Email"),
