@@ -21,9 +21,8 @@ const Header = () => {
                         indicatorColor='primary'>
 
                         <Tab component={Link} to={"/"} label="Home" />
-                        <Tab component={Link} label="Services" />
-                        <Tab component={Link} label="AboutUs" />
                         <Tab component={Link} to={'/contactUs'} label="ContactUs" />
+                        <Tab component={Link} to={'/ufeedback'} label="Feedback" />
 
 
                         <Tab sx={{display:"block" , marginLeft:"54rem"}} title='Dasboard' component={Link} to='/UserDashBoard' label={<Dashboard label="Dasboard"/>} />

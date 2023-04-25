@@ -40,7 +40,7 @@ const useStyles = makeStyles({
   },
   userField: {
     padding: '2rem',
-    backgroundColor: "gray",
+    backgroundColor: "rgb(0,0,0,0.1)",
     borderRadius: "0 0 10px 10px",
   },
 
@@ -127,12 +127,8 @@ const Complaint = () => {
     validationSchema: complaintSchema,
 
     onSubmit: (values) => {
-
-
       dispatch(CompReq(user, values))
     }
-
-
   })
 
 

@@ -12,11 +12,13 @@ import Download from './components/User/Download/Download'
 
 // package
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ColorModeContext, useMode } from "./Global";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { LoadAdmin, getAdmnProfileImage } from './Action/Admin/Login'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 
 // admin
 import AforgotPassword from './components/Admin/Aforgetpassword'
@@ -69,7 +71,17 @@ import cookies from 'js-cookie'
 import AdminResetPassword from './components/Admin/AdminResetPassword'
 import IncomeReciept from './components/User/Download/IncomeReciept'
 import ContactUs from './components/User/ContactUs/ContactUs'
+import axios from 'axios'
+import Payment from './components/User/Payment'
 const App = () => {
+
+  const [stripKey, setStripKey] = useState("pk_test_51Mq1jRSHoUNuGuBowIIEwRf0LXA54XMZsQaErcuXbAncP3h8ec1dsII0W2UHJ1u7y3viBALYid9jhDanlmZ0789J00GMiaLqJ6");
+
+  // async function getStripeKey() {
+  //   const { data } = axios.get('/api/stripeKey')
+
+  //   setStripKey(data.stripeKry)
+  // }
 
   const dispatch = useDispatch();
   const { loginData } = useSelector(state => state.user)
@@ -90,6 +102,7 @@ const App = () => {
     dispatch(getProfileImage())
     dispatch(getEmpProfileImage())
     dispatch(getAdmnProfileImage())
+    // getStripeKey()
   }, [dispatch])
 
   return (
@@ -124,13 +137,14 @@ const App = () => {
             <Route path='/castCer' element={<CastCer />} />
             <Route path='/Temp/' element={<Temp />} />
             <Route path='/view' element={<ViewPdf />} />
-
+           
+       
             {/* Admin */}
 
 
             <Route path='/adlogin' element={<AdminLogin />} />
-            <Route path='/AforgotPassword' element={<AforgotPassword/>} />
-            <Route path='adminreset/password/:token' element={< AdminResetPassword/>} />
+            <Route path='/AforgotPassword' element={<AforgotPassword />} />
+            <Route path='adminreset/password/:token' element={< AdminResetPassword />} />
             <Route path='/emplogin' element={<Emplogin />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/aemployee" element={<Employee />} />

@@ -1,5 +1,5 @@
 import { Box, FormControl, FormControlLabel, Radio, RadioGroup, Typography, TextField, Button, InputAdornment } from '@material-ui/core'
-import { Close, GasMeter, Home, Payment } from '@mui/icons-material'
+import { Close, GasMeter, Home, Login, Payment } from '@mui/icons-material'
 import GasBillImage from '../../../Images/gas.png'
 import electrBilliImage from '../../../Images/electricity.png'
 import waterBillImage from '../../../Images/download.png'
@@ -14,19 +14,17 @@ import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
 import UserAuth from '../../ProtectedRoute/UserAuth'
 
-
 const BillPay = () => {
   // const  navigate = useNavigate()
-  // const {isAuthenticated } = useSelector(state=>state.user)
-
+  
   // useEffect(()=>{
   //   isAuthenticated ? console.log(true)  : navigate('../login')
   // },[])
 
-   
 
 
- 
+
+
   const { userData } = useSelector(state => state.user)
   const alert = useAlert()
   const [billType, setStatus] = useState("Gas")
@@ -55,17 +53,38 @@ const BillPay = () => {
 
   })
 
-  const handlePayment = async () => {
-    try {
-      const { data } = await axios.post('api/admin/paybills', { bid: billData._id, uid: userData._id })
-      data ? alert.success(data.message) : null
-      data ? setBillData(null) : null
-    } catch (error) {
+  const handlePayment = async (amount) => {
 
-    }
+    const { data } = await axios.post(`http://localhost:5000/api/checkout`, { amount })
+    console.log(data)
+
+    const options = {
+      key: "rzp_test_QnKpiAy1xgFN32", 
+      amount: 1000, 
+      currency: "INR",
+      name: "E-Governace",
+      description: "Test Transaction",
+      image: <Login/>,
+      order_id: data.id, 
+      callback_url: "http://localhost:5000/api/paymentVerification",
+      prefill: {
+        name: userData.name,
+        email: userData.email,
+        contact: userData.phone,
+      },
+      notes: {
+        "address": "Razorpay Corporate Office"
+      },
+      theme: {
+        "color": "#3399cc"
+      }
+    };
+    const razor = new Razorpay(options);
+     razor.open();
+  
   }
 
- 
+
 
 
   return (
@@ -99,7 +118,7 @@ const BillPay = () => {
 
           <div className="col-12">
             <div style={{ display: "flex" }}>
-              <h2>{billType} Bill Payment</h2> {billData && <Close onClick={()=>setBillData(null)} sx={{ marginLeft: "auto" }} />}
+              <h2>{billType} Bill Payment</h2> {billData && <Close onClick={() => setBillData(null)} sx={{ marginLeft: "auto" }} />}
             </div>
 
             {!billData && <>
@@ -164,7 +183,7 @@ const BillPay = () => {
 
                     </div>
                     <div className='col-6'>
-                      <Button variant="contained" onClick={handlePayment} color="primary">
+                      <Button variant="contained" onClick={() => handlePayment(billData.totelAmt)} color="primary">
                         Pay Now
                       </Button>
                     </div><br /><br />

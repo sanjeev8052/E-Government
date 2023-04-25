@@ -9,6 +9,7 @@ const { errorHandler } = require("../../middlewares/Errorhandler");
 const { isAuthenticatedUser } = require("../../middlewares/auth");
 const multer = require('multer');
 const ContactUs = require("../../models/User/ContactUs");
+const Feedback = require("../../models/User/Feedback");
 
 
 const storage = multer.diskStorage({
@@ -34,7 +35,7 @@ router.post("/upload", isAuthenticatedUser, upload.single("image"), async (req, 
         if (!user) {
             return res.status(400).json({ message: "User  Not Found" })
         }
-      
+
         user.avatar = file
         await user.save();
         res.status(200).json({
@@ -59,7 +60,7 @@ router.put("/upload/update", isAuthenticatedUser, upload.single("image"), async 
                 .status(400)
                 .json({ sucsess: false, message: "Somthing Went Wroung..." })
         }
-      
+
         user.avatar = file
         await user.save();
         res.status(200).json({
@@ -124,7 +125,7 @@ router.post("/user/new/", async (req, res) => {
             Regmessage: "Register Success."
         })
     } catch (error) {
-        res.status(500).json({ sucsess: false, Regmessage:error.message })
+        res.status(500).json({ sucsess: false, Regmessage: error.message })
     }
 });
 router.post("/user/login", async (req, res) => {
@@ -161,8 +162,9 @@ router.post("/user/login", async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Somthing went wrong..",
+            message: error.message,
         })
+        console.log(error)
     }
 
 
@@ -244,7 +246,7 @@ router.put("/reset/password/:token", async (req, res) => {
 
     try {
 
-        
+
         const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex")
 
         const user = await User.findOne({
@@ -264,7 +266,7 @@ router.put("/reset/password/:token", async (req, res) => {
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined;
         await user.save()
-      
+
         res.status(200).json({ success: true, message: "Password Updadet..", password: user.password })
 
 
@@ -299,7 +301,7 @@ router.post("/contactUs", async (req, res) => {
     try {
         const contactInfo = await ContactUs.create(req.body)
         res.status(200).json({
-            message:"Message send Successfully.."
+            message: "Message send Successfully.."
         })
 
     } catch (error) {
@@ -309,5 +311,50 @@ router.post("/contactUs", async (req, res) => {
 
 })
 
-module.exports = router
+router.post("/user/feedback", isAuthenticatedUser, async (req, res) => {
 
+    const email = req.user.email
+    const feedb = await Feedback.find({ email: email })
+
+    if (feedb[0]) {
+        const newFeedback = await Feedback.findByIdAndUpdate(feedb[0]._id, { feedback: req.body.feedback }, { new: true })
+        res.status(200).json({
+            message: "Thanks for feedback.."
+        })
+        return
+
+    }
+    const create = {
+        feedback: req.body.feedback,
+        name: req.user.name,
+        email: req.user.email,
+    }
+    const feedback = await Feedback.create(create)
+    res.status(200).json({
+        message: "Thanks for feedback.."
+    })
+})
+
+router.get("/get/feedback", isAuthenticatedUser, async (req, res) => {
+
+    const feedback = await Feedback.find({ email: req.user.email })
+    res.status(200).json({
+        feedback
+    })
+})
+router.get("/get/feedbacks", async (req, res) => {
+
+    const feedbacks = await Feedback.find({})
+    res.status(200).json({
+        feedbacks
+    })
+})
+router.delete("/delete/feedback/:id", async (req, res) => {
+
+    const feedbacks = await Feedback.findByIdAndDelete(req.params.id)
+    res.status(200).json({
+       message:"feedback delete.."
+    })
+})
+
+module.exports = router

@@ -1,259 +1,161 @@
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
+import { makeStyles, CircularProgress, Typography, Button, } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField'
-import InputLabel from '@mui/material/InputLabel';
-import { tokens } from '../../Global'
-import { Box, FormControl, MenuItem, Select, useTheme } from '@material-ui/core';
-import { Send } from '@mui/icons-material';
-import { Link, Navigate , useNavigate} from 'react-router-dom';
-import Footer from '../Layout/Footer/Footer';
-import bgImage from '../../Images/bgImage3.jpg'
+import Footer from '../Layout/Footer/Footer'
+import { feedbackSchema } from '../../ValidateSchema/Services'
 import { useFormik } from 'formik'
-import { complaintSchema } from '../../ValidateSchema/Services';
-import { useDispatch, useSelector } from 'react-redux';
-import { LoadUser } from '../../Action/User';
-import Loader from '../Layout/Loader'
-import { CompReq } from '../../Action/Services/Services';
-import axios from 'axios';
-import { getUser } from '../../Action/Admin/User';
-import { Getdept } from '../../Action/Admin/Categories';
-import { useAlert } from 'react-alert';
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
-
-const useStyles = makeStyles({
-    Complaint: {
+import { Send, Delete, Key } from '@mui/icons-material'
+import axios from 'axios'
+import { useAlert } from 'react-alert'
 
 
+const useStyle = makeStyles({
+    mainDiv: {
+        width: "98.9vw",
+        height: "50vh",
+        paddingTop: "15rem",
+        background: "linear-gradient(to top right ,rgb(48, 94, 234),rgb(214, 245, 214))",
 
     },
-    box: {
-        width: "80%",
-        margin: "4rem auto",
+    formDiv: {
+        width: "40%",
         backgroundColor: "white",
-        boxShadow: "3px 3px 6px ",
-        border: " solid 1px black"
+        margin: "auto",
+        padding: "2rem",
+        borderRadius: "4px",
+        boxShadow: "3px 3px 6px"
 
-    },
-    compField: {
-        padding: '2rem'
-    },
-    userField: {
-        padding: '2rem',
-        backgroundColor: "gray",
-        borderRadius: "0 0 10px 10px",
-    },
-
-    fullInput: {
-        width: "71%",
-        marginBottom: "10px"
-
-    },
-
-    dropdown: {
-        width: "71%",
-        marginBottom: "15px",
-
-    },
-    button: {
-        width: "71%"
-    },
-    error: {
-        color: "red",
-        marginBottom: "10px"
-    },
-    label: {
-        marginTop: "15px"
     }
-});
+})
 
-const feedback = ({ id }) => {
 
-    const initialvalues = {
-        complaintType: "",
-        city: "",
-        streetAddress: "",
-        area: "",
-        pincode: "",
-        complaintDesc: "",
-    }
-
-    const [values, setValues] = useState(initialvalues);
-
-    const { getdept } = useSelector((state) => (state.services))
-    const themes = useTheme()
-    const colors = tokens(themes.palette.mode)
-    const [open, setOpen] = React.useState(false);
-    const [loading, setLoading] = useState(false)
-    const dispatch = useDispatch()
+const feedback = () => {
+    const [loading, setLoading] = useState(false);
+    const [feedback, setFeedback] = useState();
+    const [feedbacks, setFeedbacks] = useState();
+    const [reload, setReload] = useState(false);
     const alert = useAlert();
-    const navigate = useNavigate()
+    const initialvalues = {}
+
+    const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
+
+        initialValues: initialvalues,
+        validationSchema: feedbackSchema,
+
+        onSubmit: async (values) => {
+            try {
+                setLoading(true)
+                const { data } = await axios.post('api/user/feedback', values)
+                setLoading(false)
+                getFeedback()
+                getFeedbacks()
+                data.message && alert.success(data.message)
+            } catch (error) {
+                setLoading(false)
+                alert.success(error.response.data.message)
+            }
+        }
+    })
+
     useEffect(() => {
-        dispatch(Getdept())
-        resentComp();
-    }, [open]);
+        getFeedback()
+        getFeedbacks()
+    }, [reload]);
 
-    const resentComp = async () => {
-        const { data } = await axios.get(`api/searchComp/${id}`)
-        setValues(data)
-    }
-
-    const handleInput = (e) => {
-        const { value, name } = e.target
-        setValues({
-            ...values,
-            [name]: value
-        })
-    }
-
-    const handleSubmit = async () => {
+    const getFeedback = async () => {
         try {
             setLoading(true)
-            const { data } = await axios.put(`api/updateComp/${id}`,values)
-            alert.success(data.message)
+            const { data } = await axios.get('api/get/feedback', values)
             setLoading(false)
-            setOpen(false);
-           
+            setFeedback(data.feedback)
         } catch (error) {
             setLoading(false)
-            alert.error(error.response.data.message)
+
+        }
+        setReload(false)
+    }
+    const getFeedbacks = async () => {
+        try {
+            setLoading(true)
+            const { data } = await axios.get('api/get/feedbacks', values)
+            setLoading(false)
+            setFeedbacks(data.feedbacks)
+
+        } catch (error) {
+            setLoading(false)
 
         }
     }
+    const deleteFeedback = async (id) => {
+        try {
+            setLoading(true)
+            const { data } = await axios.get(`api/delete/feedback/${id}` )
+            setLoading(false)
+            alert.success(data.message)
+        } catch (error) {
+            setLoading(false)
 
-    const classes = useStyles();
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-
+        }
+    }
+   
+    const style = useStyle()
     return (
-        <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                View
-            </Button>
-            <Dialog
-                fullScreen
-                open={open}
-                onClose={handleClose}
-                TransitionComponent={Transition}
-            >
-                <AppBar sx={{ position: 'relative' }}>
-                    <Toolbar>
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                            onClick={handleClose}
-                            aria-label="close"
-                        >
-                            <CloseIcon />
-                        </IconButton>
+        <div className={style.mainDiv}>
+            <form onSubmit={handleSubmit} className={style.formDiv}>
+                <Typography variant="h4" color="initial">Give FeedBack</Typography>
+                <textarea style={{ width: "100%", padding: "10px" }} fullWidth className=' mt-4 s'
+                    id=""
+                    label=""
+                    variant='outlined'
+                    name='feedback'
+                    onChange={handleChange}
+                />
+                {errors.feedback ? (
+                    <Typography className='text-danger' >{errors.feedback}</Typography>
+                ) : null}
+                <Button type='sumbmit' className='mt-3' fullWidth variant="contained" color="primary">
+                    {loading ? <CircularProgress /> : <> Send <Send /></>}
+                </Button>
 
+            </form>
+            <hr />
+            <button onClick={() => setReload(true)} >reload</button>
+            { feedback  ? 
+                <>
+                    <h1 className='mx-4 text-center'>Your Feedback </h1>
+                    <hr />
+                    {
 
-                    </Toolbar>
-                </AppBar>
-                <div className={classes.Complaint}>
-                    {values && <form className={classes.box} >
+                        feedback?.map((data) => (
+                            <div Key={data._id}>
+                                <Typography className='mx-4' variant="h6" color="initial">{data.name}</Typography>
 
-                        <div className={classes.compField}>
-                            <Typography variant="h2" sx={{ marginBottom: "20px" }} color="initial">Your Complaint</Typography>
-                            <Typography variant="h3" className=' mb-3' color="initial">Compalint Type </Typography>
-                            <FormControl fullWidth className=' mb-4'>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={values.complaintType}
-                                    onChange={handleInput}
-                                    name="complaintType"
-                                >
-                                    {
-                                        getdept?.map((data) => (
-                                            <MenuItem value={data.deptType}>{data.deptType}</MenuItem>
-                                        ))
-                                    }
+                                <Typography className='mx-4' variant="body1" color="initial">{data.feedback}</Typography>
+                                <Button onClick={()=>deleteFeedback(data._id)} variant="text" className="text-danger">
+                                   {loading ? <CircularProgress/> : <Delete />}
+                                </Button>
+                            </div>
+                        ))
+                    }
 
-                                </Select>
-                            </FormControl>
-                            <Typography variant="h3" color="initial">Address</Typography>
-                            <TextField className={classes.fullInput}
-                                id=""
-                                placeholder='City'
-                                variant='outlined'
-                                size='small'
-                                name='city'
-                                value={values.city}
-                                onChange={handleInput}
-                                required
-                            />
-                            <TextField className={classes.fullInput}
-                                id=""
-                                placeholder='Street Address '
-                                variant='outlined'
-                                size='small'
-                                name='streetAddress'
-                                value={values.streetAddress}
-                                onChange={handleInput}
-                                required
-                            />
-
-
-                            <TextField className={classes.fullInput}
-                                id=""
-                                placeholder='Area Name '
-                                variant='outlined'
-                                size='small'
-                                name='area'
-                                value={values.area}
-                                onChange={handleInput}
-                                required
-                            />
-
-                            <TextField className={classes.fullInput}
-                                id=""
-                                placeholder='Zip No. '
-                                variant='outlined'
-                                size='small'
-                                name='pincode'
-                                value={values.pincode}
-                                onChange={handleInput}
-                                required
-                            />
-
-
-                            <Typography variant="h3" className=' mt-4' color="initial">Compplaint Description </Typography>
-                            <textarea
-                                style={{ width: "71%", marginBottom: "15px" }}
-                                name="complaintDesc"
-                                id="" rows="5"
-                                value={values.complaintDesc}
-                                onChange={handleInput}
-                                required
-                            />
-                            <Button disabled={loading} className='mt-3 mb-3' onClick={handleSubmit} fullWidth variant="contained" color="primary">
-                                Update
-                            </Button>
-                        </div>
-                    </form>}
-                </div>
-            </Dialog>
+                    <hr />
+                </>
+               : undefined 
+            }
+            <hr />
+            <h1 className='text-center mx-4'>All Feedbacks </h1>
+            <hr />
+            {
+                feedbacks?.map((data) => (
+                    <>
+                        <Typography className='mx-4' variant="h6" color="initial">{data.name}</Typography>
+                        <Typography className='mx-4' variant="body1" color="initial">{data.feedback}</Typography>
+                        <hr />
+                    </>
+                ))
+            }
+            <Footer />
         </div>
-    );
+    )
 }
 
 export default feedback

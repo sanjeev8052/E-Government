@@ -9,16 +9,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup'
 import { adminLogin } from '../../Action/Admin/Login';
+import { useAlert } from 'react-alert';
+import axios from 'axios';
 
 
 const AdminLogin = () => {
+    const navigate = useNavigate();
+    const { isAuthenticated, loading } = useSelector(state => state.admin)
 
-    const { isAuthenticated , loading} = useSelector(state => state.admin)
-    const navigate = useNavigate()
 
-    useEffect(()=>{
-        isAuthenticated ? navigate('/dashboard') : console.log(false)
-    },[isAuthenticated])
 
     const detail = {
         email: "",
@@ -81,14 +80,17 @@ const AdminLogin = () => {
         }
 
     }
+    const alert = useAlert();
 
-
-    const onSubmit = (values, props) => {
-        console.log(props)
-        dispatch(adminLogin(values))
-        navigate('/dashboard')
-
-
+    const onSubmit = async (values, props) => {
+        try {
+            dispatch(adminLogin(values))
+            const { data } = await axios.post(`/api/admin/alogin`, values)
+            alert.success("login success...")
+            navigate('/dashboard')
+        } catch (error) {
+            alert.error("sumthing went wrong..")
+        }
     }
     const validationSchema = Yup.object().shape({
         email: Yup.string().email("Please Enter Valid Email").required("Please Enter Email"),

@@ -57,3 +57,7 @@ export const downloadSchema = yup.object({
 export const downloadSchema2 = yup.object({
     uniqueId: yup.number().min(100000, ['Form no must have 6 digit']).max(999999, ['Form no must have 6 digit']).required(),
 })
+
+export const feedbackSchema = yup.object({
+    feedback: yup.string().required("Please Enter Your Feedback.."),
+})

@@ -15,7 +15,7 @@ import Footer from '../Layout/Footer/Footer'
 import { signInSchema } from '../../ValidateSchema/User'
 
 
-const Login = ({userCookie}) => {
+const Login = ({userCookie}) => { 
     const navigate = useNavigate();
     const {isAuthenticated } = useSelector(state=>state.user)
 
