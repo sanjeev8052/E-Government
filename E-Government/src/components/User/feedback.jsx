@@ -87,16 +87,23 @@ const feedback = () => {
     }
     const deleteFeedback = async (id) => {
         try {
-            setLoading(true)
-            const { data } = await axios.get(`api/delete/feedback/${id}` )
-            setLoading(false)
-            alert.success(data.message)
+            if (confirm("are you soure")) {
+                setLoading(true)
+                const { data } = await axios.delete(`api/delete/feedback/${id}`)
+                getFeedback();
+                getFeedbacks();
+                setLoading(false)
+                alert.success(data.message)
+
+            }
+
+
         } catch (error) {
             setLoading(false)
 
         }
     }
-   
+
     const style = useStyle()
     return (
         <div className={style.mainDiv}>
@@ -117,42 +124,54 @@ const feedback = () => {
                 </Button>
 
             </form>
-            <hr />
-            <button onClick={() => setReload(true)} >reload</button>
-            { feedback  ? 
-                <>
-                    <h1 className='mx-4 text-center'>Your Feedback </h1>
-                    <hr />
-                    {
-
-                        feedback?.map((data) => (
-                            <div Key={data._id}>
-                                <Typography className='mx-4' variant="h6" color="initial">{data.name}</Typography>
-
-                                <Typography className='mx-4' variant="body1" color="initial">{data.feedback}</Typography>
-                                <Button onClick={()=>deleteFeedback(data._id)} variant="text" className="text-danger">
-                                   {loading ? <CircularProgress/> : <Delete />}
-                                </Button>
-                            </div>
-                        ))
-                    }
-
-                    <hr />
-                </>
-               : undefined 
-            }
-            <hr />
-            <h1 className='text-center mx-4'>All Feedbacks </h1>
-            <hr />
-            {
-                feedbacks?.map((data) => (
+            <div className="box2 " style={{ background: "linear-gradient(to top right ,rgb(48, 94, 234),rgb(214, 245, 214))",
+                                            paddingTop:"2rem",
+                                            margin:"2rem ",
+                                            boxShadow:"3px 3px 6px ",
+                                            borderRadius:"0.3rem",
+                                        }}>
+                <h1 className='mx-4 mt-3 text-center'>Your Feedback </h1>
+                <hr />
+                {feedback && feedback.length > 0 ?
                     <>
-                        <Typography className='mx-4' variant="h6" color="initial">{data.name}</Typography>
-                        <Typography className='mx-4' variant="body1" color="initial">{data.feedback}</Typography>
+
+                        {
+
+                            feedback?.map((data) => (
+                                <div className='' Key={data._id}>
+                                    <Typography className='mx-4' variant="h6" color="initial">{data.name}</Typography>
+                                    <div className='d-felx'>
+                                        <Typography className='mx-4 ' variant="body1" color="initial">{data.feedback}</Typography>
+                                        <Button className='text-danger ' title='Delete Feedback' onClick={() => deleteFeedback(data._id)} variant="text" >
+                                            {loading ? <CircularProgress /> : <Delete />}
+                                        </Button>
+                                    </div>
+                                </div>
+                            ))
+                        }
+
                         <hr />
                     </>
-                ))
-            }
+                    : <Typography className='mx-4' variant="h6"
+                    >
+                        No Feedback
+                    </Typography>
+                }
+
+                <h1 className='text-center mt-3 mx-4'>All Feedbacks </h1>
+                <hr />
+                {
+
+                    feedbacks?.map((data) => (
+                        <div className=''>
+                            <Typography className='mx-4' variant="h6" color="initial">{data.name}</Typography>
+                            <Typography className='mx-4' variant="body1" color="initial">{data.feedback}</Typography>
+                            <hr />
+                        </div>
+                    ))
+                }
+            </div>
+
             <Footer />
         </div>
     )

@@ -32,6 +32,7 @@ export const Employee = createReducer(initialState, {
         state.error = action.payload;
 
     },
+
     // For Get Details
     
     GetEmpRequest: (state) => {

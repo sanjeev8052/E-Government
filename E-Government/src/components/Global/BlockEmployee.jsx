@@ -48,7 +48,7 @@ const BlockEmployee = () => {
           Block Employee
         </Button>
         <Dialog open={open} onClose={handleClose} maxWidth="md"
-          PaperProps={{ sx: { width: "80%", position: "fixed", m: 0, top: 20, backgroundImage: 'radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%)', } }} >
+          PaperProps={{ sx: { width: "80%", position: "fixed", m: 0, top: 20, } }} >
           <DialogTitle>
             <Typography variant="h4" color={colors.blueAccent[400]}>Employee Request</Typography>
           </DialogTitle>
@@ -58,12 +58,25 @@ const BlockEmployee = () => {
               flexDirection: 'column',
               m: 'auto',
               width: 'fit-content',
+              "& .MuiTable-root": {
+                border: "none"
+            },
+            "& .MuiTableCell-root": {
+                borderBottom: "none"
+            },
+            "& .name-column--cell": {
+                color: colors.greenAccent[300]
+            },
+            "& .MuiTableHead-root": {
+                backgroundColor: colors.blueAccent[400],
+                borderBottom: "none"
+            }
 
             }}>
 
-              <TableContainer component={Paper} >
+              <TableContainer component={Paper}  sx={{ backgroundColor: colors.primary[600] }} >
                 <Table size="medium" sx={{ minWidth: 650 }}>
-                  <TableHead sx={{ backgroundColor: colors.greenAccent[700] }}>
+                  <TableHead>
                     <TableRow>
                       <TableCell>Name</TableCell>
                       <TableCell>Email</TableCell>
@@ -72,7 +85,7 @@ const BlockEmployee = () => {
                       <TableCell>Buttons</TableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody sx={{ backgroundColor: colors.blueAccent[800]}}  >
+                  <TableBody sx={{ backgroundColor: colors.primary[600]}}  >
                     {
                        blkemp <= 0 ? <TableRow>
                         <TableCell colSpan={6}>

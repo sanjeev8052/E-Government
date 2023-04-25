@@ -238,13 +238,13 @@ const AdminSidebar = () => {
                
               </SubMenu>
             </Menu>
-            {/* <Item
+            <Item
               title="Feedback"
               to="/feedback"
               icon={<CommentTwoTone />}
               selected={selected}
               setSelected={setSelected}
-            /> */}
+            />
 
           </Box>
         </Menu>
