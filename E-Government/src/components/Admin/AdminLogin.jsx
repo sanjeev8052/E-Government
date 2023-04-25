@@ -5,11 +5,11 @@ import { Email, LoginRounded, PasswordOutlined, Visibility, VisibilityOff } from
 import Logo from '../Images/Icons/password.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useAlert } from 'react-alert';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup'
 import { adminLogin } from '../../Action/Admin/Login';
-import { useAlert } from 'react-alert';
+// import { useAlert } from 'react-alert';
 import axios from 'axios';
 
 
@@ -23,7 +23,6 @@ const AdminLogin = () => {
         email: "",
         password: "",
     }
-    const dispatch = useDispatch()
 
     const [type, setType] = useState("password")
     const [visible, setVisible] = useState(false)

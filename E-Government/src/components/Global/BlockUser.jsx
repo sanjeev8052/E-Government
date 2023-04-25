@@ -1,19 +1,27 @@
 
 import { Box, useTheme, Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, } from '@mui/material'
 import { tokens } from '../../Global'
-import React from 'react'
+import React , {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getblkUser, unBlockUser } from '../../Action/Admin/User'
 import AdminAuth from '../ProtectedRoute/AdminAuth'
-
+import { useAlert } from 'react-alert'
 
 const BlockUser = () => {
-
+  const alert = useAlert();
   const themes = useTheme()
   const colors = tokens(themes.palette.mode)
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch()
-  const { loading, blkuser } = useSelector((state) => (state.admin))
+  const { loading, blkuser,unblkuser } = useSelector((state) => (state.admin))
+
+useEffect(() => {
+  if (unblkuser) {
+    alert.success(unblkuser.message)
+    dispatch({ type: "clearMessage" })
+   
+}
+}, [unblkuser])
 
 
 
@@ -29,7 +37,7 @@ const BlockUser = () => {
 
   const unblock = (id) => { 
     dispatch(unBlockUser(id))
-    window.location.reload()
+    
    }
 
   return (

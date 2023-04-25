@@ -33,17 +33,18 @@ router.post("/employee/:_id", isAuthenticate, async (req, res) => {
             res.status(200).
                 json({
                     success: true,
-                    message: "successfully confirmed",
+                    message: "successfully confirmed Employee",
                 })
-        }
-    } catch (error) {
-        res.status(500).json({ error: error.message })
-        const message = `Your Request for register is accepted noe you can login`
-                await sendEmail({
+            const message = `Your Request for register is accepted now you can login`
+            await sendEmail({
                 email: emp.email,
                 subject: "Request for registraiton  Accepted...",
                 message
             });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+
     }
 })
 
@@ -58,9 +59,15 @@ router.delete("/rejectemp/:_id", isAuthenticate, async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Su1ccessfully Rejected Complaint"
+            message: "Su1ccessfully Rejected Employee"
 
         })
+        const message = `Your Request for register is rejected due to some reason`
+        await sendEmail({
+            email: emp.email,
+            subject: "Request for registraiton  Rejected...",
+            message
+        });
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
@@ -95,6 +102,12 @@ router.post("/blockemp/:_id", isAuthenticate, async (req, res) => {
                 message: "successfully Blocked",
 
             })
+        const message = `Your Are block due to some reason`
+        await sendEmail({
+            email: emp.email,
+            subject: "Block...",
+            message
+        });
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
@@ -133,6 +146,12 @@ router.post("/unblockemp/:_id", isAuthenticate, async (req, res) => {
                     message: "successfully Unblocked",
                 })
         }
+        const message = `Your Are Unblock`
+        await sendEmail({
+            email: blkemp.email,
+            subject: "Unblock...",
+            message
+        });
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

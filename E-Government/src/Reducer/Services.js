@@ -10,6 +10,8 @@ export const userServicesReducer = createReducer(initialState, {
 
     // for clear message
     clearMessage: (state) => {
+        state.remp = null;
+        state.cempMs = null;
         state.accComReqMs = null;
         state.error = null;
         state.rejComReqMs = null;
@@ -22,6 +24,24 @@ export const userServicesReducer = createReducer(initialState, {
         state.delcercatMs = null;
         state.deptMs = null;
         state.delcercatMs = null;
+        state.delCerMs = null;
+        state.addbillMs = null;
+        state.delbillcatMs = null;
+       state.rejectCastCerReqMs = null;
+       state.accCastCerReqMs = null;
+       state.accIncomeCerReqMs = null;
+       state.rejectIncomeCerReqMs = null;
+       state.accComReqMs = null;
+       state.rejComReqMs = null;
+       state.accMeterReqMs = null;
+       state.rejectMeterReqMs = null;
+       state.cempMs = null;
+       state.remp = null;
+       state.blockDataMs = null;
+       state.unblkemp = null;
+       state.BlkUser = null;
+       state.unblkuser = null;
+
 
     },
     //Compreq Reducers........
@@ -332,7 +352,7 @@ export const userServicesReducer = createReducer(initialState, {
     },
     delDeptSuccess: (state, action) => {
         state.loading = false;
-        state.deldeptMs = action.payload;
+        state.delCerMs = action.payload;
 
     },
     delDeptFailuer: (state, action) => {

@@ -30,8 +30,15 @@ const AdminComplaint = () => {
     }, [ dispatch, navigate])
 
     useEffect(() => {
-        accComReqMs ? alert.success(accComReqMs.message) : null
-        rejComReqMs ? alert.success(rejComReqMs.message) : null
+        if (accComReqMs) {
+            alert.success(accComReqMs.message)
+            dispatch({ type: "clearMessage" })
+        }
+        if (rejComReqMs) {
+            alert.success(rejComReqMs.message) 
+            dispatch({ type: "clearMessage" })
+        }
+       
     }, [accComReqMs, rejComReqMs, alert])
 
     const accept = (id) => {

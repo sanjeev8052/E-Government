@@ -17,7 +17,7 @@ export const adminLogin = (admin) => async (dispatch) => {
             payload: data
         })
 
-        dispatch(LoadAdmin())
+        // dispatch(LoadAdmin())
     } catch (error) {
         dispatch({
             type: "LoginFailure",

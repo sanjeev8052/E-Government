@@ -32,7 +32,7 @@ const GetAccCast = () => {
 
                 <Box m="15px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <Header title=" Accepted Cast Certificate Request" subtitle="Welcome to Accepted Cast Certificate Request Details Page" />
+                        <Header title=" Accepted Caste Certificate Request" subtitle="Welcome to Accepted Cast Certificate Request Details Page" />
                         <Button variant="contained" color="success" onClick={reload}>
                             Reload
                         </Button>

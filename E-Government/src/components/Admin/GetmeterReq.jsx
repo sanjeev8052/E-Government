@@ -24,9 +24,18 @@ const GetmeterReq = () => {
     }, [dispatch])
 
     useEffect(() => {
-        accMeterReqMs ? alert.success(accMeterReqMs.message) : null
-        rejectMeterReqMs ? alert.success(rejectMeterReqMs.message) : null
-    }, [accMeterReqMs, rejectMeterReqMs, alert])
+        if (accMeterReqMs) {
+            alert.success(accMeterReqMs.message)
+            dispatch({ type: "clearMessage" })
+           
+        }
+        if (rejectMeterReqMs) {
+            alert.success(rejectMeterReqMs.message)
+            dispatch({ type: "clearMessage" })
+           
+        }
+        
+    }, [accMeterReqMs, rejectMeterReqMs, alert,dispatch])
 
 
     const confirm = (id) => {

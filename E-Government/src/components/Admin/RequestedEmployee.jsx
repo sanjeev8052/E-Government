@@ -2,8 +2,8 @@ import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
 import React, { useEffect } from 'react'
 import AdminSidebar from '../Global/AdminSidebar'
 import AdminTopbar from '../Global/AdminTopbar'
-import Pdf from '../Global/Pdf'
 
+import { useAlert } from 'react-alert'
 import Header from '../Global/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from './AdminLoader'
@@ -16,9 +16,26 @@ import AdminAuth from '../ProtectedRoute/AdminAuth'
 const RequestedEmployee = () => {
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
-    const { loading, empReq } = useSelector((state) => (state.admin))
+    const { loading, empReq, cempMs, remp} = useSelector((state) => (state.admin))
+    const alert = useAlert();
 
     const dispatch = useDispatch()
+    useEffect(() => {
+        if (cempMs) {
+            alert.success(cempMs.message)
+            dispatch({ type: "clearMessage" })
+           
+        }
+    }, [cempMs,dispatch,alert])
+
+    useEffect(() => {
+        if (remp) {
+            alert.success(remp.message)
+            dispatch({ type: "clearMessage" })
+           
+        }
+    }, [remp,dispatch,alert])
+    
     useEffect(() => {
        
         dispatch(getTempEmp())

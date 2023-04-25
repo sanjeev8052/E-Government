@@ -74,13 +74,13 @@ router.post("/alogin", [
         let token;
         const admin = await AdRegister.findOne({ email });
         if (!admin) {
-            return res.status(404).json({ message: "Email is not Found" })
+            return res.status(404).json({  success: false, message: "Email is not Found" })
         }
         else {
             const chpassword = await bcrypt.compare(password, admin.password);
 
             if (!chpassword) {
-                return res.status(404).json({ error: "Please Try to Login Proper Password" })
+                return res.status(404).json({  success: false, message: "Please Try to Login Proper Password" })
             }
             else {
                 token = await admin.generateAuthToken();
