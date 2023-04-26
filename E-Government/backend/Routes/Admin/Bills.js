@@ -2,6 +2,8 @@ const express = require("express");
 const { isAuthenticate } = require('../../middlewares/Adminmiddle');
 const Bills = require("../../models/Admin/Bills");
 const UserModel = require("../../models/User/UserModel");
+const { isAuthenticatedUser } = require("../../middlewares/auth");
+const { sendEmail } = require("../../middlewares/sendEmail");
 const router = express.Router();
 
 // FOr Add Bills
@@ -68,10 +70,11 @@ router.get("/getpaidbill", async (req, res) => {
     }
 })
 // For Paying Bill
-router.post('/paybills', isAuthenticate, async (req, res) => {
+
+router.post('/paybills/:id',  isAuthenticatedUser , async (req, res) => {
     try {
-        const bills = await Bills.findById(req.body.bid)
-        const User = await UserModel.findById(req.body.uid)
+        const bills = await Bills.findById(req.params.id)
+        const User = req.user 
         if (!bills) {
             return res.status(401).json({ message: "Bills Not Found" })
         }
@@ -80,15 +83,21 @@ router.post('/paybills', isAuthenticate, async (req, res) => {
         }
         console.log(bills)
         console.log(User)
-
+        const randomNum = Math.floor(Math.random() * 999999) + 1;
+        const message = `Paymetn id for reciept download:${randomNum}`
         User.paidBills.push(bills)
         await User.save()
         bills.status = "Paid"
+        bills.paymentId = randomNum
         await bills.save()
-        res.status(200).json({
-            success: true,
-            message: "bill Successfully Paid"
-        })
+
+        await sendEmail({
+            email: User.email,
+            subject: "Payment successful",
+            message
+        });
+     
+        res.status(200).redirect('http://localhost:3000/BillReciept')
     } catch (error) {
         res.status(500).json({
             error: error.message
@@ -119,7 +128,23 @@ router.post("/searchbills", async (req, res) => {
     }
 })
 
+router.get("/searchbill/:id", async (req, res) => {
+    try {
+       
+        const bill = await Bills.find({paymentId:req.params.id}) 
+        if (!bill[0]) {
+            return res
+                .status(404)
+                .json({ message: "Invalid Input Enterd or Bill Not Found.. " })
+        }
+        res.status(200).send(bill)
+    } catch (error) {
 
+        res.status(500).json({
+            error: error.message
+        })
+    }
+})
 
 
 module.exports = router

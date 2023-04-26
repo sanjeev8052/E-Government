@@ -77,8 +77,8 @@ const Dashboard = () => {
             <div className="row dashboard ">
               <Link to='/auser' className="col-2 dsItem1">
                 <Person sx={{ fontSize: "4rem" }} />
-                <Typography components={Link} to='/auser' variant="h2" color="lightblue">User</Typography>
-                <Typography variant="h1" color="lightblue">{GetUser && GetUser.length}</Typography>
+                <Typography components={Link} to='/auser' variant="h2" color="white">User</Typography>
+                <Typography variant="h1" color="white">{GetUser && GetUser.length}</Typography>
 
               </Link>
               <Link to='/aemployee' className="col-2 dsItem1">
@@ -89,25 +89,25 @@ const Dashboard = () => {
               </Link>
               <Link to='/aremployee' className="col-2 dsItem1">
                 <Person sx={{ fontSize: "4rem" }} />
-                <Typography variant="h2" color="lightblue">Req Emp</Typography>
-                <Typography variant="h1" color="lightblue">{empReq && empReq.length}</Typography>
+                <Typography variant="h2" color="white">Req Emp</Typography>
+                <Typography variant="h1" color="white">{empReq && empReq.length}</Typography>
 
               </Link>
             </div>
             <hr />
-            <div className='row '>
+            <div className='row box3 '>
 
 
-              <div className="col-sm-6  ">
+              <div className="col-sm-5 mx-4 chartBox  ">
                 <div className="row">
                   <div className="col-5 d-flex align-items-center">
-                    <div>
-                      <Typography variant="h1" color="initial">Meter</Typography>
+                    <div className='text-end '>
+                      <Typography variant="h1" color="white">Meter</Typography>
                       <div className='chart'>
-                        <div className='bg-secondary' id='c1'></div> <Typography variant="h3" color="initial">Request  </Typography><br />
+                        <div className='bg-secondary' id='c1'></div> <Typography variant="h3" color="white">Request  </Typography><br />
                       </div>
                       <div className='chart'>
-                        <div className='bg-success' id='c1'></div> <Typography variant="h3" color="initial">Complete  </Typography><br />
+                        <div className='bg-success' id='c1'></div> <Typography variant="h3" color="white">Complete  </Typography><br />
                       </div>
                     </div>
                   </div>
@@ -126,19 +126,19 @@ const Dashboard = () => {
 
 
               </div>
-              <div className="col-sm-6  ">
+              <div className="col-sm-5 mx-4 chartBox  " >
                 <div className="row">
                   <div className="col-5 d-flex align-items-center">
-                    <div>
-                      <Typography variant="h1" color="initial">Compaints</Typography>
+                    <div >
+                      <Typography variant="h1" color="white">Compaints</Typography>
                       <div className='chart'>
-                        <div className='bg-secondary' id='c1'></div> <Typography variant="h3" color="initial">Request  </Typography><br />
+                        <div className='bg-secondary' id='c1'></div> <Typography variant="h3" color="white">Request  </Typography><br />
                       </div>
                       <div className='chart'>
-                        <div className='bg-warning' id='c1'></div> <Typography variant="h3" color="initial">Process  </Typography><br />
+                        <div className='bg-warning' id='c1'></div> <Typography variant="h3" color="white">Process  </Typography><br />
                       </div>
                       <div className='chart'>
-                        <div className='bg-success' id='c1'></div> <Typography variant="h3" color="initial">Complete  </Typography><br />
+                        <div className='bg-success' id='c1'></div> <Typography variant="h3" color="white">Complete  </Typography><br />
                       </div>
                     </div>
 

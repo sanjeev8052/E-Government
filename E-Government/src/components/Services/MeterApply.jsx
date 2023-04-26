@@ -91,7 +91,7 @@ const MeterApply = () => {
     const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
 
         initialValues: initialvalues,
-        //validationSchema: meterSchema,
+        validationSchema: meterSchema,
 
         onSubmit: (values) => {
             try {

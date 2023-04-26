@@ -73,6 +73,7 @@ import IncomeReciept from './components/User/Download/IncomeReciept'
 import ContactUs from './components/User/ContactUs/ContactUs'
 import axios from 'axios'
 import Payment from './components/User/Payment'
+import BillReciept from './components/User/Download/BillReciept'
 const App = () => {
 
   const [stripKey, setStripKey] = useState("pk_test_51Mq1jRSHoUNuGuBowIIEwRf0LXA54XMZsQaErcuXbAncP3h8ec1dsII0W2UHJ1u7y3viBALYid9jhDanlmZ0789J00GMiaLqJ6");
@@ -124,6 +125,7 @@ const App = () => {
             <Route path='/UserDashboard' element={<UserDashboard />} />
             <Route path='/Download' element={<Download />} />
             <Route path='/IncomeReciept' element={<IncomeReciept />} />
+            <Route path='/BillReciept' element={<BillReciept />} />
             <Route path='/ufeedback' element={<Feedback1 />} />
             <Route path='/ContactUs' element={<ContactUs />} />
 
