@@ -21,11 +21,11 @@ const Header = () => {
                         indicatorColor='primary'>
 
                         <Tab component={Link} to={"/"} label="Home" />
-                        <Tab component={Link} to={'/contactUs'} label="ContactUs" />
+                        {/* <Tab component={Link} to={'/contactUs'} label="ContactUs" /> */}
                         <Tab component={Link} to={'/ufeedback'} label="Feedback" />
 
 
-                        <Tab sx={{display:"block" , marginLeft:"54rem"}} title='Dasboard' component={Link} to='/UserDashBoard' label={<Dashboard label="Dasboard"/>} />
+                        {/* <Tab sx={{display:"block" }} title='Dasboard' component={Link} to='/UserDashBoard' label={<Dashboard label="Dasboard"/>} /> */}
 
 
                     </Tabs>
@@ -33,8 +33,9 @@ const Header = () => {
 
 
                     {
-                        isAuthenticated ? <AccountMenu />
+                        isAuthenticated ? <><AccountMenu /></> 
                             : <>
+                            
                                 <Typography sx={{ marginLeft: "auto", textDecoration: "none", fontSize: "1.5rem" }} component={Link} to={"/login"} variant='contained' color='primary'>Login</Typography>
 
                             </>

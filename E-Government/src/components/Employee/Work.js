@@ -65,8 +65,8 @@ const Work = () => {
               <TableBody sx={{ backgroundColor: colors.grey[200] }}>
 
                 {empCompDet <= 0 ? <TableRow>
-                  <TableCell colSpan={2}>
-                    <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Compliant Type Added</Typography>
+                  <TableCell colSpan={10}>
+                    <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Complaint Type Added</Typography>
                   </TableCell>
                 </TableRow>
                   :

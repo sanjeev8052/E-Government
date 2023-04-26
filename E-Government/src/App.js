@@ -50,6 +50,7 @@ import UserHeader from './components/User/UserHeader/UserHeader'
 import Empregister from './components/Employee/Empregister'
 import Emplogin from './components/Employee/Emplogin'
 import Work from './components/Employee/Work'
+import Feedbacke from './components/Employee/Feedbacke'
 import EProfile from './components/Employee/Profile'
 import EmpforgetPasswrod from './components/Employee/EmpforgetPasswrod'
 import EmpreserPassword from './components/Employee/EmpreserPassword'
@@ -184,6 +185,7 @@ const App = () => {
             <Route path="/emplogin" element={<Emplogin />} />
             <Route path='/empregister' element={<Empregister />} />
             <Route path='/work' element={<Work />} />
+            <Route path='/feedbacke' element={<Feedbacke />} />
             <Route path='/eprofile' element={<EProfile />} />
             {/* <Route path="/emp/register" element={<Empregister/>} /> */}
 
