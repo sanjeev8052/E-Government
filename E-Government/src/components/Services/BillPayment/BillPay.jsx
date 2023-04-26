@@ -16,7 +16,7 @@ import UserAuth from '../../ProtectedRoute/UserAuth'
 
 const BillPay = () => {
   // const  navigate = useNavigate()
-  
+
   // useEffect(()=>{
   //   isAuthenticated ? console.log(true)  : navigate('../login')
   // },[])
@@ -53,20 +53,22 @@ const BillPay = () => {
 
   })
 
+  billData && console.log(billData._id)
+
   const handlePayment = async (amount) => {
 
     const { data } = await axios.post(`http://localhost:5000/api/checkout`, { amount })
     console.log(data)
 
     const options = {
-      key: "rzp_test_QnKpiAy1xgFN32", 
-      amount: 1000, 
+      key: "rzp_test_QnKpiAy1xgFN32",
+      amount: billData.amount ,
       currency: "INR",
       name: "E-Governace",
       description: "Test Transaction",
-      image: <Login/>,
-      order_id: data.id, 
-      callback_url: "http://localhost:5000/api/paymentVerification",
+      image: <Login />,
+      order_id: data.id,
+      callback_url: `http://localhost:5000/api/admin/paybills/${billData._id}`,
       prefill: {
         name: userData.name,
         email: userData.email,
@@ -80,8 +82,16 @@ const BillPay = () => {
       }
     };
     const razor = new Razorpay(options);
-     razor.open();
+    razor.open();
   
+    // try {
+
+    //   const { data } = await axios.post('api/paymentVerification')
+
+    //  axios.post('api/admin/paybills', { bid: billData._id })
+    // } catch (error) {
+
+    // }
   }
 
 

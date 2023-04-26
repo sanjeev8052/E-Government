@@ -41,6 +41,7 @@ const billSchema = mongoose.Schema({
         type:Date,
         default:Date.now() + 20 * 24 * 60 * 60 * 1000
     },
+    paymentId:Number,
     status:String,
 
 })

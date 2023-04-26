@@ -56,6 +56,9 @@ export const billPaySchema = yup.object({
 export const downloadSchema = yup.object({
     uniqueId: yup.number().min(100000, ['Certificate no must have 6 digit']).max(999999, ['Certificate no must have 6 digit']).required(),
 })
+export const downloadSchema3 = yup.object({
+    paymentId: yup.number().min(100000, ['Certificate no must have 6 digit']).max(999999, ['Certificate no must have 6 digit']).required(),
+})
 export const downloadSchema2 = yup.object({
     uniqueId: yup.number().min(100000, ['Form no must have 6 digit']).max(999999, ['Form no must have 6 digit']).required(),
 })
