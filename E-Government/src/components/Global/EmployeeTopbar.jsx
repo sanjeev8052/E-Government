@@ -106,10 +106,10 @@ const EmployeeTopbar = () => {
               }}
             >
 
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Work</Typography>
+              <MenuItem component={Link} to="/work">
+                <Typography  textAlign="center">Work</Typography>
               </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
+              <MenuItem component={Link} to="/feedbacke">
                 <Typography textAlign="center">Feedback</Typography>
               </MenuItem>
 
@@ -136,10 +136,10 @@ const EmployeeTopbar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 
-            <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+            <Button component={Link} to="/work" sx={{ my: 2, color: 'white', display: 'block' }}>
               Work
             </Button>
-            <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+            <Button component={Link} to="/feedbacke" sx={{ my: 2, color: 'white', display: 'block' }}>
               Feedback
             </Button>
           

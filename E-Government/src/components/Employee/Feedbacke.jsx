@@ -1,16 +1,14 @@
-
 import { Paper, TableBody } from '@material-ui/core'
 import { Box, useTheme, Card, CardContent, Typography, Table, TableHead, TableRow, TableCell, TableContainer } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Getfeedback } from '../../Action/User'
 import { tokens } from '../../Global'
-import AdminSidebar from '../Global/AdminSidebar'
-import AdminTopbar from '../Global/AdminTopbar'
 
+import EmployeeTopbar from '../Global/EmployeeTopbar'
 import Header from '../Global/Header'
 import AdminAuth from '../ProtectedRoute/AdminAuth'
-const Feedback = () => {
+const Feedbacke = () => {
     const { getfeedback } = useSelector((state) => (state.user))
     const themes = useTheme()
     const colors = tokens(themes.palette.mode)
@@ -18,19 +16,10 @@ const Feedback = () => {
     useEffect(() => {
         dispatch(Getfeedback())
     }, [])
-
-    return (
-        <div className='app'>
-            <AdminSidebar />
-            <main className='content'>
-                <AdminTopbar />
-                <Box m="15px">
-                    <Box justifyContent="space-between" alignItems="center" display='flex'>
-                        <Header title="Feedback" subtitle="Welcome to Feedback Page" />
-                    </Box>
-
-
-                    <Box alignItems="center" justifyContent="center" m="15px"
+  return (
+    <>
+    <EmployeeTopbar/>
+    <Box alignItems="center" justifyContent="center" m="15px"
                         sx={{
                             "& .MuiTable-root": {
                                 border: "none"
@@ -79,10 +68,8 @@ const Feedback = () => {
                         </TableContainer>
                     </Box>
 
-                </Box>
-            </main>
-        </div>
-    )
+    </>
+  )
 }
 
-export default AdminAuth(Feedback)
+export default Feedbacke

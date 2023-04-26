@@ -62,7 +62,7 @@ const BillPay = () => {
 
     const options = {
       key: "rzp_test_QnKpiAy1xgFN32",
-      amount: billData.amount ,
+      amount: billData.amount * 100,
       currency: "INR",
       name: "E-Governace",
       description: "Test Transaction",
