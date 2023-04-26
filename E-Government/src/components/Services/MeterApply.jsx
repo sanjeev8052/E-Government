@@ -189,13 +189,13 @@ const MeterApply = () => {
                     </FormControl>
 
 
-                    {errors.complaintType && touched.complaintType ? (
-                        <Typography className={classes.error}   >{errors.complaintType}</Typography>
+                    {errors.meterType && touched.meterType ? (
+                        <Typography className={classes.error}   >{errors.meterType}</Typography>
                     ) : null}
                     <Typography variant="h6" color="initial">Tenament No</Typography>
                     <TextField className={classes.fullInput}
                         id=""
-                        placeholder='tenament_No'
+                        placeholder='tenament No'
                         variant='outlined'
                         size='small'
                         name='tenamentNo'
@@ -203,8 +203,8 @@ const MeterApply = () => {
                         onBlur={handleBlur}
                         value={values.tenament_No}
                     />
-                    {errors.tenament_No && touched.tenament_No ? (
-                        <Typography className={classes.error} >{errors.tenament_No}</Typography>
+                    {errors.tenamentNo && touched.tenamentNo ? (
+                        <Typography className={classes.error} >{errors.tenamentNo}</Typography>
                     ) : null}
 
                     <Typography variant="h6" color="initial">Address</Typography>

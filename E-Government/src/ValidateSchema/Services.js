@@ -11,19 +11,21 @@ export const complaintSchema = yup.object({
 export const meterSchema = yup.object({
     name: yup.string().min(3).required("Please Enter your name."),
     email: yup.string().email().matches(/^(?!.*@[^,]*,)/).required("Please Enter Your Email.."),
+    
     phone: yup.number().min(1000000000, ['phone no must have 10 digit']).max(9999999999, ['phone no must have 10 digit']).required(),
     meterType: yup.string().required("Please select Meter Type....... "),
     city: yup.string().required("Please Enter Your City....... "),
     streetAddress: yup.string().required("Please Enter Your Street Address...... "),
     area: yup.string().required("Please Enter Your Area Nmae....... "),
     pincodeNo: yup.string().min(6).required("Please Enter Your zip No.... "),
-    tenament_No: yup.number().min(100000000000, ['Tenament no must have 12 digit']).max(999999999999, ['Tenament no must have 12 digit']).required(),
+    tenamentNo: yup.number().min(100000000000, ['Tenament no must have 12 digit']).max(999999999999, ['Tenament no must have 12 digit']).required(),
 
 })
 
 export const incomeValidation = yup.object({
     name: yup.string().min(3).required("Please Enter your name."),
     email: yup.string().email().matches(/^(?!.*@[^,]*,)/).required("Please Enter Your Email.."),
+    age:yup.number().required("Please Enter Your Age"),
     phone: yup.number().min(1000000000, ['phone no must have 10 digit']).max(9999999999, ['phone no must have 10 digit']).required(),
     gender: yup.string().oneOf(["male", "female","other"], "!! Please Select Gender..").required("!! Please Select Gender.."),
     village: yup.string().required("Please Enter Village....... "),

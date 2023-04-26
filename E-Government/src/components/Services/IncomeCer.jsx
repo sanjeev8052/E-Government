@@ -101,7 +101,7 @@ const IncomeCer = () => {
     initialValues: initialvalues,
     validationSchema: incomeValidation,
 
-    onSubmit: async(values) => {
+    onSubmit: async (values) => {
       try {
         if (file2) {
           const formData = new FormData()
@@ -164,7 +164,11 @@ const IncomeCer = () => {
             onChange={handleChange}
             onBlur={handleBlur}
 
-          />         <Typography variant="h6" color="initial">Age</Typography>
+          />
+          {errors.email && touched.email ? (
+            <Typography className={classes.error}   >{errors.email}</Typography>
+          ) : null}
+          <Typography variant="h6" color="initial">Age</Typography>
           <TextField className={classes.fullInput}
             id=""
             placeholder='Enter Your Age '
@@ -178,7 +182,7 @@ const IncomeCer = () => {
 
           />
           {errors.age && touched.age ? (
-            <Typography className={classes.age}   >{errors.age}</Typography>
+            <Typography className={classes.error}   >{errors.age}</Typography>
           ) : null}
 
           <FormControl fullWidth>
@@ -284,7 +288,9 @@ const IncomeCer = () => {
 
           />
 
-
+          {errors.fatherName && touched.fatherName ? (
+            <Typography className={classes.error} >{errors.fatherName}</Typography>
+          ) : null}
           <Typography variant="h6" color="initial">Income</Typography>
           <TextField className={classes.fullInput}
             id=""

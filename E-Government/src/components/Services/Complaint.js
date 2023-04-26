@@ -141,7 +141,7 @@ const Complaint = () => {
 
         <div className={classes.compField}>
           <Typography variant="h4" sx={{ marginBottom: "20px" }} color="initial">New Complaint</Typography>
-          <Typography variant="h6" color="initial">Compalint Type</Typography>
+          <Typography variant="h6" color="initial">Complaint Type</Typography>
           <FormControl fullWidth>
             <Select
               labelId="demo-simple-select-label"

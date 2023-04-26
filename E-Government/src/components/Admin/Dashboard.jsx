@@ -118,7 +118,7 @@ const Dashboard = () => {
                         { title: 'Request', value: getMeterReq && getMeterReq.length, color: 'gray' },
                         { title: 'Complete', value: getAccMeterReq && getAccMeterReq.length, color: 'green', },
                       ]}
-                    />;
+                    />
                   </div>
                 </div>
 
@@ -151,7 +151,7 @@ const Dashboard = () => {
                         { title: 'Process', value: getAccMeterReq && getAccMeterReq.length, color: 'orange', },
                         { title: 'Complete', value: getAccMeterReq && getAccMeterReq.length, color: 'green', },
                       ]}
-                    />;
+                    />
                   </div>
                 </div>
               </div>
