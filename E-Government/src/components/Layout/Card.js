@@ -60,7 +60,7 @@ const Card = () => {
                     <div style={css.card}>
                         <img style={css.img} src={complaintImage} alt="Card" />
                         <div className="card-body">
-                            <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">register your complaint and track the complaint status. </Typography>
+                            <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">Register your complaint and track the complaint status. </Typography>
                             <Button style={css.button} variant="text" color="default">
                                 <PopupState variant="popover" popupId="demo-popup-menu">
                                     {(popupState) => (
@@ -84,7 +84,7 @@ const Card = () => {
                     <div style={css.card}>
                         <img style={css.img} src={billPayImage} alt="Card" />
                         <div className="card-body">
-                            <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">register your complaint and track the complaint status. </Typography>
+                            <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">Cechk Your Panding Bills,Pay and Download Reciept </Typography>
                             <Button style={css.button} variant="text" color="default">
                                 <PopupState variant="popover" popupId="demo-popup-menu">
                                     {(popupState) => (
@@ -94,6 +94,7 @@ const Card = () => {
                                             </Button>
                                             <Menu  {...bindMenu(popupState)}>
                                                 <MenuItem component={Link} to='/billPay'>New Payment</MenuItem>
+                                                <MenuItem component={Link} to='/BillReciept'>Download</MenuItem>
                                                 <MenuItem onClick={popupState.close}>Your Transactions</MenuItem>
                                             </Menu>
                                         </React.Fragment>
@@ -108,7 +109,7 @@ const Card = () => {
                     <div style={css.card}>
                         <img style={css.img} src={meterImage} alt="Card" />
                         <div className="card-body">
-                            <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">register your complaint and track the complaint status. </Typography>
+                            <Typography sx={{ margin: "1rem" }} variant="h6" color="initial">Apply For Meters</Typography>
                             <Button style={css.button} variant="text" color="default">
                                 <PopupState variant="popover" popupId="demo-popup-menu">
                                     {(popupState) => (
