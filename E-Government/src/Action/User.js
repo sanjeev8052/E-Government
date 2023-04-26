@@ -221,7 +221,7 @@ export const Getfeedback = () => async (dispatch) => {
         dispatch({
             type: "getFeedbackRequest",
         })
-             const {data}  = await  axios.get(`api/getfeedback`)
+             const {data}  = await  axios.get(`api/get/feedbacks`)
 
         dispatch({
             type: "getFeedbackSuccess",

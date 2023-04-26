@@ -53,7 +53,7 @@ const BillReciept = () => {
                     </Button>
                 </div>
             </form>}
-            {billData &&
+            {!billData &&
                 <div className='row'>
                     <div className="col-sm-5">
                         <Typography variant="h6" color="initial">Tenament No</Typography><hr />
@@ -68,25 +68,25 @@ const BillReciept = () => {
 
                     </div>
                     <div className="col-sm-5">
-                        <Typography variant="h6" color="initial">{billData.tenamentNo}</Typography><hr />
-                        <Typography variant="h6" color="initial">{billData.area}</Typography><hr />
-                        <Typography variant="h6" color="initial">{billData.ownerName}</Typography><hr />
-                        <Typography variant="h6" color="initial">{billData.billType}</Typography><hr />
-                        <Typography variant="h6" color="initial">{billData.addDate}</Typography><hr />
-                        <Typography variant="h6" color="initial">{billData.lastDueDate}</Typography><hr />
-                        <Typography variant="h6" color="initial">{billData.pastDueAmt}</Typography><hr />
-                        <Typography variant="h6" color="initial">{billData.amount}</Typography>
+                        <Typography variant="h6" color="initial">{"billData.tenamentNo"}</Typography><hr />
+                        <Typography variant="h6" color="initial">{"billData.area"}</Typography><hr />
+                        <Typography variant="h6" color="initial">{"billData.ownerName"}</Typography><hr />
+                        <Typography variant="h6" color="initial">{"billData.billType"}</Typography><hr />
+                        <Typography variant="h6" color="initial">{"billData.addDate"}</Typography><hr />
+                        <Typography variant="h6" color="initial">{"billData.lastDueDate"}</Typography><hr />
+                        <Typography variant="h6" color="initial">{"billData.pastDueAmt"}</Typography><hr />
+                        <Typography variant="h6" color="initial">{"billData.amount"}</Typography>
                     </div>
                     <div className='col-10'>
                         <hr />
                         <div className="row">
                             <div className='col-6'>
-                                <Typography variant="h6" color="initial">Total Amount : {billData.totelAmt}</Typography>
+                                <Typography variant="h6" color="initial">Total Amount : {"billData.totelAmt"}</Typography>
 
                             </div>
                             <div className='col-6'>
                                 <Button variant="contained" color="primary">
-                                    Pay Now
+                                   Download
                                 </Button>
                             </div><br /><br />
                             <hr />

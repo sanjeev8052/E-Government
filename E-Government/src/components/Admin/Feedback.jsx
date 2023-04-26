@@ -13,6 +13,7 @@ import AdminAuth from '../ProtectedRoute/AdminAuth'
 const Feedback = () => {
     const { getfeedback } = useSelector((state) => (state.user))
     const themes = useTheme()
+    const [feedbacks, setFeedbacks] = useState();
     const colors = tokens(themes.palette.mode)
     const dispatch = useDispatch()
     useEffect(() => {
@@ -28,54 +29,58 @@ const Feedback = () => {
                     <Box justifyContent="space-between" alignItems="center" display='flex'>
                         <Header title="Feedback" subtitle="Welcome to Feedback Page" />
                     </Box>
-                    
-                            
-                            <Box alignItems="center" justifyContent="center" m="15px" 
-                            sx={{
-                                "& .MuiTable-root": {
-                                    border: "none"
-                                },
-                                "& .MuiTableCell-root": {
-                                    borderBottom: "none"
-                                },
-                                "& .name-column--cell": {
-                                    color: colors.greenAccent[300]
-                                },
-                                "& .MuiTableHead-root": {
-                                    backgroundColor: colors.blueAccent[400],
-                                    borderBottom: "none"
-                                }
-                            }}
-                            >
-                                <TableContainer  component={Paper} sx={{mt: "10px",
-                                    height:"400px", overflow:"auto",  backgroundColor: colors.primary[600]
-                                }}>
-                                    <Table size='small' >
-                                        <TableHead  >
-                                            <TableRow >
-                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Name</TableCell>
-                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>Feedback</TableCell>
-                                                
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody sx={{ backgroundColor: colors.primary[600]}}>
-                                           
+
+
+                    <Box alignItems="center" justifyContent="center" m="15px"
+                        sx={{
+                            "& .MuiTable-root": {
+                                border: "none"
+                            },
+                            "& .MuiTableCell-root": {
+                                borderBottom: "none"
+                            },
+                            "& .name-column--cell": {
+                                color: colors.greenAccent[300]
+                            },
+                            "& .MuiTableHead-root": {
+                                backgroundColor: colors.blueAccent[400],
+                                borderBottom: "none"
+                            }
+                        }}
+                    >
+                        <TableContainer component={Paper} sx={{
+                            mt: "10px",
+                            height: "400px", overflow: "auto", backgroundColor: colors.primary[600]
+                        }}>
+                            <Table size='small' >
+                                <TableHead  >
+                                    <TableRow >
+                                        <TableCell sx={{ fontSize: "1.0rem", fontWeight: "bold", textTransform: 'capitalize' }}>Name</TableCell>
+                                        <TableCell sx={{ fontSize: "1.0rem", fontWeight: "bold", textTransform: 'capitalize' }}>Feedback</TableCell>
+
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody sx={{ backgroundColor: colors.primary[600] }}>
+
+                                    {getfeedback &&
+                                        getfeedback.map((data) => (
                                             <TableRow>
-                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>sujeet</TableCell>
-                                                 <TableCell  sx={{  fontSize: "1.0rem", fontWeight:"bold" ,textTransform: 'capitalize' }}>anything</TableCell>
-                                                
+                                                <TableCell sx={{ fontSize: "1.0rem", fontWeight: "bold", textTransform: 'capitalize' }}>sujeet</TableCell>
+                                                <TableCell sx={{ fontSize: "1.0rem", fontWeight: "bold", textTransform: 'capitalize' }}>anything</TableCell>
+
                                             </TableRow>
-                                         
-                                    
-                                        </TableBody>
-                                    </Table>
-                                </TableContainer>
-                            </Box>
-                           
+                                        ))}
+
+
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Box>
+
                 </Box>
             </main>
         </div>
     )
 }
 
-export default  AdminAuth(Feedback)
+export default AdminAuth(Feedback)

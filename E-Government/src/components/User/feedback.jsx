@@ -71,7 +71,7 @@ const feedback = () => {
             setLoading(false)
 
         }
-        setReload(false)
+        setReload(false) 
     }
     const getFeedbacks = async () => {
         try {
