@@ -61,12 +61,12 @@ const Feedback = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody sx={{ backgroundColor: colors.primary[600] }}>
-                                    {getfeedback <= 0 ? <TableRow>
+                                    {getfeedback && getfeedback <= 0 ? <TableRow>
                                         <TableCell colSpan={2}>
                                             <Typography sx={{ margin: "10px auto", width: "10rem" }} variant="h2" color="primary">No Feedback Added</Typography>
                                         </TableCell>
                                     </TableRow> :
-                                        getfeedback?.map((data) => (
+                                     getfeedback &&   getfeedback?.map((data) => (
                                         <TableRow key={data._id}>
                                             <TableCell sx={{ fontSize: "1.0rem", fontWeight: "bold", textTransform: 'capitalize' }}>{data.name}</TableCell>
                                             <TableCell sx={{ fontSize: "1.0rem", fontWeight: "bold", textTransform: 'capitalize' }}>{data.feedback}</TableCell>
